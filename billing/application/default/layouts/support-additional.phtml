@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="Abilov Marat, Tsoy Alexey" />
+        <title>АСР "SHARQ". Администрирование</title>
+        <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+	<script language="JavaScript" type="text/javascript" src="/scripts/jquery.js"></script>
+</head>
+<body>
+</body>
+<h1>СТП. Дополнительные услуги (+мегабит)</h1>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Начало</th>
+        <th class="list_head">Конец</th>
+        <th class="list_head" style="width:15%;">Тариф</th>
+    </tr>
+<?php
+
+if ( count($this->megabit_button) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->megabit_button as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><b><?= $item['startdate']; ?></b></td>
+            <td class="list_row"><b><?= $item['enddate']; ?></b></td>
+            <td class="list_row"><?= $item['tarif_name']; ?></td>
+        </tr>
+    <?
+    }
+}
+?>
+</table>
+<br />
+<br />
+<h1>СТП. Дополнительные услуги (Доверительный платеж)</h1>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Начало</th>
+        <th class="list_head">Конец</th>
+        <th class="list_head" style="width:15%;">дата нажатия</th>
+    </tr>
+<?php
+
+if ( count($this->trustPayments) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->trustPayments as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><b><?= $item['startdate']; ?></b></td>
+            <td class="list_row"><b><?= $item['enddate']; ?></b></td>
+            <td class="list_row"><?= $item['date_action']; ?></td>
+        </tr>
+    <?
+    }
+}
+?>
+</table>
+
+</html>

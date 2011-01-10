@@ -1,0 +1,60 @@
+<script type="text/javascript">
+function search()
+{
+	var by = $('#by').val();
+	var value = $('#value').val();
+	redirect('/log/index/by/' + by + '/value/' + value);
+	return false;
+}
+</script>
+<h1>Абонентский отдел.Поиск (Логи)</h1>
+<form style="margin-top:30px;" action="" method="get" onsubmit="return search();">
+<center>
+	<select id='by'>
+		<?
+		$options = array(
+			'LG.client_id'    => 'По ID клиента',
+			'LG.client_login' => 'По логину клиента',
+			'CLA.client_name' => 'По имени клиента',
+			'USS.login'       => 'По логину пользователя'
+		); 
+		print FormHelper::getSelectOptions($options, $this->search_by); 
+		?>
+	</select>
+	<input type="text" size="20" id="value" value='<?= $this->value; ?>'/>
+	<input type="submit" value="Поиск" onclick='return search();'/>
+</center>
+</form>
+<br />
+
+<table class='list'>
+	<tr>
+		<th class="list_head">Дата</th>
+		<th class="list_head">Логин Клиента</th>
+		<th class="list_head">Клиент</th>
+		<th class="list_head">Действие</th>
+		<th class="list_head">Пользователь</th>
+	</tr>
+	<?php
+	// Вывод информации
+	if (count($this->paginator))
+	{
+		foreach ($this->paginator as $item)
+		{
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row"><?= date('m.d.Y H:i:s', strtotime($item['actiondate'])); ?></td>
+				<td class="list_row"><?= $item['client_login']; ?></td>
+				<td class="list_row"><?= $item['client_name']; ?></td>
+				<td class="list_row"><?= $item['action']; ?></td>
+				<td class="list_row"><?= $item['first_name'] . ' ' . $item['last_name']; ?></td>
+			</tr>
+			<?
+		}
+	}
+	?>
+</table>
+
+<center style="margin-top:30px;">
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>

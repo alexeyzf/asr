@@ -1,0 +1,33 @@
+<h1>Отчет по поступлениям  <?php if(isset($this->pay_type)) echo $this->pay_type; ?>. Зачисления по клиентам за период: <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Рег. номер</th>
+		<th class='list_head'>Наименование</th>
+		<th class='list_head'>Логин</th>
+		<th class='list_head'>Сумма($)</th>
+		<th class='list_head'>Сумма(сум)</th>
+	</tr>
+	<?
+	foreach ($this->data as $item)
+	{
+		$totalUsd += $item['amount_usd'];
+		$totalUzs += $item['amount_uzs'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $item['client_id'] ?></td>
+			<td class='list_row'><?= $item['client_name'] ?></td>
+			<td class='list_row'><?= $item['u_login'] ?></td>
+			<td class='list_row right'><?= number_format($item['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right' colspan='2'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>

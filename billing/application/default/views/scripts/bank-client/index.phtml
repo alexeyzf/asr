@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	function post(action)
+	{
+		if (action)
+		{
+			redirect('/bank-client/' + action);
+		}
+	}
+</script>
+
+<h1>Бухгалтерия. Разноска</h1>
+<br />
+<br />
+<center>
+	<select id='action' onchange="post(this.value)">
+		<?= FormHelper::getSelectOptions($this->options, $this->action) ?>
+	</select>
+</center>
+<br />
+<br />
+<br />
+<br />

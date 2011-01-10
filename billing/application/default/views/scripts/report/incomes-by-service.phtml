@@ -1,0 +1,30 @@
+<h1>Отчет по поступлениям. Зачисления по услугам за период: <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Наименование</th>
+		<th class='list_head'>Сумма($)</th>
+		<th class='list_head'>Сумма(сум)</th>
+	</tr>
+	<?
+	foreach ($this->data as $item)
+	{
+		$totalUsd += $item['amount_usd'];
+		$totalUzs += $item['amount_uzs'];
+		$totalClients += $item['clients_count'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $item['servicetype'] ?></td>
+			<td class='list_row right'><?= number_format($item['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>

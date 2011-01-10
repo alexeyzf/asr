@@ -1,0 +1,49 @@
+<center><h2>Разноска по счетам клиентов</h2></center>
+<br />
+<br />
+
+<form method='post'>
+	<dt><label>За дату:</label></dt>
+	<dd>
+		<input type='text' name='date' value='<?= $this->date; ?>' />
+		<!-- Все <input type="checkbox" name='is_all' <?= $this->is_all ? 'checked' : ''; ?> />  -->
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label></label></dt>
+	<dd><input type='submit' value='Разнести'></dd>
+	<div class='clear'></div>
+</form>
+<div class='clear'></div>
+<br />
+<br />
+<center>
+<?
+if (is_array($this->result))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Р.н клиента</td>
+			<td class='list_head'>Наименование клиента</td>
+			<td class='list_head'>Сумма</td>
+			<td class='list_head'>Комментарии</td>
+		</tr>
+		<?
+		foreach ($this->result as $row)
+		{
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $row['id']; ?></td>
+				<td class='list_row'><?= $row['client_name']; ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+				<td class='list_row'><?= $row['notes']; ?></td>
+			</tr>
+			<?
+		} 
+		?>
+	</table>
+	<?
+} 
+?>
+</center>

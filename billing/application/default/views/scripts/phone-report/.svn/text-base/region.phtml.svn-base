@@ -1,0 +1,100 @@
+<h1>Отчет по телефонии по регионам</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<h2>Межрегиональная связь</h2>
+<br />
+<?
+if ($this->data && is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Наименование направления</th>
+			<th class='list_head'>Кол-во минут</th>
+			<th class='list_head'>Тариф</th>
+			<th class='list_head'>Сумма</th>
+		</tr>
+		<?
+		foreach ($this->data as $direction => $row)
+		{
+			if ( ! $row['is_inside_country'] )
+			{
+				continue;
+			}
+			
+			$minutesCountTotal += $row['minutes'];
+			$amountTotal += $row['amount'];
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $direction; ?></td>
+				<td class='list_row right'><?= $row['minutes']; ?></td>
+				<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+?>
+<br />
+<br />
+<h2>Международная связь</h2>
+<br />
+<?
+if ($this->data && is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Наименование направления</th>
+			<th class='list_head'>Кол-во минут</th>
+			<th class='list_head'>Тариф</th>
+			<th class='list_head'>Сумма</th>
+		</tr>
+		<?
+		foreach ($this->data as $direction => $row)
+		{
+			if ( $row['is_inside_country'] )
+			{
+				continue;
+			}
+			
+			$minutesCountTotal1 += $row['minutes'];
+			$amountTotal1 += $row['amount'];
+			?>
+			<tr>
+				<td class='list_row'><?= $direction; ?></td>
+				<td class='list_row right'><?= $row['minutes']; ?></td>
+				<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal1; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right'><b><?= number_format($amountTotal1, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+?>
+<br />
+<br />
+<h2>
+	Всего за выбранный период переговоров на сумму: 
+	<?= number_format($amountTotal + $amountTotal1, 2, ',', ' '); ?>
+</h2>

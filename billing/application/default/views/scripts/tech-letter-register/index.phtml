@@ -1,0 +1,109 @@
+<h1>Отдел проектов. Реестр исходящих писем</h1>
+<br />
+<br />
+<form action='' method="post">
+    <dt><label>За период: </label></dt>
+    <dd>
+       <input type='text' name='start_date' value='<?= $this->startDate; ?>' /> -
+       <input type="text" name="end_date" value='<?= $this->endDate; ?>' />
+    <dd>
+    <div class='clear'></div>
+
+    <br/>
+    <br/>
+
+    <dt><label>Произвести cтатический расчет: </label></dt>
+    <dd>
+        <input type="checkbox" name="is_statistical_calculation" value="1"
+            <?= ($this->isStatisticalCalculation ? 'checked' : '') ?> />
+    </dd>
+    <div class='clear'></div>
+
+    <dt><label>&nbsp;</label></dt>
+    <dd><input type="submit" name="show" value="Показать"/></dd>
+    <div class='clear'></div>
+</form>
+
+<br />
+<br />
+<?
+if (is_array($this->letters))
+{
+    ?>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class='list_head'>Дата</th>
+            <th class='list_head'>№ письма</th>
+            <th class='list_head'>Номер</th>
+            <th class='list_head'>Скросс</th>
+            <th class='list_head'>Снятие</th>
+            <th class='list_head'>Узел</th>
+        </tr>
+    <?
+    if ( count($this->letters) == 0 )
+    {
+        ?>
+        <tr>
+            <td colspan='6' class='list_row center'>Не найдено ни одного письма</td>
+        </tr>
+        <?
+    }
+
+    foreach ($this->letters as $letter)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'><?= date('d.m.y', strtotime($letter['date'])); ?></td>
+            <td class='list_row'>КР-<?= $letter['number']; ?></td>
+            <td class='list_row'><?= $letter['pcross']; ?></td>
+            <td class='list_row'><?= $letter['is_cross'] ? '1' : '0'; ?></td>
+            <td class='list_row'><?= $letter['is_uncross'] ? '1' : '0'; ?></td>
+            <td class='list_row'><?= $letter['phone_hub_name']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+    </table>
+    <br />
+    <br />
+    <?
+
+    if (is_array($this->hubLetters) && count($this->hubLetters) != 0)
+    {
+        ?>
+        <label class='font14'>Период: <?= $this->startDate; ?> - <?= $this->endDate; ?></label>
+        <table class="list" cellpadding="3" cellspacing="0">
+            <tr>
+                <th class='list_head'>Узел</th>
+                <th class='list_head'>Скросс</th>
+                <th class='list_head'>Снятие</th>
+                <th class='list_head'>Всего по узлу</th>
+            </tr>
+            <?
+            $crossTotal = 0;
+            $uncrossTotal = 0;
+            foreach ($this->hubLetters as $hub => $hubLetter)
+            {
+                $crossTotal += $hubLetter['cross'];
+                $uncrossTotal += $hubLetter['uncross'];
+                ?>
+                <tr>
+                    <td class='list_row'><?= $hub; ?></td>
+                    <td class='list_row'><?= $hubLetter['cross']; ?></td>
+                    <td class='list_row'><?= $hubLetter['uncross']; ?></td>
+                    <td class='list_row'><?= $hubLetter['total']; ?></td>
+                </tr>
+                <?
+            }
+            ?>
+            <tr>
+                <td class='list_head'>Итого</td>
+                <td class='list_head'><?= $crossTotal; ?></td>
+                <td class='list_head'><?= $uncrossTotal; ?></td>
+                <td class='list_head'><?= $crossTotal + $uncrossTotal; ?></td>
+            </tr>
+        </table>
+        <?
+    }
+}
+?>

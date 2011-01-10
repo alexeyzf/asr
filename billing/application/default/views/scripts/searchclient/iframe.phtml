@@ -1,0 +1,78 @@
+<script language="JavaScript" type="text/javascript">
+function openerChosePoint(pointID, table)
+{
+	window.opener.chosePoint(pointID, table);
+	window.close();
+}
+</script>
+<form action="" method="post">
+<center>
+<table border="0">
+	<tr>
+		<td width="100" valign="top">
+			<?php echo $this->form->type_search; ?>
+		</td>
+		<td valign="top">
+			<?php echo $this->form->searchword; ?>
+		</td>
+		<td valign="top">
+			<input type="submit" value="поиск" name="s_submit" />
+		</td>
+	</tr>
+
+</table>
+</center>
+</form>
+<br/>
+<br/>
+<table border="1" width="100%" class="list" align="center" bordercolor="#cccccc"  cellspacing="2" cellpadding="2"  style="border-collapse: collapse">
+<tr>
+	<th class="list_head">Действие</th>
+	<th class="list_head">ID клиента</th>
+        <th class="list_head">Услуга</th>
+	<th class="list_head">Название</th>
+	<th class="list_head">Логин</th>
+	<th class="list_head">Телефон крос.</th>
+
+</tr>
+
+<?php
+// Вывод информации
+$counter = 1;
+
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row" align="center">
+                                    <a href="#" onclick="openerChosePoint(' . $item['point_id'] . ', \'' . $item['tablename'] . '\')">
+                                        Выбрать
+                                    </a>
+				</td>
+				<td class="list_row">'.$item['client_id'].'</td>
+				<td class="list_row"><b>'.$item['tablename'].'</b></td>
+                                <td class="list_row">'.$item['client_name'].'</td>
+				<td class="list_row">'.$item['u_login'].'</td>
+				<td class="list_row">'.$item['pcross'].'</td>
+			</tr>
+		');
+	}
+}
+else
+{
+	?>
+	<tr>
+		<td class='list_row center' colspan='5'><b>Не найдено ни одного клиента</b></td>
+	</tr>
+	<?
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>

@@ -1,0 +1,73 @@
+<h1>Статистика по траффику</h1>
+<br />
+<br />
+<form method='post' action=''>
+	<dt><label>Период:</label></dt>
+	<dd>
+		С
+		<select name='start_day'>
+			<?= FormHelper::getDayOptions($this->starDay); ?>
+		</select>
+		<select name='start_month'>
+			<?= FormHelper::getMonthOptions($this->startMonth); ?>
+		</select>
+		<select name='start_year'>
+			<?= FormHelper::getYearOptions($this->startYear); ?>
+		</select>
+
+		По
+		<select name='end_day'>
+			<?= FormHelper::getDayOptions($this->endDay); ?>
+		</select>
+		<select name='end_month'>
+			<?= FormHelper::getMonthOptions($this->endMonth); ?>
+		</select>
+		<select name='end_year'>
+			<?= FormHelper::getYearOptions($this->endYear); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label>&nbsp;</label></dt>
+	<dd><input type="submit" value='Показать' /></dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+
+<?
+if (is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Дата</td>
+			<td class='list_head'>Исходящий</td>
+			<td class='list_head'>Входящий</td>
+		</tr>
+		<?
+		$totalInput = 0;
+		$totalOutput = 0;
+
+		foreach ($this->data as $row)
+		{
+			$totalInput += $row['input'];
+			$totalOutput += $row['output'];
+			?>
+			<tr>
+				<td class='list_row'><?= date('d.m.y', strtotime($row['session_time'])); ?></td>
+				<td class='list_row right'><?= round($row['input'], 3); ?></td>
+				<td class='list_row right'><?= round($row['output'], 3); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого:</b></td>
+			<td class='list_row right'><b><?= round($totalInput, 3); ?></b></td>
+			<td class='list_row right'><b><?= round($totalOutput, 3); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+?>

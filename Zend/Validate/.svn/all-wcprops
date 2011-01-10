@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/3/library/Zend/Validate
+END
+Between.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/library/Zend/Validate/Between.php
+END
+Int.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/3/library/Zend/Validate/Int.php
+END
+Identical.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/library/Zend/Validate/Identical.php
+END
+EmailAddress.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3/library/Zend/Validate/EmailAddress.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/library/Zend/Validate/Exception.php
+END
+Barcode.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/library/Zend/Validate/Barcode.php
+END
+Interface.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/library/Zend/Validate/Interface.php
+END
+Abstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3/library/Zend/Validate/Abstract.php
+END
+GreaterThan.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3/library/Zend/Validate/GreaterThan.php
+END
+Float.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/Validate/Float.php
+END
+Ccnum.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/Validate/Ccnum.php
+END
+InArray.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/library/Zend/Validate/InArray.php
+END
+Ip.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3/library/Zend/Validate/Ip.php
+END
+StringLength.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3/library/Zend/Validate/StringLength.php
+END
+Iban.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3/library/Zend/Validate/Iban.php
+END
+Regex.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/Validate/Regex.php
+END
+Alnum.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/Validate/Alnum.php
+END
+Date.php
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3/library/Zend/Validate/Date.php
+END
+Hostname.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3/library/Zend/Validate/Hostname.php
+END
+NotEmpty.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3/library/Zend/Validate/NotEmpty.php
+END
+LessThan.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3/library/Zend/Validate/LessThan.php
+END
+Digits.php
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/3/library/Zend/Validate/Digits.php
+END
+Hex.php
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/3/library/Zend/Validate/Hex.php
+END
+Alpha.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/Validate/Alpha.php
+END

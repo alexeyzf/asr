@@ -1,0 +1,120 @@
+<h1>Статистика по звонкам</h1>
+<br />
+<br />
+<form method='post' action=''>
+	<dt><label>Период:</label></dt>
+	<dd>
+		С
+		<select name='start_day'>
+			<?= FormHelper::getDayOptions($this->starDay); ?>
+		</select>
+		<select name='start_month'>
+			<?= FormHelper::getMonthOptions($this->startMonth); ?>
+		</select> 
+		<select name='start_year'>
+			<?= FormHelper::getYearOptions($this->startYear); ?>
+		</select>
+		
+		По
+		<select name='end_day'>
+			<?= FormHelper::getDayOptions($this->endDay); ?>
+		</select>
+		<select name='end_month'>
+			<?= FormHelper::getMonthOptions($this->endMonth); ?>
+		</select>
+		<select name='end_year'>
+			<?= FormHelper::getYearOptions($this->endYear); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label>Телефон</label></dt>
+	<dd>
+		<select name='number'>
+			<?= FormHelper::getSelectOptions($this->numbers, $this->number); ?>
+		</select>
+		Все <input type="checkbox" name='all_numbers' <?= $this->isAll ? 'checked' : ''; ?> />
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label>&nbsp;</label></dt>
+	<dd><input type="submit" value='Показать' /></dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Дата</td>
+			<td class='list_head'>Время</td>
+			<td class='list_head'>На номер</td>
+			<td class='list_head'>Кол. минут звонка</td>
+			<td class='list_head'>Стоимость</td>
+			
+		</tr>
+		<?
+		$currentNumber = '';
+		$totalMinutes = 0;
+		$totalAmount = 0;
+		$numberMinutes = 0;
+		$numberAmount = 0;
+		
+		foreach ($this->data as $item)
+		{
+			if ($item['abonent1'] != $currentNumber)
+			{				
+				if ($currentNumber)
+				{
+					?>
+					<tr>
+						<td class='list_row right' colspan="3"><b>Всего по <?= $currentNumber; ?>:</b></td>
+						<td class='list_row right'><b><?= number_format($numberMinutes, 0, ',', ' '); ?></b></td>
+						<td class='list_row right'><b><?= number_format($numberAmount, 2, ',', ' '); ?></b></td>
+					</tr>
+					<?
+				}
+				
+				$currentNumber = $item['abonent1'];
+				$numberMinutes = 0;
+				$numberAmount = 0;
+				
+				?>
+				<tr>
+					<td class ='list_row center' colspan="5"><b>Номер: <?= $currentNumber; ?></b></td>
+				</tr>
+				<?
+			}
+			
+			$numberMinutes += $item['minutes_count'];
+			$numberAmount += $item['amount'];
+			$totalMinutes += $item['minutes_count'];
+			$totalAmount += $item['amount'];
+			?>
+			<tr>
+				<td class='list_row'><?= $item['call_date']; ?></td>
+				<td class='list_row'><?= $item['call_time']; ?></td>
+				<td class='list_row'><?= $item['abonent2']; ?></td>
+				<td class='list_row right'><?= number_format($item['minutes_count'], 0, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($item['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right' colspan="3"><b>Всего по <?= $currentNumber; ?>:</b></td>
+			<td class='list_row right'><b><?= number_format($numberMinutes, 0, ',', ' '); ?></b></td>
+			<td class='list_row right'><b><?= number_format($numberAmount, 2, ',', ' '); ?></b></td>
+		</tr>
+		<tr>
+			<td class='list_row right' colspan="3"><b>Всего по всем номерам:</b></td>
+			<td class='list_row right'><b><?= number_format($totalMinutes, 0, ',', ' '); ?></b></td>
+			<td class='list_row right'><b><?= number_format($totalAmount, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+?>

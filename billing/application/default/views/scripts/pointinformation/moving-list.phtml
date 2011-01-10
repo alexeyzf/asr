@@ -1,0 +1,54 @@
+<h1>Линейнный отдел. Заявки на перекросс</h1>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Старый номер</th>
+        <th class="list_head">Новый номер</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Действие</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['client_id'] ?></td>
+            <td class="list_row"><?= $item['client_name']; ?></td>
+            <td class="list_row"><?= $item['ballance']; ?></td>
+            <td class="list_row"><?= $item['pcross']; ?></td>
+            <td class="list_row"><?= $item['new_pcross']; ?></td>
+            <td class="list_row"><?= $item['date_action']; ?></td>
+            <td class="list_row">
+                <a href='/Pointinformation/moving-list-done/id/<?= $item['id'] ?>' >
+                    сделано
+                </a>
+            </td>
+        </tr>
+    <?
+    }
+
+}
+?>
+
+</table>

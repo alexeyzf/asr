@@ -1,0 +1,193 @@
+<h1><?= ! $this->isNew ? 'Редактирование' : 'Добавление'; ?> АТС
+
+  <form action="/tech-ats/getspeedup" method="post">
+  	<input type="hidden" name="ats_id" value="<?= $this->atsID ?>" />
+  	<?php
+  		if($this->expanded == "t")
+  		{
+  	?>
+  			<input disabled type="submit" name="btn1" value="Установить 1 мб" />
+  	<?
+  		} else {
+  	?>
+  			<input type="submit" name="btn1" value="Установить 1 мб" />
+  	<?
+  		}
+  	?>
+  </form>
+
+  </form>
+
+</h1>
+<br />
+<br />
+<form method="post" action="">
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/tech-ats')"/>
+             </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <?php echo $this->form->name; ?>
+    <div class='clear'></div>
+
+    <dt>&nbsp;</dt>
+    <dd><label style='float:left;'>Начало диапазона</label><label style='float:left; margin-left:80px;'>Конец диапазона</label></dd>
+    <div class='clear'></div>
+    <dt><label>Диапазон номеров:</label></dt>
+    <dd>
+        <div id='numbers'>
+            <?
+            foreach ($this->numbers as $number)
+            {
+                ?>
+                <span id='numbers<?= $number['id']; ?>'>
+                    <input type='text' name='numbers[<?= $number['id']; ?>][start_number]' value='<?= $number['start_number']; ?>' />&nbsp;-&nbsp;
+                    <input type='text' name='numbers[<?= $number['id']; ?>][end_number]' value='<?= $number['end_number']; ?>' />
+                    <input type='hidden' name='numbers[<?= $number['id']; ?>][id]' value='<?= $number['id']; ?>' />
+                    &nbsp;&nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('numbers<?= $number['id']; ?>');" title='Удалить' />
+                    <br />
+                </span>
+                <?
+            }
+            ?>
+        </div>
+        <div id='numbers_template' class="hide">
+            <span id='numbersnewCOUNTER'>
+                <input type='text' name='numbers[newCOUNTER][start_number]' value='' />&nbsp;-&nbsp;
+                <input type='text' name='numbers[newCOUNTER][end_number]' value='' />
+                <input type='hidden' name='numbers[newCOUNTER][id]' value='newCOUNTER' />
+                &nbsp;&nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('numbersnewCOUNTER');" title='Удалить' />
+                <br />
+            </span>
+        </div>
+        <?
+        if ( count($this->numbers) == 0 )
+        {
+            ?>
+            <script>
+            addDiv('numbers', 'numbers_template');
+            </script>
+            <?
+        }
+        ?>
+        <a href="#numbers" onclick="addDiv('numbers', 'numbers_template')">Добавить</a>
+        <?
+        if (is_array($this->numbersErrors) && count($this->numbersErrors) > 0)
+        {
+            print '<ul class="errors">';
+
+            foreach ($this->numbersErrors as $error)
+            {
+                print "<li>{$error}</li>";
+            }
+
+            print '</ul>';
+        }
+        ?>
+    </dd>
+    <div class='clear'></div>
+    <br />
+
+
+    <dt>&nbsp;</dt>
+    <dd>
+        <label style='float:left;'>Начало диапазона</label>
+        <label style='float:left; margin-left:80px;'>Конец диапазона</label>
+        <label style='float:left; margin-left:80px;'>Причина</label>
+    </dd>
+    <div class='clear'></div>
+    <dt><label>Необслуживаемые номера:</label></dt>
+    <dd>
+        <div id='bad_numbers'>
+            <?
+            foreach ($this->badNumbers as $badNumber)
+            {
+                ?>
+                <span id='bad_numbers<?= $badNumber['id']; ?>'>
+                    <input type='text' name='bad_numbers[<?= $badNumber['id']; ?>][start_number]' value='<?= $badNumber['start_number']; ?>' />&nbsp;-&nbsp;
+                    <input type='text' name='bad_numbers[<?= $badNumber['id']; ?>][end_number]' value='<?= $badNumber['end_number']; ?>' />
+                    <input type='text' name='bad_numbers[<?= $badNumber['id']; ?>][reason]' value='<?= $badNumber['reason']; ?>' />
+                    <input type='hidden' name='bad_numbers[<?= $badNumber['id']; ?>][id]' value='<?= $badNumber['id']; ?>' />
+                    &nbsp;&nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('bad_numbers<?= $badNumber['id']; ?>');" title='Удалить' />
+                    <br />
+                </span>
+                <?
+            }
+            ?>
+        </div>
+        <div id='bad_numbers_template' class="hide">
+            <span id='bad_numbersnewCOUNTER'>
+                <input type='text' name='bad_numbers[newCOUNTER][start_number]' value='' />&nbsp;-&nbsp;
+                <input type='text' name='bad_numbers[newCOUNTER][end_number]' value='' />
+                <input type='text' name='bad_numbers[newCOUNTER][reason]' value='' />
+                <input type='hidden' name='bad_numbers[newCOUNTER][id]' value='newCOUNTER' />
+                &nbsp;&nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('bad_numbersnewCOUNTER');" title='Удалить' />
+                <br />
+            </span>
+        </div>
+        <?
+        if ( count($this->badNumbers) == 0 )
+        {
+            ?>
+            <script>
+            addDiv('bad_numbers', 'bad_numbers_template');
+            </script>
+            <?
+        }
+        ?>
+        <a href="#bad_numbers" onclick="addDiv('bad_numbers', 'bad_numbers_template')">Добавить</a>
+        <?
+        if (is_array($this->badNumbersErrors) && count($this->badNumbersErrors) > 0)
+        {
+            print '<ul class="errors">';
+
+            foreach ($this->badNumbersErrors as $error)
+            {
+                print "<li>{$error}</li>";
+            }
+
+            print '</ul>';
+        }
+        ?>
+    </dd>
+    <div class='clear'></div>
+    <br />
+
+
+    <?php echo $this->form->city_id; ?>&nbsp;<input type='button' name='addCity' value='Добавить' onclick="redirect('/coverzone/index/ats_id/<?= $this->atsID; ?>')" />
+    <div class='clear'></div>
+
+    <?php echo $this->form->phone_hub_id; ?>&nbsp;<input type="button" name="addHub" value="Добавить" onclick="redirect('/tech-phonehub/modify/ats_id/<?= $this->atsID; ?>')" />
+    <div class='clear'></div>
+
+    <?php echo $this->form->address; ?>
+    <div class='clear'></div>
+
+    <?php echo $this->form->status; ?>
+    <div class='clear'></div>
+
+    <?php echo $this->form->notes; ?>
+    <div class='clear'></div>
+
+    <input type='hidden' name='id' value='<?= $this->atsID; ?>' />
+    <br />
+    <br />
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/tech-ats')"/>
+             </td>
+        </tr>
+    </table>
+</form>

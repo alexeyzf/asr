@@ -1,0 +1,49 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="Abilov Marat, Tsoy Alexey" />
+        <title>АСР "SHARQ". Администрирование</title>
+        <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+	<script language="JavaScript" type="text/javascript" src="/scripts/jquery.js"></script>
+</head>
+<body>
+</body>
+<h1>СТП. Логи личного кабинета</h1>
+<br />
+<br />
+<table class='list'>
+		<tr>
+			<td class='list_head'>№</td>
+			<td class='list_head'>Действие</td>
+			<td class='list_head'>Дата/Время</td>
+			<td class='list_head'>Результат</td>
+		</tr>
+<?php
+if($this->data)
+{
+
+    $counter = 0;
+	foreach($this->data as $item)
+	{
+       $counter++;
+	?>
+		<tr>
+			<td class='list_row'><?= $counter ?></td>
+			<td class='list_row'><?=  $item['action_name']; ?></td>
+			<td class='list_row'><?= $item['currenttime']; ?></td>
+			<td class='list_row'><?= $item['param']; ?></td>
+		</tr>
+	<?
+    }
+}
+else
+{
+	?>
+		<tr>
+			<td colspan="4" class='list_head'>Not found!</td>
+		</tr>
+	<?
+}
+?>
+
+</html>

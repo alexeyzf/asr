@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/1862/billing/application/default/views/scripts/card-contract
+END
+create.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/732/billing/application/default/views/scripts/card-contract/create.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/25/billing/application/default/views/scripts/card-contract/index.phtml
+END
+modify.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3/billing/application/default/views/scripts/card-contract/modify.phtml
+END
+view.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1862/billing/application/default/views/scripts/card-contract/view.phtml
+END

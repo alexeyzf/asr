@@ -1,0 +1,77 @@
+<h1><b>Абонентский отдел. Поиск в архиве</b></h1>
+<br/>
+
+<form action="/Clientarhiv/index" method="post">
+<center>
+<table border="0">
+	<tr>
+		<td width="100" valign="top">
+			<?php echo $this->form->type_search; ?>
+		</td>
+		<td valign="top">
+			<?php echo $this->form->searchword; ?>
+		</td>
+		<td valign="top">
+			<input type="submit" value="поиск" name="s_submit" />
+		</td>
+	</tr>
+
+</table>
+</center>
+<br/>
+<br/>
+<!-- Выводим результат !-->
+<table border="1" width="100%" class="list" align="center" bordercolor="#cccccc"  cellspacing="2" cellpadding="2"  style="border-collapse: collapse">
+<tr>
+	<th class="list_head">действия</th>
+	<th class="list_head">N</th>
+	<th class="list_head">Название</th>
+	<th class="list_head">Логин</th>
+	<th class="list_head">Контактный тел.</th>
+	<th class="list_head">Телефон крос.</th>
+	<th class="list_head">ID клиента</th>
+</tr>
+<?php
+// Вывод информации
+$counter = 1;
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row">
+					<table>
+					<tr>
+						<td align="center">
+						<img id="decor_a" border="0" src="/images/restore.png" width="25" height="25" />
+						</td>
+						<td align="center">
+						<a onclick="drop()" href="/Arhiv/lifeupclient/client_id/'.$item['client_id'].'/point_id/'.$item['point_id'].'" >
+						 Восстановить
+						</a>&nbsp;|&nbsp;
+						<a href="/clientarhiv/view/id/' . $item['client_id'] . '">Просмотр</a> 
+						</td>
+					</tr>
+					</table>
+				</td>
+				<td class="list_row">'.$counter.'</td>
+				<td class="list_row">'.$item['client_name'].'</td>
+				<td class="list_row">'.$item['u_login'].'</td>
+				<td class="list_row">'.$item['phone'].'</td>
+				<td class="list_row">'.$item['pcross'].'</td>
+				<td class="list_row">'.$item['client_id'].'</td>
+			</tr>
+		');
+	    $counter++;
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>
+
+

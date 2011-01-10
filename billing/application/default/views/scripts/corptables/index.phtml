@@ -1,0 +1,43 @@
+<h1>Создание таблиц</h1>
+<br/>
+<br/>
+<table border="1" width="100%" class="list" align="center" bordercolor="#cccccc"  cellspacing="2" cellpadding="2"  style="border-collapse: collapse">
+<tr>
+	<th class="list_head">действия</th>
+	<th class="list_head">N</th>
+	<th class="list_head">Название</th>
+	<th class="list_head">Логин</th>
+	<th class="list_head">Контактный тел.</th>
+	<th class="list_head">Баланс</th>
+	<th class="list_head">Телефон крос.</th>
+	<th class="list_head">ID клиента</th>
+</tr>
+
+<?php
+// Вывод информации
+$counter = 1;
+	foreach ($this->data as $item)
+	{
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row" align="center">
+					<a href="/Corptables/createtable/clientid/'.$item['client_id'].'/login/'.$item['u_login'].'" >
+							Создать
+					</a>
+				</td>
+				<td class="list_row">'.$counter.'</td>
+				<td class="list_row">'.$item['client_name'].'</td>
+				<td class="list_row">'.$item['u_login'].'</td>
+				<td class="list_row">'.$item['phone'].'</td>
+				<td class="list_row">
+					'.number_format($item['ballance'], 2, ',', ' ').'
+					<b>[Порт: '.$word.']</b>
+				</td>
+				<td class="list_row">'.$item['pcross'].'</td>
+				<td class="list_row">'.$item['client_id'].'</td>
+			</tr>
+		');
+		$counter++;
+	}
+?>
+</table>

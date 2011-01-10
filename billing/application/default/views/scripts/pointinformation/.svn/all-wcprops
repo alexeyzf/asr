@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3474/billing/application/default/views/scripts/pointinformation
+END
+trust-payment.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3474/billing/application/default/views/scripts/pointinformation/trust-payment.phtml
+END
+atsbonus.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/391/billing/application/default/views/scripts/pointinformation/atsbonus.phtml
+END
+set-test-days.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/1511/billing/application/default/views/scripts/pointinformation/set-test-days.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3472/billing/application/default/views/scripts/pointinformation/index.phtml
+END
+moving-list.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/2030/billing/application/default/views/scripts/pointinformation/moving-list.phtml
+END

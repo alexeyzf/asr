@@ -1,0 +1,150 @@
+<table border="0" width="100%">
+<tr align="center">
+	<td colspan="2">
+		<h1>Приложение N 1</h1>
+		к Договору о совместной деятельности
+		от {$date_dogovor_string}.
+	</td>
+</tr>
+
+<tr>
+	<td colspan="2">
+		<br />
+				<br />
+						<br />
+		<h2>Перечень реламных материалов</h2>
+	</td>
+</tr>
+</table>
+<br />
+<table align="left" border="1" width="530" style="font-family: arial" cellpadding=8>
+<tr>
+	<td>
+		<b style="font-family:arialbd; font-size: 11">N</b>
+	</td>
+	<td>
+		<b style="font-family:arialbd; font-size: 11">Наименование</b>
+	</td>
+	<td>
+		<b style="font-family:arialbd; font-size: 11">Размеры, мм</b>
+	</td>
+	<td>
+		<b style="font-family:arialbd; font-size: 11">Количество, шт.</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		1
+	</td>
+	<td>
+		Наклейки на двери и окна
+	</td>
+	<td>
+		Формат А3
+	</td>
+	<td>
+		4 шт.
+	</td>
+</tr>
+
+<tr>
+	<td>
+		2
+	</td>
+	<td>
+		Баннер в помещении
+	</td>
+	<td>
+		600*1500
+	</td>
+	<td>
+		1 шт.
+	</td>
+</tr>
+<tr>
+	<td>
+		3
+	</td>
+	<td>
+		Наклейки на мониторы
+	</td>
+	<td>
+		150*20
+	</td>
+	<td>
+		В зависимости        от
+		количества компьютеров
+	</td>
+</tr>
+<tr>
+	<td>
+		4
+	</td>
+	<td>
+		Флажки
+	</td>
+	<td>
+		Формат А5
+	</td>
+	<td>
+		В зависимости от помещения
+	</td>
+</tr>
+<tr>
+	<td>
+		5
+	</td>
+	<td>
+		Лайтбокс/флагшток
+	</td>
+	<td>
+		90*30/без размеров
+	</td>
+	<td>
+		1 шт.
+	</td>
+</tr>
+</table>
+<br />
+Все рекламные материалы размещаются на территории 2-й стороны.
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<table align="left" border="0" width="600" style="font-family: arial" cellpadding=4>
+<tr>
+	<td>
+		<br/>
+		Генеральный Директор
+		ООО "Sharq Telekom"
+	</td>
+	<td>
+		<br/>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		__________________________ Садыков С. И.
+	</td>
+	<td>
+		__________________________
+	</td>
+</tr>
+</table>

@@ -1,0 +1,110 @@
+<table border="0" width="100%">
+<tr align="center">
+	<td colspan="2">
+	<b style="font-family:arialbd">
+		Приложение N4<br />
+		к заказу от {$dateagree}<br />
+		к Договору N{$contract_number}<br />
+		от {$time}
+	</b>
+	</td>
+</tr>
+</table>
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td colspan="2" align="center">
+	<br />
+	<br />
+		<b style="font-family:arialbd">АКТ ПРИЕМА-ПЕРЕДАЧИ</b>
+		<br />
+        <br />
+	</td>
+</tr>
+</table>
+<table border="0" width="100%">
+<tr>
+	<td>
+		 Подтверждаю, что <b style="font-family:arialbd">ADSL-модем</b> _______________, <b style="font-family:arialbd">стоимостью</b> ______________ долларов США. с серийным номером __________________, в полной
+		 комплектации, получил в целости и с работоспособными параметрами.<br />
+		 Обязуюсь применять все меры для предотвращения попадания Модема в ненадлежащие условия технической эксплуатации,
+		 могущие привести к его неисправности или преднамеренной поломке, не вскрывать и не пытаться ремонтировать его самостоятельно.<br />
+	</td>
+</tr>
+</table>
+<br />
+<br />
+<table border="1" width="100%">
+	<tr>
+		<td align="center">№</td>
+		<td align="center">Наименование оборудования</td>
+		<td align="center">Ед.изм.</td>
+		<td align="center">Кол-во</td>
+		<td align="center">Serial</td>
+		<td align="center">Цена</td>
+	</tr>
+{$reserch_modem}
+</table>
+
+<br />
+<br />
+<table border="0" width="100%">
+<tr>
+	<td>
+		<b style="font-family:arialbd">ПРЕДУПРЕЖДЕНИЕ</b>
+	</td>
+	<td>
+	<b style="font-family:arialbd">
+		Срок гарантии на оборудование (модем) – 1 год с момента получения. В случае выхода модема из строя по вине
+        Абонента при его настройке либо при неправильной эксплуатации, гарантийный срок на него не распространяется, и ремонг
+        или замена оборудования осуществляется за счет Абонента.
+     </b>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<table border="0" width="100%">
+<tr align="center">
+	<td>
+		<br/>
+		<b style="font-family:arialbd">ПЕРЕДАЛ:</b>
+	</td>
+	<td align="center">
+		<br/>
+		<b style="font-family:arialbd">ПРИНЯЛ:</b>
+	</td>
+</tr>
+<tr align="center">
+	<td>
+		<br/>
+		<b style="font-family:arialbd">ООО "Sharq Telekom"</b>
+	</td>
+	<td align="center">
+		<br/>
+		<b style="font-family:arialbd">{$client_name}</b>
+	</td>
+</tr>
+<tr align="center">
+	<td>
+		___________________Подпись.
+	</td>
+	<td  align="center">
+		___________________Подпись.
+	</td>
+</tr>
+<tr align="center">
+	<td>
+	<br />
+		{$time}
+	</td>
+	<td  align="center">
+	<br />
+		{$time}
+	</td>
+</tr>
+</table>

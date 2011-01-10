@@ -1,0 +1,128 @@
+<center>
+<form action="" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+
+	<select size="1" name="year">
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+	   <input type="submit" value="Отправить">
+</form>
+</center>
+<br />
+<br />
+<table class="list">
+		<tr>
+			<th class="list_head" style='width: 10%'>№</th>
+			<th class="list_head" style='width: 10%'>ID</th>
+			<th class="list_head" style='width: 30%'>Клиент</th>
+			<th class="list_head" >Абон плата (USD)</th>
+			<th class="list_head" >Абон плата (UZS)</th>
+			<th class="list_head" >Переговоры (USD)</th>
+			<th class="list_head" >Переговоры (UZS)</th>
+			<th class="list_head" >Итого (USD)</th>
+			<th class="list_head" >Итого (UZS)</th>
+		</tr>
+<?
+if (is_array($this->data))
+{
+	foreach($this->data as $key => $value)
+	{
+	?>
+		<tr class="list_tr"  onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td colspan="9" class="list_row"><b><?= $key ?></b></td>
+		</tr>
+	<?
+		$counter = 0;
+		$amountAbonUSD = 0;
+		$amountAbonUZS = 0;
+		$amountPeregovorUSD = 0;
+		$amountPeregovorUZS = 0;
+
+		$totalUZSamount = 0;
+		$totalUSDamount = 0;
+
+		foreach($value as $row)
+		{
+			$counter++;
+			$totalUZS = 0;
+			$totalUSD = 0;
+
+			$totalUSD = $row['abon_pay'] + $row['peregovors'];
+			$totalUZS = $row['abon_pay_sum'] + $row['peregovors_sum'];
+			$amountAbonUSD = $amountAbonUSD + $row['abon_pay'];
+			$amountAbonUZS = $amountAbonUZS + $row['abon_pay_sum'];
+
+			$amountPeregovorUSD = $amountPeregovorUSD + $row['peregovors'];
+			$amountPeregovorUZS = $amountPeregovorUZS + $row['peregovors_sum'];
+
+			$totalUSDamount = $totalUSDamount + $totalUSD;
+			$totalUZSamount = $totalUZSamount + $totalUZS;
+
+		?>
+			<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row"><?= $counter; ?></td>
+				<td class="list_row"><b><?= $row['client_id']; ?></b></td>
+				<td class="list_row"><?= $row['client_name']; ?></td>
+				<td class="list_row right">
+					<?= number_format($row['abon_pay'], 2, ',', ' '); ?>
+				</td>
+				<td class="list_row right">
+					<?= number_format($row['abon_pay_sum'], 2, ',', ' '); ?>
+				</td>
+				<td class="list_row right">
+					<?= number_format($row['peregovors'], 2, ',', ' '); ?>
+				</td>
+				<td class="list_row right">
+					<?= number_format($row['peregovors_sum'], 2, ',', ' '); ?>
+				</td>
+				<td class="list_row right">
+					<?= number_format($totalUSD, 2, ',', ' '); ?>
+				</td>
+				<td class="list_row right">
+					<?= number_format($totalUZS, 2, ',', ' '); ?>
+				</td>
+			</tr>
+		<?php
+		}
+
+		$globalAmountUSD = $globalAmountUSD +  $totalUSDamount;
+		$globalAmountUZS = $globalAmountUZS +  $totalUZSamount;
+
+		$amountAbonUSDamount = $amountAbonUSDamount + $amountAbonUSD;
+		$amountAbonUZSamount = $amountAbonUZSamount + $amountAbonUZS;
+
+		$amountPeregovorUSDamount = $amountPeregovorUSDamount +  $amountPeregovorUSD;
+		$amountPeregovorUZSamount = $amountPeregovorUZSamount +  $amountPeregovorUZS;
+		?>
+
+		<tr class="list_tr"  onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row" colspan="3" align="right"><b>Итого:</b></td>
+				<td class="list_row right"><b><?= number_format($amountAbonUSD, 2, ',', ' '); ?></b></td>
+				<td class="list_row right"><b><?= number_format($amountAbonUZS, 2, ',', ' '); ?></b></td>
+				<td class="list_row right"><b><?= number_format($amountPeregovorUSD, 2, ',', ' '); ?></b></td>
+				<td class="list_row right"><b><?= number_format($amountPeregovorUZS, 2, ',', ' '); ?></b></td>
+				<td class="list_row right"><b><?= number_format($totalUSDamount, 2, ',', ' '); ?></b></td>
+				<td class="list_row right"><b><?= number_format($totalUZSamount, 2, ',', ' '); ?></b></td>
+		</tr>
+		<?php
+	}
+
+	?>
+		<tr class="list_tr"  onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row right"><b></b></td>
+				<td class="list_row right"><b></b></td>
+				<td class="list_row right"><b></b></td>
+
+				<td class="list_row right"><b><?= number_format($amountAbonUSDamount, 2, '. ', ',') ?></b></td>
+				<td class="list_row right"><b><?= number_format($amountAbonUZSamount, 2, '. ', ',') ?></b></td>
+				<td class="list_row right"><b><?= number_format($amountPeregovorUSDamount, 2, '. ', ',') ?></b></td>
+				<td class="list_row right"><b><?=  number_format($amountPeregovorUZSamount, 2, '. ', ',') ?></b></td>
+				<td class="list_row" align="right"><b><?= number_format($globalAmountUSD, 2, '. ', ',') ?></b></td>
+				<td class="list_row" align="right"><b><?= number_format($globalAmountUZS, 2, '. ', ',')  ?></b></td>
+		</tr>
+	<?
+}
+?>
+</table>

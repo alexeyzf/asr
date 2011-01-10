@@ -1,0 +1,91 @@
+<h1>Карточки. Серия SiGMA-KAPITAL</h1>
+<br />
+<br />
+<center>
+<?php
+    if($this->infos)
+    {
+        foreach($this->infos as $value)
+        {
+            echo $value;
+        }
+    }
+?>
+</center>
+
+
+<table border="0">
+<tr>
+	<td>
+	Активная серия: <h2><?= $this->data['serial']; ?></h2>
+	Установлена   : <h2><?= date('d.m.Y', strtotime($this->data['last_change'])); ?></h2>
+	</td>
+	<td width="100%" align="center">
+		<label> <h3>Установить серию</h3></label>
+                <br />
+		<form action="" method="post">
+                        	<br />
+			<input type="text" maxlength="4" name="new_serial" value="<?= $this->data['serial']; ?>" />
+                         процент: <input type="text" maxlength="4" name="new_percent" size="5" value="<?= $this->data['percent']; ?>" />
+                         <br />
+                         <br />
+			<?= $this->form; ?>
+		</form>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Серия</th>
+        <th class="list_head" style="width:15%;">Процент</th>
+        <th class="list_head">Начало</th>
+        <th class="list_head">Окончание</th>
+        <th class="list_head">Дата создания</th>
+        <th class="list_head">Действия</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $cards)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $cards['serial']; ?></td>
+            <td class="list_row"><?= $cards['percent']; ?> %</td>
+            <td class="list_row"><?= $cards['startdate']; ?></td>
+            <td class="list_row"><?= $cards['enddate']; ?></td>
+            <td class="list_row"><?= $cards['last_change']; ?></td>
+            <td class="list_row">
+                <form action="/Sigma-kapital/close" method="post">
+                    <input type="hidden" name="is_serial" value="<?=  $cards['serial']; ?>" />
+                    <input type="hidden" name="serial_id" value="<?=  $cards['id']; ?>" />
+                    <input type="submit" name="btn1" value="закрыть" />
+                </form>
+            </td>
+        </tr>
+    <?
+        $price = $price + $cards['tarif_price'];
+    }
+
+}
+?>
+</table>

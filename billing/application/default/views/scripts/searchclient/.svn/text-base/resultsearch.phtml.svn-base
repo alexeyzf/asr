@@ -1,0 +1,47 @@
+<table class="list"  cellspacing="0" border="0">
+	<tr>
+		<th class="list_head" width="40">ID</th>
+		<th class="list_head" width="200">Имя</th>
+		<th class="list_head" width="100">тел. крос.</th>
+		<th class="list_head" width="200">адрес подк.</th>
+		<th class="list_head" width="75">конт. тел.</th>
+		<th class="list_head" width="100">конт. лицо</th>
+		<th class="list_head" width="100">логин</th>
+		<th class="list_head" width="200">действия</th>
+	</tr>
+<?php
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+		print '<tr class="list_tr">';
+
+		echo ('
+		<td class="list_row" >'.$item['point_id'].'</td>
+		<td class="list_row" >'.$item['client_name'].'</td>
+		<td class="list_row">'.$item['pcross'].'</td>
+		<td class="list_row">'.$item['connect_address'].'</td>
+		<td class="list_row">'.$item['phone'].'</td>
+		<td class="list_row">'.$item['contact_name'].'</td>
+		<td class="list_row">'.$item['u_login'].'</td>
+		<td class="list_row"><a href="/Searchclient/modifyclientinsearch/pointid/'.$item['point_id'].'/clientid/'.$item['client_id'].' " >редактировать</a></td>
+		');
+
+		print '</tr>';
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>
+
+
+
+
+
+
+
+

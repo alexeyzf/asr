@@ -1,0 +1,43 @@
+<h1>Статистика по сальдо клиента: ( <?= $this->client_name ?> ) | <a href="<?= $_SESSION['back_url'] ?>">НАЗАД</a></h1>
+<br/>
+<br/>
+<br/>
+<form action="/Finance/financehistory/client_id/<?= $this->client_id ?>" method="post" >
+
+</form>
+
+<table border="1"  class="list" >
+<tr>
+	<th class="list_head">дата</th>
+	<th class="list_head">Истрачено</th>
+	<th class="list_head">Баланс</th>
+	<th class="list_head">Оплачено</th>
+	<th class="list_head">Валюта</th>
+</tr>
+<?php
+// Вывод информации
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row">'.$item['cur_date'].'</td>
+				<td class="list_row">'.money_format('%i', $item['imoney']).'</td>
+				<td class="list_row">'.money_format('%i', $item['ballance']).'$</td>
+				<td class="list_row">'.money_format('%i', $item['omoney']).'</td>
+				<td class="list_row">'.$item['valuta'].'</td>
+			</tr>
+		');
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>
+<br/>
+<br/>
+

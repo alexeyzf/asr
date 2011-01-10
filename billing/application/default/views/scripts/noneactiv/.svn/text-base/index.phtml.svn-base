@@ -1,0 +1,55 @@
+<h1>Абонентский отдел. Не активированные клиенты</h1>
+<br />
+<br />
+<center class='font14'>
+	<a href='/noneactiv'>Новые</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href='/noneactiv/index/date/<?= date('Y-m-d', strtotime('-30 days')); ?>'>Более 30 дней</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href='/noneactiv/index/date/<?= date('Y-m-d', strtotime('-60 days')); ?>'>Более 60 дней</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href='/noneactiv/index/date/<?= date('Y-m-d', strtotime('-90 days')); ?>'>Более 90 дней</a>
+</center>
+<br />
+<br />
+<table class='list' >
+	<tr>
+  		<th class='list_head'>ID клинета</th>
+  		<th class='list_head'>Логин</th>
+  		<th class='list_head'>Клиент</th>
+  		<th class='list_head'>Адрес</th>
+  		<th class='list_head'>Конт. тел.</th>
+  		<th class='list_head'>Конт. лицо</th>
+  		<th class='list_head'>Дата подкл.</th>
+  		<th class='list_head'>Баланс</th>
+  		<th class='list_head'>РЕШЕНИЕ</th>
+	</tr>
+	<?php
+	foreach ($this->data as $hubName => $list)
+	{
+		?>
+		<tr id="atsname">
+			<td  class="list_row left"  colspan="9" >
+				<h2><b><?= $hubName; ?></b></h2>
+			</td>
+		</tr>
+		<?
+		foreach ($list as $item)
+		{
+			?>
+	      	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	        	<td class='list_row'><?= $item['client_id']; ?></td>
+				<td class='list_row'><?= $item['u_login']; ?></td>
+	        	<td class='list_row'><?= $item['client_name']; ?></td>
+	        	<td class='list_row'><?= $item['address']; ?></td>
+	        	<td class='list_row'><?= $item['phone']; ?></td>
+	        	<td class='list_row'><?= $item['contact_name']; ?></td>
+	        	<td class='list_row'><?= date('d.m.Y', strtotime($item['dateagree_contract'])); ?></td>
+	        	<td class='list_row'><?= money_format('%i', $item['ballance']); ?></td>
+	 			<td class='list_row'>&nbsp;</td>
+	      	</tr>
+	    	<?
+	  	}
+	}
+	?>
+</table>

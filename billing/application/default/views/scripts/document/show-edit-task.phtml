@@ -1,0 +1,207 @@
+<h1>Задание</h1>
+<br />
+<br />
+<?
+if (!$this->data)
+{
+?>
+    <h2>Задание не найдено или у вас нет прав на его просмотр.</h2>
+<?
+}
+else
+{
+    $task = $this->data['task']['task'];
+    $docs = $this->data['task']['docs'];
+    $flow = $this->data['flow'];
+?>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Задание</td>
+    </tr>
+</table>
+<center>
+    <table id="infotask" cellpadding="5" cellspacing="8">
+        <tr>
+            <th class="label">Заголовок:</th>
+            <td><?= $task['title'] ?></td>
+        </tr>
+        <tr>
+            <th class="label">Сообщение:</th>
+            <td><?= $task['body'] ?></td>
+        </tr>
+        <tr>
+            <th class="label">Дата создания:</th>
+            <td><?= date('Y-m-d', strtotime($task['create_date'])) ?></td>
+        </tr>
+        <tr>
+            <th class="label">Крайний срок:</th>
+            <td><?= $task['deadline'] ?></td>
+        </tr>
+        <tr>
+            <th class="label">Тип:</th>
+            <td><?= $task['type'] ?></td>
+        </tr>
+        <tr>
+            <th class="label">Приоритет:</th>
+            <td><?= $task['priority'] ?></td>
+        </tr>
+        <tr>
+            <th class="label">Статус:</th>
+            <td><?= $task['status'] ?></td>
+        </tr>
+    </table>
+</center>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Прикрепленные документы</td>
+    </tr>
+</table>
+<table class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+    <tr>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Файл</th>
+        <th class="list_head">Комментарий</th>
+        <th class="list_head" style="width: 30px;">&nbsp;</th>
+    </tr>
+    <?
+    foreach ($docs as $document)
+    {
+    ?>
+    <tr id="document_row_<?= $document['id'] ?>" class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class="list_row"><?= date('Y-m-d', strtotime($document['uplaod_date'])) ?></td>
+        <td class="list_row">
+            <a href="/document/get-document/id/<?= $document['hash'] ?>/">
+                <?= $document['name'] ?>
+            </a>
+        </td>
+        <td class="list_row"><?= $document['comment'] ?></td>
+        <td class="list_row">
+            <img class="link" src="/images/icons/delete.png" onclick="removeRow(<?= $document['id'] ?>, '<?= $document['hash'] ?>')" alt="Удалить" />
+        </td>
+    </tr>
+    <?
+    }
+    ?>
+</table>
+<br/>
+
+<form id="form_id" method="post" action="/document/show-edit-task/id/<?= $task['id'] ?>/" enctype="application/x-www-form-urlencoded">
+    <table width="100%">
+        <tr>
+            <td class="sub-heading">Сменить статус</td>
+        </tr>
+    </table>
+    <br />
+    <center>
+        <table>
+            <tr>
+                <th class="label">Статус:</th>
+                <td>
+                    <select name="status">
+                        <?
+                        foreach ($this->properties['statuses'] as $status)
+                        {
+                        ?>
+                            <option value="<?= $status['id'] ?>" label="<?= $status['status_id'] ?>"
+                                <?= ($status['id'] == $flow['status_id']) ? 'selected="selected"' : '' ?>>
+                                <?= $status['description'] ?>
+                            </option>
+                        <?
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td align='center' nowrap>
+                    <div class='space-5h'></div>
+                    <input type="submit" value="Продолжить" name="change-status"/>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <br/>
+
+    <table width="100%">
+        <tr>
+            <td class="sub-heading">Переназначить</td>
+        </tr>
+    </table>
+    <center>
+        <table>
+            <tr>
+                <th class="label">На кого:</th>
+                <td>
+                    <table id="assignees_table">
+                        <tr id="assignees_row">
+                            <td>
+                                <table border="1" bordercolor="grey" rules="none">
+                                    <tr>
+                                        <th>Сотрудники:</th>
+                                        <td>
+                                            <select name="assignee[]" id="assignee" style="width:200px;">
+                                                <option value="" label="Выберите" selected="selected">Выберите</option>
+                                                <?
+                                                foreach ($this->properties['users'] as $group => $users)
+                                                {
+                                                ?>
+                                                    <optgroup label="<?= $group ?>">
+                                                    <?
+                                                    foreach ($users as $user)
+                                                    {
+                                                    ?>
+                                                        <option value="<?= $user['user_id'] ?>" label="<?= $user['full_name'] ?>"><?= $user['full_name'] ?></option>
+                                                    <?
+                                                    }
+                                                    ?>
+                                                    </optgroup>
+                                                <?
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <!--put-x-button-->
+                                    </tr>
+                                    <tr>
+                                        <th>Отделы:</th>
+                                        <td>
+                                            <select name="group[]" id="assignee" style="width:200px;">
+                                            <option value="" label="Выберите" selected="selected">Выберите</option>
+                                            <?
+                                            foreach ($this->properties['groups'] as $group)
+                                            {
+                                            ?>
+                                                <option value="<?= $group['id'] ?>" label="<?= $group['name'] ?>"><?= $group['name'] ?></option>
+                                            <?
+                                            }
+                                            ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!--remove-start-->
+                            <td rowspan="1000" valign="bottom">
+                                <input type="button" onclick="addRow('assignees')" name="assignees_btn" id="assignees_btn" value="Добавить" />
+                            </td>
+                            <!--remove-finish-->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td align='center' nowrap>
+                    <div class='space-5h'></div>
+                    <input type="submit" value="Продолжить" name="reassign-task"/>
+                </td>
+            </tr>
+        </table>
+    </center>
+</form>
+
+<?
+}
+?>

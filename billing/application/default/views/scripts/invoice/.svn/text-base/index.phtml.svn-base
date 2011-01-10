@@ -1,0 +1,8 @@
+<h1>Бухгалтерия. Генерация счет фактур</h1>
+<br />
+<br />
+<form action="/Invoice/create" method="post" >
+<center>
+		<?= $this->form ?>
+</center>
+</form>

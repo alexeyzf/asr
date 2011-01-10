@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3611/billing/application/default/views/scripts/clientreports
+END
+switchoff.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/2136/billing/application/default/views/scripts/clientreports/switchoff.phtml
+END
+uncross-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3603/billing/application/default/views/scripts/clientreports/uncross-report.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3611/billing/application/default/views/scripts/clientreports/index.phtml
+END
+show-total-switch-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3465/billing/application/default/views/scripts/clientreports/show-total-switch-report.phtml
+END

@@ -1,0 +1,31 @@
+<h1>Баланс короративных клиентов</h1>
+<br />
+<br />
+<form method="post" name="show-clients-ballamce-form" action="#">
+	<center class="font14">
+		<label class="font14">Дата:</label>
+		<input type="text" value="<?= $this->date; ?>" name="date" />
+		<input type="submit" value="Показать" />
+	</center>
+</form>
+<br />
+<br />
+<table class="list">
+	<tr>
+		<th class="list_head">Регистрационный номер</th>
+		<th class="list_head">Наименование</th>
+		<th class="list_head">Баланс</th>
+	</tr>
+	<?
+	foreach ($this->corpClients as $client)
+	{
+		?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class="list_row"><?= $client['client_id']; ?></td>
+			<td class="list_row"><?= $client['client_name']; ?></td>
+			<td class="list_row right"><?= number_format($client['ballance'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	} 
+	?>
+</table>

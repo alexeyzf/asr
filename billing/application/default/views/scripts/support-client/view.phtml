@@ -1,0 +1,213 @@
+<h1>СТП. Информация о клиенте</h1>
+<br />
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Общая информация о клиенте</td>
+    </tr>
+</table>
+<br/>
+
+<dt><label>Логин:</label></dt>
+<dd><?= $this->info['u_login']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Клиент:</label></dt>
+<dd><?= $this->info['client_name']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Баланс:</label></dt>
+<dd>
+   <b style="color:red"> $<?= $this->info['ballance'] ? number_format($this->info['ballance'], 2, '.', ' ') : 0; ?></b>
+    <a class='link' href='/support-client/finance/id/<?= $this->info['client_id']; ?>'>Финансовая история</a>
+</dd>
+<div class='clear'></div>
+
+<dt><label>Состояние порта:</label></dt>
+<dd><?= $this->info['port_state'] ? 'Включен' : 'Выключен'; ?></dd>
+<div class='clear'></div>
+
+<br />
+
+<dt><label>АТС:</label></dt>
+<dd><?= $this->info['ats_name']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Dslam:</label></dt>
+<dd><?= $this->info['dslam_name']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Номер порта:</label></dt>
+<dd><?= $this->info['port_number']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Номер рамки:</label></dt>
+<dd><?= $this->info['frame_number']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Номера пар:</label></dt>
+<dd><?= $this->info['line_number1'] . '/' .$this->info['line_number2']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Статус кросса:</label></dt>
+<dd><?= $this->info['statuscross_label']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Количество истраченных часов:</label></dt>
+<dd><b><?= $this->sessionTime; ?></b></dd>
+<div class='clear'></div>
+
+<?php
+if($this->info['client_type_id'] == 1)
+{
+?>
+	<dt><label>История смены тарифа:</label></dt>
+	<dd>
+		 <a id="client_name_link" onclick="openIframe('/Tarifhistory/index/point_id/<?= $this->info['point_id']; ?>/tablename/<?= $this->info['tablename']; ?>/flag/1')" href="#">просмотр</a>
+	</dd>
+	<div class='clear'></div>
+	<dt><label>Дополнительные услуги:</label></dt>
+	<dd>
+		 <a id="client_name_link" onclick="openIframe('/support/show-additional-services/point_id/<?= $this->info['point_id']; ?>/username/<?= $this->info['u_login']; ?>')" href="#">просмотр</a>
+	</dd>
+	<div class='clear'></div>
+    <dt><label>Починить Интернет:</label></dt>
+    <dd>
+        <a id="client_name_link" onclick="openIframe('/support/repair-internet/u_login/<?= $this->info['u_login']; ?>/ctype/<?= $this->info['client_type_id']; ?>/tablename/<?= $this->info['tablename']; ?>')" href="#">проверить</a>
+    </dd>
+    <div class='clear'></div>
+    <dt><label>Логи кабинета:</label></dt>
+    <dd>
+        <a id="client_name_link" onclick="openIframe('/support/cabinet-log-view/u_login/<?= $this->info['u_login']; ?>')" href="#">проверить</a>
+    </dd>
+<?
+}
+?>
+<br />
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Оказываемые услуги</td>
+    </tr>
+</table>
+<br/>
+<?php
+if($this->info['client_type_id'] == 1)
+{
+	$condHead = "<th class='list_head'>Состояние</th>";
+
+}
+?>
+
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Статистика</th>
+        <th class='list_head'>Link</th>
+        <th class='list_head'>Услуга</th>
+        <th class='list_head'>Логин</th>
+        <th class='list_head'>Тел. крос.</th>
+        <th class='list_head'>Тариф</th>
+        <th class='list_head'>Дата начала</th>
+        <th class='list_head'>Дата окончания</th>
+        <th class='list_head'>Оплачено до</th>
+		<?= $condHead; ?>
+        <th class='list_head'>Ip</th>
+        <th class='list_head'>Шлюз</th>
+        <th class='list_head'>Маска сети</th>
+    </tr>
+
+    <?
+
+    foreach ($this->services as $service)
+    {
+    	if($service['group_name'] == 'special')
+    	{
+    		$options = $service['speed']. " <b>|</b> ". $service['tarif_price'];
+    	}
+
+
+        if($service['enddate'] <= date("Y-m-d"))
+    	{
+    		$tr_bgcolor = '#D7D7D7';
+    	}
+    	elseif($service['startdate'] > date("Y-m-d"))
+    	{
+    		$tr_bgcolor = '#bdffbb';
+    	}
+    	else
+    	{
+    		$tr_bgcolor = '#ffffff';
+    	}
+
+        ?>
+        <tr class='list_tr' bgcolor="<?= $tr_bgcolor; ?>">
+            <td class='list_row'>
+            	<a class='link' href='/support-client/service/login/<?= $this->info['u_login'] ?>/ctype/<?= $this->info['client_type_id'] ?>/pid/<?= $this->info['point_id'] ?>'>
+            		Посмотреть
+            	</a>
+            </td>
+            <td class='list_row'>
+            <?php
+                if(in_array($service['servicetype_id'], array(7000, 3000, 7020, 8000, 7111, 3100)))
+                {
+            ?>
+                <a id="client_name_link" onclick="openIframe('/support/show-links/u_login/<?= $this->info['u_login']; ?>/ctype/<?= $this->info['client_type_id']; ?>/tablename/<?= $this->info['tablename']; ?>')" href="#">
+                        [Link]
+                </a>
+            <?php
+                }
+            ?>
+
+            </td>
+            <td class='list_row'><?= $service['servicetype_name']; ?></td>
+            <td class='list_row'><?= $service['u_login']; ?></td>
+            <td class='list_row'><?= $service['pcross']; ?></td>
+            <td class='list_row'><?= $service['tarif_name']; ?> (<?= $options; ?>$)</td>
+            <td class='list_row'><?= date('d.m.y', strtotime($service['startdate'])); ?></td>
+            <td class='list_row'><?= date('d.m.y', strtotime($service['enddate'])); ?></td>
+            <td class='list_row'><b><?= date('Y/m/d', strtotime($service['paidto'])); ?></b></td>
+            <?php
+            //var_dump($this->services[$i][0]['penable']);
+            //exit();
+            if($this->info['client_type_id'] == 1)
+            {
+            ?>
+            	<td class='list_row'><?= $service['penable'] ? 'Включена' : 'Выключена' ?></td>
+            <?php
+            }
+            ?>
+            <td class='list_row'><?= $service['ip_address']; ?></td>
+            <td class='list_row'><?= $service['gw_address']; ?></td>
+            <td class='list_row'><?= $service['mask']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>
+
+<br/>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Логи соединений</td>
+    </tr>
+</table>
+<br/>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Дата</th>
+        <th class='list_head'>Статус</th>
+    </tr>
+    <?
+    foreach ($this->logs as $l)
+    {
+        ?>
+        <tr>
+            <td class='list_row'><?= date('d.m.y H:i:s', strtotime($l['currenttime'])); ?></td>
+            <td class='list_row'><?= $l['messages']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>

@@ -1,0 +1,29 @@
+<?php
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+//echo $this->form->service_id;
+?>
+
+<form action="/employee/template" method="post">
+
+<center>
+  <table border="0">
+    <tr>
+      <td valign="bottom" ><h2>Выберите услугу:</h2></td>
+      <td valign="bottom"><?php echo $this->form->servicetype_id; ?></td>
+      <td valign="bottom"><input type="submit" value="выбрать" name="btn1" /></td>
+    </tr>
+    <tr>
+    	<td>
+    		<?php echo $this->form->point_id;  ?>
+    		<?php echo $this->form->client_id;  ?>
+    		<?php echo $this->form->back_url;  ?>
+    	</td>
+    </tr>
+  </table>
+</center>
+</form>
+
+<?php echo $this->twice; ?>

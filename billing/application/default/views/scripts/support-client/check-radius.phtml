@@ -1,0 +1,64 @@
+<h1>Проверка выставление данных на Radius</h1>
+<br />
+<br />
+<form method='post' name='check-radius' action='#'>
+	<dt><label>Логин:</label></dt>
+	<dd><input type='text' name='login' value='<?= $this->login; ?>' /></dd>
+	<div class='clear'></div>
+	
+	<dt><label>Пароль:</label></dt>
+	<dd><input type='text' name='password' value='<?= $this->password; ?>' /></dd>
+	<div class='clear'></div>
+	
+	<dt><label>Услуга:</label></dt>
+	<dd>
+		<?
+		$options = array(
+			3000	=> 'Adsl',
+			1000	=> 'Dialup',
+			1100	=> 'Dialup-smile'
+		);
+		?>
+		<select name='servicetype'>
+			<?= FormHelper::getSelectOptions($options, $this->serviceType); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label>&nbsp;</label></dt>
+	<dd><input type="submit" value='Проверить' /></dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if ($this->serviceType)
+{
+	?>
+	<label class='font14'>Результат выставления</label>
+	<br />
+	<?
+	if ($this->setLimitResult)
+	{
+		foreach ($this->radreply as $row)
+		{
+			?>
+			<label class='font14'><?= $row->attribute ?> = <?= $row->value; ?></label>
+			<br />
+			<?
+		}
+	}
+	else
+	{
+		?>
+		<label class='font14'>Проверьте включена ли услуга и на отрицательный баланс и не зашел ли уже клиент</label>
+		<br />
+		<?
+	}
+	?>
+	<label class='font14'>Результат проверки пароля - <?= $this->passwordCheckResult ? 'Правильный' : 'Неправильный' ?></label>
+	<br />
+	<label class='font14'>Группа - <?= $this->userGroup; ?></label>
+	<?
+}
+?>

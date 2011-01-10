@@ -1,0 +1,219 @@
+<h1>Подключения. Сравнение информации по подключениям</h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+<br />
+<br />
+<br />
+<br />
+
+<?
+if ( is_array($this->data))
+{
+    $keys = array_keys($this->data['data']);
+    //var_dump($this->data['data'][$keys[0]]['payment']['stream']['abon']); exit;
+    if (/*$this->data['data'][$keys[0]]['payment']['stream']['abon'] == 0*/ false )
+    {
+    ?>
+        <h2 style="text-align: center">За данный период ничего не найдено</h2>
+    <?
+    }
+    else
+    {?>
+<h2 style="text-align: left;">Сумма по поступлениям:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Клиенты</th>
+        <?
+        foreach (array_keys($this->data['data']) as $month)
+        {
+        ?>
+            <th class="list_head" colspan="4" style="text-align: center;"><?= $month ?></th>
+        <?
+        }
+        ?>
+    </tr>
+    <tr>
+        <th class="list_head"></th>
+        <?
+        for ($i = 0; $i < count($this->data['data']); $i++)
+        {
+        ?>
+            <th class="list_head">Абон. плата</th>
+            <th class="list_head">Рег. плата</th>
+            <th class="list_head">Модем</th>
+            <th class="list_head">Итого</th>
+        <?
+        }
+        ?>
+    </tr>
+    <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <th class="list_head">Физические лица</th>
+        <?
+        $colSums = array();
+
+        foreach ($this->data['data'] as $key => $row)
+        {
+            $row = $row['payment']['stream'];
+            $sum = $row['abon'] + $row['reg'] +  $row['modem'];
+
+            $colSum['abon'] = $row['abon'];
+            $colSum['reg'] = $row['reg'];
+            $colSum['modem'] = $row['modem'];
+            $colSum['sum'] = $sum;
+
+            $colSums[$key] = $colSum;
+        ?>
+            <td class='list_row'><?= sprintf('%.3f', $row['abon']) ?></td>
+            <td class='list_row'><?= sprintf('%.3f', $row['reg']) ?></td>
+            <td class='list_row'><?= sprintf('%.3f', $row['modem']) ?></td>
+            <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $sum) ?></td>
+        <?
+        }
+        ?>
+    </tr>
+    <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <th class="list_head">Юридические лица</th>
+        <?
+        foreach ($this->data['data'] as $key => $row)
+        {
+            $row = $row['payment']['corp'];
+            $sum = $row['abon'] + $row['reg'] +  $row['modem'];
+
+            $colSums[$key]['abon'] += $row['abon'];
+            $colSums[$key]['reg'] += $row['reg'];
+            $colSums[$key]['modem'] += $row['modem'];
+            $colSums[$key]['sum'] += $sum;
+        ?>
+            <td class='list_row'><?= sprintf('%.3f', $row['abon']) ?></td>
+            <td class='list_row'><?= sprintf('%.3f', $row['reg']) ?></td>
+            <td class='list_row'><?= sprintf('%.3f', $row['modem']) ?></td>
+            <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $sum) ?></td>
+        <?
+        }
+        ?>
+    </tr>
+    <tr>
+        <th class="list_head">Итого</th>
+        <?
+        foreach ($colSums as $col)
+        {
+        ?>
+             <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $col['abon']) ?></td>
+             <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $col['reg']) ?></td>
+             <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $col['modem']) ?></td>
+             <td class='list_row' style="font-weight: bold;"><?= sprintf('%.3f', $col['sum']) ?></td>
+        <?
+        }
+        ?>
+    </tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+
+<h2 style="text-align: left;">Сумма по количеству абонентов:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head"></th>
+        <?
+        foreach (array_keys($this->data['data']) as $month)
+        {
+        ?>
+            <th class="list_head"><?= $month ?></th>
+        <?
+        }
+        ?>
+    <tr>
+    <tr>
+        <th class="list_head" colspan="<?= count($this->data['data']) + 1?>" style="text-align: center;">Физические лица</th>
+    </tr>
+    <?
+    $colSums = array();
+    foreach ($this->data['streamTarifs'] as $streamService)
+    {
+    ?>
+    <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class='list_row' style="font-weight: bold;"><?= $streamService['service_name'] ?></td>
+        <?
+        foreach ($this->data['data'] as $key => $row)
+        {
+            $row = $row['amount']['stream'];
+            $colSums[$key] += $row[$streamService['service_name']];
+        ?>
+            <td class='list_row' style="font-weight: bold;"><?= $row[$streamService['service_name']] ?></td>
+        <?
+        }
+        ?>
+    </tr>
+    <?
+    }
+    ?>
+    <tr>
+        <th class="list_head"></th>
+        <?
+        foreach ($colSums as $sum)
+        {
+        ?>
+            <th class="list_head"><?= $sum ?></th>
+        <?
+        }
+        ?>
+    </tr>
+    <tr>
+        <th class="list_head" colspan="<?= count($this->data['data']) + 1?>" style="text-align: center;">Юрудические лица</th>
+    </tr>
+    <?
+    foreach ($this->data['corpTarifs'] as $corpService)
+    {
+    ?>
+    <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class='list_row' style="font-weight: bold;"><?= $corpService['service_name'] ?></td>
+        <?
+        foreach ($this->data['data'] as $key => $row)
+        {
+            $row = $row['amount']['corp'];
+            $colSums[$key] += $row[$corpService['service_name']];
+            $colSums2[$key] += $row[$corpService['service_name']];
+        ?>
+            <td class='list_row' style="font-weight: bold;"><?= $row[$corpService['service_name']] ?></td>
+        <?
+        }
+        ?>
+    </tr>
+    <?
+    }
+    ?>
+    <tr>
+        <th class="list_head"></th>
+        <?
+        foreach ($colSums2 as $sum)
+        {
+        ?>
+            <th class="list_head"><?= $sum ?></th>
+        <?
+        }
+        ?>
+    </tr>
+    <tr>
+        <th class="list_head">Итого</th>
+        <?
+        foreach ($colSums as $sum)
+        {
+        ?>
+            <th class="list_head"><?= $sum ?></th>
+        <?
+        }
+        ?>
+    </tr>
+</table>
+<?
+    }
+}
+?>

@@ -1,0 +1,70 @@
+<h1>Отдел продаж. Статистика переговоров</h1>
+<br />
+<br />
+<center>
+<?= $this->form; ?>
+</center>
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">дата</th>
+        <th class="list_head">направление</th>
+        <th class="list_head">номер + код</th>
+        <th class="list_head" style="width:15%;">кол.-минут</th>
+        <th class="list_head">стоимость 1 мин.</th>
+        <th class="list_head">стоимость звонка</th>
+        <th class="list_head">телефон</th>
+        <th class="list_head">примечание</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+	$total 	 = 0;
+    foreach ($this->data as $list)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $list['call_date']; ?>  <?= $list['call_time']; ?></td>
+            <td class="list_row"><?= $list['directions']; ?></td>
+            <td class="list_row"><?= $list['abonent2']; ?></td>
+            <td class="list_row"><?= $list['minutes_count']; ?></td>
+            <td class="list_row"><?= $list['price']; ?></td>
+            <td class="list_row"><?= $list['amount']; ?></td>
+            <td class="list_row"><?= $list['abonent1']; ?></td>
+            <td class="list_row"><?= $list['disposition']; ?></td>
+        </tr>
+        <?
+
+       $total = $total + $list['amount'];
+    }
+    ?>
+       <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"><b><?= $total; ?></b></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+        </tr>
+    <?
+}
+?>
+</table>

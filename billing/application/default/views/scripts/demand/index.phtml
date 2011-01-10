@@ -1,0 +1,225 @@
+<script language="JavaScript" type="text/javascript">
+    function markChanged(pointID)
+    {
+        $('#points_' + pointID + '_is_changed')[0].value = 1;
+    }
+
+    function cancelCross(pointID)
+    {
+		$('#cancel_point_id').val(pointID);
+		$('#cancel_notes').val($('#point_' + pointID + '_notes').val());
+		$('#cancel_day_counts').val($('#point_' + pointID + '_count_days').val());
+
+        $('#cancel_has_no_debt').val($(String.format('#points_{0}_has_no_debt', pointID)).attr('checked'));
+        $('#cancel_modem_returned').val($(String.format('#points_{0}_modem_returned', pointID)).attr('checked'));
+        $('#cancel_leaving_reason').val($(String.format('#points_{0}_leaving_reason', pointID)).attr('value'));
+
+		var f = $('#cancel_app')[0];
+		f.submit();
+    }
+
+    function updateHidden(pointID, checked)
+    {
+		if (checked)
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_TO_UNCROSS ?>';
+		}
+		else
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_WAIT_UNCROSS ?>';
+		}
+
+        markChanged(pointID);
+    }
+
+    function checkDemandForm()
+    {
+        var result = true;
+        $('#demand_points > tbody > tr').css('background-color', 'inherit');
+        $('#demand_points > tbody > tr').each(
+            function(index)
+            {
+                var rowId = $(this).attr('id').split('_')[1];
+                if (!rowId) return;
+                var crossValue = $(String.format('#points_{0}_statuscross', rowId)).attr('value');
+
+                if (crossValue == '<?= PointHelper::STATUS_CROSS_TO_UNCROSS ?>')
+                {
+                    if (!$(String.format('#points_{0}_has_no_debt', rowId)).attr('checked')   ||
+                        !$(String.format('#points_{0}_modem_returned', rowId)).attr('checked') ||
+                        $(String.format('#points_{0}_leaving_reason', rowId)).attr('value') == '')
+                    {
+                        $(this).css('background-color', 'rgb(299, 66, 00');
+                        result = false;
+                    }
+                }
+            });
+        return result ;
+    }
+</script>
+<h1>Заявки на раскроссировку</h1>
+<br />
+<br />
+<form method="post" action="/demand/save" onsubmit="return checkDemandForm()">
+    <?
+    if ( is_array($this->points) )
+    {
+        ?>
+        <table id="demand_points" id="points" class="list" cellpadding="3" cellspacing="0">
+            <tr>
+            	<th class="list_head">N</th>
+                <th class="list_head">Точка</th>
+                <th class="list_head">Дата Отключения</th>
+                <th class="list_head">Телефон</th>
+                <th class="list_head">Задолженность Отсутствует</th>
+                <th class="list_head">Модем Возвращен</th>
+                <th class="list_head">Причина Отключения</th>
+                <th class="list_head">Принято</th>
+                <th class="list_head">Примечание</th>
+                <th class="list_head">Действие</th>
+            </tr>
+        <?
+        $currentPhoneHub = '';
+
+        foreach ($this->points as $point)
+        {
+            if ($point['statuscross'] == PointHelper::STATUS_CROSS_ACCEPTED_CROSS || $point['statuscross'] == PointHelper::STATUS_CROSS_ACCEPTED_UNCROSS)
+            {
+                $checked = 'checked';
+            }
+            else
+            {
+                $checked = '';
+            }
+
+            if ($point['phone_hub_name'] != $currentPhoneHub)
+            {
+            	$counter = 1;
+            	$currentPhoneHub = $point['phone_hub_name'];
+
+            	?>
+            	<tr class='list_tr'>
+            		<td class="list_head center" colspan="10"><b><h1><?=  $currentPhoneHub; ?></h1></b></td>
+            	</tr>
+            	<?
+            }
+            ?>
+            <tr id="row_<?= $point['point_id'] ?>" class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <!-- Щетчик -->
+                <td class="list_row">
+                   <?= $counter ?>
+                </td>
+                <!-- Точка -->
+                <td class="list_row">
+                    <a href='/tech-client/modify/id/<?= $point['point_id'] ?>'><?= $point['client_name']; ?></a>
+                </td>
+                <!-- Дата Отключения -->
+				<td class="list_row">
+                	<?= $point['ballance_change'] ?>
+                </td>
+                <!-- Телефон -->
+                <td class="list_row"><?= $point['pcross'] ?></td>
+                <!-- Задолженность Отсутствует -->
+                <td class="list_row">
+                    <input type="checkbox"
+                           value="true"
+                           name="points[<?= $point['point_id'] ?>][has_no_debt]"
+                           onchange="markChanged(<?= $point['point_id'] ?>)"
+                           id="points_<?= $point['point_id'] ?>_has_no_debt"
+                           <?= $point['has_no_debt'] ? 'checked="checked"' : '' ?>>
+                </td>
+                <!-- Модем Возвращен -->
+                <td class="list_row">
+                    <input 
+                        type="checkbox"
+                        value="true"
+                        name="points[<?= $point['point_id'] ?>][modem_returned]"
+                        onchange="markChanged(<?= $point['point_id'] ?>)"
+                        id="points_<?= $point['point_id'] ?>_modem_returned"
+                        <?= $point['modem_returned'] ? 'checked="checked"' : '' ?>>
+                </td>
+                <!-- Причина Отключения -->
+                <td class="list_row">
+                    <select name="points[<?= $point['point_id'] ?>][leaving_reason]" id="points_<?= $point['point_id'] ?>_leaving_reason"
+                            onchange="markChanged(<?= $point['point_id'] ?>)">
+                        <?
+                            if (!$point['leaving_leaving_reason'])
+                            {
+                        ?>
+                                <option selected="selected" value="">Выберите</option>
+                        <?
+                            }
+                            foreach ($this->reasons['23'] as $reason)
+                            {
+                        ?>
+                                <option value="<?= $reason['typename_id'] ?>"
+                                        label="<?= $reason['typename'] ?>"
+                                        <?= $reason['typename_id'] == $point['leaving_reason'] ? 'selected="selected"' : '' ?>>
+                                    <?= $reason['typename'] ?>
+                                </option>
+                        <?
+                            }
+                        ?>
+                    </select>
+                </td>
+                <!-- Принято -->
+                <td class="list_row">
+                    <input type="checkbox" <?= $checked; ?> onchange="updateHidden(<?= $point['point_id']; ?>, this.checked);" />
+                    <input type="hidden" id="points_<?= $point['point_id'] ?>_statuscross" name="points[<?= $point['point_id'] ?>][statuscross]" value="<?= $point['statuscross'] ?>" />
+                </td>
+                <!-- Примечание -->
+                <td class="list_row">
+                    <table style="width:251px;">
+                        <tr>
+                            <td>
+                                <input type="text" id='point_<?= $point['point_id'] ?>_notes'
+                                    name="points[<?= $point['point_id'] ?>][notes]"
+                                    value="<?= $point['notes'] ?>"
+                                    onchange="markChanged(<?= $point['point_id'] ?>)" />
+                                    <select size="1" id="point_<?= $point['point_id'] ?>_count_days">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                    </select>
+                            </td>
+                            <td>
+                                <input type="hidden" name="points[<?= $point['point_id'] ?>][is_changed]" id="points_<?= $point['point_id'] ?>_is_changed" value="0" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+               <!-- Действие -->
+               <td class="list_row">
+ 					<input type="hidden" name="point_id" id="points_<?= $point['point_id'] ?>_is_changed" value="<?= $point['point_id'] ?>" />
+                    <input type="button" name="btn1" value="отмена" onclick='cancelCross(<?= $point['point_id'] ?>)' />
+                </td>
+            </tr>
+            <?
+            $counter++;
+        }
+        ?>
+        </table>
+        <br />
+        <br />
+        <center><input type="submit" value="Сохранить" /></center>
+        <?
+    }
+    ?>
+</form>
+
+<form name="cancel_app" id="cancel_app" method="post" action="/demand/rollback-uncross">
+	<input type="hidden" id="cancel_point_id" name="point_id">
+	<input type="hidden" id="cancel_day_counts" name="count_days">
+	<input type="hidden" id="cancel_notes" name="notes">
+
+    <input type="hidden" id="cancel_has_no_debt" name="cancel_has_no_debt">
+    <input type="hidden" id="cancel_modem_returned" name="cancel_modem_returned">
+    <input type="hidden" id="cancel_leaving_reason" name="cancel_leaving_return">
+</form>

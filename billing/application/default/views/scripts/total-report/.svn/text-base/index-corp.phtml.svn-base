@@ -1,0 +1,368 @@
+<h1>Итог по клиентам</h1>
+<br />
+<br />
+<center>
+<form action="/total-report/index" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+
+	<select size="1" name="year">
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+
+	<select size="1" name="by_type">
+   		<?
+   		$options = array(
+   			'by_pay'		=> 'по платежам',
+			'by_clients'	=> 'по клиентам',
+   			'by_ports'		=> 'по портам'
+
+		);
+   		?>
+        <?= FormHelper::getSelectOptions($options, $this->by_type); ?>
+   </select>
+
+	<select size="1" name="is_face">
+   		<?
+   		$options = array(
+   			'1'		=> 'stream',
+   			'0'		=> 'корп.',
+   			'by_corp_phone'		=> 'Корп. телефония',
+   			'by_stream_phone'	=> 'Частная телефония',
+   			'by_dialup'		    => 'Dialup'
+   		);
+   		?>
+        <?= FormHelper::getSelectOptions($options, $this->is_face); ?>
+   </select>
+
+
+   <input type="submit" value="Отправить">
+ </form>
+</center>
+<br />
+<?php
+if($this->type == "by_pay") {
+    if($this->data['penalty'] == "")
+    {
+        $this->data['penalty'] = 0;
+    }
+    elseif($this->data['perelimit'] == "")
+    {
+        $this->data['perelimit'] = 0;
+    }
+    elseif($this->data['bonus'] == "")
+    {
+        $this->data['bonus'] = 0;
+    }
+
+?>
+<?php
+	$totalMinus =$this->data['abon_plata'] +
+				 $this->data['reserved'] +
+				 $this->data['perelimit'] +
+				 $this->data['new_users_regpay'] +
+				 $this->data['new_users_payed'] +
+				 $this->data['penalty'] +
+				 $this->data['dop_service_day'] +
+				 $this->data['dop_service_mon'] +
+				 $this->data['buh_correct_minus']+
+				 $this->data['zachis_aftr_pereshet'] +
+				 $this->data['zachis_bonus'];
+?>
+<h2>Ежемесячные платежи:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+
+        <tr>
+            <th class="list_head">Параметр</th>
+            <th class="list_head">Значение</th>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Абонентская плата: *</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['abon_plata'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Резервирование: </td>
+            <td class="list_row right">
+            	<?= number_format($this->data['reserved'], 3, ',', ' ') ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Превышение лимита:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['perelimit'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Регистрационная плата:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['new_users_regpay'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Плата за модемы:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['sell_modems_price'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Сумма активаций услуг: **</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['new_users_payed'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Штраф:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['penalty'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <!--<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">За дополнительные услуги (Суточные услуги):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['dop_service_day'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">За дополнительные услуги (Ежемесячные услуги):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['dop_service_mon'], 3, ',', ' '); ?>
+            </td>
+        </tr>-->
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Зачисления после пересчета:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['zachis_aftr_pereshet'] + $this->data['zachis_bonus'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Корректировка бухгалтером (снятие):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['buh_correct_minus'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Недополученная абон. плата по точкам:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['sum_month_demand_points'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row" align="right"><b>Сумма:</b></td>
+            <td class="list_row right">
+            	<b><?= number_format($totalMinus, 3 , ',', ' '); ?></b>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row" align="right"><b>Не дополученная абон. плата по платежам:</b></td>
+            <td class="list_row right">
+            	<b><?= number_format($this->data['tran_sum'], 3 , ',', ' '); ?></b>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row" align="right"><b>Итого:</b></td>
+            <td class="list_row right">
+            	<b><?= number_format(($totalMinus - $this->data['tran_sum']), 3 , ',', ' '); ?></b>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><br /></td>
+            <td class="list_row"><br /></td>
+        </tr>
+<?php
+$totalPlus= $this->data['activ_card']+
+			$this->data['kassa'] +
+			$this->data['kassa_card'] +
+			$this->data['kassa_samarkand_card'] +
+			$this->data['kassa_samarkand'] +
+			$this->data['paynet'] +
+			$this->data['kapital'] +
+			$this->data['kapital_corp'] +
+			$this->data['buh_correct_plus'];
+?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Оплачено с карточек:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['activ_card'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Оплачено в кассу:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kassa'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+       	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Оплачено в кассу (с ПК):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kassa_card'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Оплачено в кассу ПК (Самарканд):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kassa_samarkand_card'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Оплачено в кассу (Самарканд):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kassa_samarkand'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Paynet:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['paynet'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Зачисление с касс АКБ Капиталбанк:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kapital'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Зачисление с банка Капиталбанк:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['kapital_corp'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Зачислено бонусов:</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['bonus'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Корректировка бухгалтером (зачисление):</td>
+            <td class="list_row right">
+            	<?= number_format($this->data['buh_correct_plus'], 3, ',', ' '); ?>
+            </td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row" align="right"><b>Всего поступлений:</b></td>
+            <td class="list_row right">
+            	<b><?= number_format($totalPlus, 3, ',', ' '); ?></b>
+            </td>
+        </tr>
+</table>
+
+<br />
+<br />
+<h2>Пользователи:</h2>
+
+<table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">Параметр</th>
+            <th class="list_head">Значение</th>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Всего пользователей: ***</td>
+            <td class="list_row right"><?= $this->data['count_clients'] ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Всего точек:</td>
+            <td class="list_row right"><?= $this->data['count_points'] ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Всего плативших пользователей:</td>
+            <td class="list_row right"><?= $this->data['payed_clients'] ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Новые пользователи, активировавшие услугу: ****</td>
+            <td class="list_row right"><?= $this->data['new_clients'] ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><b>Отключенные: *****</b></td>
+            <td class="list_row right"><b><?= $this->data['deleted'] ?></b></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><b>Количество точек, в заявках</b></td>
+            <td class="list_row right"><b><?= $this->data['count_demand_points'] ?></b></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><b>Количество точек, попавших в заявки</b></td>
+            <td class="list_row right"><b><?= $this->data['count_month_demand_points'] ?></b></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Количество модемов:</td>
+            <td class="list_row right"><?= $this->data['sell_modems'] ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Количество клиентов со своим модемом:</td>
+            <td class="list_row right"><?= $this->data['without_modems']; ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Средний доход на работающего пользователя:</td>
+            <td class="list_row right"><?= number_format(($totalMinus -  $this->data['tran_sum']) / $this->data['count_clients'], 3, ',', ' '); ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Среднее поступление на одного пользователя:</td>
+            <td class="list_row right"><?= number_format($totalPlus / $this->data['count_clients'], 3, ',', ' '); ?></td>
+        </tr>
+</table>
+<br />
+<p>*Абонентская плата, списанная 1-ого числа.</p>
+<p>** Абонентская плата, списанная у новых абонентов и восстановленных с заявок абонентов.</p>
+<p>*** Кол-во абонентов, у которых 1-ого числа списалась абон. Плата.</p>
+<p>**** Новые абоненты , активировавшие услугу в этом месяце.</p>
+<p>***** Абоненты, которые попали в архив в этом месяце.</p>
+<?
+}
+elseif ($this->type == 'by_clients') {
+?>
+<h2>Клиенты:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+
+        <tr>
+            <th class="list_head">Параметр</th>
+            <th class="list_head">Значение</th>
+        </tr>
+        <tr class='list_tr'>
+            <td class="list_row">
+            	Количество клиентов у которых списалась абон плата <?= date('d.m', strtotime($this->startDate)); ?>:
+            </td>
+            <td class="list_row">
+            	<?= $this->data['count_abon_payments'] ?>
+            </td>
+        </tr>
+        <tr class='list_tr'>
+            <td class="list_row">
+            	Количество клиентов у которых списалась абон плата плюс новые абоненты:
+            </td>
+            <td class="list_row">
+            	<?= $this->data['count_all_payments'] ?>
+            </td>
+        </tr>
+        <tr class='list_tr'>
+            <td class="list_row">
+            	С положительным балансом после списания абон платы <?= date('d.m', strtotime($this->startDate)); ?>:
+            </td>
+            <td class="list_row">
+            	<?= $this->data['clients_plus'] ?>
+            </td>
+        </tr>
+        <tr class='list_tr'>
+            <td class="list_row">
+            	С отрицательным балансом после списания абон платы <?= date('d.m', strtotime($this->startDate)); ?>:
+            </td>
+            <td class="list_row">
+            	<?= $this->data['clients_minus'] ?>
+            </td>
+        </tr>
+        <tr class='list_tr'>
+        	<td class="list_row">
+            	С положительным балансом на текущий момент:
+            </td>
+            <td class="list_row">
+            	<?= $this->data['now_positive_clients'] ?>
+            </td>
+        </tr>
+</table>
+<?
+}
+?>
+

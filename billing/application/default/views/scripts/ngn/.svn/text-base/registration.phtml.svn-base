@@ -1,0 +1,59 @@
+<h1>Отдел управления. Регистрация новых NGN номеров на сервере</h1>
+<br />
+<br />
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head">Логин точки</th>
+        <th class="list_head" style="width:15%;">телефон</th>
+        <th class="list_head">Пароль</th>
+        <th class="list_head">Баланс клиента</th>
+        <th class="list_head">Действие</th>
+
+    </tr>
+<?php
+if ( count($this->ngnData) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->ngnData as $ngn)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $ngn['client_id'] ?>/pointid/" >
+            		<?= $ngn['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ngn['u_login']; ?></td>
+            <td class="list_row"><?= $ngn['number']; ?></td>
+            <td class="list_row"><?= $ngn['password']; ?></td>
+            <td class="list_row"><?= $ngn['ballance']; ?></td>
+            <td class="list_row">
+                <form action="/Ngn/done" method="post" >
+                    <input type="hidden" name="pid" value="<?= $ngn['point_id']; ?>" />
+                    <input type="hidden" name="number" value="<?= $ngn['number']; ?>" />
+                    <input type="submit" name="btn1" value="установлено" />
+                </form>
+            </td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

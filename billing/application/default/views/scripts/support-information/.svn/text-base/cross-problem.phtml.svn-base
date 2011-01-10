@@ -1,0 +1,34 @@
+<h1>СТП. Проблемы на кроссе</h1>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Тел</th>
+        <th class="list_head">Клиент</th>
+        <th class="list_head">Проблема</th>
+    </tr>
+    <?
+    if (count($this->problemlist) == 0)
+    {
+        ?>
+        <tr>
+            <td class='list_row center' colspan="4">Не найденно ни одной проблемы</td>
+        </tr>
+        <?
+    }
+    $i = 0;
+    
+    foreach ($this->problemlist as $problem)
+    {
+        ?>
+        <tr>
+            <td class='list_row'><?= ++$i; ?></td>
+            <td class='list_row'><?= $problem['pcross']; ?></td>
+            <td class='list_row'><?= $problem['client_name']; ?></td>
+            <td class='list_row'><?= $problem['label']; ?></td>
+        </tr>
+        <?
+    } 
+    ?>
+</table>

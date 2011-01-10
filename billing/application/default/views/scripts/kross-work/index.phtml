@@ -1,0 +1,66 @@
+<h1>Отдел Бухгалтерии. Кроссировачные работы.</h1>
+
+<br />
+<br />
+<center>
+<form action="#" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+	<input type="submit" value="показать" />
+</form>
+</center>
+
+<h2>Узлы связи</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head">Депозит</th>
+        <th class="list_head">Расскрос</th>
+        <th class="list_head">Кросс</th>
+        <th class="list_head">Итого</th>
+    </tr>
+    <?php
+if ( count($this->hubs) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+	$countAllCross 	 = 0;
+	$countAllUNCross = 0;
+
+    foreach ($this->hubs as $item)
+    {
+    	$total = $item['ports_statistic']['crossed'] + $item['ports_statistic']['uncrossed'];
+    	$total_by_hub = $this->amountKross * $total;
+	    ?>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row"><?= $counter++; ?></td>
+	            <td class="list_row"><a href="/kross-work/finance-history/hub_id/<?= $item['id']; ?>"><?= $item['name']; ?></a></td>
+	            <td class="list_row"><?= number_format($item['deposit'], 2, '.', ' '); ?> (<a href="/kross-work/conducting-build/id/<?= $item['id']; ?>/month/<?= $this->month; ?>" >проводка</a>)</td>
+	            <td class="list_row"><?= $item['ports_statistic']['uncrossed']; ?></td>
+	            <td class="list_row"><?= $item['ports_statistic']['crossed']; ?></td>
+	            <td class="list_row"><?= number_format($total_by_hub, 2, '.', ' '); ?></td>
+	        </tr>
+	    <?
+	    $countAllCross   = $countAllCross + $item['ports_statistic']['crossed'];
+	    $countAllUNCross = $countAllUNCross + $item['ports_statistic']['uncrossed'];
+
+	    $total = 0;
+	    $total_by_hub = 0;
+    }
+
+}
+?>
+</table>

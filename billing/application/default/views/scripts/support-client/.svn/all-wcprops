@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3550/billing/application/default/views/scripts/support-client
+END
+service.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/2169/billing/application/default/views/scripts/support-client/service.phtml
+END
+check-radius.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/922/billing/application/default/views/scripts/support-client/check-radius.phtml
+END
+finance.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/117/billing/application/default/views/scripts/support-client/finance.phtml
+END
+logs.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/117/billing/application/default/views/scripts/support-client/logs.phtml
+END
+search.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/117/billing/application/default/views/scripts/support-client/search.phtml
+END
+sessions.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/117/billing/application/default/views/scripts/support-client/sessions.phtml
+END
+view.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3550/billing/application/default/views/scripts/support-client/view.phtml
+END

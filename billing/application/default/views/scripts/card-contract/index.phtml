@@ -1,0 +1,67 @@
+<h1>Поиск договора</h1>
+<input type='button' value='Новый' onclick="redirect('/card-contract/create')" />
+<br />
+<br />
+<center>
+    <form name='contract_search' method='post'>
+       <b class='font14'>Найти клиента по:</b>
+        <?
+        $options = array (
+            'client_name'     => 'названию организации',
+            'client_id'     => 'регистрационному номеру'
+        );
+        ?>
+        <select name='param'>
+            <?= FormHelper::getSelectOptions($options, $this->param); ?>
+        </select>
+        &nbsp;&nbsp;
+        <input type='text' name='value' value='<?= $this->value; ?>' />
+        &nbsp;&nbsp;
+        <input type='submit' value='Найти' />
+    </form>
+</center>
+
+<br />
+<br />
+<?
+if (is_array($this->contracts))
+{
+    ?>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class='list_head'>Действие</th>
+            <th class='list_head'>N</th>
+            <th class='list_head'>РН</th>
+            <th class='list_head'>Название</th>
+            <th class='list_head'>Контактный телефон</th>
+            <th class='list_head'>Контактное лицо</th>
+        </tr>
+        <?
+        if (count($this->contracts) == 0)
+        {
+            ?>
+            <tr>
+                <td colspan='6' class='list_row center'>Не Найдено ни одного договора</td>
+            </tr>
+            <?
+        }
+
+        $counter = 1;
+        foreach ($this->contracts as $contract)
+        {
+            ?>
+            <tr onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class='list_row'><a href='/card-contract/view/id/<?= $contract['client_id']; ?>'>Просмотреть</a></td>
+                <td class='list_row'><?= $counter++; ?></td>
+                <td class='list_row'><?= $contract['client_id']; ?></td>
+                <td class='list_row'><?= stripcslashes($contract['client_name']); ?></td>
+                <td class='list_row'><?= $contract['phone']; ?></td>
+                <td class='list_row'><?= $contract['contact_name']; ?></td>
+            </tr>
+            <?
+        }
+        ?>
+    </table>
+    <?
+}
+?>

@@ -1,0 +1,37 @@
+<h1>Абоенты по регионам</h1>
+<br />
+<br />
+<h2>Использоваие тарифных планов по регионам</h2>
+<br />
+<br />
+
+<?
+if ($this->data)
+{
+?>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">№</th>
+        <th class="list_head">ID клиента</th>
+        <th class="list_head">Наимонование</th>
+        <th class="list_head">Баланс</th
+    </tr>
+    <? 
+    $counter = 1;
+    foreach ($this->data as $row)
+    {
+    ?>
+        <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter ?></td>
+            <td class="list_row"><?= $row['client_id'] ?></td>
+            <td class="list_row"><?= $row['client_name'] ?></td>
+            <td class="list_row"><?= $row['ballance'] ?></td>
+        </tr>
+    <?
+    $counter++;
+    }
+    ?>
+</table>
+<?
+}
+?>

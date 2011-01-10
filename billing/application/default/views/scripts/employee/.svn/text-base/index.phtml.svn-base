@@ -1,0 +1,274 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function addInputTag()
+    {
+		var client_type = $('#faceid')[0].value;
+
+		if (client_type == 1)
+		{
+			$('#rovd_text').show();
+            $('#btn1_rovd').show();
+
+            $('#input_bank_name').hide();
+            $('#btn1_bank').hide();
+		}
+
+		if (client_type == 0)
+		{
+            $('#input_bank_name').show();
+            $('#btn1_bank').show();
+
+            $('#rovd_text').hide();
+            $('#btn1_rovd').hide();
+		}
+    }
+
+	function sendDataRovd()
+	{
+		var rovd_name = $('#rovd_text')[0].value;
+		var client_type = $('#faceid')[0].value;
+
+                $.php("/ajax/addasrtypes", { rovd: rovd_name, ctype: client_type });
+	}
+
+        function sendDataBank()
+	{
+		var bank_name = $('#input_bank_name')[0].value;
+		var client_type = $('#faceid')[0].value;
+
+                $.php("/ajax/addasrtypes", { bank: bank_name, ctype: client_type });
+	}
+
+    function checkNumber()
+    {
+        var country = $("select[name='country_id']").val();
+        var phone = $("input[name='pcross']").val();
+        var client_type = $('#faceid')[0].value;
+        $.php("/ajax/abonclient", {
+                    name: "check_number",
+                    phone: phone,
+                    client_type: client_type,
+                    country: country
+        });
+    }
+
+    function checkSattlement()
+    {
+        var arrOfSattlments = $("input[name='some[]']");
+
+        var params = '';
+        var connector = '';
+
+        for (i = 0; i < arrOfSattlments.length; i++)
+        {
+            params += connector + arrOfSattlments[i].value;
+            connector = ',';
+        	//params.push(JSON.parse(arrOfSattlments[i].value));
+        }
+
+        $.php("/ajax/varifysattlement", { arr: params })
+    }
+
+</script>
+
+<center>
+
+<?php
+	if ($this->errors['employee-errors'])
+        {
+        	foreach($this->errors as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+
+        if ($this->infos['employee-infos'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+
+
+    <table border="0" id="title_for_search_client" >
+    <tr>
+        <td><?php echo $this->title; ?></td>
+    </tr>
+</table>
+</center>
+<br/>
+<br/>
+<form id="form_id" action="/employee/" method="post">
+<center>
+    <select id="faceid" name="client_type_id" onchange="
+        if (this.value == 1 || this.value == 4)
+                {
+                  $('#fizik').show();
+                  $('#yurik').hide();
+                  $('#input_bank_name').hide();
+		          $('#btn1_bank').hide();
+		          $('#rovd_text').hide();
+		          $('#btn1_rovd').hide();
+
+                } else {
+                    $('#fizik').hide();
+                    $('#yurik').show();
+                    $('#input_bank_name').hide();
+		          $('#btn1_bank').hide();
+		          $('#rovd_text').hide();
+		          $('#btn1_rovd').hide();
+                }
+               ">
+        <option value="0" >Юридическое лицо</option>
+        <option value="1" selected>Частное лицо</option>
+    </select>
+</center>
+
+<table width="100%">
+     <tr>
+        <td class="sub-heading"><?php echo $this->titles; ?></td>
+     </tr>
+</table>
+<br/>
+<?php echo $this->form->client_name; ?>
+<div class="clear"></div>
+<?php echo $this->form->country_id; ?>
+<div class="clear"></div>
+<?php echo $this->form->address; ?>
+<div class="clear"></div>
+<?php echo $this->form->client_orient; ?>
+<div class="clear"></div>
+<?php echo $this->form->phone; ?>
+<div class="clear"></div>
+<?php echo $this->form->contact_name; ?>
+
+<div class="clear"></div>
+<?php echo $this->form->pcross; ?><div 'class='left'>&nbsp;<input type='button' value='Проверить' onclick='checkNumber()' /></div>
+<div class='left font14' style='margin-left: 45%' id='number_test'></div>
+
+<div class="clear"></div>
+<?php echo $this->form->pcross_owner; ?>
+
+<div class="clear"></div>
+<?php echo $this->form->email; ?>
+<div class="clear"></div>
+<?php echo $this->form->fax; ?>
+
+
+<div id="fizik">
+<div class="clear"></div>
+<?php echo $this->form->passp_n; ?>
+<div class="clear"></div>
+<?php echo $this->form->ruvd_id; ?> <a href="#" onclick="addInputTag()">добавить</a>
+<div class="clear"></div>
+
+<div id="input_rovd">
+    <dt id="ruvd_id-label">
+        <label class="optional" for="some_id"></label>
+    </dt>
+    <dd id="ruvd_id-element">
+
+            <form action="#" method="post" >
+                    <input id="rovd_text" type="text" name="new_rovd" value="" style="display:none" />
+                    <input type="button" id="btn1_rovd" name="btn1" value="записать" onclick="sendDataRovd()" style="display:none" />
+            </form>
+    </dd>
+    <div id="rovd_label">
+        <div class="clear"></div>
+    </div>
+</div>
+
+</div>
+
+
+<div id="yurik">
+<div class="clear"></div>
+<?php echo $this->form->test_days; ?>
+
+<div class="clear"></div>
+<div id="content1">
+<dt><label class="required">Расчетный счет: </label></dt>
+    <dd>
+        <span id="sp_id">
+        <input id="" type="text" name="some[]" value="" size="30px" />
+        </span>
+        <input type="button" onclick="addspan()" name="btn" value="add" />
+
+        <input type="button" onClick="checkSattlement()" name="btn2" value="verify" />
+    </dd>
+<div class='left font14' style='margin-left: 45%' id='msg_rschet'></div>
+</div>
+    <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+	 <?php echo $this->form->sign_name; ?>
+	 <div class="clear"></div>
+	 <?php echo $this->form->post_sign_name; ?>
+     <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+     <div class="clear"></div>
+
+    <div class="clear"></div>
+    <?php echo $this->form->legaladdress; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->inn; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->mfo; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->okonx; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->bank_id; ?> <a href="#" onclick="addInputTag()">добавить</a>
+    <div class="clear"></div>
+    <?php echo $this->form->is_accounting; ?>
+    <div class="clear"></div>
+	<div id="input_bank">
+        <dt id="ruvd_id-label">
+             <label class="optional" for="some_id"></label>
+        </dt>
+	<dd id="ruvd_id-element">
+		<form action="#" method="post" >
+			<input id="input_bank_name" type="text" name="new_rovd" value="" style="display:none" />
+			<input type="button" id="btn1_bank" name="btn1" value="записать" onclick="sendDataBank()" style="display:none" />
+		</form>
+        </dd>
+        <div id="bank_label">
+            <div class="clear"></div>
+        </div>
+	</div>
+</div>
+
+
+<div class="clear"></div>
+<?php echo $this->form->boss_id; ?>
+<div class="clear"></div>
+<?php echo $this->form->jeton; ?>
+
+<br />
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="submit" value="Продолжить" />
+         </td>
+    </tr>
+</table>
+<br />
+
+</form>
+
+<hr>
+

@@ -1,0 +1,30 @@
+<?php
+if(!empty($this->message))
+{
+?>
+	<div id="message">
+		<?php echo $this->escape($this->message); ?>
+	</div>
+<?php
+}
+?>
+<form id="loginForm" action="<?php echo $this->baseUrl; ?>/auth/login" method="post">
+	<div id="logo_container"></div>
+	<div class="login_css_plus" >
+		Пользователь:
+		<br />
+		<input type="text" name="username" size="20" value=""/>
+	</div>
+
+	<div class="login_css_plus">
+		Пароль:
+		<br />
+		<input type="password" name="password" size="20" value=""/>
+	</div>
+
+	<div class="login_button">
+		<input type="submit" name="login" value="&nbsp;&nbsp;Войти&nbsp;&nbsp;">
+	</div>
+</form>
+<br /><br /><br />
+<br /><br /><br />

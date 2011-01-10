@@ -1,0 +1,48 @@
+<h1>История пересчетов</h1>
+<br />
+<a class='font14' href='/Clientinfo/index/clientid/<?= $this->clientID; ?>'>Назад</a>
+<br />
+<center><? echo $this->form; ?></center>
+<br />
+<br />
+<?
+if ($this->history)
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Дата</th>
+			<th class='list_head'>Логин</th>
+			<th class='list_head'>Cтарый тариф</th>
+			<th class='list_head'>Новый тариф</th>
+			<th class='list_head'>Cтарый период</th>
+			<th class='list_head'>Новый период</th>
+			<th class='list_head'>Сумма</th>
+			<th class='list_head'>Пользователь</th>
+		</tr>
+		<?
+		foreach ($this->history as $row)
+		{
+			?>
+			<tr>
+				<td class='list_row'><?= date('d.m.Y', strtotime($row['created'])); ?></td>
+				<td class='list_row'><?= $row['u_login']; ?></td>
+				<td class='list_row'><?= $row['old_tarif']; ?></td>
+				<td class='list_row'><?= $row['new_tarif']; ?></td>
+				<td class='list_row'>
+					<?= date('d.m.Y', strtotime($row['old_service_startdate'])) . ' - ' .
+						date('d.m.Y', strtotime($row['old_service_enddate'])); ?>
+				</td>
+				<td class='list_row'>
+					<?= date('d.m.Y', strtotime($row['new_service_startdate'])) . ' - ' .
+						date('d.m.Y', strtotime($row['new_service_enddate'])); ?>
+				</td>
+				<td class='list_row'><?= number_format($row['total_amount'], 2, ',', ' ') ; ?></td>
+				<td class='list_row'><?= $row['first_name'] . ' ' . $row['last_name']; ?></td>
+			</tr>
+			<?
+		} 
+		?>
+	</table>
+	<?
+} 

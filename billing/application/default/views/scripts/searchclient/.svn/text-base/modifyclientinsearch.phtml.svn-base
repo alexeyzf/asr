@@ -1,0 +1,262 @@
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о клиенте</td>
+        <td ><a href="/Deleteclient/index/clientid/<?= $this->pointform[0]['client_id'] ?>" >Удалить клиента</a></td>
+    </tr>
+</table>
+<?php
+		// Выводи инфу о клиенте
+		 echo $this->clientform;
+?>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Редактирование информации (Точка)</td>
+    </tr>
+</table>
+<br/>
+<br/>
+<?php
+// начинаем вывод информации о данной точке
+for($i=0; $i<count($this->pointform); $i++)
+{
+	print '<form action="/Searchclient/saveinfopoint" method="post" >';
+	echo ('
+	<center><b>ID точки: '.$this->pointform[$i]['point_id'].'</b></center>
+	<table id="gen_info" >
+		 <tr>
+		     <td id="table_bgr">Контактное лицо: </td>
+		     <td><input size="70" type="text" name="contact_name" value="'.$this->pointform[$i]['contact_name'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Контактный телефон: </td>
+		     <td><input size="70" type="text" name="phone" value="'.$this->pointform[$i]['phone'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Адрес подключения: </td>
+		     <td><input size="70" type="text" name="connect_address" value="'.$this->pointform[$i]['connect_address'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Телефон кроссировки: </td>
+		     <td><input size="70" type="text" name="pcross" value="'.$this->pointform[$i]['pcross'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Город: </td>
+		     <td>
+				'.$this->country.'
+			 </td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Логин: </td>
+		     <td><input disabled size="70" type="text" name="u_login" value="'.$this->pointform[$i]['u_login'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">
+			 <input type="hidden" name="client_id" value="'.$this->pointform[$i]['client_id'].'" /></td>
+		     <td><input type="hidden" name="point_id" value="'.$this->pointform[$i]['point_id'].'" /></td>
+		 </tr>
+
+		 <tr>
+		     <td id="table_bgr">
+				Действия
+			 </td>
+		     <td>
+				<input type="submit" value="назад" name="cancelpoint" />
+				<input type="submit" value="сохранить" name="savepoint" />
+				<a href="/Editpoint/deletepoint/point_id/'.$this->pointform[$i]['point_id'].'" >Удалить</a>
+			 </td>
+		 </tr>
+	');
+	print '</table><br/><br/></form>';
+
+}
+// Далее идет инфа о контр.
+
+//var_dump($this->pointform);
+//exit();
+?>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о договоре</td>
+        <td>
+        <?php
+        echo ('
+			<a target="_blank" href="/Printerdoc/printcontract/client_id/'.$this->pointform[0]['client_id'].'/contract_id/'.$this->clientdata['contract_id'].'" >распечатать</a>
+		');
+        ?>
+		</td>
+    </tr>
+</table>
+
+<?php
+echo ('
+	<table id="gen_info">
+		 <tr>
+		     <td id="table_bgr">ID договора </td>
+		     <td>
+				'.$this->clientdata['contract_id'].'
+			 </td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Номер договора </td>
+		     <td>
+				'.$this->clientdata['contract_number'].'
+			 </td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Дата подписания </td>
+		     <td>
+				'.$this->clientdata['dateagree'].'
+			 </td>
+		 </tr>
+	</table>
+');
+
+// Конец инфы о договоре
+?>
+<br/>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Редактирование информации (Имеющиеся услуги)</td>
+        <td>
+        <?php
+        echo ('
+		<form action="/employee/modifyservice" method="post">
+        		<input type="hidden" name="client_id" value="'.$this->pointform[0]['client_id'].'" />
+        		<input type="hidden" name="point_id" value="'.$this->pointform[0]['point_id'].'" />
+				<input type="hidden" name="backurl" value="'.$this->backurl.'" />
+				<input type="submit" name="name" value="создать услугу"/>
+        </form>
+		');
+        ?>
+		</td>
+    </tr>
+</table>
+<br/>
+<br/>
+<?php
+// Выводим все услуги для данной точкой
+for($i=0; $i<count($this->virtual); $i++)
+{
+  for($k=0; $k<count($this->virtual[$i]); $k++)
+	{
+	print '<form action="/Searchclient/updateservice" method="post" >';
+	echo ('
+	   <center><b><h3>Наименование услуги '.$this->virtual[$i][$k]['servicetype_name'].' </h3></b></center>
+	');
+
+	// Строим форму (select). Весь список возможных тарифов для данной услуги
+	$t= FormHelper::showTarifs($this->virtual[$i][$k]['servicetype_id'], $this->virtual[$i][$k]['tarif_id']);
+	echo $t;
+		//
+		$dateSelect = FormHelper::actualDay();
+		$monthSelect =FormHelper::actualMonth();
+		$yearSelect = FormHelper::actualYear();
+		$continueDay = FormHelper::continueDay();
+		$continueMonth = FormHelper::continueMonth();
+		$continueYear = FormHelper::continueYear();
+		//
+		if($this->virtual[$i][$k]['client_type_id'] == 0)
+		{
+		echo ('
+			<table>
+				<tr>
+					<td>
+						'.$dateSelect.' '.$monthSelect.' '.$yearSelect.'
+					</td>
+					<td>
+						'.$continueDay.' '.$continueMonth.' '.$continueYear.'
+					</td>
+				</tr>
+			</table>
+		');
+		}
+		else
+		{
+			echo ('
+						'.$dateSelect.' '.$monthSelect.' '.$yearSelect.'
+			');
+		}
+
+	echo ('
+	<table id="gen_info" >
+		 <tr>
+		     <td id="table_bgr">Контактное лицо: </td>
+		     <td><input size="70" type="text" name="contact_name" value="'.$this->virtual[$i][$k]['contact_name'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Контактный телефон: </td>
+		     <td><input size="70" type="text" name="phone" value="'.$this->virtual[$i][$k]['contact_phone'].'" /></td>
+		 </tr>
+		 <tr>
+		     <td id="table_bgr">Адрес подключения: </td>
+		     <td><input size="70" type="text" name="connect_address" value="'.$this->virtual[$i][$k]['service_address'].'" /></td>
+		 </tr>
+
+		 <tr>
+		     <td id="table_bgr"><input type="hidden" name="tablename" value="'.$this->virtual[$i][$k]['tablename'].'" /></td>
+		     <td>
+				<input type="hidden" name="point_id" value="'.$this->virtual[$i][$k]['point_id'].'" />
+				<input type="hidden" name="id" value="'.$this->virtual[$i][$k]['id'].'" />
+				<input type="hidden" name="client_id" value="'.$this->pointform[0]['client_id'].'" />
+			</td>
+		 </tr>
+
+		 <tr>
+		     <td id="table_bgr">
+				Действия
+			 </td>
+		     <td>
+				<input type="submit" value="сохранить" name="savepoint" />
+				<a href="/Searchclient/deleteservice/pointid/'.$this->virtual[$i][$k]['point_id'].'/tablename/'.$this->virtual[$i][$k]['tablename'].'/sid/'.$this->virtual[$i][$k]['id'].'/clientid/'.$this->pointform[0]['client_id'].'" > удалить</a>
+
+			 </td>
+		 </tr>
+	');
+	print '</table><br/><br/></form>';
+	}
+}
+?>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Технические данные </td>
+    </tr>
+</table>
+<br/>
+<br/>
+<?php
+if ($this->statuscross == PointHelper::STATUS_CROSS_EMPTY)
+{
+    $type = 'cross';
+    $button = '<input type="submit" name="after" value="Скроссировать" />';
+}
+elseif ($this->statuscross == PointHelper::STATUS_CROSS_CROSS_DONE)
+{
+    $type = 'uncross';
+    $button = '<input type="submit" name="after" value="Раскросировать" />';
+}
+
+echo ('
+    <form action="/techapplication/add" method="post">
+	<table id="gen_info" >
+            <tr>
+                <td id="table_bgr">Состояние кросса:</td>
+		<td>' . $wordnow . '</td>
+		<td>
+                    <input type="hidden" name="type" value="' . $type . '" />
+                    <input type="hidden" name="back_url" value="' . $back_url . '" />
+                    <input type="hidden" name="point_id" value="' . $this->pointform[0]['point_id'] . '" />
+		</td>
+                <td>' . $button . '</td>
+            </tr>
+            <tr>
+                <td id="table_bgr">Тип маршрутизации:</td>
+                <td></td>
+            </tr>
+        </table>
+     </form>
+');
+?>
+
+

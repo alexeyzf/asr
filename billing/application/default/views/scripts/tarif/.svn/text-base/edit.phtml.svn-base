@@ -1,0 +1,56 @@
+<h1>Редактирование тарифного плана</h1>
+<br/>
+<a class='font14' href='#' onClick="history.back(-1)">Назад</a>
+<br/>
+<?= $this->form; ?>
+<br/>
+<br/>
+<table>
+<tr>
+  <td>
+	 <h1>Составляющие тарифного плана</h1>
+  </td>
+  <td width="200" align="right" >
+  	 <h2><a href="/Tarif/addcomponent/tarif_id/<?= $this->tarifdata[0]['tarif_id'] ?>">Добавить</a></h2>
+  </td>
+</tr>
+</table>
+<br/>
+			<!-- Составляющие тарифного плана  !-->
+<table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">to do</th>
+            <th class="list_head">Компонент</th>
+            <th class="list_head">Начало (время)</th>
+            <th class="list_head">Окончание (время)</th>
+            <th class="list_head">Дни недели</th>
+            <th class="list_head">Цена</th>
+            <th class="list_head">delete</th>
+        </tr>
+<?php
+$weektype = "";
+for($i=0; $i<count($this->compdata); $i++)
+{
+	if($this->compdata[$i]['weekday'] == "0")
+	{
+		$weektype = "Все дни";
+	}
+	elseif($this->compdata[$i]['weekday'] == "1")
+	{
+		$weektype = "По раб. дням";
+	} else { $weektype = "По выходным"; }
+	echo ('
+	  <tr>
+		<td  class="list_row" align="center"><a href="/Tarif/editcomponent/tarif_id/'.$this->compdata[$i]['tarif_id'].'/comp_id/'.$this->compdata[$i]['component_id'].'"> Ред.</a></td>
+		<td  class="list_row">'.$this->compdata[$i]['component_name'].'</td>
+		<td class="list_row">'.$this->compdata[$i]['starttime'].'</td>
+		<td class="list_row">'.$this->compdata[$i]['endtime'].'</td>
+		<td class="list_row">'.$weektype.'</td>
+		<td class="list_row">'.$this->compdata[$i]['traffic_excess'].' $</td>
+		<td class="list_row"><a href="/Tarif/deletecomponent/comp_id/'.$this->compdata[$i]['component_id'].'"> Удалить</a></td>
+	  </tr>
+	');
+}
+?>
+
+</table>

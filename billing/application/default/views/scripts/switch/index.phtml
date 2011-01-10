@@ -1,0 +1,93 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function showElement(sid)
+    {
+		$('#comutator_' + sid ).show();
+    }
+
+    function hideElement(sid)
+    {
+		$('#comutator_' + sid ).hide();
+    }
+</script>
+<?php
+	if ($this->infos['switch-info'])
+    {
+    	foreach($this->infos as $value)
+    	{
+			?>
+				<center><h2><?= $value; ?></h2></center>
+				<br />
+			<?
+    	}
+    }
+?>
+
+<h1>Список коммутаторов</h1>
+<br />
+<br />
+<center>
+	<input type="button" value="Добавить" onclick="redirect('/switch/edit')" />
+</center>
+<?
+foreach ($this->switches as $switch)
+{
+	?>
+	<h2>
+		<a name="<?= $switch['id']; ?>" />
+		<a href='/switch/edit/id/<?= $switch['id']; ?>'><?= $switch['ip_address']; ?></a>
+		<a href="#<?= $switch['id']; ?>" onclick='showElement(<?= $switch['id']; ?>)'>
+			<img border="0" src="/images/icons/expand.gif" height="12" width="12" />
+		</a>
+		<a href="#<?= $switch['id']; ?>" onclick='hideElement(<?= $switch['id']; ?>)'>
+			<img border="0" src="/images/icons/contract.gif" height="12" width="12" />
+		</a>
+
+	</h2>
+
+	<br />
+	<div id="comutator_<?= $switch['id']; ?>" style="display:none;">
+		<table class='list'>
+			<tr>
+				<th class='list_head'>№ порта</th>
+				<th class='list_head'>Тип оборудования</th>
+				<th class='list_head'>Детализация</th>
+			</tr>
+			<?
+			foreach ($switch['ports'] as $port)
+			{
+				$equipmentType = '';
+				$detail = '';
+				if ($port['dslam_id'])
+				{
+					$equipmentType = 'Dslam';
+					$detail = $port['dslam_name'] . ' (' . $port['dslam_ip'] . ')';
+				}
+				elseif($port['point_id'])
+				{
+					$equipmentType = 'Modem';
+					$detail = $port['client_name'];
+				}
+				elseif ($port['is_broken'])
+				{
+					$equipmentType = 'Битый';
+					$detail = 'Битый';
+				}
+				?>
+				<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+					<td class='list_row'>
+						<a href='/switch/edit-port/id/<?= $port['id'] ?>'>Порт <?= $port['port_number']; ?></a>
+					</td>
+					<td class='list_row'><?=  $equipmentType; ?></td>
+					<td class='list_row'><?= $detail; ?></td>
+				</tr>
+				<?
+			}
+			?>
+		</table>
+	</div>
+	<br />
+	<br />
+	<?
+}

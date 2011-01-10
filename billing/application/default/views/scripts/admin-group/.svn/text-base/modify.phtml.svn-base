@@ -1,0 +1,82 @@
+<h1><?= ! $this->isNew ? 'Редактирование' : 'Добавление'; ?> Группы</h1>
+<br />
+<br />
+<form method="post" action="">
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/admin-group')"/>
+             </td>
+        </tr>
+    </table>
+
+    <table width="100%">
+           <tr>
+            <td class="sub-heading">Информация о Группе</td>
+        </tr>
+    </table>
+
+    <?php echo $this->form->name; ?>
+    <div class="clear"></div>
+
+    <input type='hidden' name="id" value="<?= $this->groupID  ?>" />
+
+    <br />
+    <br />
+
+    <table width="100%">
+        <tr>
+            <td class="sub-heading">Привилегии</td>
+        </tr>
+    </table>
+
+    <table width="100%" >
+        <tr>
+            <th class='priv_head'>Параметр</th>
+            <th class='priv_head'>Доступность</th>
+        </tr>
+        <?php
+        foreach ($this->modules as $module)
+        {
+            ?>
+            <tr>
+                <td class='priv_row'><?= $module->label; ?></td>
+                <td class='priv_row'></td>
+            </tr>
+            <?php
+
+            foreach ($this->actions as $action)
+            {
+                if ($action->module_id == $module->id)
+                {
+                    ?>
+                    <tr>
+                        <td class='priv_row'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $action->label; ?></td>
+                        <td class='priv_row'>
+                            <input type='checkbox' name='privileges[<?= $action->id; ?>]' value='<?= $module->id; ?>'
+                                   <?= $this->privs[$action->id] ? 'checked' : '' ?> />
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+        }
+        ?>
+    </table>
+
+    <br />
+    <br />
+
+    <table width='100%'>
+    <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/admin-group')"/>
+             </td>
+    </tr>
+    </table>
+</form>

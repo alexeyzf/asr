@@ -1,0 +1,62 @@
+<script language="JavaScript" type="text/javascript">
+    function removeRowCallback(data)
+    {
+        var values = JSON.parse(data);
+        if (values['status'] == 'OKay')
+        {
+            $(String.format('#document_row_{0}', values['id'])).remove();
+        }
+        else
+        {
+            alert('Произошла ошибка.');
+        }
+    }
+
+    function removeRow(docId, docHash)
+    {
+        if (confirm('Вы уверены?'))
+        {
+            $.post('/ajax/remove-document/', {id: docId, hash: docHash}, removeRowCallback);
+        }
+    }
+</script>
+
+<h1>Список документов</h1>
+<br />
+<h2>Список загруженных ВАМИ документов.</h2>
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+    <tr>
+        <th class="list_head">&nbsp;</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Заголовок</th>
+        <th class="list_head">Описание</th>
+        <th class="list_head" style="width: 30px;">&nbsp;</th>
+    </tr>
+    <?
+    foreach ($this->data as $document)
+    {
+    ?>
+    <tr id="document_row_<?= $document['id'] ?>" class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class="list_row">
+            <a href="/document/show-edit-document/hash/<?= $document['hash'] ?>/">
+                <img border="0" width="25" height="25" src="/images/edit.png" id="decor_a" alt="Просмотр/Редактирование"/>
+            </a>
+        </td>
+        <td class="list_row"><?= date('Y-m-d', strtotime($document['uplaod_date'])) ?></td>
+        <td class="list_row">
+            <a href="/document/get-document/hash/<?= $document['file_hash'] ?>/">
+                <?= $document['title'] ?>
+            </a>
+        </td>
+        <td class="list_row"><?= $document['description'] ?></td>
+        <td class="list_row">
+            <img class="link" src="/images/icons/delete.png" onclick="removeRow(<?= $document['id'] ?>, '<?= $document['file_hash'] ?>')" alt="Удалить" />
+        </td>
+    </tr>
+    <?
+    }
+    ?>
+</table>

@@ -1,0 +1,51 @@
+<h1>Бухгалтерия. История корректировок | <a href="<?= $_SESSION['back_url'] ?>">назад</a></h1>
+<br />
+<br />
+
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Сумма опер. (USD)</th>
+        <th class="list_head">Сумма опер. (UZS)</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Примечание</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $ats['client_id'] ?>/pointid/" >
+            		<?= $ats['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ats['summa']; ?></td>
+            <td class="list_row"><?= $ats['summas']; ?></td>
+            <td class="list_row"><?= $ats['currenttime']; ?></td>
+            <td class="list_row"><?= $ats['commente']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

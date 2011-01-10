@@ -1,0 +1,67 @@
+<h1>Отчет по реестру. Общая сумма по услугам за период: <?= $this->startDate ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Услуга</th>
+		<th class='list_head'>Сумма($)</th>
+		<th class='list_head'>Сумма(сум)</th>
+		<th class='list_head'>Кол-во клиентов</th>
+		<th class='list_head'>Кол-во точек</th>
+		<th class='list_head'>Средний доход на 1 точку</th>
+		<th class='list_head'>Процент % (UZS/USD)</th>
+	</tr>
+	<?
+	foreach ($this->data as $row)
+	{
+		$totalUsdPer += floatval($row['amount_usd']);
+		$totalUzsPer += floatval($row['amount_uzs']);
+	}
+
+	foreach ($this->data as $row)
+	{
+		$totalUsd += floatval($row['amount_usd']);
+		$totalUzs += floatval($row['amount_uzs']);
+
+		if ($row['points_count'] > 0)
+		{
+			$pointIncome = $row['amount_usd'] / $row['points_count'];
+		}
+		else
+		{
+			$pointIncome = 0;
+		}
+
+		if ($row['points_count'] > 0)
+		{
+			$totalPortIncome += $row['amount_usd'];
+			$totalPortsCount += $row['points_count'];
+		}
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'>
+				<?=  $row['servicename']; ?>
+			</td>
+			<td class='list_row right'><?= number_format($row['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($row['amount_uzs'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($row['clients_count'], 0, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($row['points_count'], 0, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($pointIncome, 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format(($row['amount_uzs'] / $totalUzsPer) * 100, 2, ',', ' '); ?> / <?= number_format(($row['amount_usd'] / $totalUsdPer) * 100, 2, ',', ' ') ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'></td>
+		<td class='list_row right'></td>
+		<td class='list_row right'></td>
+		<td class='list_row right'></td>
+	</tr>
+</table>
+
+<br />
+<h2>Средний доход на 1 порт: <?= number_format($totalPortIncome / $totalPortsCount, 2, ',', ' '); ?></h2>

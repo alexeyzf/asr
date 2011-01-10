@@ -1,0 +1,60 @@
+<h1>Отдел продаж. Статистика</h1>
+<br />
+<br />
+<center>
+	<form action="" method="post">
+		<b>IP адрес:</b> <input type="text" name="ip_search" value="<?= $this->ip ?>" />
+		<input type="submit" value="показать" />
+	</form>
+</center>
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">IP отправителя</th>
+        <th class="list_head">IP получателя</th>
+        <th class="list_head">Протокол</th>
+        <th class="list_head" style="width:15%;">Порт отправителя</th>
+        <th class="list_head" style="width:15%;">Порт получателя</th>
+        <th class="list_head">Байты</th>
+        <th class="list_head">Кол. пакетов</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="8" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['ip_sender'] ?></td>
+            <td class="list_row"><?= $item['ip_to'] ?></td>
+            <td class="list_row"><?= $item['protocol']; ?></td>
+            <td class="list_row"><?= $item['port_sender']; ?></td>
+            <td class="list_row"><?= $item['port_to']; ?></td>
+            <td class="list_row"><?= $item['bytes']; ?></td>
+            <td class="list_row"><?= $item['count_packages']; ?></td>
+        </tr>
+    <?
+
+    }
+
+}
+?>
+
+</table>

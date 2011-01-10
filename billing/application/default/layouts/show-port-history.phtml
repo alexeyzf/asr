@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="Abilov Marat, Tsoy Alexey" />
+        <title>АСР "SHARQ". Администрирование</title>
+        <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+	<script language="JavaScript" type="text/javascript" src="/scripts/jquery.js"></script>
+</head>
+<body>
+</body>
+<h1>Отдел управления. Поиск по истории изм. порта</h1>
+<br />
+<br />
+<table class='list'>
+		<tr>
+			<td class='list_head'>N задания</td>
+			<td class='list_head'>Тип задания</td>
+			<td class='list_head'>Дата</td>
+			<td class='list_head'>Дата выполнения</td>
+			<td class='list_head'>Пользователь</td>
+			<td class='list_head'>IP dslam</td>
+			<td class='list_head'>ID клиента</td>
+			<td class='list_head'>N порта</td>
+		</tr>
+<?php
+if($this->data)
+{
+	foreach($this->data as $item)
+	{
+	?>
+		<tr>
+			<td class='list_row'><?= $item['id']; ?></td>
+			<td class='list_row'><? $item['tasktype'] == 2 ? print "DOWN" : print "UP" ?></td>
+			<td class='list_row'><?= $item['datecreate']; ?></td>
+			<td class='list_row'><?= $item['datedone']; ?></td>
+			<td class='list_row'><?= $item['fullname']; ?></td>
+			<td class='list_row'><?= $item['dslamip']; ?></td>
+			<td class='list_row'><?= $item['port_clientid']; ?></td>
+			<td class='list_row'><?= $item['portnumber']; ?></td>
+		</tr>
+	<?
+	}
+}
+else
+{
+	?>
+		<tr>
+			<td colspan="8" class='list_head'>Not found!</td>
+		</tr>
+	<?
+}
+?>
+
+</html>

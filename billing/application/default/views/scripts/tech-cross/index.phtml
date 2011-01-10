@@ -1,0 +1,176 @@
+<?
+require_once('FormHelper.php');
+$options  = array(
+    'cross'     => 'Кроссировка',
+    'uncross'   => 'Расскросировка'
+);
+?>
+<script language="JavaScript" type="text/javascript">
+	function testfunc(flag)
+	{
+		if(flag == 1)
+		{
+			$('#form_id').attr("action", "/Printerdoc/mass-press-letter");
+			$('#form_id')[0].submit();
+		}
+		else if(flag == 0)
+		{
+			$('#form_id').attr("action", "/tech-cross/save");
+			$('#form_id')[0].submit();
+		}
+	}
+
+
+    function show()
+    {
+        var type = $('#type')[0].value;
+        redirect('/tech-cross/index/type/' + type);
+    }
+
+    function order(column)
+    {
+        var type = $('#type')[0].value;
+        redirect('/tech-cross/index/type/' + type + '/order_by/' + column);
+    }
+
+    function markChanged(pointID)
+    {
+        $('#points_' + pointID + '_is_changed')[0].value = 1;
+    }
+
+    function updateHidden(pointID, checked)
+    {
+		if (checked)
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_TO_UNCROSS; ?>';
+		}
+		else
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_WAIT_UNCROSS; ?>';
+		}
+
+        markChanged(pointID);
+    }
+</script>
+<h1>Линейнный отдел. Клиенты на кросс</h1>
+<br />
+<br />
+<center>
+    <select id="type">
+        <?= FormHelper::getSelectOptions($options, $this->type); ?>
+    </select>
+    &nbsp;
+    <input type="button" value="Показать" onclick="show();" />
+</center>
+<br />
+<br />
+<?
+if (is_array($this->pointList))
+{
+    ?>
+    <form action="/tech-cross/save" method="post" id="form_id">
+    <table id="pointList" class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">N</th>
+            <th class="list_head">NTA</th>
+            <th class="list_head"><a class="link" href="#" onclick="order('pcross');">Телефон</a></th>
+            <th class="list_head"><a class="link" href="#" onclick="order('ats');">АТС</a></th>
+            <th class="list_head">DSLAM</th>
+            <th class="list_head">N порта</th>
+            <th class="list_head">N рамки</th>
+            <th class="list_head">N пар</th>
+            <th class="list_head"><a class="link" href="#" onclick="order('dateagree');">Дата извещения</a></th>
+            <th class="list_head">Дата отправки письма</th>
+            <th class="list_head"><a class="link" href="#" onclick="order('point_status');">Статус</a></th>
+            <th class="list_head">Примечание</th>
+            <th class="list_head"><a class="link" href="#" onclick="order('last_modified_date');">Дата последнего изменения</a></th>
+            <th class="list_head">Дата принятия письма</th>
+        </tr>
+
+        <?
+        if ( count($this->pointList) == 0 )
+        {
+            ?>
+            <tr>
+                <td class="list_row center" colspan="13">Не найдено ни одной точки</td>
+            </tr>
+            <?
+        }
+
+        $counter  = 1;
+        foreach ($this->pointList as $point)
+        {
+            if ($point['point_status_type'] == PointStatusesHelper::TYPE_PROBLEM)
+            {
+                $color = '#ff7c7c';
+            }
+            elseif ($point['point_status_type'] == PointStatusesHelper::TYPE_PROBLEM_SOLVED)
+            {
+                $color = '#bdffbb';
+            }
+            elseif ($point['statuscross'] == PointHelper::STATUS_CROSS_LETTER_RECEIVED)
+            {
+                $color = '#92c6dc';
+            }
+            else
+            {
+                $color = 'white';
+            }
+            ?>
+            <tr style="background-color: <?= $color; ?>">
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row">
+                	<input type="checkbox" <?= $checked; ?> onchange="updateHidden(<?= $point['point_id']; ?>, this.checked);" />
+                	<input type="hidden" id="points_<?= $point['point_id']; ?>_statuscross" name="points[<?= $point['point_id']; ?>][statuscross]" value="<?= $point['statuscross']; ?>" />
+                </td>
+                <td class="list_row"><a href='/tech-client/modify/id/<?= $point['point_id'] ?>'><?= $point['pcross']; ?></a></td>
+                <td class="list_row"><?= $point['ats']; ?></td>
+                <td class="list_row"><?= $point['dslam']; ?></td>
+                <td class="list_row"><?= $point['port_number']; ?></td>
+                <td class="list_row"><?= $point['port_frame_number']; ?></td>
+                <td class="list_row">
+                	S:<?= $point['port_line_number1']; ?>
+                	L:<?= $point['port_line_number2']; ?>
+                </td>
+                <td class="list_row"><?= date('d.m.y', strtotime($point['last_modified_date'])); ?></td>
+                <td class="list_row"><?= $point['letter_sent_date'] ? date('d.m.y', strtotime($point['letter_sent_date'])) : ''; ?></td>
+                <td class="list_row">
+                    <select name="points[<?= $point['point_id']; ?>][statuscross]" onchange="markChanged(<?= $point['point_id']; ?>);">
+                        <?= FormHelper::getSelectOptions($this->statuses, $point['statuscross']); ?>
+                    </select>
+                    <input type="hidden" name="points[<?= $point['point_id']; ?>][is_changed]"
+                           id="points_<?= $point['point_id']; ?>_is_changed" value="0" />
+                </td>
+                <td class="list_row">
+                    <input type="text" name='points[<?= $point['point_id']; ?>][notes]' value="<?= $point['notes']; ?>" onchange="markChanged(<?= $point['point_id']; ?>);" />
+                </td>
+
+                <td class="list_row">
+                		<?= date('d.m.y', strtotime($point['last_modified_date'])); ?>
+                		<input type="hidden" name="last_modified_date" value="<?= $point['last_modified_date'] ?>" />
+                </td>
+                <td class="list_row"><?= $point['letter_receive_date'] ? date('d.m.y', strtotime($point['letter_receive_date'])) : ''; ?></td>
+            </tr>
+            <?
+        }
+        ?>
+
+    </table>
+    <br />
+    <br />
+    <center>
+        <input type="submit" value="Сохранить" onclick="testfunc(0)" />
+        <?php
+			if($this->type == "uncross")
+			{
+        ?>
+        		<input type="button" onclick="testfunc(1)" value="Комплектная печать" />
+        <?php
+			}
+        ?>
+    </center>
+    <input type="hidden" name="type" value="<?= $this->type ?>" />
+    </form>
+    <?
+}
+?>

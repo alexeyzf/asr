@@ -1,0 +1,57 @@
+<h1>Карточки. Финансовая история</h1>
+<br />
+<a href="<?= $_SESSION['back_url'] ?>" >назад</a>
+<br />
+<br />
+<center>
+
+</center>
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Дата</th>
+        <th class="list_head">сумма (USD)</th>
+        <th class="list_head">сумма (UZS)</th>
+        <th class="list_head">Примечание</th>
+        <th class="list_head">Тип</th>
+    </tr>
+<?php
+if ( count($this->finhistory) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->finhistory as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+            	<a href="/card-contract/view/id/<?= $ats['client_id'] ?>/pointid/" >
+            		<?= $ats['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ats['currenttime']; ?></td>
+            <td class="list_row"><?= $ats['summa']; ?></td>
+            <td class="list_row"><?= $ats['summas']; ?></td>
+            <td class="list_row"><?= $ats['commente']; ?></td>
+            <td class="list_row"><?= $ats['tran']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

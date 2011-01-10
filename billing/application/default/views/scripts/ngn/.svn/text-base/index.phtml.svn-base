@@ -1,0 +1,74 @@
+<h1>Отдел продаж. Поиск клиента по NGN номеру</h1>
+<br />
+<br />
+<center>
+<form action="/Ngn/index" method="post">
+	<label><b>NGN номер:</b></label>
+	<input type="text" name="ngn_number" />
+	<input type="submit" name="btn1" value="найти клиента" />
+</form>
+</center>
+
+
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Факс</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Овердрафт</th>
+        <th class="list_head">Все номера клиента</th>
+    </tr>
+<?php
+if ( count($this->result) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->result as $ngn)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $ngn['client_id'] ?>/pointid/<?= $ngn['point_id'] ?>" >
+            		<?= $ngn['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ngn['ballance']; ?></td>
+            <td class="list_row"><?= $ngn['fax']; ?></td>
+            <td class="list_row"><?= $ngn['phone']; ?></td>
+            <td class="list_row"><?= $ngn['overdraft']; ?></td>
+            <td class="list_row">
+            <?php
+            	$counter = 1;
+            	foreach($ngn['all'] as $key => $value)
+            	{
+					echo $counter. ". <b>
+                                                          <a href=\"/Ngn/showstat/ngn_number/".$value['number']."\">  [". $value['number']. "]
+                                                          <br />
+                                                          </b>";
+					$counter++;
+            	}
+            ?>
+            </td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

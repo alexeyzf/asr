@@ -1,0 +1,38 @@
+<table border="0" width="100%">
+<tr align="right">
+	<td colspan="2">
+	<b style="font-family:arialbd">
+		Приложение N3<br />
+		к заказу от {$start_date_pr}<br />
+		к Договору N {$contract_number}<br />
+		от {$dateagree}
+	</b>
+	</td>
+</tr>
+</table>
+<br />
+<br />
+
+<br />
+<br />
+<table border="0" width="100%">
+<tr align="center">
+	<td colspan="2">
+		<b style="font-family:arialbd">
+			Зона ответственности сторон
+		</b>
+	</td>
+</tr>
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

@@ -1,0 +1,42 @@
+<h1>Отчет по реестру (по выставленным счет-фактурам)</h1>
+<br />
+<center>
+	<form method="post" action="">
+		<dt><label>Тип:</label></dt>
+		<dd>			
+			<select name='type'>
+				<option value='by-service'>Общая сумма по услугам</option>
+				<option value='by-client'>Сумма по клиентам</option>
+				<option value='by-client-service'>Сумма по услугам с детализацией по клиентам</option>
+				<option value='by-client-group-service'>Сумма по клиентам с группировкой по услугам</option>
+			</select>
+		</dd>
+		<div class='clear'></div>
+		
+		<dt><label>Период:</label></dt>
+		<dd>
+			С
+			<select name='start_month'>
+				<?= FormHelper::getMonthOptions(1); ?>
+			</select> 
+			<select name='start_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+			
+			По
+			<select name='end_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='end_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+		</dd>
+		<div class='clear'></div>
+		
+		<dt><label>&nbsp;</label></dt>
+		<dd><input type="submit" value='Показать' /></dd>
+		<div class='clear'></div>
+	</form>
+</center>
+<br />
+<br />

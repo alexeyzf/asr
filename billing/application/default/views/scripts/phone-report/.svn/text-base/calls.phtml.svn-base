@@ -1,0 +1,62 @@
+<h1>Детализация по переговорам (CDR)</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<?
+if ($this->data && is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Дата</th>
+			<th class='list_head'>Время</th>
+			<th class='list_head'>Номер</th>
+			<th class='list_head'>Номер (наз.)</th>
+			<!-- <th class='list_head'>Наименование направления</th> -->
+			<th class='list_head'>Кол. сек.</th>
+			<!-- <th class='list_head'>Тариф</th>
+			<th class='list_head'>Сумма</th> -->
+		</tr>
+		<?
+		foreach ($this->data as $row)
+		{
+			if(substr($row['abonent2'],0 ,4) == "8592" or
+				substr($row['abonent2'],0 ,4) == "8593" or
+				substr($row['abonent2'],0 ,4) == "8594" or
+				substr($row['abonent2'],0 ,4) == "8590" or
+				substr($row['abonent2'],0 ,4) == "8598" or
+				substr($row['abonent2'],0 ,4) == "8595" or
+				substr($row['abonent2'],0 ,4) == "8597" or
+				substr($row['abonent2'],0 ,4) == "8591")
+			{
+				continue;
+			}
+
+			$minutesCountTotal += $row['ts'];
+			$amountTotal += $row['amount'];
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= date('d.m.Y', strtotime($row['call_date'])); ?></td>
+				<td class='list_row'><?= $row['call_time']; ?></td>
+				<td class='list_row'><?= $row['abonent1']; ?></td>
+				<td class='list_row'><?= $row['abonent2']; ?></td>
+				<!--  <td class='list_row'><?= $row['directions']; ?></td> -->
+				<td class='list_row right'><?= $row['ts']; ?></td>
+				<!--  <td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td> -->
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right' colspan="2"><b>Итого</b></td>
+			<!-- <td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td> -->
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+		</tr>
+	</table>
+	<?
+}

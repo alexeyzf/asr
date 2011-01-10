@@ -1,0 +1,109 @@
+<h1>Отчеты. Статистика активации карт SiGMA-KAPITAL</h1>
+
+<br />
+<br />
+
+<center>
+<?=	$this->form; ?>
+</center>
+
+
+
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head" >Время</th>
+        <th class="list_head">Сумма в USD </th>
+        <th class="list_head">Сумма в UZS</th>
+        <th class="list_head">ID клиента</th>
+    </tr>
+<?php
+if ( count($this->getstat) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+	$per_amount = 0;
+    foreach ($this->getstat as $key => $sigma)
+    {
+    	?>
+    		<tr>
+	            <td align="center" class="list_row" colspan="7">
+					<h1><?= $sigma[0]['filial']; ?></h1>
+	            </td>
+	        </tr>
+    	<?
+
+
+		for($i = 0; $i < count($sigma); $i++)
+		{
+			$per_amount 	   = $per_amount + $sigma[$i]['summas'];
+			$global_per_amount = $global_per_amount + $sigma[$i]['summas'];
+
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row"><?= $counter++; ?></td>
+	            <td class="list_row">
+	            	<a href="/Clientinfo/index/clientid/<?= $sigma[$i]['client_id'] ?>/pointid/" >
+	            		<?= $sigma[$i]['client_name']; ?>
+	            	</a>
+	            </td>
+	            <td class="list_row"><?= $sigma[$i]['ballance']; ?></td>
+	            <td class="list_row"><?= date('d.m.Y H:s:m', strtotime($sigma[$i]['currenttime'])); ?></td>
+	            <td class="list_row"><?= $sigma[$i]['summa']; ?></td>
+	            <td class="list_row"><?= $sigma[$i]['summas']; ?></td>
+	            <td class="list_row"><?= $sigma[$i]['client_id']; ?></td>
+	        </tr>
+	        <?
+		}
+		?>
+			<tr class="list_tr">
+           		<td  class="list_row" colspan="7" align="right" ><h1>Итого: <?= $per_amount; ?> Сум</h1></td>
+       		</tr>
+		<?
+		$per_amount = 0;
+    }
+
+}
+?>
+       <tr class="list_tr">
+           <td  class="list_row" colspan="7" align="right" >Итого зачислении на: <?= $global_per_amount; ?> Сум</td>
+       </tr>
+       <tr class="list_tr">
+           <td  class="list_row"  align="right" >Номинал</td>
+           <td  class="list_row"  align="right" >Итого</td>
+           <td  class="list_row" colspan="5" align="right" >Кол.</td>
+       </tr>
+       <?php
+       if($this->group == 0)
+       {
+
+       }
+       else
+       {
+       	   foreach($this->group as $item)
+	       {
+	       	?>
+		       <tr class="list_tr">
+		           <td  class="list_row" align="right" ><?= $item['summas'] ?></td>
+		           <td  class="list_row" align="right" ><?= number_format($item['cash'], 2, '.', ' '); ?></td>
+		           <td  class="list_row" colspan="5" align="right" ><?= $item['cash']/$item['summas'] ?></td>
+		       </tr>
+	       	<?
+	       }
+       }
+       ?>
+</table>

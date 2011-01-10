@@ -1,0 +1,319 @@
+<?php
+	$_SESSION['back_url'] = $_SERVER['REQUEST_URI'];
+?>
+<center>
+    <h2>С клиентов успешно заключен договор (<?php echo $this->pointslist[0]['contract_id']; ?>) </h2>
+    <br/>
+    <br/>
+    <br/>
+
+<form action="/Employee/modify" method="post">
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о клиенте</td>
+        <td><input type="submit" value="Изменить" /></td>
+    </tr>
+</table>
+<br/>
+<br/>
+</center>
+
+<table id="gen_info">
+ <tr>
+     <td id="table_bgr">Имя Клиента (название организации): </td>
+     <td><?php echo $this->pointslist[0]['client_name']; ?></td>
+     <td><input type="hidden" name="client_name" value="<?php echo $this->pointslist[0]['client_name']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Тип клиента: </td>
+     <td>
+         <?php echo $this->pointslist[0]['client_type']; ?>
+     </td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Город: </td>
+     <td><?php echo $this->pointslist[0]['town']; ?></td>
+     <td><input type="hidden" name="country_id" value="<?php echo $this->pointslist[0]['country_id']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Адрес: </td>
+     <td><?php echo $this->pointslist[0]['address']; ?></td>
+     <td><input type="hidden" name="address" value="<?php echo $this->pointslist[0]['address']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Телефон для связи: </td>
+     <td><?php echo $this->pointslist[0]['phone']; ?></td>
+     <td><input type="hidden" name="phone" value="<?php echo $this->pointslist[0]['phone']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Контактное лицо: </td>
+     <td><?php echo $this->pointslist[0]['contact_name']; ?></td>
+     <td><input type="hidden" name="contact_name" value="<?php echo $this->pointslist[0]['contact_name']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Факс: </td>
+     <td><?php echo $this->pointslist[0]['fax']; ?></td>
+     <td><input type="hidden" name="fax" value="<?php echo $this->pointslist[0]['fax']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Email клиента: </td>
+     <td><?php echo $this->pointslist[0]['email']; ?></td>
+     <td><input type="hidden" name="email" value="<?php echo $this->pointslist[0]['email']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr">Ориентир: </td>
+     <td><?php echo $this->pointslist[0]['client_orient']; ?></td>
+     <td><input type="hidden" name="client_orient" value="<?php echo $this->pointslist[0]['client_orient']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr"></td>
+     <td><input type="hidden" name="bank_id" value="<?php echo $this->pointslist[0]['bank_id']; ?>"/></td>
+     <td><input type="hidden" name="point_id" value="<?php echo $this->pointslist[0]['point_id']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr"></td>
+     <td><input type="hidden" name="ruvd_id" value="<?php echo $this->pointslist[0]['ruvd_id']; ?>"/></td>
+     <td><input type="hidden" name="client_type_id" value="<?php echo $this->pointslist[0]['client_type_id']; ?>"/></td>
+ </tr>
+ <tr>
+     <td id="table_bgr"></td>
+     <td></td>
+     <td><input type="hidden" name="client_id" value="<?php echo $this->pointslist[0]['client_id']; ?>"/></td>
+ </tr>
+ <?php
+ if($_SESSION['faceid'] == 1 || $_SESSION['faceid'] == 4)
+    {
+        echo ('
+          <tr>
+             <td id="table_bgr">Пасспорт: </td>
+             <td>'.$this->pointslist[0]['passp_n'].'</td>
+             <td><input type="hidden" name="passp_n" value="'.trim($this->pointslist[0]['passp_n']).'" /></td>
+         </tr>
+        ');
+    }
+    else
+    {
+     echo ('
+     <tr>
+         <td id="table_bgr">Обслуживается в Банке: </td>
+         <td>'.$this->pointslist[0]['bank_name'].'</td>
+         <td><input type="hidden" name="bank_id" value='.$this->pointslist[0]['bank_id'].' /></td>
+     </tr>
+     <tr>
+         <td id="table_bgr">ИНН: </td>
+         <td>'.$this->pointslist[0]['inn'].'</td>
+         <td><input type="hidden" name="inn" value='.$this->pointslist[0]['inn'].' /></td>
+     </tr>
+     <tr>
+         <td id="table_bgr">МФО: </td>
+         <td>'.$this->pointslist[0]['mfo'].'</td>
+         <td><input type="hidden" name="mfo" value='.$this->pointslist[0]['mfo'].' /></td>
+     </tr>
+     <tr>
+         <td id="table_bgr">ОКОНХ: </td>
+         <td>'.$this->pointslist[0]['okonx'].'</td>
+         <td><input type="hidden" name="okonx" value='.$this->pointslist[0]['okonx'].' /></td>
+     </tr>
+     <tr>
+         <td id="table_bgr">Валюта: </td>
+         <td>'.$this->pointslist[0]['currency'].'</td>
+     </tr>
+
+     ');
+     // Перебираем все расчетники клиента
+     for($i=0; $i<count($this->rschet); $i++)
+     {
+     	$z = $i+1;
+     	echo ('
+			<tr>
+		        <td id="table_bgr">Расчетный счет N'.$z.': </td>
+		        <td>'.$this->rschet[$i]['schet'].'</td>
+		        <td><input type="hidden" name="schet" value='.$this->rschet[0]['schet'].' /></td>
+			<tr>
+		');
+
+     }
+    }
+ ?>
+</table>
+</form>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о договоре</td>
+        <td>
+            <a href="/printerdoc/printcontract/client_id/<?= $_SESSION['last_userID']; ?>/contract_id/<?= $this->pointslist[0]['contract_id'] ?>" target="_blank">Распечатать</a>
+        </td>
+    </tr>
+</table>
+
+<table id="gen_info">
+<?php
+    echo ('
+    <tr>
+        <td id="table_bgr">Идентификатор договора: </td>
+         <td>'.$this->pointslist[0]['contract_id'].'</td>
+    </tr>
+    <tr>
+        <td id="table_bgr">Номер договора: </td>
+         <td>'.$this->pointslist[0]['contract_number'].'</td>
+    </tr>
+    <tr >
+        <td id="table_bgr">Дата подписания: </td>
+         <td>'.$this->pointslist[0]['dateagree'].'</td>
+    </tr>
+    <tr >
+        <td id="table_bgr">Менеджер: </td>
+         <td>'.$this->pointslist[0]['manager_full_name'].'</td>
+    </tr>
+    ');
+    ///////////////////////////////////////////////////////////////////////////////////////
+?>
+</table>
+
+
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">
+            Услуги
+            <?php
+            if($_SESSION['faceid'] == 1 || $_SESSION['faceid'] == 4)
+            {
+
+            } else {
+                  echo ('<a id="dop_tochka" href="/Editpoint/attachpoint/client_id/'.$this->pointslist[0]['client_id'].'/client_type_id/'.$this->pointslist[0]['client_type_id'].'" >добавить точку</a>');
+            }
+            ?>
+        </td>
+    </tr>
+</table>
+<br/>
+<br/>
+</form>
+
+<?php
+for($i=0; $i<count($this->pointslist); $i++)
+		{
+
+		 // Форма в которой хранится все что нужно что бы назначить новую услугу на данную точку
+		 print '<form action="/employee/modifyservice" method="post" >';
+		 print '<b style="background-color:yellow; font-size:14px;" >
+					Информация о точке
+					<input type="submit" value="Добавить услугу" />
+					<input type="hidden" name="backurl" value="'.$this->backurl.'" />
+					<input type="hidden" name="point_id" value="'.$this->pointslist[$i]['point_id'].'" />
+					<input type="hidden" name="client_id" value="'.$_SESSION['last_userID'].'" />
+				</b>';
+		 echo ('
+			<table>
+				 <tr>
+				     <td id="table_bgr">ID точки: </td>
+				     <td>'.$this->pointslist[$i]['point_id'].'</td>
+				     <td>
+						<a href="/Editpoint/index/point_id/'.$this->pointslist[$i]['point_id'].'/client_id/'.$this->pointslist[$i]['client_id'].'"> Редактировать</a>
+						|
+						<a href="/Editpoint/deletepoint/point_id/'.$this->pointslist[$i]['point_id'].'/client_id/'.$this->pointslist[$i]['client_id'].'"> Удалить</a>
+					 </td>
+				 </tr>
+				 <tr>
+				     <td id="table_bgr">Номер телефона: </td>
+				     <td>'.$this->pointslist[$i]['ptsphone'].'</td>
+				     <td></td>
+				 </tr>
+				 <tr>
+				     <td id="table_bgr">Номер для кроссировки: </td>
+				     <td>'.$this->pointslist[$i]['pcross'].'</td>
+				     <td></td>
+				 </tr>
+				 <tr>
+				     <td id="table_bgr">Владелец телефонного номера:</td>
+				     <td>'.$this->pointslist[$i]['pcross_owner'].'</td>
+				     <td></td>
+				 </tr>
+				  <tr>
+				     <td id="table_bgr">Контактное лицо: </td>
+				     <td>'.$this->pointslist[$i]['contact_name'].'</td>
+				     <td></td>
+				 </tr>
+				 <tr>
+				     <td id="table_bgr">Адрес: </td>
+				     <td>'.$this->pointslist[$i]['connect_address'].'</td>
+				     <td></td>
+				 </tr>
+				 <tr>
+				     <td id="table_bgr">Город: </td>
+				     <td>'.$this->pointslist[$i]['town'].'</td>
+				     <td></td>
+				 </tr>
+			</table>
+			</form>
+			');
+			// End form point Идем далее view услуг на точке
+
+			echo ('
+				<table border="1" cellpadding="7" cellspacing="0">
+				   <tr>
+				   	 <td width="30">ID</td>
+				   	 <td width="30">точка</td>
+				   	 <td width="80">логин</td>
+				   	 <td width="230">адрес</td>
+				   	 <td width="150">период</td>
+				   	 <td width="150">услуга</td>
+				     <td width="190" bgcolor="#D3EDF6" align="center">Тариф</td>
+				     <td width="90">тел. крос.</td>
+				     <td width="80">сост. крос.</td>
+				     <td width="80">действия</td>
+				   </tr>
+			');
+
+
+
+$allservices = new ListServiceModel();
+for($s=0; $s<count($this->tablearr); $s++)
+	{
+
+			$all = $allservices->selectServices($this->pointslist[$i]['point_id'], $this->tablearr[$s]);
+
+			echo ('<form action="/employee/deleteservice" method="post" >');
+
+			for($k=0; $k<count($all); $k++)
+			{
+				echo ('<input type=hidden name=point_id value='.$all[$k]['point_id'].' /> ');
+				echo ('<input type=hidden name=colla_id value='.$all[$k]['colla_id'].' /> ');
+				echo ('<input type=hidden name=tarif_id value='.$all[$k]['tarif_id'].' /> ');
+				echo ('
+						   <tr>
+						     <td>'.$i.'</td>
+						     <td>'.$all[$k]['point_id'].'</td>
+						     <td>'.$all[$k]['u_login'].'</td>
+						     <td>'.$all[$k]['fiz_connect'].'</td>
+						     <td>'.$all[$k]['startdate'].' по '.$all[$k]['enddate'].'</td>
+						     <td>'.$all[$k]['short_name'].'</td>
+							 <td>'.$all[$k]['tarif_name'].'</td>
+							 <td>'.$all[$k]['pcross'].'</td>
+							 <td> --- </td>
+							 <td>
+								<a href=/employee/deleteservice/point/'.$all[$k]['point_id'].'/sid/'.$all[$k]['id'].'/tarif/'.$all[$k]['tarif_id'].'/tablename/'.$all[$k]['tablename'].'/client_id/'.$this->pointslist[0]['client_id'].' >
+									Выкл.
+								</a>
+							 </td>
+						   </tr>
+				');
+			}
+	}
+	echo ('</form></table><br/><br/><br/>');
+
+	}
+?>
+
+
+
+<center>
+    <form action="/employee/clearvars" method="post">
+        <input type="submit" name="xxx" value="Завершить">
+    </form>
+</center>
+
+
+
+

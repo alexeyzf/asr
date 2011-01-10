@@ -1,0 +1,95 @@
+<script language="JavaScript" type="text/javascript">
+    var counter = 1;
+    var pattern =
+        '<tr id="document_row_{0}" class="list_tr" onMouseOver="this.setAttribute(\'class\', \'list_tr_hover\')" onMouseOut="this.setAttribute(\'class\', \'list_tr\')">' +
+            '<td class="list_row">' +
+                '<input type="file" name="doc_{0}"/>' +
+            '</td>' +
+            '<td class="list_row">' +
+                '<input type="text" name="title_{0}">' +
+            '</td>' +
+            '<td class="list_row">' +
+                '<textarea cols="80" rows="2" id="body" name="description_{0}"></textarea>' +
+            '</td>' +
+            '<td class="list_row">' +
+                '<img class="link" src="/images/icons/delete.png" onclick="$(\'#document_row_{0}\').remove()" alt="Удалить" />' +
+            '</td>' +
+        '</tr>';
+    function addRow()
+    {
+        var html = String.format(pattern, ++counter);
+        $(html).insertBefore('#last_row');
+    }
+</script>
+
+<h1>Добавление документов</h1>
+<br />
+<h2>Добавте документ(ы) для прикрепления к заданиям.</h2>
+<br />
+<br />
+<div id="errors" class="errors">
+<?
+    if ($this->errors)
+    {
+        foreach ($this->errors as $error)
+        {
+?>
+    <p><?= $error ?></p>
+<?
+        }
+    }
+?>
+</div>
+
+<form id="form_id" method="post" action="/document/add-document/" enctype="multipart/form-data">
+    <table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="submit" value="Сохранить" />
+         </td>
+    </tr>
+    </table>
+    <br />
+    <br />
+
+    <table class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+        <tr>
+            <th class="list_head">Документ</th>
+            <th class="list_head">Заголовок *</th>
+            <th class="list_head">Описание</th>
+            <th class="list_head" style="width: 30px;">&nbsp;</th>
+        </tr>
+        <tr id="document_row_1" class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">
+                <input type="file" name="doc_1"/>
+            </td>
+            <td class="list_row">
+                <input type="text" name="title_1">
+            </td>
+            <td class="list_row">
+                <textarea cols="80" rows="2" id="body" name="description_1"></textarea>
+            </td>
+            <td class="list_row">
+                &nbsp;
+            </td>
+        </tr>
+        <tr class="list_tr" id="last_row">
+            <td colspan="4">
+                <input type="button" onclick="addRow()" name="document_btn" id="assignee_btn" value="Добавить" />
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <br />
+    <table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="submit" value="Сохранить" />
+         </td>
+    </tr>
+    </table>
+</form>
+<p>Если поле заголовка оставить пустым, то будет взято исходное имя файла.</p>

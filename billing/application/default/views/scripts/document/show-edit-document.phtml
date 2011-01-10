@@ -1,0 +1,155 @@
+<script language="JavaScript" type="text/javascript">
+    var currentDocPattern =
+        '<a href="/document/get-document/hash/{0}/">{1}</a>';
+
+    function changeActiveFileRow(data)
+    {
+        var values = JSON.parse(data);
+        if (values['doc'])
+        {
+            var doc = values['doc'];
+
+            $('#current_file').html(String.format(currentDocPattern, doc['file_hash'], doc['file_name']));
+            $('#doc_row_' + doc['file_hash']).css('background-color', 'rgb(255, 255, 204)');
+        }
+        else
+        {
+            $('#current_file').html('');
+        }
+    }
+
+    function removeFile(docId, fileHash)
+    {
+        $('#docs_table > tbody > tr').css('background-color', 'inherit');
+        $('#doc_row_' + fileHash).remove();
+        $.post('/ajax/modify-file/', {doc: docId, hash: fileHash, verb: 'delete'}, changeActiveFileRow);
+    }
+
+    function changeActiveFile(docId, fileHash)
+    {
+        $('#docs_table > tbody > tr').css('background-color', 'inherit');
+        $.post('/ajax/modify-file/', {doc: docId, hash: fileHash, verb: 'activate'}, changeActiveFileRow);
+    }
+</script>
+
+<h1>Редактирование документа</h1>
+<br />
+<h2>Редактирование ВАШЕГО документа.</h2>
+<br />
+<br />
+
+<div id="errors" class="errors">
+<?
+    if ($this->errors)
+    {
+        foreach ($this->errors as $error)
+        {
+?>
+    <p><?= $error ?></p>
+<?
+        }
+    }
+?>
+</div>
+
+<?
+    $doc = $this->data['doc'];
+    $files = $this->data['files'];
+?>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Документ</td>
+    </tr>
+</table>
+<form id="docform" action="/document/show-edit-document/id/<?= $doc['id'] ?>/hash/<?= $doc['hash'] ?>/" method="post">
+    <center>
+        <table id="infodoc" cellpadding="5" cellspacing="8" style="font-size: 16px;">
+            <tr>
+                <th class="label">Заголовок:</th>
+                <td>
+                    <input type="text" name="title" value="<?= $doc['title'] ?>" style="width:98.3%; font-size: 16px;">
+                </td>
+            </tr>
+            <tr>
+                <th class="label">Описание:</th>
+                <td>
+                    <textarea name="description" cols="80" rows="2"><?= $doc['description'] ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="label">Дата создания:</th>
+                <td><?= $doc['title'] ?></td>
+            </tr>
+            <tr>
+                <th class="label">Текущий Файл:</th>
+                <td id="current_file"><a href="/document/get-document/hash/<?= $doc['file_hash'] ?>/"><?= $doc['file_name'] ?></a></td>
+            </tr>
+        </table>
+    </center>
+     <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+                <input type="submit" value="Сохранить" name="update" />
+                <input type="submit" value="Удалить" name="delete-doc" onclick="return confirm('Вы уверены?')"/>
+             </td>
+        </tr>
+    </table>
+</form>
+<br/>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">История файлов</td>
+    </tr>
+</table>
+<table id="docs_table" class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+    <tr>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Имя</th>
+        <th class="list_head">&nbsp;</th>
+        <th class="list_head">&nbsp;</th>
+    </tr>
+    <?
+    foreach ($files as $file)
+    {
+    ?>
+        <tr <?= $file['is_active'] ? 'style="background-color:rgb(255, 255, 204);"' : '' ?> id="doc_row_<?= $file['file_hash'] ?>">
+            <td class="list_row"><?= date('Y-m-d', strtotime($file['uplaod_date'])) ?></td>
+            <td class="list_row"><?= $file['file_name'] ?></td>
+            <td class="list_row"><img class="link" src="/images/icons/approve.gif" alt="Установаить"
+                                      onclick="changeActiveFile(<?= $doc['id'] ?>, '<?= $file['file_hash'] ?>')" /></td>
+            <td class="list_row"><img class="link" src="/images/icons/delete.png" alt="Удалить" 
+                                      onclick="removeFile(<?= $doc['id'] ?>, '<?= $file['file_hash'] ?>')" /></td>
+        </tr>
+    <?
+    }
+    ?>
+</table>
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Добавить файл</td>
+    </tr>
+</table>
+<center>
+    <form action="/document/show-edit-document/id/<?= $doc['id'] ?>/hash/<?= $doc['hash'] ?>/" method="post" enctype="multipart/form-data">
+        <table class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+            <tr>
+                <th class="list_head">Документ</th>
+            </tr>
+            <tr id="document_row_1" class="list_tr">
+                <td class="list_row">
+                    <input type="file" name="doc"/>
+                </td>
+            </tr>
+        </table>
+        <table width='100%'>
+            <tr>
+                <td align='center' nowrap>
+                    <div class='space-5h'></div>
+                    <input type="submit" value="Сохранить" name="new-doc" />
+                 </td>
+            </tr>
+        </table>
+    </form>
+</center>

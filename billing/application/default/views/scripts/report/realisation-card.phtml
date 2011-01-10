@@ -1,0 +1,96 @@
+<h1>Карточки. Реализация карт предоплаты</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+			С
+			<select name='start_day'>
+				<?= FormHelper::getDayOptions(1); ?>
+			</select>
+			<select name='start_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='start_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+
+			По
+			<select name='end_day'>
+				<?= FormHelper::getDayOptions(date('t')); ?>
+			</select>
+			<select name='end_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='end_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+   <input type="submit" value="показать">
+ </form>
+</center>
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Клиент</th>
+        <th class="list_head">Номер счет-фак.</th>
+        <th class="list_head" style="width:15%;">На сумму</th>
+        <th class="list_head">Рег. номер</th>
+        <th class="list_head">Тип карточек</th>
+        <th class="list_head">Номинал</th>
+        <th class="list_head">Кол-во.</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    	$amount = $item['amount'] * (1 - ($item['discount'] / 100));
+    	$total_price = $total_price + $amount;
+
+    	if($item['card_type'] == "1")
+    	{
+    		$card_type = "Сигма";
+    	}
+    	else
+    	{
+    		$card_type = "Смайл";
+    	}
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= date('d.m.Y', strtotime($item['order_date'])); ?></td>
+            <td class="list_row"><?= $item['client_name']; ?></td>
+            <td class="list_row"><?= $item['invoice_number']; ?></td>
+            <td class="list_row right"><?= number_format($amount, 2, ',', ' '); ?></td>
+            <td class="list_row"><?= $item['client_id']; ?></td>
+            <td class="list_row"><?= $card_type; ?></td>
+            <td class="list_row"><?= $item['face_value']; ?></td>
+            <td class="list_row"><?= $item['count']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+       <tr class="list_tr">
+           <td  class="list_row right" colspan="9">
+           	<h2><b><?= number_format($total_price, 2, ',', ' '); ?> USZ</b></h2>
+           </td>
+       </tr>
+</table>

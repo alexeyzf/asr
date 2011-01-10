@@ -1,0 +1,42 @@
+<h1>Специальные возможности. Доставка счёт-фактуры | <a href="<?= $_SESSION['back_url'] ?>" > назад </a></h1>
+<br />
+<br />
+<?
+if (is_array($this->services))
+{
+	?>
+	<center>
+	<h2>История услуги</h2><br />
+	<table cellpadding="0" cellspacing="0" style='border-collapse: collapse; text-align: center; width: 50%'>
+		<tr>
+			<th class='list_head'>№</th>
+			<th class='list_head'>Период</th>
+		</tr>
+		<?
+		$counter = 0;
+		foreach ($this->services as $service)
+		{ 
+			?>
+			<tr>
+				<td class='list_row'><?= ++$counter; ?></td>
+				<td class='list_row'>
+					<?= date('d.m.Y', strtotime($service['startdate'])) . ' - ' .
+						date('d.m.Y', strtotime($service['enddate'])); ?>
+				</td>
+			</tr>
+			<?
+		}
+		?>
+	</table>
+	</center>
+	<br /><br />
+	<?
+} 
+?>
+<center>
+<h2>Включение доставки</h2><br />
+</center>
+<form action="/Service/savedeliveryinvoice" method="post">
+<?= $this->form; ?>
+</form>
+<br />

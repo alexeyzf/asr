@@ -1,0 +1,13 @@
+<h1>Касса. Изменение обменного курса.</h1>
+
+<br />
+<br />
+<b>Текущий курс: 1 USD = <?= $this->current_rate; ?></b>
+
+<br />
+<br />
+<form action="/Kassa/saverate" method="post">
+<?php
+echo $this->form;
+?>
+</form>

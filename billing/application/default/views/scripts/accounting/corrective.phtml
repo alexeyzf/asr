@@ -1,0 +1,40 @@
+<?php $_SESSION['back_url'] = $_SERVER['REQUEST_URI']; ?>
+<h1>Бухгалтерия. Корректировка Бухгалтером</h1>
+<br />
+<br />
+<br />
+<center>
+<form action="/Accounting/corrective" method="post">
+<?php
+	echo $this->form;
+?>
+</form>
+
+</center>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<br/>
+<br/>
+<center>
+    <form action="/Accounting/showcorrect" method="post">
+        ID клиента:<input type="text" name="client_id" />
+        <input type="submit" name="btn1" value="показать" /> <b>*История корректировок</b>
+    </form>
+</center>
+

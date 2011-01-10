@@ -1,0 +1,189 @@
+<table width="100%" style="font-family: arial">
+    <tr>
+        <td style="text-align:right">
+        Приложение N1<br/>
+        К заказу от {$start_date_pr}<br/>
+        К Договору N {$contractNumber}<br/>
+        от {$contractDate}
+        </td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Заказ на предоставление улуг свзяи N1</b></td>
+    </tr>
+    <tr>
+        <td><b style="font-family:arialbd">Наименование клиента</b></td>
+        <td>{$clientName}</td>
+    </tr>
+    <tr>
+        <td><b style="font-family:arialbd">Дата заказа</b></td>
+        <td>{$start_date_pr}</td>
+    </tr>
+    <tr>
+        <td>
+            <b style="font-family:arialbd">Дата готовности услуги</b><br/>
+            *(Названная дата не обязывает {$companyName}<br/>
+            сдать канал в эксплуатацию в далее указанный<br/>
+            срок)
+        </td>
+        <td>В течение 10 банковских дней cо дня произведения оплаты</td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Тип заказа</b></td>
+    </tr>
+    <tr>
+        <td>
+            Регистрационный номер существующей услуги ID<br/><br/>
+            Наименование услуги<br/>{$serviceName}<br/>
+            {$clientType}
+        </td>
+        <td>
+            Изменение существующей услуги<br/><br/>
+            {$comment}
+        </td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Комерческий представитель ООО "{$companyName}"</b></td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{$manager}</td>
+    </tr>
+    <tr>
+        <td>Номер телефона</td>
+        <td>{$companyContactPhone}</td>
+    </tr>
+    <tr>
+        <td>Адрес электронной почты</td>
+        <td>{$companyContactEmail}</td>
+    </tr>
+    <tr>
+        <td>Номер факса</td>
+        <td>{$companyFax}</td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Эксплуатация</b></td>
+    </tr>
+    <tr>
+        <td colspan=2>
+            Восстановление при аварии. Нарушение в работе услуги. Плановые работы.<br/>
+            Эскалация технических вопросов
+        </td>
+    </tr>
+    <tr>
+        <td>Представитель / Отдел</td>
+        <td>СТП (Служба технической поддержки)</td>
+    </tr>
+    <tr>
+        <td>Номер телефона</td>
+        <td>{$companyPhone}</td>
+    </tr>
+    <tr>
+        <td>Адрес электронной почты</td>
+        <td>{$companyEmail}</td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Информация о Заказчике</b></td>
+    </tr>
+    <tr>
+        <td>
+            <b style="font-family:arialbd">Регистрационный номер</b><br/>
+            (указывается в платежных документах)
+        </td>
+        <td>{$clientID}</td>
+    </tr>
+    <tr>
+        <td>ИНН</td>
+        <td>{$clientINN}</td>
+    </tr>
+    <tr>
+        <td>Р/с</td>
+        <td>{$clientSattlementAccount}</td>
+    </tr>
+    <tr>
+        <td>в банке </td>
+        <td>{$clientBank}</td>
+    </tr>
+    <tr>
+        <td>МФО</td>
+        <td>{$clientMfo}</td>
+    </tr>
+    <tr>
+        <td>ОКОНХ</td>
+        <td>{$clientOkonx}</td>
+    </tr>
+    <tr>
+        <td>Телефон</td>
+        <td>{$clientPhone}</td>
+    </tr>
+    <tr>
+        <td>Факс</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Адрес подключения</td>
+        <td>{$address}</td>
+    </tr>
+    <tr>
+        <td>WWW адрес</td>
+        <td>{$clientSite}</td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Комерческий представитель</b></td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{$sign_name}</td>
+    </tr>
+    <tr>
+        <td>Номер телефона</td>
+        <td>{$contactPhone}</td>
+    </tr>
+    <tr>
+        <td>Адрес электронной почты</td>
+        <td>{$contactEmail}</td>
+    </tr>
+</table>
+<br/><br/>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td colspan=2><b style="font-family:arialbd">Выставление счетов</b></td>
+    </tr>
+    <tr>
+        <td>Контактное лицо</td>
+        <td>{$sign_name}</td>
+    </tr>
+    <tr>
+        <td>Адрес для выставления счетов</td>
+        <td>{$clientAddress}</td>
+    </tr>
+    <tr>
+        <td>Номер телефона</td>
+        <td>{$clientPhone}</td>
+    </tr>
+    <tr>
+        <td>Адрес электронной почты</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Номер факса</td>
+        <td></td>
+    </tr>
+</table>

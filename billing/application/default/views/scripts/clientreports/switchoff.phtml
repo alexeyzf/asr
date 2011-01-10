@@ -1,0 +1,178 @@
+<h1>Отчет по клиентам (Отключенные)</h1>
+<br />
+<br />
+<center>
+<center>
+<form action="/Clientreports/switchoff" method="post">
+	<? echo $this->form; ?>
+</form>
+</center>
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head">Дата подключения</th>
+        <th class="list_head">Дата отключения</th>
+        <th class="list_head">Проработал</th>
+        <th class="list_head">Баланс</th>
+        <th class="list_head">Сумма по тарифу</th>
+    </tr>
+<?php
+if ( count($this->waitingForUncross) == 0 
+	&& count($this->uncrossed) == 0 
+	&& count($this->acceptedForUncross) == 0)
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+	?>
+	<tr>
+		<td class='list_head center' colspan="8">
+			<b>Еще не снятые с кросса на текущий момент</b>
+		</td>
+	</tr>
+	<?
+	$counter     = 1;
+	$total = 0;
+	foreach ($this->waitingForUncross as $client)
+	{
+		$total += $client['price'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class="list_row">
+				<?= $counter++; ?>
+			</td>
+			<td class="list_row">
+				<?= $client['u_login'] ?>
+			</td>
+			<td class="list_row">
+				<?= $client['client_name'] ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['client_dateagree']); ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['ballance_change']); ?>
+			</td>
+			<td class="list_row">
+				<?= $client['interval']; ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['ballance'], 2, ',', ' '); ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['price'], 2, ',', ' '); ?>
+			</td>
+		</tr>
+		<?
+	}
+	
+	?>
+	<tr class='list_tr'>
+		<td class='list_row right' colspan="8"><b><?= number_format($total, 2, ',', ' '); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_head center' colspan="8">
+			<b>Подтвержденные на расскросс</b>
+		</td>
+	</tr>
+	<?
+	$counter = 1;
+	$total = 0;
+	foreach ($this->acceptedForUncross as $client)
+	{
+		$total += $client['price'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class="list_row">
+				<?= $counter++; ?>
+			</td>
+			<td class="list_row">
+				<?= $client['u_login'] ?>
+			</td>
+			<td class="list_row">
+				<?= $client['client_name'] ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['client_dateagree']); ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['ballance_change']); ?>
+			</td>
+			<td class="list_row">
+				<?= $client['interval']; ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['ballance'], 2, ',', ' '); ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['price'], 2, ',', ' '); ?>
+			</td>
+		</tr>
+		<?
+	}
+	
+	?>
+	<tr class='list_tr'>
+		<td class='list_row right' colspan="8"><b><?= number_format($total, 2, ',', ' '); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_head center' colspan="8">
+			<b>Снятые с кросса</b>
+		</td>
+	</tr>
+	<?
+    $counter = 1;
+	$total = 0;
+    foreach ($this->uncrossed as $client)
+    {
+    	$total += $client['price'];
+        ?>
+    	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class="list_row">
+				<?= $counter++; ?>
+			</td>
+			<td class="list_row">
+				<?= $client['u_login'] ?>
+			</td>
+			<td class="list_row">
+				<?= $client['client_name'] ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['client_dateagree']); ?>
+			</td>
+			<td class="list_row">
+				<?= date('d.m.Y', $client['date']); ?>
+			</td>
+			<td class="list_row">
+				<?= $client['interval']; ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['ballance'], 2, ',', ' '); ?>
+			</td>
+			<td class="list_row right">
+				<?= number_format($client['price'], 2, ',', ' '); ?>
+			</td>
+		</tr>
+        <?
+    }
+    ?>
+    <tr class='list_tr'>
+		<td class='list_row right' colspan="8"><b><?= number_format($total, 2, ',', ' '); ?></b></td>
+	</tr>
+	<?
+}
+?>
+</table>

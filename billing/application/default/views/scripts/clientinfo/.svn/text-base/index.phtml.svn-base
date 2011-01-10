@@ -1,0 +1,853 @@
+<?php
+$_SESSION['back_url'] = $_SERVER['REQUEST_URI'];
+?>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о клиенте</td>
+        <td>
+        	<input type='button' value='Логи'
+        		onclick="redirect('/log/index/by/LG.client_id/value/<?= $this->dataclient[0]['client_id'] ?>')"/>
+        </td>
+        <td>
+            <form action="/Client-account/index" method="post">
+                <input type="hidden" name="type" value="by_inn" />
+                <input type="hidden" name="svalue" value="<?= $this->dataclient[0]['inn'] ?>" />
+                <input type="submit" value="Счета" />
+            </form>
+        </td>
+        <td>
+            <form action="/Employee/modify" method="post">
+                <input type="submit" value="Изменить" />
+        </td>
+    </tr>
+</table>
+<br/>
+
+                       <!-- Выводим информацию о клиенте !-->
+<center>
+<table id="infoclient" cellpadding="5" cellspacing="8">
+	<tr>
+
+	</tr>
+    <tr>
+        <td width="50%" align="right"><b>Название организации (клиент): </b></td>
+        <td><?= $this->dataclient[0]['client_name'] ?></td>
+        <td><input type="hidden" name="client_name" value="<?= htmlentities($this->dataclient[0]['client_name']) ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>ID клиента:</b></td>
+        <td><?= $this->dataclient[0]['client_id'] ?></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Тип клиента:</b></td>
+        <td><?= $this->dataclient[0]['client_type'] ?></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Полный адрес клиента:</b></td>
+        <td><?= $this->dataclient[0]['address'] ?></td>
+        <td><input type="hidden" name="address" value="<?= $this->dataclient[0]['address'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Юр. адрес клиента:</b></td>
+        <td><?= $this->dataclient[0]['legaladdress'] ?></td>
+        <td><input type="hidden" name="legaladdress" value="<?= $this->dataclient[0]['legaladdress'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Город:</b></td>
+        <td><?= $this->dataclient[0]['town'] ?></td>
+        <td><input type="hidden" name="country_id" value="<?= $this->dataclient[0]['country_id'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Ориентир: </b></td>
+        <td><?= $this->dataclient[0]['client_orient'] ?></td>
+        <td><input type="hidden" name="client_orient" value="<?= $this->dataclient[0]['client_orient'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Телефон клиента: </b></td>
+        <td><?= $this->dataclient[0]['phone'] ?></td>
+        <td><input type="hidden" name="phone" value="<?= $this->dataclient[0]['phone'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Email адрес: </b></td>
+        <td><?= $this->dataclient[0]['email'] ?></td>
+        <td><input type="hidden" name="email" value="<?= $this->dataclient[0]['email'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Факс: </b></td>
+        <td><?= $this->dataclient[0]['fax'] ?></td>
+        <td><input type="hidden" name="fax" value="<?= $this->dataclient[0]['fax'] ?>" /></td>
+    </tr>
+<?php
+if($this->dataclient[0]['client_type_id'] == "1")
+{
+    echo ('
+    <tr>
+        <td width="50%" align="right"><b>Номер паспорта:</b></td>
+        <td>'.$this->dataclient[0]['passp_n'].'</td>
+        <td><input type="hidden" name="passp_n" value="'.$this->dataclient[0]['passp_n'].'" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Кем выдан: </b></td>
+        <td>'.$this->dataclient[0]['ruvd_name'].'</td>
+        <td><input type="hidden" name="ruvd_id" value="'.$this->dataclient[0]['ruvd_id'].'" /></td>
+    </tr>
+    ');
+}
+    else
+    {
+        echo ('
+            <tr>
+                <td width="50%" align="right"><b>ИНН:</b></td>
+                <td>'.$this->dataclient[0]['inn'].'</td>
+                <td><input type="hidden" name="inn" value="'.$this->dataclient[0]['inn'].'" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="right"><b>МФО: </b></td>
+                <td>'.$this->dataclient[0]['mfo'].'</td>
+                <td><input type="hidden" name="mfo" value="'.$this->dataclient[0]['mfo'].'" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="right"><b>ОКОНХ: </b></td>
+                <td>'.$this->dataclient[0]['okonx'].'</td>
+                <td><input type="hidden" name="okonx" value="'.$this->dataclient[0]['okonx'].'" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="right"><b>Банк: </b></td>
+                <td>'.$this->dataclient[0]['bank_name'].'</td>
+                <td><input type="hidden" name="bank_id" value="'.$this->dataclient[0]['bank_id'].'" /></td>
+            </tr>
+        ');
+
+        for($i=0; $i<count($this->rschet); $i++)
+        {
+            $z=$i+1;
+            echo ('
+            <tr>
+                <td width="50%" align="right"><b>Расчетный счет: '.$z.' </b></td>
+                <td>'.$this->rschet[$i]['schet'].'</td>
+                <td><input type="hidden" name="bank_name" value="'.$this->rschet[0]['schet'].'" /></td>
+            </tr>
+            ');
+        }
+    }
+?>
+    <tr>
+        <td width="50%"></td>
+        <td>
+        <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+        <input type="hidden" name="point_id" value="<?= $this->dataclient[0]['point_id'] ?>" />
+        <input type="hidden" name="client_type_id" value="<?= $this->dataclient[0]['client_type_id'] ?>" />
+        </td>
+    </tr>
+</table>
+                        <!-- КОНЕЦ  !-->
+</form>
+
+<!-- Начинаем выводить инфу о договоре !-->
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Договор </td>
+        <td>
+            <a href="/printerdoc/printcontract/client_id/<?= $this->dataclient[0]['client_id']; ?>/contract_id/<?= $this->dataclient[0]['contract_id'] ?>/client_type_id/<?= $this->dataclient[0]['client_type_id'] ?>" target="_blank">Распечатать</a>
+        </td>
+    </tr>
+</table>
+
+
+<br/>
+
+
+<table  id="infoclient" cellpadding="5" cellspacing="8">
+    <tr>
+        <td width="50%" align="right"><b>ID договора: </b></td>
+        <td><?= $this->dataclient[0]['contract_id'] ?></td>
+        <td><input type="hidden" name="contract_id" value="<?= $this->dataclient[0]['contract_id'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Номер договора: </b></td>
+        <td><?= $this->dataclient[0]['contract_number'] ?></td>
+        <td><input type="hidden" name="contract_number" value="<?= $this->dataclient[0]['contract_number'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Дата заключения: </b></td>
+        <td><?= $this->dataclient[0]['dateagree'] ?></td>
+        <td><input type="hidden" name="dateagree" value="<?= $this->dataclient[0]['dateagree'] ?>" /></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Ответственный менеджер: </b></td>
+        <td><?= $this->dataclient[0]['manager_full_name'] ?></td>
+        <td><input type="hidden" name="manager_full_name" value="<?= $this->dataclient[0]['manager_full_name'] ?>" /></td>
+    </tr>
+</table>
+</center>
+
+
+<!-- Вывод инфы о балансе !-->
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о балансе </td>
+        <td>
+            <?
+            if($this->dataclient[0]['client_type_id'] != 1  )
+            {
+            ?>
+            	<a href='/clientinfo/makeaccount/client_id/<?= $this->dataclient[0]['client_id']; ?>'>Составить счет</a>
+            <?
+            }
+            ?>
+        </td>
+    </tr>
+</table>
+<br/>
+<center>
+    <table id="infoclient" border="1" >
+    <tr>
+        <td width="20%" align="center"><b>Зачислено</b></td>
+        <td width="20%" align="center"><b>Израсходованно</b></td>
+        <td width="20%" align="center"><b>Текущий остаток</b></td>
+    </tr>
+    <tr>
+        <td width="20%" align="center"><?= money_format('%i', $this->dataclient[0]['omoney']); ?></td>
+        <td width="20%" align="center"><?= money_format('%i', $this->dataclient[0]['imoney']); ?></td>
+        <td width="20%" align="center"><?= money_format('%i', $this->dataclient[0]['ballance']); ?></td>
+    </tr>
+    <tr>
+        <td colspan="3" width="20%" align="left">
+            <a  href="/Finance/financehistory/client_id/<?= $this->dataclient[0]['client_id'] ?>" >
+                <b>Финансовая история</b>
+            </a><br />
+            <a  href="/Finance/saldohistory/client_id/<?= $this->dataclient[0]['client_id'] ?>" >
+                <b>Статистика по сальдо</b>
+            </a><br />
+            <?php
+            if($this->dataclient[0]['client_type_id'] == 1)
+            {
+                ?>
+                <a  href="/Finance/traffichistory/client_id/<?= $this->dataclient[0]['client_id'] ?>/pid/<?= $this->dataclient[0]['point_id'] ?>" >
+                <b>Статистика по трафику</b>
+                </a><br />
+                <?php
+            }
+            ?>
+            <a href='/client-recalculation/index/client_id/<?= $this->dataclient[0]['client_id'] ?>'>
+            	<b>Пересчеты</b>
+            </a>
+            <br />
+            <a href="#">
+                Обороты
+            </a>
+        </td>
+    </tr>
+
+</table>
+<br/>
+<br/>
+</center>
+
+<!-- Конец инфы о балансе !-->
+
+
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">
+           Услуги
+           <?php
+            //if($this->dataclient[0]['client_type_id'] == "0")
+            {
+                echo ('
+                    <a id="dop_tochka" href="/Editpoint/attachpoint/client_id/'.$this->dataclient[0]['client_id'].'">добавить точку</a>
+                ');
+            }
+           ?>
+        </td>
+        <td></td>
+    </tr>
+</table>
+<br/>
+<center>
+    <label class='font14'>Действующие</label>
+    <table border="0">
+        <tr>
+            <td class='legend' height="13" width="13"></td>
+            <td>
+                <b> -- Активная услуга</b>&nbsp;&nbsp;
+            </td>
+            <td bgcolor="#8FBC8F" class='legend' height="13" width="13"></td>
+            <td>
+                <b> -- Услуги не вступившие в силу</b>&nbsp;&nbsp;
+            </td>
+            <td bgcolor="pink" class='legend' height="13" width="13"></td>
+            <td>
+                <b> -- Архивная услуга</b>
+            </td>
+        </tr>
+    </table>
+</center>
+<br/>
+<!-- Начало! Вывод всех услуг на данной точке !-->
+
+<center>
+    <table id="tableservice" class="list" >
+        <tr>
+            <th class="list_head" width="30"  bgcolor="#D3EDF6" align="center">N</th>
+            <th class="list_head" width="30"  bgcolor="#D3EDF6" align="center">точка</th>
+            <th class="list_head" width="80"  bgcolor="#D3EDF6" align="center">логин</th>
+            <th class="list_head" width="230" bgcolor="#D3EDF6" align="center">адрес</th>
+            <th class="list_head" width="150" bgcolor="#D3EDF6" align="center">период</th>
+            <th class="list_head" width="150" bgcolor="#D3EDF6" align="center">услуга</th>
+            <th class="list_head" width="190" bgcolor="#D3EDF6" align="center">Тариф</th>
+            <th class="list_head" width="90" bgcolor="#D3EDF6" align="center">тел. крос.</th>
+            <th class="list_head" width="80" bgcolor="#D3EDF6" align="center">сост. крос.</th>
+            <th class="list_head" width="80" bgcolor="#D3EDF6" align="center">действия</th>
+        </tr>
+
+<?php
+if($this->servicedata)
+{
+    for($i=0; $i<count($this->servicedata); $i++)
+    {
+        for($k = 0; $k < count($this->servicedata[$i]); $k++)
+        {
+            $color = 'white';
+
+
+            if($this->servicedata[$i][$k]['ctype'] != 0)
+            {
+                if( $this->servicedata[$i][$k]['startdate'] > date('Y-m-d')
+                    || $this->servicedata[$i][$k]['penable'] == false
+                    || $this->servicedata[$i][$k]['enddate'] < date('Y-m-d') )
+                {
+                    $color = '#8FBC8F';
+                }
+            }
+            else
+            {
+                if(!$this->servicedata[$i][$k]['is_forced'])
+                {
+                    $color = '#8FBC8F';
+                }
+            }
+
+
+            if( $this->servicedata[$i][$k]['is_deleted'] == true
+            	|| $this->servicedata[$i][$k]['enddate'] < date('Y-m-d') )
+            {
+                $color = 'pink';
+                $flag  = 1;
+            }
+            else
+            {
+                $flag  = 0;
+            }
+
+
+
+            if($this->servicedata[$i][$k]['is_deleted'])
+            {
+                $operation ='
+                    <a  id="decor_a_bottom" href="/Arhiv/switchservice/point_id/'.$this->servicedata[$i][$k]['point_id'].'/sid/'.$this->servicedata[$i][$k]['id'].'/tarif/'.$this->servicedata[$i][$k]['tarif_id'].'/tablename/'.$this->servicedata[$i][$k]['tablename'].'/client_id/'.$this->servicedata[$i][$k]['client_id'].'/flag/false"  >
+                        [вкл].
+                    </a><br />';
+
+                if($this->dataclient[0]['client_type_id'] == "0")
+                {
+                    $operation .= '
+                        <a href="/Traffic/index/pid/'.$this->servicedata[$i][$k]['point_id'].'">
+                            [тест траф.]
+                        </a>
+                    ';
+                }
+            }
+            else
+            {
+                $operation ='
+                	<a id="decor_a_bottom" href="/service/show-stat/p/' . $this->servicedata[$i][$k]['point_id'] . '/t/' . $this->servicedata[$i][$k]['tablename'] . '/i/' . $this->servicedata[$i][$k]['id'] . '">
+                		[стат]
+                	</a><br />';
+
+                if($this->dataclient[0]['client_type_id'] == "0")
+                {
+                    $operation .= '
+                        <a href="/Traffic/index/pid/'.$this->servicedata[$i][$k]['point_id'].'">
+                            [тест траф.]
+                        </a><br />
+                    ';
+                }
+
+                $operation .= '
+                	<a id="decor_a_bottom" href="/Arhiv/switchservice/point_id/'.$this->servicedata[$i][$k]['point_id'].'/sid/'.$this->servicedata[$i][$k]['id'].'/tarif/'.$this->servicedata[$i][$k]['tarif_id'].'/tablename/'.$this->servicedata[$i][$k]['tablename'].'/client_id/'.$this->servicedata[$i][$k]['client_id'].'/flag/true"  >
+                            [выкл].
+                    </a>';
+            }
+
+            if ($this->servicedata[$i][$k]['tablename'] == 'pintel')
+            {
+            	$operation .= '
+            		<a href="/printerdoc/print-service-contract/table/pintel/point_id/' . $this->servicedata[$i][$k]['point_id'] . '">
+            			[Договор по услуге]
+            		</a>
+            	';
+            }
+
+			if($this->servicedata[$i][$k]['group_name'] == "reserved" and $this->dataclient[0]['client_type_id'] == 1)
+			{
+				$changeReservedPortBtn = '
+					<form action="/clientinfo/change-from-reserved" method = "post">
+						<input type="submit" value="сменить" />
+						<input type="hidden" name="point_id" value = "'.$this->servicedata[$i][$k]['point_id'].'" />
+						<input type="hidden" name="tarif_id" value = "'.$this->servicedata[$i][$k]['tarif_id'].'" />
+						<input type="hidden" name="service_id" value = "'.$this->servicedata[$i][$k]['id'].'" />
+						<input type="hidden" name="client_type_id" value = "'.$this->dataclient[0]['client_type_id'].'" />
+					</form>
+				';
+			}
+
+
+            echo ('
+            <tr class="" bgcolor="'.$color.'">
+                    <td class="list_row" width="30">'. ($k + 1) .'</td>
+                    <td class="list_row" width="30">'.$this->servicedata[$i][$k]['point_id'].'</td>
+                    <td class="list_row" width="80">
+                    	<a href="/Pointinformation/index/pointid/'.$this->servicedata[$i][$k]['point_id'].'/clientid/'.$this->servicedata[$i][$k]['client_id'].'/tablename/'.$this->servicedata[$i][$k]['tablename'].'/tarif_id/'.$this->servicedata[$i][$k]['tarif_id'].'" >
+                        	'.$this->servicedata[$i][$k]['u_login'].'
+                    	</a>
+                	</td>
+                    <td class="list_row" width="230">'.$this->servicedata[$i][$k]['connect_address'].'</td>
+                    <td class="list_row" width="150">
+						С '.$this->servicedata[$i][$k]['startdate'].' по '.$this->servicedata[$i][$k]['enddate'].'
+						<br />
+						<a href="/Tarifhistory/index/point_id/'.$this->servicedata[$i][$k]['point_id'].'/tablename/'.$this->servicedata[$i][$k]['tablename'].'" >[история смены]</a>
+					</td>
+                    <td class="list_row" width="150">'.$this->servicedata[$i][$k]['servicetype_name'].'</td>
+	                <td class="list_row" width="190">
+						'.$this->servicedata[$i][$k]['tarif_name'].'
+						<br />
+						'. $changeReservedPortBtn .'
+					</td>
+	                <td class="list_row" width="90">
+						'.$this->servicedata[$i][$k]['pcross'].'
+						<br />
+						<a href="/tech-history/index/searchBy/client/login/'.$this->servicedata[$i][$k]['u_login'].'">[История номера]</a>
+					</td>
+	                <td class="list_row" width="80">'.$this->servicedata[$i][$k]['label'].'</td>
+	                <td class="list_row" width="80">
+                    	<a href="/service/edit/tablelink/'.$this->servicedata[$i][$k]['tablename'].'/client_id/'.$this->servicedata[$i][$k]['client_id'].'/point_id/'.$this->servicedata[$i][$k]['point_id'].'/id/'.$this->servicedata[$i][$k]['id'].'">
+                        	<img id="decor_a" border="0" src="/images/edit.png" width="25" height="25" />
+                    	</a>
+                    <br/>
+                    '.$operation.'
+                </td>
+            </tr>
+        ');
+        }
+    }
+}
+elseif ( count($this->expectedList) == 0 )
+{
+    for($p=0; $p<count($this->pointlist); $p++)
+    {
+            echo ('
+            <tr bgcolor="'.$color.'">
+                    <td width="30">'.$i.'</td>
+                    <td width="30">'.$this->pointlist[$p]['point_id'].'</td>
+                    <td width="80">
+                    	<a href="/Pointinformation/index/pointid/'.$this->pointlist[$p]['point_id'].'/clientid/'.$this->pointlist[$p]['client_id'].'" >
+                        	'.$this->pointlist[$p]['u_login'].'
+                    	</a>
+                    </td>
+                    <td width="230"></td>
+                    <td width="150"></td>
+                    <td width="150">NO SERVICE</td>
+                    <td width="190">NO SERVICE</td>
+                    <td width="90"></td>
+                    <td width="80"></td>
+                    <td width="80">
+                        <a href="#">
+                            <img id="decor_a" border="0" src="/images/edit.png" width="25" height="25" />
+                        </a>
+                    </td>
+            </tr>
+        ');
+    }
+}
+?>
+    </table>
+    <br />
+    <br />
+    <center><label class='font14'>Ожидаемые</label></center>
+    <br />
+    <table id="tableservice" border="1" cellpadding="5" cellspacing="4">
+        <tr>
+            <td width="30"  bgcolor="#D3EDF6" align="center">ID</td>
+            <td width="30"  bgcolor="#D3EDF6" align="center">точка</td>
+            <td width="80"  bgcolor="#D3EDF6" align="center">логин</td>
+            <td width="230" bgcolor="#D3EDF6" align="center">адрес</td>
+            <td width="150" bgcolor="#D3EDF6" align="center">период</td>
+            <td width="150" bgcolor="#D3EDF6" align="center">услуга</td>
+            <td width="190" bgcolor="#D3EDF6" align="center">Тариф</td>
+            <td width="90" bgcolor="#D3EDF6" align="center">тел. крос.</td>
+            <td width="80" bgcolor="#D3EDF6" align="center">сост. крос.</td>
+            <td width="80" bgcolor="#D3EDF6" align="center">действия</td>
+        </tr>
+<?
+for($i=0; $i<count($this->expectedList); $i++)
+{
+    for($k = 0; $k < count($this->expectedList[$i]); $k++)
+    {
+        if($this->expectedList[$i][$k]['startdate'] > date('Y-m-d'))
+        {
+                echo ('
+                <tr bgcolor="white">
+                        <td width="30">'.$i.'</td>
+                        <td width="30">'.$this->expectedList[$i][$k]['point_id'].'</td>
+                        <td width="80">
+                        <a href="/Pointinformation/index/pointid/'.$this->expectedList[$i][$k]['point_id'].'/clientid/'.$this->expectedList[$i][$k]['client_id'].'" >
+                            '.$this->expectedList[$i][$k]['u_login'].'
+                        </a>
+                    </td>
+                        <td width="230">'.$this->expectedList[$i][$k]['connect_address'].'</td>
+                        <td width="150">
+							С '.$this->expectedList[$i][$k]['startdate'].' по '.$this->expectedList[$i][$k]['enddate'].'
+						</td>
+                        <td width="150">'.$this->expectedList[$i][$k]['servicetype_name'].'</td>
+                    <td width="190">'.$this->expectedList[$i][$k]['tarif_name'].'</td>
+                    <td width="90">'.$this->expectedList[$i][$k]['pcross'].'</td>
+                    <td width="80">'.$this->expectedList[$i][$k]['label'].'</td>
+                    <td width="80">
+                        <a href="/service/edit/tablelink/'.$this->expectedList[$i][$k]['tablename'].'/client_id/'.$this->expectedList[$i][$k]['client_id'].'/point_id/'.$this->expectedList[$i][$k]['point_id'].'/id/'.$this->expectedList[$i][$k]['id'].'">
+                            <img id="decor_a" border="0" src="/images/edit.png" width="25" height="25" />
+                        </a>
+                        <br/>
+                        '.$operation.'
+                    </td>
+                </tr>
+                ');
+        }
+    }
+}
+?>
+    </table>
+</center>
+
+<!-- Конец! Вывода всех услуг на данной точке !-->
+
+
+<br/>
+<br/>
+<table width="100%">
+    <tr>
+        <td class="sub-heading" >Дополнительные возможности</td>
+        <td></td>
+    </tr>
+</table>
+<br/>
+<center>
+<table id="additional">
+    <tr>
+        <td>
+            Расторгнуть договор:
+        </td>
+        <td width="200" align="right">
+	        <form action="/Arhiv/terminatecontract" method="post" name="mainform">
+	            <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+	            <input type="hidden" name="point_id" value="<?= $this->pointlist[0]['point_id'] ?>" />
+	            <input type="hidden" name="client_type_id" value="<?= $this->dataclient[0]['client_type_id'] ?>" />
+	            <input id="test" type="submit" name="break_contract" value="Расторгнуть" onclick="return confirm('Вы действительно хотите расторгнуть договор с клиентом?')" />
+	        </form>
+        </td>
+    </tr>
+</table>
+
+<table id="additional">
+    <tr>
+        <td>
+            Вызов специалиста:
+        </td>
+        <td width="200" align="right">
+        <form action="/Clientinfo/engineer" method="get" name="mainform">
+            <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+            <input type="hidden" name="client_type_id" value="<?= $this->dataclient[0]['client_type_id'] ?>" />
+            <input id="test" title="Активировать"  type="submit" name="break_contract" value="Активировать"  />
+        </form>
+        </td>
+    </tr>
+</table>
+
+
+
+<br />
+<?php
+if( $this->dataclient[0]['client_type_id'] == 0 )
+{
+?>
+<table id="additional">
+            <tr>
+                <td>Установить овердрафт: </td>
+                <td>
+                    <form action="/Overdraft/index" method="post">
+                        <?= $this->form ?>
+                    </form>
+                </td>
+            </tr>
+</table>
+<br />
+<table id="additional">
+            <tr>
+                <td>Доставка счёт-фактуры: </td>
+                <td>
+                    <form action="/Service/deliveryinvoice" method="post">
+                        <?php
+                        if( $this->statusInvoice == 0 )
+                        {
+                            $word = "Включить";
+                        }
+                        else
+                        {
+                            $word = "Выключить";
+                        }
+                        ?>
+                        <input type="submit" name="ok" value="<?= $word ?>" />
+                        <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+                        <input type="hidden" name="status" value="<?= $this->statusInvoice ?>" />
+                        <input type="hidden" name="point_id" value="<?= $this->dataclient[0]['point_id'] ?>" />
+                    </form>
+                </td>
+            </tr>
+</table>
+<br />
+<table id="additional">
+    <tr>
+        <td>
+            <?
+            if ($this->dataclient[0]['is_employee'])
+            {
+                print 'Оформлено как сотрудничество';
+            }
+            elseif ($this->dataclient[0]['is_donate'])
+            {
+                print 'Оформлено как благотворительность';
+            }
+            else
+            {
+                ?>
+                Оформить как:
+                </td>
+                <td>
+                    <input type='button' value='Сотрудничество'
+                        onclick="redirect('/clientinfo/set-as-employee/c/<?= $this->dataclient[0]['client_id'] ?>/p/<?= $this->dataclient[0]['point_id'] ?>')" />
+                    <input type='button' value='Благотворительность'
+                        onclick="redirect('/clientinfo/set-as-donate/c/<?= $this->dataclient[0]['client_id'] ?>/p/<?= $this->dataclient[0]['point_id'] ?>')" />
+                <?
+            }
+            ?>
+        </td>
+    </tr>
+</table>
+<?php
+}
+else
+{
+    if($this->dataclient[0]['block_from_date'])
+    {
+        $flag = 0;
+    }
+    else
+    {
+        $month_off = date('m', strtotime($this->dataclient[0]['block_from_date']));
+        $year_off = date('Y', strtotime($this->dataclient[0]['block_from_date']));
+        $day_off = date('d', strtotime($this->dataclient[0]['block_from_date']));
+
+        $yearArr = array (
+            2009 => '2009',
+            2010 => '2010',
+            2011 => '2011',
+            2012 => '2012'
+        );
+        $flag = 1;
+    }
+
+    if( $flag == 0 )
+    {
+?>
+        <table id="additional">
+                <tr>
+                    <td>Блок установлен с даты: </td>
+                    <td>
+                        <b><?= $this->dataclient[0]['block_from_date'] ?>&nbsp;</b>
+                    </td>
+                    <td>
+                        <form action="/Clientinfo/blockstream/" method="post">
+                            <input type="submit" name="ok" value="разблокировать" />
+                            <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+                            <input type="hidden" name="flag" value="<?= $flag ?>" />
+                        </form>
+                    </td>
+                </tr>
+        </table>
+<?php
+    }
+    elseif( $flag == 1 )
+    {
+?>
+    <table id="additional">
+                <tr>
+                    <td>Заблокировать с даты: </td>
+                    <td>
+                        <form action="/Clientinfo/blockstream/" method="post">
+                        <select name="day_off" >
+                            <?php
+                            $day_selected   = '';
+                            $month_selected = '';
+
+                            for( $i = 1; $i < 32; $i++ )
+                            {
+                                if( $i == date('d', strtotime(date('Y-m-d'))) )
+                                {
+                                    $day_selected = "selected";
+                                }
+                                echo "<option ".$day_selected." value=".$i.">".$i."</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="month_off" >
+                            <?php
+                            for( $i = 1; $i < 13; $i++ )
+                            {
+                                if( $i == date('m', strtotime(date('Y-m-d'))) )
+                                {
+                                    $month_selected = "selected";
+                                }
+
+                                echo "<option ".$month_selected." value=".$i.">".$i."</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="year_off" >
+                            <?php
+                            foreach( $yearArr as $key => $value )
+                            {
+                                echo "<option ".$year_selected." value=".$key.">".$value."</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="submit" name="ok" value="заблокировать" />
+                        <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+                        <input type="hidden" name="point_id" value="<?= $this->dataclient[0]['point_id'] ?>" />
+                        <input type="hidden" name="flag" value="<?= $flag ?>" />
+                        </form>
+                    </td>
+                </tr>
+    </table>
+<br />
+<table id="additional" >
+    <tr>
+        <td>
+           Перевести основной баланс на логин:
+        </td>
+        <td>
+        <form action="/Clientinfo/balancecarrying" method="post" name="mainform">
+            <input type="text" name="u_login" />
+        </td>
+        <td width="200" align="left">
+            <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+            <input type="hidden" name="point_id" value="<?= $this->pointlist[0]['point_id'] ?>" />
+            <input id="test" title="перенос"  type="submit" name="perevod" value="Перевести"  />
+        </form>
+        </td>
+    </tr>
+</table>
+
+<table id="additional" >
+    <tr>
+        <td>
+           Возврат за подключение:
+        </td>
+        <td>
+        <form action="/Clientinfo/return-for-connection" method="post" name="mainform">
+        </td>
+        <td width="200" align="left">
+            <input type="hidden" name="client_id" value="<?= $this->dataclient[0]['client_id'] ?>" />
+            <input type="hidden" name="point_id" value="<?= $this->pointlist[0]['point_id'] ?>" />
+            <input type="hidden" name="ballance" value="<?= $this->dataclient[0]['ballance'] ?>" />
+            <input id="test" title="перенос"  type="submit" name="perevod" value="Вернуть"  />
+        </form>
+        </td>
+    </tr>
+</table>
+<?php
+    }
+}
+?>
+<table id='bonus'>
+	<tr>
+		<td>АТС Бонус</td>
+		<td>
+			<input type="button" value="Зачислить"
+				onclick="redirect('/service/ats-bonus/client_id/<?= $this->dataclient[0]['client_id'] ?>')"/>
+		</td>
+	</tr>
+</table>
+</center>
+
+<br/>
+<br/>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Технические данные</td>
+        <td></td>
+    </tr>
+</table>
+<br/>
+                    <!-- состояние кроса !-->
+<?php
+
+for($i=0; $i<count($this->pointlist); $i++)
+{
+    $wordnow = $this->pointlist[$i]['label_cross'];
+
+
+    if ($this->pointlist[$i]['statuscross'] == PointHelper::STATUS_CROSS_EMPTY)
+    {
+        $type    = 'cross';
+        $button  = '<input type="submit" name="after" value="Скроссировать" />';
+    }
+    elseif ($this->pointlist[$i]['statuscross'] == PointHelper::STATUS_CROSS_CROSS_DONE)
+    {
+        $type = 'uncross';
+        $button = '<input type="submit" name="after" value="Раскросировать" />';
+    }
+
+    echo ('
+        <form action="/tech-application/add" method="post">
+        <h2>Тех. состояние точки №'.$this->pointlist[$i]['point_id'].' ('.$this->pointlist[$i]['u_login'].')</h2>
+        <table id="gen_info" >
+            <tr>
+                    <td id="table_bgr">Состояние кросса:</td>
+                    <td>' . $wordnow . '</td>
+                    <td>
+                        <input type="hidden" name="type" value="' . $type . '" />
+                        <input type="hidden" name="point_id" value="'.$this->pointlist[$i]['point_id'].'" />
+                    </td>
+                    <td>' . $button . '</td>
+            </tr>
+            <tr>
+                    <td id="table_bgr">Состояние порта:</td>
+                    <td>' . ($this->pointlist[$i]['port_state'] ? 'Включен' : 'Выключен') . '</td>
+            </tr>
+            <tr>
+                    <td id="table_bgr">Тип маршрутизации:</td>
+                    <td>---</td>
+            </tr>
+        </table>
+        </form>
+        <br/>
+        <br/>
+    ');
+
+}
+?>
+

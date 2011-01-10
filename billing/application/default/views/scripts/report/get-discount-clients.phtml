@@ -1,0 +1,74 @@
+<h1>Отчет по Private.</h1>
+<form name='private-clients' action='' method="post">
+<center>
+	<select name='ctype'>
+		<?
+		$options = array(
+			'private-office'	=> 'Private office',
+			'private'			=> 'Private');
+		print FormHelper::getSelectOptions($options, $this->ctype, 'Тип клиентов'); 
+		?>
+	</select>
+	<select name='year'>
+		<?= FormHelper::getYearOptions($this->year, 'Год'); ?>
+	</select>
+	<select name='month'>
+		<?= FormHelper::getMonthOptions($this->month, 'Месяц'); ?>
+	</select>
+	<input type='submit' value='Показать' />
+</center>
+</form>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{ 
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>N</td>
+			<td class='list_head'>ID</td>
+			<td class='list_head'>Наименование</td>
+			<td class='list_head'>Логин</td>
+			<td class='list_head'>Скорость подключения</td>
+			<td class='list_head'>Цена по тарифу ($)</td>
+			<td class='list_head'>Траффик за месяц (МБ)</td>
+		</tr>
+		<?
+		$counter = 0;
+		$totalTraffic = 0;
+		$totalPrice = 0;
+		
+		foreach ($this->data as $row) 
+		{
+			$clientTraffic = $row['traffic'] / 1024 / 1024;
+			$totalTraffic += $clientTraffic;
+			$totalPrice += $row['price'];
+			?>
+			<tr>
+				<td class='list_row'><?= ++$counter; ?></td>
+				<td class='list_row'><?= $row['client_id']; ?></td>
+				<td class='list_row'><?= $row['client_name']; ?></td>
+				<td class='list_row'><?= $row['u_login']; ?></td>
+				<td class='list_row'><?= $row['speed']; ?></td>
+				<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($clientTraffic, 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right' colspan="5"><b>Итого: </b></td>
+			<td class='list_row right'><b><?= number_format($totalPrice, 2, ',', ' '); ?></b></td>
+			<td class='list_row right'><b><?= number_format($totalTraffic, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+	$total_per_month = ($totalTraffic * 8 * 1024) / (3600 * 24 * intval($this->countDays));
+	?>
+	<br />
+	<br />
+	<h2>Средняя загрузка канала за указанный месяц: <?= number_format($total_per_month, 2, ',', ' '); ?> Кб/c</h2>
+	<?
+}
+?>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3108/billing/application/default/views/scripts/traffic
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/1653/billing/application/default/views/scripts/traffic/index.phtml
+END
+search-details.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3108/billing/application/default/views/scripts/traffic/search-details.phtml
+END
+get-detaled-traffic.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3108/billing/application/default/views/scripts/traffic/get-detaled-traffic.phtml
+END

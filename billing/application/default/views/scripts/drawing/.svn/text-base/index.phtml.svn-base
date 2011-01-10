@@ -1,0 +1,9 @@
+<h1>График загрузки точки <?= $this->pointID; ?></h1>
+<?
+foreach ($this->ips as $ip) 
+{
+	?>
+	<img src='/drawing/show-traffic-flow/ip/<?= $ip; ?>' />
+	<br />
+	<?	
+}

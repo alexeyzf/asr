@@ -1,0 +1,17 @@
+<h1>Массовая смена тарифов клиентов Sharq Stream</h1>
+<br />
+<br />
+<center>
+<?php
+    if (!$this->data) {
+        echo $this->form;
+    }
+    else { ?>
+    <h2><?= $this->data ?></h2>
+    <br />
+    <br />
+    <a id="link_color" href="tarif/bulk-change">Назад</a>
+<?php
+    }
+?>
+</center>

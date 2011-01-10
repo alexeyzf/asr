@@ -1,0 +1,48 @@
+<h1>СТП. Журнал</h1>
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">IP адрес</th>
+        <th class="list_head">АТС</th>
+        <th class="list_head">Начало</th>
+        <th class="list_head">Конец</th>
+        <th class="list_head">Кто закрыл</th>
+        <th class="list_head">Комментарии</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><h1><?= $item['ip_address'] ?></h1></td>
+            <td class="list_row"><h1><?= $item['ats_name']; ?></h1></td>
+            <td class="list_row"><?= $item['startdate']; ?></td>
+            <td class="list_row"><?= $item['enddate']; ?></td>
+            <td class="list_row"><?= $item['closed_user_name']; ?></td>
+            <td class="list_row"><?= $item['commente']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>

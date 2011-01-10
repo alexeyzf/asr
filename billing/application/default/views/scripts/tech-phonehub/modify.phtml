@@ -1,0 +1,39 @@
+<h1><?= ! $this->isNew ? 'Редактирование' : 'Добавление'; ?> Телефонного Узла</h1>
+<br />
+<br />
+<form method="post" action="">
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/tech-ats/modify/id/<?= $this->atsID; ?>')" />
+             </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <?= $this->form->name; ?>
+    <div class='clear'></div>
+
+    <?= $this->form->address; ?>
+    <div class='clear'></div>
+
+    <?= $this->form->director; ?>
+    <div class='clear'></div>
+
+    <br />
+    <br />
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/tech-ats/modify/id/<?= $this->atsID; ?>')" />
+             </td>
+        </tr>
+    </table>
+
+</form>

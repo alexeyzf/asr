@@ -1,0 +1,38 @@
+<h1>Форма №51</h1>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>N</td>
+			<td class='list_head'>ID</td>
+			<td class='list_head'>Логин</td>
+			<td class='list_head'>IP адрес</td>
+			<td class='list_head'>Порт</td>
+			<td class='list_head'>IP адрес DSLAM</td>
+			<td class='list_head'>Тип</td>
+		</tr>
+		<?
+
+		foreach ($this->data as $row)
+		{
+			?>
+			<tr>
+				<td class='list_row'><?= ++$counter; ?></td>
+				<td class='list_row'><?= $row['client_id']; ?></td>
+				<td class='list_row'><?= $row['u_login']; ?></td>
+				<td class='list_row'><?= $row['ip_address']; ?></td>
+				<td class='list_row'><?= $row['number']; ?></td>
+				<td class='list_row'><?= $row['ip_address_dslam']; ?></td>
+				<td class='list_row'><?= $row['dslam_type']; ?></td>
+			</tr>
+			<?
+		}
+		?>
+	</table>
+	<?
+}
+?>

@@ -1,0 +1,40 @@
+<div id="addtariftitle">
+	<h1>Администрирование. Тарифные планы</h1>
+	<br />
+	<br />
+</div>
+<div id="addtarif">
+	<a href="/tarif/edit"><b>Добавить</b></a>
+</div>
+
+<table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">to do</th>
+            <th class="list_head">Наименование</th>
+            <th class="list_head">Начало действия</th>
+            <th class="list_head">Окончание действия</th>
+            <th class="list_head">Абонентская плата</th>
+            <th class="list_head">delete</th>
+        </tr>
+<?php
+$oldService = '';
+for($i=0; $i<count($this->datalist); $i++)
+{
+	if($oldService != $this->datalist[$i]['servicetype_id'])
+	{
+		$oldService = $this->datalist[$i]['servicetype_id'];
+		echo ('<tr id="atsname"><td  class="list_row center"  colspan="7" >'.$this->datalist[$i]['servicetype_name'].'</td></tr>');
+	}
+	echo ('
+	  <tr>
+		<td class="list_row" align="center"><a href="/tarif/edit/id/'.$this->datalist[$i]['tarif_id'].'"> Ред.</a></td>
+		<td class="list_row">'.$this->datalist[$i]['tarif_name'].'</td>
+		<td class="list_row">'.$this->datalist[$i]['startdate'].'</td>
+		<td class="list_row">'.$this->datalist[$i]['enddate'].'</td>
+		<td class="list_row">'.$this->datalist[$i]['tarif_price'].' $</td>
+		<td class="list_row"><a href="#"> Удалить</a></td>
+	  </tr>
+	');
+}
+?>
+</table>

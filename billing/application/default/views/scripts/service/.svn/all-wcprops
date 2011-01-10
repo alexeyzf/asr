@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3393/billing/application/default/views/scripts/service
+END
+show-phone-calls-stat.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/1450/billing/application/default/views/scripts/service/show-phone-calls-stat.phtml
+END
+save.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1163/billing/application/default/views/scripts/service/save.phtml
+END
+deliveryinvoice.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3161/billing/application/default/views/scripts/service/deliveryinvoice.phtml
+END
+saveparams.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/3/billing/application/default/views/scripts/service/saveparams.phtml
+END
+edit.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3211/billing/application/default/views/scripts/service/edit.phtml
+END
+show-traffic-stat.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3089/billing/application/default/views/scripts/service/show-traffic-stat.phtml
+END
+add.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3/billing/application/default/views/scripts/service/add.phtml
+END
+recalc.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3393/billing/application/default/views/scripts/service/recalc.phtml
+END
+show-stat.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/346/billing/application/default/views/scripts/service/show-stat.phtml
+END
+ats-bonus.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3112/billing/application/default/views/scripts/service/ats-bonus.phtml
+END

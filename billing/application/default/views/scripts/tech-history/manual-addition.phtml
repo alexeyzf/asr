@@ -1,0 +1,21 @@
+<h1>Отдел проектов.  История (Добавление)</h1>
+<br />
+<br />
+<br />
+<?php
+	if ($this->infos['history-info'])
+    {
+    	foreach($this->infos as $value)
+    	{
+			?>
+				<center><h1><?= $value; ?></h1></center>
+				<br />
+			<?
+    	}
+    }
+?>
+<br />
+<br />
+<form action="/Tech-History/save-histroy-addition" method="post">
+	<?php echo $this->form; ?>
+</form>

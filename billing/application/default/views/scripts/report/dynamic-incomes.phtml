@@ -1,0 +1,350 @@
+<h1>Отчеты. Динамика доходов</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+	За
+	<select name='year'>
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+	<select name='is_stream'>
+		<?
+		$options = array(
+			1		=> 'Stream',
+			0		=> 'Корп'
+		);
+		print FormHelper::getSelectOptions($options, $this->isStream, 'Тип клиента');
+		?>
+	</select>
+    <input type="submit" value="показать">
+ </form>
+</center>
+<br />
+<br />
+<br />
+
+<br />
+<?php
+
+if ( count($this->result) != 0 )
+{
+	if($this->is_stream == "0")
+	{
+	    foreach ($this->result as $key => $item )
+	    {
+
+	    ?>
+	    <table class="list" cellpadding="3" cellspacing="0">
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <th class="list_head" width='250px'>
+		            <? 
+		            if ($item['01']['service_type'] == 100)
+					{
+						print 'Пересчеты';
+					}
+					elseif ($item['01']['service_type'] == 200)
+					{
+						print 'Переговоры';
+					}
+					else
+					{
+						print $item['01']['servicetype_name'];
+					}
+					?>
+				</th>
+	            <th class="list_head">Январь</th>
+	            <th class="list_head">Февраль</th>
+	            <th class="list_head">Март</th>
+	            <th class="list_head">Апрель</th>
+	            <th class="list_head">Май</th>
+	            <th class="list_head">Июнь</th>
+	            <th class="list_head">Июль</th>
+	            <th class="list_head">Август</th>
+	            <th class="list_head">Сентябрь</th>
+	            <th class="list_head">Октябрь</th>
+	            <th class="list_head">Ноябрь</th>
+	            <th class="list_head">Декабрь</th>
+	        </tr>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row">Доход</td>
+	            <td class="list_row right"><?= number_format($item['01']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['02']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['03']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['04']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['05']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['06']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['07']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['08']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['09']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['10']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['11']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['12']['amount'], 2, ',', ' '); ?></td>
+	        </tr>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row">Кол-во клиентов</td>
+	            <td class="list_row right"><?= number_format($item['01']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['02']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['03']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['04']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['05']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['06']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['07']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['08']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['09']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['10']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['11']['clients_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['12']['clients_count'], 0, ',', ' '); ?></td>
+	        </tr>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row">Кол-во точек</td>
+	            <td class="list_row right"><?= number_format($item['01']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['02']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['03']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['04']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['05']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['06']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['07']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['08']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['09']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['10']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['11']['points_count'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($item['12']['points_count'], 0, ',', ' '); ?></td>
+	        </tr>
+	        <tr class='list_tr'  onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	        	<td class="list_row">Средний доход на точку</td>
+	            <td class="list_row right">
+	            	<?
+	            	if ($item['01']['points_count'])
+	            	{
+	            		$val = $item['01']['amount'] / $item['01']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            	?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['02']['points_count'])
+	            	{
+	            		$val = $item['02']['amount'] / $item['02']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['03']['points_count'])
+	            	{
+	            		$val = $item['03']['amount'] / $item['03']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['04']['points_count'])
+	            	{
+	            		$val = $item['04']['amount'] / $item['04']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['05']['points_count'])
+	            	{
+	            		$val = $item['05']['amount'] / $item['05']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['06']['points_count'])
+	            	{
+	            		$val = $item['06']['amount'] / $item['06']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['07']['points_count'])
+	            	{
+	            		$val = $item['07']['amount'] / $item['07']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['08']['points_count'])
+	            	{
+	            		$val = $item['08']['amount'] / $item['08']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['09']['points_count'])
+	            	{
+	            		$val = $item['09']['amount'] / $item['09']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['10']['points_count'])
+	            	{
+	            		$val = $item['10']['amount'] / $item['10']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['11']['points_count'])
+	            	{
+	            		$val = $item['11']['amount'] / $item['11']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	            <td class="list_row right">
+	            <?
+	            	if ($item['12']['points_count'])
+	            	{
+	            		$val = $item['12']['amount'] / $item['12']['points_count'];
+	            	}
+	            	else
+	            	{
+	            		$val = 0;
+	            	}
+	            	
+	            	print number_format($val, 2, ',', ' '); 
+	            ?>
+	            </td>
+	        </tr>
+	    </table>
+	    <br />
+	    <br />
+	    <br />
+	    <?
+	    }
+	}
+
+	if($this->is_stream == "1")
+	{
+	    ?>
+	    <table class="list" cellpadding="3" cellspacing="0">
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <th class="list_head" width='250px'>#2#</th>
+	            <th class="list_head">Январь</th>
+	            <th class="list_head">Февраль</th>
+	            <th class="list_head">Март</th>
+	            <th class="list_head">Апрель</th>
+	            <th class="list_head">Май</th>
+	            <th class="list_head">Июнь</th>
+	            <th class="list_head">Июль</th>
+	            <th class="list_head">Август</th>
+	            <th class="list_head">Сентябрь</th>
+	            <th class="list_head">Октябрь</th>
+	            <th class="list_head">Ноябрь</th>
+	            <th class="list_head">Декабрь</th>
+	        </tr>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row"><h2>Списание абон. платы</h2></td>
+	            <td class="list_row right"><?= number_format($this->result['01']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['02']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['03']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['04']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['05']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['06']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['07']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['08']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['09']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['10']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['11']['amount'], 2, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['12']['amount'], 2, ',', ' '); ?></td>
+	        </tr>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row"><h2>Кол. клиентов</h2></td>
+	            <td class="list_row right"><?= number_format($this->result['01']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['02']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['03']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['04']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['05']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['06']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['07']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['08']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['09']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['10']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['11']['count_client_id'], 0, ',', ' '); ?></td>
+	            <td class="list_row right"><?= number_format($this->result['12']['count_client_id'], 0, ',', ' '); ?></td>
+	        </tr>
+	    </table>
+	    <br />
+	    <br />
+	    <br />
+	    <?
+	}
+}
+
+?>
+</table>

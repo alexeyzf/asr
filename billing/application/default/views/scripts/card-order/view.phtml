@@ -1,0 +1,57 @@
+<h1>Просмотр заказа</h1>
+<br />
+<br />
+<dt><label>Наименование:</label></dt>
+<dd class='padding3'><?= $this->client; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Номер заказа:</label></dt>
+<dd class='padding3'><?= $this->order['number']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Номер накладной:</label></dt>
+<dd class='padding3'><?= $this->order['invoice_number']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Дата заказа:</label></dt>
+<dd class='padding3'><?= date('d.m.y', strtotime($this->order['order_date'])); ?></dd>
+<div class='clear'></div>
+
+<dt><label>Тип карт:</label></dt>
+<dd class='padding3'>
+    <?
+    if (is_array($this->details))
+    {
+        $detail = end($this->details);
+        if ($detail['card_type'] == 1)
+        {
+            print 'Sigma';
+        }
+        else
+        {
+            print 'Smile';
+        }
+    }
+    ?>
+</dd>
+<div class='clear'></div>
+
+<dt><label>3 единицы:</label></dt>
+<dd class='padding3'><?= $this->details[3]['count']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>5 единиц:</label></dt>
+<dd class='padding3'><?= $this->details[5]['count']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>10 единиц:</label></dt>
+<dd class='padding3'><?= $this->details[10]['count']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>15 единиц:</label></dt>
+<dd class='padding3'><?= $this->details[15]['count']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>20 единиц:</label></dt>
+<dd class='padding3'><?= $this->details[20]['count']; ?></dd>
+<div class='clear'></div>

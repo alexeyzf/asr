@@ -1,0 +1,51 @@
+<h1>Отдел управления сети. Указания на установку IP-адресов</h1>
+<br />
+<br />
+<table class="list">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Указание</th>
+        <th class="list_head">Таблица</th>
+        <th class="list_head">АТС</th>
+        <th class="list_head">Dslam</th>
+        <th class="list_head">Порт</th>
+        <th class="list_head">Скорость</th>
+        <th class="list_head">Ip-Адреса</th>
+        <th class="list_head">Vlan</th>
+        <th class="list_head">Тип</th>
+        <th class="list_head">Сформировал</th>
+        <th class="list_head">Дата создания</th>
+        <th class="list_head">Дата начала</th>
+        <th class="list_head">Дата выполнения</th>
+        <th class="list_head">Ошибка</th>
+    </tr>
+
+    <?
+    $counter = 1;
+
+//    var_dump($this->all_tasks);
+
+    foreach ($this->all_tasks as $row)
+    {
+    	$tasks_type = array(2=>'Поднятие', 0=>"Опускание");
+        ?>
+        <tr class='list_tr'>
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $row['port_clientid']; ?></td>
+            <td class="list_row"><?= $row['u_login']; ?></td>
+            <td class="list_row"><?= $row['pcross']; ?></td>
+            <td class="list_row"><?= $tasks_type[$row['tasktype']]; ?></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"></td>
+            <td class="list_row"><?= $row['manager']; ?></td>
+        </tr>
+        <?
+    }
+
+    ?>
+</table>

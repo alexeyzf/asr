@@ -1,0 +1,164 @@
+<h1>Бухгалтерия.  Зачисление денег на счет клиента</h1>
+
+<br />
+<br />
+
+<center>
+<table id="infoclient" cellpadding="5" cellspacing="8">
+
+</table>
+</center>
+<br />
+<br />
+
+    <!-- sd !-->
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Осуществленные платежи</td>
+        <td></td>
+    </tr>
+</table>
+<br />
+<table width="100%" id="tableservice" border="1" cellpadding="5" cellspacing="4">
+<tr>
+    <th>№</th>
+    <th>Дата</th>
+    <th>Сумма, $</th>
+    <th>Сумма, сум</th>
+    <th>Комментарий</th>
+</tr>
+<?php
+    for($i = 0; $i < count($this->payments); $i++)
+    {
+    	$rowNumber = $i + 1; 
+        echo ('
+        <tr>
+            <td>' . $rowNumber . '</td>
+            <td>'.$this->payments[$i]['currenttime'].'</td>
+            <td>'.money_format('%i', $this->payments[$i]['summa']).', $</td>
+            <td>'.money_format('%i', $this->payments[$i]['summas']).', сум</td>
+            <td>'.$this->payments[$i]['commente'].'</td>
+        ');
+        if(date('Y-m-d') == date('Y-m-d', strtotime($this->payments[$i]['currenttime'])))
+        {
+           echo ('
+              <td>
+                <a href="/Accounting/todaytransactions/tran_id/'.$this->payments[$i]['id'].'">удалить</a>
+              </td>
+              </tr>
+           ');
+        }
+        else
+        {
+            echo ('
+               </tr>
+            ');
+        }
+    }
+?>
+</table>
+
+<br />
+<br />
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о клиенте (<font color="red" >Текущий курс: 1 USD= <?= $this->rate ?> Сум</font>)</td>
+        <td></td>
+    </tr>
+</table>
+<center>
+<table id="infoclient" cellpadding="5" cellspacing="8">
+    <tr>
+        <td width="50%" align="right"><b>Логин клиента: </b></td>
+        <td><?= $this->data[0]['u_login'] ?></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Название организации (клиент): </b></td>
+        <td><?= $this->data[0]['client_name'] ?></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Поступило: </b></td>
+        <td><?= money_format('%i', $this->data[0]['omoney']); ?></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Баланс: </b></td>
+        <td><?= money_format('%i',$this->data[0]['ballance']); ?></td>
+    </tr>
+    <tr>
+        <td width="50%" align="right"><b>Израсходовано: </b></td>
+        <td><?= money_format('%i', $this->data[0]['imoney']); ?></td>
+    </tr>
+</table>
+</center>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Оказываемые услуги (вступившие в силу):</td>
+        <td></td>
+    </tr>
+</table>
+
+<br />
+<table width="100%" id="tableservice" border="1" cellpadding="5" cellspacing="4">
+<tr>
+    <th>№</th>
+    <th>Услуга</th>
+    <th>Тариф</th>
+    <th>Дата начала</th>
+    <th>Дата окончания</th>
+    <th>Плата</th>
+    <th>Сверх</th>
+</tr>
+<?php
+    for($i = 0; $i < count($this->avaible); $i++)
+    {
+        for($k = 0; $k < count($this->avaible[$i]); $k++)
+        {
+        echo ('
+            <tr>
+                <td>1</td>
+                <td>'.$this->avaible[$i][$k]['servicetype_name'].'</td>
+                <td>'.$this->avaible[$i][$k]['tarif_name'].'</td>
+                <td>'.$this->avaible[$i][$k]['startdate'].'</td>
+                <td>'.$this->avaible[$i][$k]['enddate'].'</td>
+                <td>'.$this->avaible[$i][$k]['tarif_price'].' $</td>
+                <td>0</td>
+            </tr>
+        ');
+        }
+    }
+?>
+</table>
+
+<br />
+<br />
+    <!-- sd !-->
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Зачислить на счет:</td>
+        <td></td>
+    </tr>
+</table>
+
+<br />
+<br />
+<?php
+if( $this->data[0]['statuscross'] == -1  and $this->data[0]['client_type_id'] == 1) {
+?>
+<center>
+<div id="mess">
+    Данный клиент подан <br />
+    на расскрос.
+    Обратитесь в отдел продаж.
+</div>
+</center>
+<?php } else { ?>
+<form action="/Accounting/startpayment" method="post">
+    <center>
+        <?=    $this->form; ?>
+    </center>
+</form>
+<?php } ?>
+

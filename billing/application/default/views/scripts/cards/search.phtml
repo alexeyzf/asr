@@ -1,0 +1,144 @@
+<h1>Поиск по карточкам</h1>
+<br />
+<br />
+<form method='post' action=''>
+	<dt><label>Серийный номер</label></dt>
+	<dd>
+		<input type='text' name='serial' size="5" maxlength="4" value='<?= $this->serial; ?>' />
+		- <input type="text" name="number" size="10" maxlength="8" value='<?= $this->number; ?>'>
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label></label></dt>
+	<dd>
+		<input type="submit" value='Поиск' />
+	</dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if ($this->cards)
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Серийный номер</td>
+			<td class='list_head'>Номинал</td>
+			<td class='list_head'>Балланс</td>
+			<td class='list_head'>Статус</td>
+			<td class='list_head'>История</td>
+
+		<?
+		foreach ($this->cards as $card)
+		{
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $card->serial; ?> - <?= $card->number; ?></td>
+				<td class='list_row'><?= $card->face_value; ?></td>
+				<td class='list_row'><?= $card->ballance; ?></td>
+				<td class='list_row'><?= $card->is_activated ? 'Активирована' : 'Неактивирована'; ?></td>
+				<td class='list_row'>
+					<a href="" > Просмотреть </a>
+				</td>
+			</tr>
+			<?
+		}
+		?>
+	</table>
+	<?
+}
+?>
+<br />
+<br />
+<h2>Детали активации</h2>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Дата активации</th>
+        <th class="list_head">ID клиента</th>
+    </tr>
+<?php
+if ( count($this->activated_data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->activated_data as $card_used)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $card_used['client_id'] ?>/pointid/" >
+            		<?= $card_used['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $card_used['ballance']; ?></td>
+            <td class="list_row"><?= $card_used['phone']; ?></td>
+            <td class="list_row"><?= date('d.m.Y H:m', strtotime($card_used['currenttime'])); ?></td>
+            <td class="list_row"><?= $card_used['client_id']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>
+
+
+
+<br />
+<br />
+<h2>Детали по переговорам</h2>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Время звонка</th>
+        <th class="list_head" style="width:15%;">Набор</th>
+    </tr>
+<?php
+if ( count($this->card_peregovor_stat) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->card_peregovor_stat as $card_p)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= date('d.m.Y H:m', strtotime($card_p['acctstarttime'])); ?></td>
+            <td class="list_row"><?= $card_p['calledstationid']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>

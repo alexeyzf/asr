@@ -1,0 +1,171 @@
+<?php
+    $_SESSION['back_url'] = $_SERVER['REQUEST_URI'];
+?>
+<h1>Абонентский отдел. Проблемные клиенты</h1>
+<br/>
+<br/>
+<br/>
+
+<table class="list" cellpadding="3" cellspacing="0">
+	<tr>
+		<th class="list_head">N</th>
+        <th class="list_head">Тел</th>
+        <th class="list_head">Клиент</th>
+        <th class="list_head">Контактный телефон</th>
+        <th class="list_head">Проблема</th>
+        <th class="list_head">Дата обнаружения проблемы</th>
+        <th class="list_head">Решена</th>
+        <th class="list_head">Договор расторгнут</th>
+        <th class="list_head">Договор</th>
+	</tr>
+	<?php
+	foreach ($this->problemlist as $hubName => $list)
+	{
+		?>
+		<tr id="atsname">
+			<td  class="list_row left"  colspan="9" >
+				<h2><b><?= $hubName; ?></b></h2>
+			</td>
+		</tr>
+		<?
+		$i = 0;
+		foreach ($list as $item)
+		{
+			?>
+			<tr>
+				<td  class="list_row"><?= ++$i; ?></td>
+			    <td  class="list_row"><?= $item['pcross']; ?></td>
+			    <td class="list_row">
+					<a href="/Clientinfo/index/clientid/<?= $item['client_id']; ?>/pointid/<?= $item['point_id']?>">
+			        	<?= $item['client_name']; ?>
+			        </a>
+			    </td>
+			    <td class="list_row">
+					<?= $item['phone']; ?>
+				</td>
+			    <td class="list_row"><?= $item['label']; ?>
+					<form action="/Clientproblem/resolveproblem" method="post" name="trable_issue">
+					<select size="1" name="resolved_code">
+			    		<option disabled selected>Выберите решение</option>
+						<?
+						foreach($this->optionsView as $key => $value)
+						{
+							?>
+							<option value="<?= $key; ?>"><?= $value; ?></option>
+							<?
+						}
+						?>
+					</select>
+				</td>
+		        <td class="list_row"><?= date('Y-m-d', strtotime($item['last_modified_date'])) ?></td>
+		        <td class="list_row">
+		                <input type="hidden" name="point_id" value="<?= $item['point_id']; ?>" />
+		                <input type="hidden" name="client_id" value="<?= $item['client_id']; ?>" />
+		                <input type="submit" name="issue_btn" value="Проблема решена" />
+		            </form>
+		        </td>
+		        <td class="list_row">
+		            <form action="/Arhiv/delete-point-cross-problem" method="post" name="drop_contract">
+		                <input type="hidden" name="point_id" value="<?= $item['point_id']; ?>" />
+		                <input type="hidden" name="back_url" value="/clientproblem" />
+		                <input type="submit" name="drop" value="Невозможно решить" />
+		            </form>
+		        </td>
+		        <td class="list_row">
+		            <form action="/Arhiv/set-problem-statuscross" method="post" name="test">
+		                <input type="hidden" name="point_id" value="<?= $item['point_id']; ?>" />
+		                <input type="submit" name="btn2" value="Расторгнуть" />
+		            </form>
+		        </td>
+		    </tr>
+		    <?
+		}
+	}
+	?>
+</table>
+
+                            <!-- письма на кросс !-->
+<br/>
+<br/>
+<br/>
+<h1>Письма на кроссировку</h1>
+<br/>
+
+
+<table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">N</th>
+            <th class="list_head">Тел</th>
+            <th class="list_head">Клиент</th>
+            <th class="list_head">Логин</th>
+            <th class="list_head">Дата договора</th>
+            <th class="list_head">Дата отправки письма</th>
+            <th class="list_head">Дата принятия письма</th>
+            <th class="list_head">Статус</th>
+            <th class="list_head">Дата выставления статуса</th>
+        </tr>
+<?php
+for($i=0; $i<count($this->clientlistcross); $i++)
+{
+    echo ('
+    <tr>
+        <td  class="list_row">'.$i.'</td>
+        <td  class="list_row">'.$this->clientlistcross[$i]['pcross'].'</td>
+        <td class="list_row">
+            <a href="/Clientinfo/index/clientid/'.$this->clientlistcross[$i]['client_id'].'/pointid/'.$this->clientlistcross[$i]['point_id'].'">
+                '.$this->clientlistcross[$i]['client_name'].'
+            </a>
+        </td>
+        <td class="list_row">'.$this->clientlistcross[$i]['u_login'].'</td>
+        <td class="list_row">'.$this->clientlistcross[$i]['dateagree'].'</td>
+        <td class="list_row">'.$this->clientlistcross[$i]['letter_sent_date'].'</td>
+        <td class="list_row">'.$this->clientlistcross[$i]['letter_receive_date'].'</td>
+        <td class="list_row">'.$this->clientlistcross[$i]['point_status'].'</td>
+        <td class="list_row">'.$this->clientlistcross[$i]['last_modified_date'].'</td>
+    </tr>
+    ');
+}
+?>
+</table>
+
+                            <!-- письма на раскросс !-->
+<br/>
+<br/>
+<br/>
+<h1>Письма на раскроссировку</h1>
+<br/>
+
+<table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">N</th>
+            <th class="list_head">Тел</th>
+            <th class="list_head">Клиент</th>
+            <th class="list_head">Дата отправки письма</th>
+            <th class="list_head">Дата принятия письма</th>
+            <th class="list_head">Статус</th>
+            <th class="list_head">Дата выставления статуса</th>
+        </tr>
+<?php
+for($i=0; $i<count($this->clientlistuncross); $i++)
+{
+    echo ('
+    <tr>
+        <td  class="list_row">'.$i.'</td>
+        <td  class="list_row">'.$this->clientlistuncross[$i]['pcross'].'</td>
+        <td class="list_row">
+            <a href="/Clientinfo/index/clientid/'.$this->clientlistuncross[$i]['client_id'].'/pointid/'.$this->clientlistuncross[$i]['point_id'].'">
+                '.$this->clientlistuncross[$i]['client_name'].'
+            </a>
+        </td>
+        <td class="list_row">'.$this->clientlistuncross[$i]['letter_sent_date'].'</td>
+        <td class="list_row">'.$this->clientlistuncross[$i]['letter_receive_date'].'</td>
+        <td class="list_row">'.$this->clientlistuncross[$i]['point_status'].'</td>
+        <td class="list_row">'.$this->clientlistuncross[$i]['last_modified_date'].'</td>
+    </tr>
+    ');
+}
+?>
+</table>
+<br/>
+<br/>
+

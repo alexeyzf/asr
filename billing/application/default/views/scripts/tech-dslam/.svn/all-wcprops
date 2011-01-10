@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2016/billing/application/default/views/scripts/tech-dslam
+END
+set-port-status.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1300/billing/application/default/views/scripts/tech-dslam/set-port-status.phtml
+END
+configure.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3/billing/application/default/views/scripts/tech-dslam/configure.phtml
+END
+delete.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/billing/application/default/views/scripts/tech-dslam/delete.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/2016/billing/application/default/views/scripts/tech-dslam/index.phtml
+END
+modify.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/billing/application/default/views/scripts/tech-dslam/modify.phtml
+END

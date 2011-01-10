@@ -1,0 +1,135 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function checkAll()
+    {
+	  if(document.forms.addpost.clientID.value == "")
+	  {
+	    alert("Заполните поле: Имя клиента");
+	    document.forms.addpost.clientID.focus();
+	    return false;
+	  }
+
+	  if(document.forms.addpost.pcrossNum.value == "")
+	  {
+	    alert("Введите правильный тел. кроса");
+	    document.forms.addpost.pcrossNum.focus();
+	    return false;
+	  }
+
+	  if(document.forms.addpost.phoneNum.value == "")
+	  {
+	    alert("Введите правильный Контактный телефон");
+	    document.forms.addpost.phoneNum.focus();
+	    return false;
+	  }
+
+	  if(document.forms.addpost.notes.value == "")
+	  {
+	    alert("Обязательно оставляйте комментарии");
+	    document.forms.addpost.notes.focus();
+	    return false;
+	  }
+	  return true;
+    }
+</script>
+
+<h1>Абонентский отдел. Черный список</h1>
+<br />
+<br />
+<?php
+        if ($this->infos['blacklist-info'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+<br />
+<h2>Добавить:</h2>
+<form action="" name="addpost" id="blacklist" method="post" onsubmit="return checkAll();">
+<table border="0">
+<tr>
+	<td>Клиент:</td><td><input id="clientID" type="text" name="client_name" /></td>
+</tr>
+<tr>
+	<td>Тел. кроса:</td><td><input id="pcrossNum" type="text" name="pcross" /></td>
+</tr>
+<tr>
+	<td>Конт. тел.:</td><td><input id="phoneNum" type="text" name="phone" /></td>
+</tr>
+<tr>
+	<td>Примечание:</td>
+	<td>
+		<textarea cols="100" rows="50" name="notes"></textarea>
+	</td>
+</tr>
+<tr>
+	<td></td>
+	<td>
+		<input type="submit" name="btn1" value="сохранить" />
+	</td>
+</tr>
+</table>
+</form>
+
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Клиент</th>
+        <th class="list_head">Тел. крос.</th>
+        <th class="list_head" style="width:15%;">Конт. Тел.</th>
+        <th class="list_head">Примечание</th>
+        <th class="list_head">Действие</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= date('Y/m/d', strtotime($item['actiondate'])) ?></td>
+            <td class="list_row"><?= $item['client_name'] ?></td>
+            <td class="list_row">
+            		<?= $item['pcross']; ?>
+            </td>
+            <td class="list_row"><?= $item['phone']; ?></td>
+            <td class="list_row"><?= $item['notes']; ?></td>
+            <td class="list_row">
+            	<a href="/black-list/delete-post/id/<?= $item['id']; ?>">
+            		удалить
+            	</a>
+            </td>
+        </tr>
+    <?
+
+    }
+
+}
+?>
+
+</table>
+
+

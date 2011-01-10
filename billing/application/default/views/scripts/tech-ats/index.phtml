@@ -1,0 +1,79 @@
+<h1>Отдел проектов. АТС</h1>
+<br />
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/tech-ats/modify')"/>
+         </td>
+    </tr>
+</table>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Действие</th>
+        <th class="list_head">N</th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/name">Наименование</a></th>
+        <th class="list_head" style="width:15%;"><a id="link_color" href="/techats/index/sortBy/numbers">Диапазоны номеров</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/bad_numbers">Необслуживаемые номера</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/address">Место расположения</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/hub_name">Телефонный узел</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/status">Статус</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/notes">Примечание</a></th>
+        <th class="list_head"><a id="link_color" href="/tech-ats/index/sortBy/expanded"> 1 МБ атс </a></th>
+    </tr>
+<?php
+if ( count($this->atsList) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="8" class="list_row center">
+            Не найдено ни одной АТС
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->atsList as $ats)
+    {
+    	$word = "";
+    	//var_dump($ats['expanded']);
+    	//exit();
+    	if($ats['expanded'] == "true")
+    	{
+    		$word = " OK ";
+    	}
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">
+                <a class="link" href="/tech-ats/modify/id/<?= $ats['id']; ?>">Изменить</a>&nbsp;|&nbsp;<a class="link" href="/tech-ats/delete/id/<?= $ats['id']; ?>">Удалить</a>
+            </td>
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['name']; ?></td>
+            <td class="list_row"><?= $ats['numbers']; ?></td>
+            <td class="list_row"><?= $ats['bad_numbers']; ?></td>
+            <td class="list_row"><?= $ats['address']; ?></td>
+            <td class="list_row"><?= $ats['hub_name']; ?></td>
+            <td class="list_row"><?= $ats['status']; ?></td>
+            <td class="list_row"><?= $ats['notes']; ?></td>
+            <td class="list_row"> <?= $word; ?> </td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/tech-ats/modify')" />
+         </td>
+    </tr>
+</table>

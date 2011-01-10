@@ -1,0 +1,46 @@
+<h1>Отдел продаж. История смены тарифа</h1><br />
+<h2><a href="<?= $_SESSION['back_url'] ?>"> назад </a></h2>
+<br />
+<br />
+<center>
+
+</center>
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head" style="">период</th>
+        <th class="list_head">наименование тарифа</th>
+        <th class="list_head">логин</th>
+    </tr>
+<?php
+if ( count($this->dataTarif) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->dataTarif as $ats)
+    {
+    ?>
+        <tr style="background-color:<?= $color ?>" class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><b> C <?= $ats['startdate'];  ?> до <?= $ats['enddate'];  ?></b></td>
+            <td class="list_row"><?= $ats['tarif_name']; ?></td>
+            <td class="list_row"><?= $ats['login']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

@@ -1,0 +1,9 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<h1>Данные</h1>
+<br />
+<br />
+<?php
+echo $this->result;
+?>

@@ -1,0 +1,127 @@
+<h1>Переговоры по направлениям</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<?
+if ($this->data && is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Наименование направления</th>
+			<th class='list_head'>Кол минут</th>
+			<th class='list_head'>Тариф</th>
+			<th class='list_head'>Сумма</th>
+		</tr>
+		<?
+		foreach ($this->data as $direction => $row)
+		{
+			$minutesCountTotal += $row['minutes'];
+			$amountTotal += $row['amount'];
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $direction; ?></td>
+				<td class='list_row right'><?= $row['minutes']; ?></td>
+				<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+
+if ($this->unresolvedNumbers && is_array($this->unresolvedNumbers))
+{
+	?>
+	<br />
+	<br />
+	<h2>Номера не принадлежащие клиентам</h2>
+	<br />
+	<br />
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Номер</th>
+			<th class='list_head'>Кол минут</th>	
+			<th class='list_head'>Цена</th>
+			<th class='list_head'>Сумма</th>
+		</tr>
+		<?
+		$minutesCountTotal = 0;
+		$amountTotal = 0;
+		
+		foreach ($this->unresolvedNumbers as $number)
+		{
+			$minutesCountTotal += $this->unresolvedCalls[$number]['minutes'];
+			$amountTotal += $this->unresolvedCalls[$number]['amount'];
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $number; ?></td>
+				<td class='list_row right'><?= $this->unresolvedCalls[$number]['minutes'] ?></td>
+				<td class='list_row right'><?= number_format($this->unresolvedCalls[$number]['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($this->unresolvedCalls[$number]['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?	
+		} 
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}
+
+if ($this->quantCalls && is_array($this->quantCalls))
+{
+	?>
+	<br />
+	<br />
+	<h2>Переговоры по кванту</h2>
+	<br />
+	<br />
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Наименование направления</th>
+			<th class='list_head'>Кол минут</th>
+			<th class='list_head'>Тариф</th>
+			<th class='list_head'>Сумма</th>
+		</tr>
+		<?
+		$minutesCountTotal = 0;
+		$amountTotal = 0;
+		
+		foreach ($this->quantCalls as $direction => $row)
+		{
+			$minutesCountTotal += $row['minutes'];
+			$amountTotal += $row['amount'];
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $direction; ?></td>
+				<td class='list_row right'><?= $row['minutes']; ?></td>
+				<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+			<td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+}

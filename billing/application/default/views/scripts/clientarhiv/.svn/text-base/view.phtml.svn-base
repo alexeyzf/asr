@@ -1,0 +1,187 @@
+<h1>Архивный клиент</h1>
+<br />
+<br />
+<table width="100%">
+	<tr>
+		<td class="sub-heading">Информация о клиенте</td>
+	<td>
+</table>
+<dt><label>Название организации (клиент):</label></dt>
+<dd><label><?= $this->data['client_name']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>ID клиента:</label></dt>
+<dd><label><?= $this->data['client_id']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Тип клиента:</label></dt>
+<dd><label><?= $this->data['client_type']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Полный адрес клиента:</label></dt>
+<dd><label><?= $this->data['address']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Ориентир:</label></dt>
+<dd><label><?= $this->data['client_orient']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Телефон клиента:</label></dt>
+<dd><label><?= $this->data['phone']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Email адрес:</label></dt>
+<dd><label><?= $this->data['email']; ?></label></dd>
+<div class='clear'></div>
+
+<dt><label>Факс:</label></dt>
+<dd><label><?= $this->data['fax']; ?></label></dd>
+<div class='clear'></div>
+
+<?
+if($this->data['client_type_id'] == 1)
+{
+	?>
+	<dt><label>Номер паспорта:</label></dt>
+    <dd><label><?= $this->data['passp_n']; ?></label></dd>
+	<div class='clear'></div>
+
+	<dt><label>Кем выдан:</label></dt>
+    <dd><label><?= $this->data['ruvd_name']; ?></label></dd>
+	<div class='clear'></div>
+	<?
+}
+else
+{
+	?>
+	<dt><label>ИНН:</label></dt>
+    <dd><label><?= $this->data['inn']; ?></label></dd>
+    <div class='clear'></div>
+
+    <dt><label>МФО:</label></dt>
+    <dd><label><?= $this->data['mfo']; ?></label></dd>
+    <div class='clear'></div>
+
+    <dt><label>ОКОНХ:</label></dt>
+    <dd><label><?= $this->data['okonx']; ?></label></dd>
+    <div class='clear'></div>
+
+    <dt><label>Банк:</label></dt>
+    <dd><label><?= $this->data['bank_name']; ?></label></dd>
+    <div class='clear'></div>
+	<?
+}
+?>
+
+<dt><label>Баланс:</label></dt>
+<dd><label><?= money_format('%i', $this->data['ballance']); ?></label></dd>
+
+<br />
+<br />
+<table width="100%">
+	<tr>
+		<td class="sub-heading">Услуги</td>
+	</tr>
+</table>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID точки</th>
+        <th class="list_head">Тариф</th>
+        <th class="list_head" style="width:15%;">Старт</th>
+        <th class="list_head">Конец</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Действия</th>
+    </tr>
+<?php
+if ( count($this->services) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->services as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['point_id'] ?></td>
+            <td class="list_row">
+            		<b><?= $item['tarif_name']; ?></B>
+					(<a href="#" onclick="openIframe('/Tarifhistory/index/point_id/<?= $item['point_id']; ?>/tablename/<?= $item['tablename']; ?>')">История смены</a>)
+            </td>
+            <td class="list_row"><?= $item['startdate']; ?></td>
+            <td class="list_row"><?= $item['enddate']; ?></td>
+            <td class="list_row"><?= $item['u_login']; ?></td>
+            <td class="list_row">
+            	<a href="#" onclick="openIframe('/Clientarhiv/view-traffic/ipaddress/<?= $item['ip_address']; ?>/client_id/<?= $item['client_id']; ?>')">
+            		Трафик
+            	</a>
+            </td>
+        </tr>
+    <?
+    }
+}
+?>
+</table>
+<br />
+<br />
+
+
+
+
+<table width="100%">
+	<tr>
+		<td class="sub-heading">Фин. история клиента</td>
+	</tr>
+</table>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head" style="width:15%;">Дата</th>
+        <th class="list_head">Сумма (UZS)</th>
+        <th class="list_head">Сумма (USD)</th>
+        <th class="list_head">Тип операции</th>
+    </tr>
+<?php
+if ( count($this->finance) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->finance as $fin)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $fin['currenttime']; ?></td>
+            <td class="list_row"><?= $fin['summa']; ?></td>
+            <td class="list_row"><?= $fin['summas']; ?></td>
+            <td class="list_row"><?= $fin['tran_label']; ?></td>
+        </tr>
+    <?
+    }
+}
+?>
+</table>

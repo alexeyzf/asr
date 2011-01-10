@@ -1,0 +1,130 @@
+<h1>Поиск клиента. Отдел управления сети</h1>
+<br />
+<br />
+<center>
+
+<?php
+if($this->vipports)
+{
+	print "<div id=\"vipports\"><b>";
+
+	foreach($this->vipports as $row)
+	{
+		print "[".$row['date_action']."] ".$row['username']." Причина: ".$row['action_trouble'];
+	}
+	print "</b></div>";
+}
+?>
+</center>
+<center>
+    <form method='post' action=''>
+    <table cellpadding="3" cellspacing="0">
+        <tr>
+            <td class="row">Найти клиента</td>
+            <td class="row">
+                <?
+                $options = array
+                (
+                    'login'       => 'По логину',
+                    'name'        => 'По названию',
+                    'phone'       => 'По телефону',
+                    'ats'         => 'По АТС',
+                    'dslam'       => 'По DSLAM',
+                    'ip_address'  => 'По IP',
+                    'vlan'        => 'По VLAN'
+                );
+
+                print "<select id='param' name='by'>";
+                print FormHelper::getSelectOptions($options, $this->param);
+                print "</select>";
+                ?>
+            </td>
+            <td class="row">
+                <input type="text" id="value" name='value' value="<?= $this->value; ?>"/>
+            </td>
+            <td class="row">
+                <input type="submit" value="Поиск" />
+            </td>
+        </tr>
+    </table>
+    </form>
+</center>
+<br />
+<?
+if ( is_array($this->clients) )
+{
+    ?>
+    <table class="list" cellpadding="0" cellspacing="0">
+        <tr>
+            <th class="list_head">Действие</th>
+            <th class="list_head">N</th>
+            <th class="list_head">Название</th>
+            <th class="list_head">Логин</th>
+            <th class="list_head">Телефон</th>
+            <th class="list_head">Таблица</th>
+            <th class="list_head">АТС</th>
+            <th class="list_head">Рамка</th>
+            <th class="list_head">Порт</th>
+
+            <th class="list_head">Данные</th>
+
+            <th class="list_head">Порт</th>
+            <th class="list_head">Тип услуги</th>
+            <th class="list_head">Сформировал</th>
+        </tr>
+        <?
+        if( count($this->clients) == 0 )
+        {
+            ?>
+            <tr>
+                <td class="list_row center" colspan="13"><b>Не найдено ни одного клиента</b></td>
+            </tr>
+            <?
+        }
+
+        $counter = 1;
+
+        foreach($this->clients as $client)
+        {
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row">
+                   <a href="/net-admin-service-attribute/modify/point_id/<?= $client['point_id']; ?>/service_type_id/<?= $client['servicetype_id']; ?>">
+                       <img id="decor_a" border="0" src="/images/edit.png" width="25" height="25" title='Изменить'/>
+                   </a>
+                   <a href="/drawing/index/pid/<?= $client['point_id']; ?>">
+                       <img id="decor_a" border="0" src="/images/icons/drawing.png" title='График загрузки'/>
+                   </a>
+                </td>
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row"><?= $client['client_name']; ?></td>
+                <td class="list_row"><?= $client['u_login'] ?> (<?= $client['tarif_speed'] ?>)</td>
+                <td class="list_row"><?= $client['pcross']; ?></td>
+                <td class="list_row"><?= $client['tablelink']; ?></td>
+                <td class="list_row"><?= $client['ats']; ?></td>
+                <td class="list_row"><?= $client['frame_number']; ?></td>
+                <td class="list_row"><?= $client['portnumber']; ?></td>
+
+                <td class="list_row">
+                	<?php
+                	echo ('
+						<font size="2">
+							  '.$client['dslam_name'].'
+							 ['.$client['dslam_ip'].']
+							 '.$client['dslamtype1'].'
+						</font>
+					');
+                	?>
+                </td>
+
+                <td class="list_row"><?= $client['port_state'] == 1 ? 'Вкл' : 'Выкл'; ?></td>
+                <td class="list_row"><?= $client['servicetype_name']; ?></td>
+                <td class="list_row"><?= $client['admin']; ?></td>
+            </tr>
+            <?
+        }
+        ?>
+    </table>
+    <?
+}
+?>

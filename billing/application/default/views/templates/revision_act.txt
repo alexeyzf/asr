@@ -1,0 +1,13 @@
+<span width="100%" style="font-family: arial" align="center">
+    <b style="font-family:arialbd">
+    	<h2>Акт сверки взаиморасчетов</h2>
+    </b>
+    Мы, ниже подписавшиеся, ООО "{$companyName}" в лице главного бухгалтера "{$companyHeadAcc}" и<br />
+    {$clientName}<br />
+    в лице ___________________________________<br />
+    произвели сверку взаиморасчетов на {$currentDate}<br />
+</span><br /><br/>
+<span width="100%" align="right">
+    Регистрационный номер: {$clientID}
+</span>
+<br />

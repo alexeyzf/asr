@@ -1,0 +1,323 @@
+<table border="0" width="100%">
+<tr align="center">
+	<td colspan="2">
+	<b style="font-family:arialbd">
+		Приложение N1<br />
+		к заказу от {$dateagree}<br />
+		к Договору N{$contract_number}<br />
+		от {$time}
+	</b>
+	</td>
+</tr>
+</table>
+<br />
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Заказ на предоставление услуг связи N{$iterator}</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Наименование клиента
+	</td>
+	<td>
+		{$client_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Дата заказа
+	</td>
+	<td>
+		{$dateagree}
+	</td>
+</tr>
+<tr>
+	<td>
+		Дата готовности услуги
+		*(Названная дата не обязывает Sharq Telekom
+		сдать канал в эксплуатацию в далее указанный
+		срок)
+		<br />
+	</td>
+	<td>
+		В течение 10 банковских дней со дня
+		произведения оплаты
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Тип заказа</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Регистрационный номер новой услуги ID
+		(предоставляется ООО "Sharq Telekom"):
+	</td>
+	<td>
+		{$id}
+	</td>
+</tr>
+<tr>
+	<td>
+		Наименование услуги
+	</td>
+	<td>
+		{$servicetype_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Тарифный план
+	</td>
+	<td>
+		{$tarif_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Тип клиента
+		<br />
+	</td>
+	<td>
+		{$isface}
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Коммерческий представитель ООО "Sharq Telekom"</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Имя
+	</td>
+	<td>
+		{$user_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Номер телефона
+	</td>
+	<td>
+		{$user_phone}
+	</td>
+</tr>
+<tr>
+	<td>
+		Адрес электронной почты
+		<br />
+	</td>
+	<td>
+		{$user_email}
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Эксплуатация</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Представитель / Отдел
+	</td>
+	<td>
+		СТП (Служба технической поддержки)
+	</td>
+</tr>
+<tr>
+	<td>
+		Номер телефона
+	</td>
+	<td>
+		тел. 113-00-00
+	</td>
+</tr>
+<tr>
+	<td>
+		Адрес электронной почты
+		<br />
+	</td>
+	<td>
+		admin@st.uz
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Информация о Заказчике</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Регистрационный номер
+		(указывается в платежных документах)
+	</td>
+	<td>
+		{$client_id}
+	</td>
+</tr>
+<tr>
+	<td>
+		ИНН
+	</td>
+	<td>
+		{$inn}
+	</td>
+</tr>
+<tr>
+	<td>
+		Р/c
+	</td>
+	<td>
+		{$rschets}
+	</td>
+</tr>
+<tr>
+	<td>
+		в банке
+	</td>
+	<td>
+		в {$bank_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		МФО
+	</td>
+	<td>
+		{$mfo}
+	</td>
+</tr>
+<tr>
+	<td>
+		ОКОНХ
+	</td>
+	<td>
+		{$okonx}
+	</td>
+</tr>
+<tr>
+	<td>
+		Телефон клиента
+	</td>
+	<td>
+		{$client_phone}
+	</td>
+</tr>
+<tr>
+	<td>
+		Факс
+	</td>
+	<td>
+		{$fax}
+	</td>
+</tr>
+<tr>
+	<td>
+		Почтовый адрес
+		<br />
+	</td>
+	<td>
+		{$email}
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Коммерческий представитель</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Имя
+	</td>
+	<td>
+		{$contact_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Номер телефона
+		<br />
+	</td>
+	<td>
+		{$contact_phone}
+		<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">Выставление счетов</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		Контактное лицо
+	</td>
+	<td>
+		{$contact_name}
+	</td>
+</tr>
+<tr>
+	<td>
+		Адрес для выставления счетов
+	</td>
+	<td>
+		{$connect_address}
+	</td>
+</tr>
+<tr>
+	<td>
+		Номер телефона
+	</td>
+	<td>
+		{$contact_phone}
+	</td>
+</tr>
+<tr>
+	<td>
+		Адрес электронной почты
+	</td>
+	<td>
+		{$email}
+	</td>
+</tr>
+</table>
+<br />

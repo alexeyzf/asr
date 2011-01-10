@@ -1,0 +1,26 @@
+<table width="100%" style="font-family: arial">
+    <tr>
+        <td align=right>
+            Приложение N 1<br />
+            К договору N {$contractNumber}<br />
+            от {$contractDate}
+        </td>
+    </tr>
+    <tr>
+        <td align=left>
+            {$currentDate}
+        </td>
+    </tr>
+    <tr>
+        <td align=center>
+            <h2>Заказ на предоставление услуг N {$orderNumber}</h2>
+        </td>
+    </tr>
+</table>
+<br />
+<span style="text-align:justify;font-family: arial">
+Мы, нижеподписавшиеся, от лица Исполнителя - "{$companyName}" с одной стороны, и от лица Заказчика - {$clientName}
+в лице {$contactName} с другой стороны, удостоверяем, что сторонами достигнуто соглашение о нижеследующем:<br />
+1. Согласованы следующие цены на стоимость услуги по приобретению карт предварительной оплаты
+<br />
+</span>

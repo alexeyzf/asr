@@ -1,0 +1,187 @@
+<h1>Отчет по клиентам (Включения)</h1>
+<br />
+<br />
+<center>
+<form action="/Clientreports/index" method="post">
+	<? echo $this->form ?>
+
+</form>
+</center>
+<br />
+<br />
+<h2>Общая информация о точках</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head">Баланс</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Менеджер</th>
+        <th class="list_head">Регион</th>
+        <th class="list_head">АТС</th>
+        <th class="list_head">Узел</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Услуга</th>
+        <th class="list_head">Скорость</th>
+        <th class="list_head">Лимит по тарифу</th>
+        <th class="list_head">Цена тарифа</th>
+        <th class="list_head">Рег. плата</th>
+        <th class="list_head">Оплата за модем</th>
+        <th class="list_head">Модем</th>
+    </tr>
+<?php
+if ( count($this->dataResult) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter     = 1;
+	$tarifAmount = 0;
+	$regAmount   = 0;
+	$modemAmount = 0;
+	$clients = array();
+	$points = 0;
+
+    $regions = array();
+    $managers = array();
+	
+    foreach ($this->dataResult as $key => $row)
+    {
+        $startDate = $row[0]['startdate'];
+        foreach ($row as $dataRow)
+        {
+            if ($dataRow['startdate'] != $startDate) {
+                continue;
+            }
+            if ($dataRow['discount'])
+            {
+                $dataRow['tarif_price'] = $dataRow['tarif_price'] * (1 - $dataRow['discount'] / 100);
+            }
+
+            $tarifAmount += $dataRow['tarif_price'];
+            $regAmount   += $dataRow['reg_pay'];
+            $modemAmount += $dataRow['modem_price'];
+            $clients[$dataRow['client_id']] = $dataRow['client_id'];
+            $points++;
+            $regions[$dataRow['country']]['points']++;
+            $regions[$dataRow['country']]['clients'][$dataRow['client_id']] = 1;
+            $regions[$dataRow['country']]['pay'] += $dataRow['tarif_price'] + $dataRow['reg_pay'] + $dataRow['modem_price'];
+            $managers[$dataRow['manager']]['points']++;
+            $managers[$dataRow['manager']]['clients'][$dataRow['client_id']] = 1;
+            $managers[$dataRow['manager']]['pay'] += $dataRow['tarif_price'] + $dataRow['reg_pay'] + $dataRow['modem_price'];
+
+            if ($dataRow['tablename'] == "tasix")
+            {
+                $dataRow['tablename'] = "localnet";
+            }
+            elseif ($dataRow['tablename'] == "additional_services")
+            {
+                $dataRow['tablename'] = "Доп";
+            }
+
+            $dataRow['tablename'] = ucfirst($dataRow['tablename']);
+
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $counter++ ?></td>
+                <td class="list_row">
+                    <a href="/Clientinfo/index/clientid/<?= $dataRow['client_id'] ?>/pointid/<?= $dataRow['point_id'] ?>" >
+                        <?= $dataRow['client_name'] ?>
+                    </a>
+                </td>
+                <td class="list_row right"><?= number_format($dataRow['ballance'], 2, ',', ' ') ?></td>
+                <td class="list_row"><?= $dataRow['client_dateagree'] ?></td>
+                <td class="list_row"><?= $dataRow['manager'] ?></td>
+                <td class="list_row"><?= $dataRow['country'] ?></td>
+                <td class="list_row"><?= $dataRow['ats_name'] ?></td>
+                <td class="list_row"><?= $dataRow['hub_name'] ?></td>
+                <td class="list_row"><?= $dataRow['phone'] ?></td>
+                <td class="list_row"><?= $dataRow['tablename'] ?></td>
+                <td class="list_row"><?= $dataRow['speed'] ?></td>
+                <td class="list_row"><?= $dataRow['limit'] ?></td>
+                <td class="list_row right"><?= number_format($dataRow['tarif_price'], 0, ',', ' ') ?>$ </td>
+                <td class="list_row right"><?=  number_format($dataRow['reg_pay'], 0, ',', ' ') ?>$</td>
+                <td class="list_row right"><?= number_format($dataRow['modem_price'], 0, ',', ' ') ?>$</td>
+                <td class="list_row"><?= $dataRow['modem_serial'] ? $dataRow['modem_serial'] : "свой модем" ?></td>
+            </tr>
+            <?
+            }
+    }
+}
+?>
+        <tr>
+            <td class="list_head" colspan="12"><b>Итого</b></td>
+            <td class="list_head right">
+            	<b><?= number_format($tarifAmount, 0, ',', ' ') ?>$</b>
+            </td>
+            <td class="list_head right">
+            	<b><?= number_format($regAmount, 0, ',', ' ') ?>$</b>
+            </td>
+            <td class="list_head right">
+            	<b><?= number_format($modemAmount, 0, ',', ' ') ?>$</b>
+            </td>
+            <td class="list_head"></td>
+        </tr>
+</table>
+<br />
+<br />
+<h2>Сумма по точкам</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Источник</th>
+        <th class="list_head">Всего Абонентов</th>
+        <th class="list_head">Всего Точек</th>
+        <th class="list_head">Всего USD</th>
+    </tr>
+    <tr>
+        <th class="list_head" colspan="4" style="text-align: center; color: #FF6600;">Разбивка по регионам</th>
+    </tr>
+    <?
+    foreach ($regions as $region => $values)
+    {
+    ?>
+    <tr>
+        <th class="list_row"><?= $region ?></th>
+        <th class="list_row"><?= count($values['clients']) ?></th>
+        <th class="list_row"><?= $values['points'] ?></th>
+        <th class="list_row"><?= $values['pay'] ?></th>
+    </tr>
+    <?
+    }
+    ?>
+
+    <tr>
+        <th class="list_head" colspan="4" style="text-align: center; color: #FF6600;">Разбивка по менеджерам</th>
+    </tr>
+    <?
+    foreach ($managers as $manager => $values)
+    {
+    ?>
+    <tr>
+        <th class="list_row"><?= $manager ?></th>
+        <th class="list_row"><?= count($values['clients']) ?></th>
+        <th class="list_row"><?= $values['points'] ?></th>
+        <th class="list_row"><?= $values['pay'] ?></th>
+    </tr>
+    <?
+    }
+    ?>
+    
+    <tr>
+        <th class="list_head" colspan="4" style="text-align: center; color: #FF6600;">Итого</th>
+    </tr>
+    <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class="list_row"></td>
+        <td class="list_row"><?= count($clients) ?></td>
+        <td class="list_row"><?= $points  ?></td>
+        <td class="list_row"><?= number_format($tarifAmount + $regAmount + $modemAmount, 0, ',', ' ') ?></td>
+    <tr>
+</table>

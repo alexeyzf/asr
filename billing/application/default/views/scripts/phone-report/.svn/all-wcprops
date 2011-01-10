@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3496/billing/application/default/views/scripts/phone-report
+END
+uncalculate-calls.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3245/billing/application/default/views/scripts/phone-report/uncalculate-calls.phtml
+END
+calls.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3311/billing/application/default/views/scripts/phone-report/calls.phtml
+END
+unresolved-numbers.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3270/billing/application/default/views/scripts/phone-report/unresolved-numbers.phtml
+END
+direction.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3245/billing/application/default/views/scripts/phone-report/direction.phtml
+END
+region.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3265/billing/application/default/views/scripts/phone-report/region.phtml
+END
+number-analiz.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3496/billing/application/default/views/scripts/phone-report/number-analiz.phtml
+END
+number-calls.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3311/billing/application/default/views/scripts/phone-report/number-calls.phtml
+END
+search-by-phone.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3446/billing/application/default/views/scripts/phone-report/search-by-phone.phtml
+END
+attached-numbers.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3449/billing/application/default/views/scripts/phone-report/attached-numbers.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3450/billing/application/default/views/scripts/phone-report/index.phtml
+END
+free-numbers.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3450/billing/application/default/views/scripts/phone-report/free-numbers.phtml
+END

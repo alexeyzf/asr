@@ -1,0 +1,31 @@
+<table border="0" width="100%">
+<tr align="right">
+	<td colspan="2">
+	<b style="font-family:arialbd">
+		Приложение N2<br />
+		к заказу от {$start_date_pr}<br />
+		к Договору N {$contract_number}<br />
+		от {$dateagree}
+	</b>
+	</td>
+</tr>
+</table>
+<table border="0" width="100%">
+<tr align="center">
+	<td>
+		<b style="font-family:arialbd">Протокол согласования <br />
+		договорной цены на стоимость услуги "{$servicetype_name}".
+		</b>
+	</td>
+</tr>
+</table>
+<table border="0" width="100%">
+<tr>
+	<td>
+	    Мы нижеподписавшиеся, от лица Исполнителя - ООО "Sharq Telekom" .. с одной стороны, и от лица Заказчика -
+		{$client_name} с другой стороны, удостоверяем, что сторонами
+		достигнуто соглашение о нижеследующем:<br />
+		1. Согласованы следующие цены на стоимость услуги <b style="font-family:arialbd">"{$servicetype_name}"</b>
+	</td>
+</tr>
+</table>

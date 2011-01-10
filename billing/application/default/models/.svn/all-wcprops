@@ -1,0 +1,797 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3611/billing/application/default/models
+END
+InfoClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3408/billing/application/default/models/InfoClient.php
+END
+Cards.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2258/billing/application/default/models/Cards.php
+END
+CorptableModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/463/billing/application/default/models/CorptableModel.php
+END
+IpaddressModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/949/billing/application/default/models/IpaddressModel.php
+END
+DocumentModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2460/billing/application/default/models/DocumentModel.php
+END
+TrustPaymentModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3386/billing/application/default/models/TrustPaymentModel.php
+END
+Radacct.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1244/billing/application/default/models/Radacct.php
+END
+InsertClientContract.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3/billing/application/default/models/InsertClientContract.php
+END
+ModifyClientInfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3408/billing/application/default/models/ModifyClientInfo.php
+END
+AdminGroupPriv.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/billing/application/default/models/AdminGroupPriv.php
+END
+BankClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3165/billing/application/default/models/BankClient.php
+END
+ClientContract.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/1855/billing/application/default/models/ClientContract.php
+END
+InvoiceModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3573/billing/application/default/models/InvoiceModel.php
+END
+DocumentReferenceModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/3534/billing/application/default/models/DocumentReferenceModel.php
+END
+VpnModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3179/billing/application/default/models/VpnModel.php
+END
+Rschet.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2145/billing/application/default/models/Rschet.php
+END
+AtsBadNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3/billing/application/default/models/AtsBadNumbers.php
+END
+BaseModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1855/billing/application/default/models/BaseModel.php
+END
+DialupModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3550/billing/application/default/models/DialupModel.php
+END
+ServiceType.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3109/billing/application/default/models/ServiceType.php
+END
+LogModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3481/billing/application/default/models/LogModel.php
+END
+CompareModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1472/billing/application/default/models/CompareModel.php
+END
+RevisionActBallance.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/922/billing/application/default/models/RevisionActBallance.php
+END
+DemandModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3177/billing/application/default/models/DemandModel.php
+END
+EngineerCalls.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/214/billing/application/default/models/EngineerCalls.php
+END
+PintelModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/947/billing/application/default/models/PintelModel.php
+END
+OverdraftModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3179/billing/application/default/models/OverdraftModel.php
+END
+Rates.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2449/billing/application/default/models/Rates.php
+END
+FreeTraffic.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3108/billing/application/default/models/FreeTraffic.php
+END
+IvrModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/61/billing/application/default/models/IvrModel.php
+END
+KassaModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2449/billing/application/default/models/KassaModel.php
+END
+PointStatuses.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2293/billing/application/default/models/PointStatuses.php
+END
+BallanceLogs.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1639/billing/application/default/models/BallanceLogs.php
+END
+Schets.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2227/billing/application/default/models/Schets.php
+END
+BlackListModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2287/billing/application/default/models/BlackListModel.php
+END
+ClientsArhiv.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2300/billing/application/default/models/ClientsArhiv.php
+END
+AsrHelp.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/684/billing/application/default/models/AsrHelp.php
+END
+AddPoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3603/billing/application/default/models/AddPoint.php
+END
+TicketModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2308/billing/application/default/models/TicketModel.php
+END
+AdminGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3544/billing/application/default/models/AdminGroup.php
+END
+TasixModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1744/billing/application/default/models/TasixModel.php
+END
+NotesModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1860/billing/application/default/models/NotesModel.php
+END
+CollacationModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/49/billing/application/default/models/CollacationModel.php
+END
+DynamicUnlimModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3525/billing/application/default/models/DynamicUnlimModel.php
+END
+TarifComponents.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1132/billing/application/default/models/TarifComponents.php
+END
+GenCrossNumberModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/billing/application/default/models/GenCrossNumberModel.php
+END
+Cities.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3/billing/application/default/models/Cities.php
+END
+AtsList.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1155/billing/application/default/models/AtsList.php
+END
+AdminAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/billing/application/default/models/AdminAction.php
+END
+AdminUser.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3544/billing/application/default/models/AdminUser.php
+END
+AccidentModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2092/billing/application/default/models/AccidentModel.php
+END
+InnerDocumentFileModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/3600/billing/application/default/models/InnerDocumentFileModel.php
+END
+InnerDocumentModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3603/billing/application/default/models/InnerDocumentModel.php
+END
+PhoneServicesCalls.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3450/billing/application/default/models/PhoneServicesCalls.php
+END
+RecalcTasks.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/586/billing/application/default/models/RecalcTasks.php
+END
+ClientModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3607/billing/application/default/models/ClientModel.php
+END
+Radcheck.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1037/billing/application/default/models/Radcheck.php
+END
+PhoneHubList.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2297/billing/application/default/models/PhoneHubList.php
+END
+TechHistory.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3057/billing/application/default/models/TechHistory.php
+END
+ServiceAttributes.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3443/billing/application/default/models/ServiceAttributes.php
+END
+Ports.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3388/billing/application/default/models/Ports.php
+END
+GenContract.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/billing/application/default/models/GenContract.php
+END
+TreasuryRateModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2821/billing/application/default/models/TreasuryRateModel.php
+END
+FinanceModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3496/billing/application/default/models/FinanceModel.php
+END
+InsertClientModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3129/billing/application/default/models/InsertClientModel.php
+END
+LvsModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/61/billing/application/default/models/LvsModel.php
+END
+TrapModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2225/billing/application/default/models/TrapModel.php
+END
+AllService.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/models/AllService.php
+END
+DynamicTarifModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3541/billing/application/default/models/DynamicTarifModel.php
+END
+CardOrdersDetails.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/billing/application/default/models/CardOrdersDetails.php
+END
+AdminModule.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/billing/application/default/models/AdminModule.php
+END
+ClientServicesModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3203/billing/application/default/models/ClientServicesModel.php
+END
+AdminUserGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3/billing/application/default/models/AdminUserGroup.php
+END
+StreamTrafficModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1171/billing/application/default/models/StreamTrafficModel.php
+END
+PerekrosModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2043/billing/application/default/models/PerekrosModel.php
+END
+TradtelModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/384/billing/application/default/models/TradtelModel.php
+END
+SaldoModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1760/billing/application/default/models/SaldoModel.php
+END
+SearchClientModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/billing/application/default/models/SearchClientModel.php
+END
+DslamTypes.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/models/DslamTypes.php
+END
+CardOrders.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1206/billing/application/default/models/CardOrders.php
+END
+Porttasks.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3525/billing/application/default/models/Porttasks.php
+END
+UserGroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/921/billing/application/default/models/UserGroup.php
+END
+ReportModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3611/billing/application/default/models/ReportModel.php
+END
+DslamList.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3522/billing/application/default/models/DslamList.php
+END
+HostingModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2271/billing/application/default/models/HostingModel.php
+END
+SwitchesTypesModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1953/billing/application/default/models/SwitchesTypesModel.php
+END
+PortReportModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3389/billing/application/default/models/PortReportModel.php
+END
+DirectionControlModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1755/billing/application/default/models/DirectionControlModel.php
+END
+MysqlTraffic.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1180/billing/application/default/models/MysqlTraffic.php
+END
+AdslModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3553/billing/application/default/models/AdslModel.php
+END
+TurnModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3088/billing/application/default/models/TurnModel.php
+END
+SwitchPortsModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3043/billing/application/default/models/SwitchPortsModel.php
+END
+HostingTaskModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2272/billing/application/default/models/HostingTaskModel.php
+END
+SearchServicePdf.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/1625/billing/application/default/models/SearchServicePdf.php
+END
+ClientType.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/models/ClientType.php
+END
+SwitchModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2476/billing/application/default/models/SwitchModel.php
+END
+CorpTraffic.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2292/billing/application/default/models/CorpTraffic.php
+END
+NgnModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3403/billing/application/default/models/NgnModel.php
+END
+TaskDocModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3534/billing/application/default/models/TaskDocModel.php
+END
+StreamModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3323/billing/application/default/models/StreamModel.php
+END
+Recalcs.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3140/billing/application/default/models/Recalcs.php
+END
+ListServiceModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/689/billing/application/default/models/ListServiceModel.php
+END
+Arhivservices.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2033/billing/application/default/models/Arhivservices.php
+END
+NetworkParamsModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1623/billing/application/default/models/NetworkParamsModel.php
+END
+IsdnModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1831/billing/application/default/models/IsdnModel.php
+END
+EditPointModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3197/billing/application/default/models/EditPointModel.php
+END
+TarifListModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3608/billing/application/default/models/TarifListModel.php
+END
+Radreply.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1037/billing/application/default/models/Radreply.php
+END
+ModemModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3211/billing/application/default/models/ModemModel.php
+END
+AtsNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/models/AtsNumbers.php
+END
+CardOrdersDiscounts.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/billing/application/default/models/CardOrdersDiscounts.php
+END
+AddClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/billing/application/default/models/AddClient.php
+END
+SearchAbonDepartment.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2231/billing/application/default/models/SearchAbonDepartment.php
+END
+WorkflowModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/3555/billing/application/default/models/WorkflowModel.php
+END
+SupportModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3386/billing/application/default/models/SupportModel.php
+END
+LettersToAts.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2274/billing/application/default/models/LettersToAts.php
+END
+AtsBonus.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3176/billing/application/default/models/AtsBonus.php
+END
+InsertClientPointModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/633/billing/application/default/models/InsertClientPointModel.php
+END
+TotalReportModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3576/billing/application/default/models/TotalReportModel.php
+END
+DebtorModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3256/billing/application/default/models/DebtorModel.php
+END
+InvoiceAvoider.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3517/billing/application/default/models/InvoiceAvoider.php
+END
+NoneactivModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/970/billing/application/default/models/NoneactivModel.php
+END
+KitModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3602/billing/application/default/models/KitModel.php
+END
+AccountingModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3207/billing/application/default/models/AccountingModel.php
+END
+WifiModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1745/billing/application/default/models/WifiModel.php
+END
+PointIpAddresses.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2162/billing/application/default/models/PointIpAddresses.php
+END
+HostingTasks.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2271/billing/application/default/models/HostingTasks.php
+END
+AbonHistoryModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3090/billing/application/default/models/AbonHistoryModel.php
+END
+TaskModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3603/billing/application/default/models/TaskModel.php
+END
+ClientServicesHistoryModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3305/billing/application/default/models/ClientServicesHistoryModel.php
+END
+PhoneServicesTarifs.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/913/billing/application/default/models/PhoneServicesTarifs.php
+END
+SigmaKapitalModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2041/billing/application/default/models/SigmaKapitalModel.php
+END

@@ -1,0 +1,148 @@
+<?
+require_once('FormHelper.php');
+
+
+
+?>
+<h1>Поиск Dslam</h1>
+<br/>
+<br/>
+<form method="post" action="">
+    <dt><label>Выберите АТС:</label></dt>
+    <dd>
+        <select name='ats_id'>
+            <?= FormHelper::getSelectOptions($this->atsList, $this->atsID); ?>
+        </select>
+        &nbsp;&nbsp;
+        <input type='checkbox' name='only_empty' value='1' <?= $this->only_empty ? 'checked' : ''; ?> />
+        Только пустые
+        &nbsp;&nbsp;
+        <input type='submit' value='Показать' />
+    </dd>
+    <div class='clear'></div>
+</form>
+<br />
+<br />
+<br />
+<?
+if ( is_array($this->dslamList) )
+{
+    ?>
+    <center>
+        <input type="button" onclick="redirect('/tech-dslam/modify/ats_id/<?= $this->atsID; ?>')" value="Добавить" />
+    </center>
+    <?
+    if ( count($this->dslamList) == 0 )
+    {
+        print "<label class='font14'>Не найденно ни одного DSLAM</label>";
+    }
+
+    foreach ($this->dslamList as $dslam)
+    {
+        ?>
+        <label class='font14'><?= $dslam['name']; ?> [<?= $dslam['ip_address']; ?>] <?= count($dslam['ports']); ?>-портов Тип: <?= $this->dslamTypes[$dslam['type_id']] ?></label>
+        <div class='left'>
+            <a class='font14' href='/tech-dslam/modify/id/<?= $dslam['id']; ?>'>Редактировать</a>
+            &nbsp;
+            <a class='font14' onclick="return confirm('Вы действительно хотите удлаить DSLAM?')" href='/tech-dslam/delete/id/<?= $dslam['id']; ?>'>Удалить</a>
+            &nbsp;
+            <a class='font14' href='/tech-dslam/configure/id/<?= $dslam['id']; ?>'>Настройки</a>
+        </div>
+        <div class='clear'></div>
+        <br />
+        <table class="list" cellpadding="3" cellspacing="0">
+            <tr>
+                <th class='list_head'>Порт</th>
+                <th class='list_head'>Рамка</th>
+                <th class='list_head'>Стан. пара</th>
+                <th class='list_head'>Лин. пара</th>
+                <th class='list_head'>Телефон</th>
+                <th class='list_head'>Скорость</th>
+                <th class='list_head'>Клиент</th>
+                <th class='list_head'>Тип клиента</th>
+                <th class='list_head'>Восстановлен?</th>
+                <th class='list_head'>Перейти</th>
+            </tr>
+            <?
+            if ( is_array($dslam['ports']) )
+            {
+                foreach ($dslam['ports'] as $port)
+                {
+
+					if($port['state'] == 1)
+					{
+						$color = "#D3D3D3";
+					}
+					elseif($port['state'] == 0)
+					{
+						$color = "#D2691E";
+					}
+
+					if($port['portspeed'] == "резервирование")
+					{
+						$color = "#1E90FF";
+					}
+
+					if($port['is_repair'] == 1)
+					{
+						$repairWord = "repair";
+					}
+					else
+					{
+						$repairWord = "";
+					}
+
+                    ?>
+                    <tr style='background-color:<?= $color ?>' class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                        <td class='list_row'><?= $port['number']; ?></td>
+                        <td class='list_row'><?= $port['frame_number']; ?></td>
+                        <td class='list_row'><?= $port['line_number1']; ?></td>
+                        <td class='list_row'><?= $port['line_number2']; ?></td>
+                        <td class='list_row'><?= $port['pcross']; ?></td>
+                        <td class='list_row'><?= $port['portspeed']; ?></td>
+                        <td class='list_row'><?= $port['client_name']; ?></td>
+                        <td class='list_row'>
+                            <?
+                            // If port is empty or broken
+                            if ( ! $port['client_name'] )
+                            {
+                                 $clientType = 'Не установлен';
+                            }
+                            elseif ($port['client_type_id'] === 0 || $port['client_type_id'] === 2 || $port['client_type_id'] === 3) // If client is physical
+                            {
+                                $clientType = 'Корпоративный';
+                            }
+                            elseif ($port['client_type_id'] === 1 || $port['client_type_id'] === 4) // If cliens is juridical
+                            {
+                                $clientType = 'Stream';
+                            }
+
+                            print $clientType;
+                            ?>
+                         </td>
+                         <td class='list_row'><?= $repairWord; ?> <?= date('d.m.Y H:m:s',strtotime($port['modify'])); ?></td>
+                         <td class='list_row'>
+                         	<?
+                         		if($port['status'] <= 0)
+                         		{
+                         			$url = "/Tech-dslam/set-port-status/port_id/".$port['id'];
+                         		}
+                         		else
+                         		{
+                         			$url = "/tech-client/modify/id/".$port['point_id'];
+                         		}
+                         	?>
+                         	<a href="<?= $url; ?>">&gt;&gt;</a>
+                         </td>
+                    </tr>
+                    <?
+                }
+            }
+            ?>
+
+        </table>
+        <br />
+        <?
+    }
+}
+?>

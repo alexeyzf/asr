@@ -1,0 +1,70 @@
+<h1>СТП. Регистрация аварии на АТС</h1>
+<br />
+<a href="/accident/show-frame">
+    <h1><b>создать</b></h1>
+</a>
+--------------------------
+<a href="/Accident/jurnal">
+    <h1><b>Журнал</b></h1>
+</a>
+<br />
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">IP адрес</th>
+        <th class="list_head">Время регист.</th>
+        <th class="list_head" style="width:15%;">Комментарии</th>
+        <th class="list_head">Пользователь</th>
+        <th class="list_head">Метка</th>
+        <th class="list_head">Закрыть проблему</th>
+    </tr>
+<?php
+if ( count($this->dataList) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->dataList as $item)
+    {
+        if($item['ats_id'] != $oldAtsID)
+        {
+            ?>
+                <tr align="center">
+                    <td class="list_row" colspan="8"><h2><?= $item['ats_name']; ?></h2></td>
+                </tr>
+            <?
+        }
+    ?>
+
+
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['ip_address'] ?></td>
+            <td class="list_row"><?= $item['startdate']; ?></td>
+            <td class="list_row"><?= $item['commente']; ?></td>
+            <td class="list_row"><?= $item['username']; ?></td>
+            <td class="list_row"><?= $item['dslam_name']; ?></td>
+            <td class="list_row">
+                <a href="/Accident/close-accident/id/<?= $item['accident_id'] ?>">закрыть</a>
+            </td>
+        </tr>
+    <?
+        $oldAtsID = $item['ats_id'];
+    }
+
+}
+?>
+</table>

@@ -1,0 +1,136 @@
+<h1>Разница счет-фактур</h1>
+<br />
+<br />
+<form name="compare-invoices-form" method="post">
+	<dt><label>Сравнить за</label></dt>
+	<dd>
+		<select name='month_first'>
+			<?= FormHelper::getMonthOptions($this->monthFirst); ?>
+		</select>
+		<select name='year_first'>
+			<?= FormHelper::getYearOptions($this->yearFirst); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label>c</label></dt>
+	<dd>
+		<select name='month_second'>
+			<?= FormHelper::getMonthOptions($this->monthSecond); ?>
+		</select>
+		<select name='year_second'>
+			<?= FormHelper::getYearOptions($this->yearSecond); ?>
+		</select>
+	</dd>
+	<dt><label>детально?:</label></dt>
+	<dd>
+        <input type="checkbox" name="is_detaled" checked="checked" />
+	</dd>
+	<div class='clear'></div>
+
+	<dt>&nbsp;</dt>
+	<dd>
+		<input type="submit" value="Показать" />
+	</dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br /
+<?
+if (is_array($this->data))
+{
+	$preMonth  = array();
+	$nextMonth = array();
+?>
+<table class="list">
+    <tr>
+        <th class="list_head" rowspan="2">Регистрационный номер</th>
+        <th class="list_head" rowspan="2">Название организации</th>
+        <th class="list_head" rowspan="2">Наименование Услуги</th>
+        <th align="center" class="list_head" colspan="2"><?= $this->lastDateFirst ?></th>
+        <th align="center" class="list_head" colspan="2"><?= $this->lastDateSecond ?></th>
+        <th align="center" class="list_head" colspan="2">Разница</th>
+    </tr>
+    <tr>
+        <th class="list_head">Сумма($)</th>
+        <th class="list_head">Сумма(UZS)</th>
+        <th class="list_head">Сумма($)</th>
+        <th class="list_head">Сумма(UZS)</th>
+        <th class="list_head">Сумма($)</th>
+        <th class="list_head">Сумма(UZS)</th>
+    </tr>
+<?
+    $fullSums = array();
+	foreach ($this->data as $key => $row)
+    {
+        if (count($row) == 0)
+        {
+            continue;
+        }
+
+        $sums = array();
+        foreach ($row as $value)
+        {
+            $sums['new_usd'] += $value['new']['usd'];
+            $sums['new_uzs'] += $value['new']['uzs'];
+
+            $sums['old_usd'] += $value['old']['usd'];
+            $sums['old_uzs'] += $value['old']['uzs'];
+
+            $sums['delta_usd'] += ($value['new']['usd'] - $value['old']['usd']);
+            $sums['delta_uzs'] += ($value['new']['uzs'] - $value['old']['uzs']);
+
+            
+            $fullSums['new_usd'] += $value['new']['usd'];
+            $fullSums['new_uzs'] += $value['new']['uzs'];
+
+            $fullSums['old_usd'] += $value['old']['usd'];
+            $fullSums['old_uzs'] += $value['old']['uzs'];
+
+            $fullSums['delta_usd'] += ($value['new']['usd'] - $value['old']['usd']);
+            $fullSums['delta_uzs'] += ($value['new']['uzs'] - $value['old']['uzs']);
+        ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td align="center" class="list_row"><?= $value['client_id'] ?></td>
+                <td class="list_row"><?= $value['client_name'] ?></td>
+                <td class="list_row"><?= $value['service_name'] ?></td>
+
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['old']['usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['old']['uzs']) ?></td>
+
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['new']['usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['new']['uzs']) ?></td>
+
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['new']['usd'] - $value['old']['usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $value['new']['uzs'] - $value['old']['uzs']) ?></td>
+            </tr>
+        <?
+        }
+        ?>
+            <tr style="background: #E70;">
+                <td align="center" class="list_row" colspan="3">&nbsp;</td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['old_usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['old_uzs']) ?></td>
+
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['new_usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['new_uzs']) ?></td>
+
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['delta_usd']) ?></td>
+                <td align="center" class="list_row"><?= sprintf('%.3f', $sums['delta_uzs']) ?></td>
+            </tr>
+    <?
+    }
+}
+?>
+            <tr>
+                <th class="list_head" colspan="3">Итого:</th>
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['old_usd']) ?></th>
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['old_uzs']) ?></th>
+
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['new_usd']) ?></th>
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['new_uzs']) ?></th>
+
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['delta_usd']) ?></th>
+                <th class="list_head" align="center"><?= sprintf('%.3f', $fullSums['delta_uzs']) ?></th>
+            </tr>
+</table>

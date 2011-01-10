@@ -1,0 +1,25 @@
+<h1>Отдел управления сети. Перегрузка портов на DSLAM</h1>
+<br />
+<br />
+<center>
+    <h2>
+        <?php
+            if($this->errors)
+            {
+                foreach($this->errors as $value)
+        	{
+                     echo $value;
+        	}
+            }
+        ?>
+    </h2>
+</center>
+<br />
+<br />
+<br />
+<center>
+    <form action="/Dslam/start" method="post">
+           IP дслама: <input type="text" name="need_ip" />
+            <input type="submit" name="btn1" value="сформировать" />
+    </form>
+</center>

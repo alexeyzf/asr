@@ -1,0 +1,70 @@
+<h1>Акт Сверки</h1>
+<br />
+<br />
+<form action='' method='post'>
+	<dt><label>Год: </label></dt>
+	<dd>
+		<input type='text' name='year' id='year' value='<?= $this->year; ?>' />
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label></label></dt>
+	<dd><input type='submit' value='Сформировать' /></dd>
+	<div class='clear'></div>
+</form>
+
+<?
+if ( is_array($this->transactions) )
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Дата</td>
+			<td class='list_head'>Р.н.</td>
+			<td class='list_head'>Наименование</td>
+			<td class='list_head'>Тип операции</td>
+			<td class='list_head'>Услуга</td>
+			<td class='list_head'>Пользователь</td>
+			<td class='list_head'>Сумма($)</td>
+			<td class='list_head'>Сумма(сум)</td>
+		</tr>
+		<?
+		$total = 0;
+		$totalUzs = 0;
+		
+		foreach ($this->transactions as $tran)
+		{
+			if ($tran['trantype'] < 100)
+			{
+				$total -= $tran['summa'];
+				$totalUzs -= $tran['summas'];
+			}
+			else
+			{
+				$total += $tran['summa'];
+				$totalUzs += $tran['summas'];
+			}
+			
+			?>
+			<tr>
+				<td class='list_row'><?= date('d.m.y G:i:s', strtotime($tran['currenttime'])); ?></td>
+				<td class='list_row'><?= $tran['client_id']; ?></td>
+				<td class='list_row'><?= $tran['client_name']; ?></td>
+				<td class='list_row'><?= $tran['tran_label']; ?></td>
+				<td class='list_row'><?= $tran['servicetype_name']; ?></td>
+				<td class='list_row'><?= $tran['user_name']; ?></td>
+				<td class='list_row right'><?= number_format($tran['summa'], 2, ',', ' '); ?></td>
+				<td class='list_row right'><?= number_format($tran['summas'], 2, ',', ' '); ?></td>
+			</tr>
+			<?		
+		}
+		?>
+		<tr>
+			<td class='list_row right' colspan='5'><b>Всего:</b></td>
+			<td class='list_row right'><b><?= number_format($total, 2, ',', ' '); ?></b></td>
+			<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+		</tr>
+	</table>
+	<?
+} 
+?>

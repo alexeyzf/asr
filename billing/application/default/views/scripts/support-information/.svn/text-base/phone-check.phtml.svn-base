@@ -1,0 +1,30 @@
+<h1>Проверка номера</h1>
+<br/>
+<br/>
+<form method='post'>
+    <dt><label>Номер:</label></dt>
+    <dd><input type='text' name='number' value='<?= $this->number; ?>' /></dd>
+    <div class='clear'></div>
+
+    <dt><label>Город:</label></dt>
+    <dd>
+        <select name='city'>
+            <?= FormHelper::getSelectOptions($this->cities, $this->city); ?>
+        </select>
+    </dd>
+    <div class='clear'></div>
+
+    <dt><label>Тип клиента:</label>
+    <dd>
+        <select name='client_type'>
+            <?= FormHelper::getSelectOptions($this->clientTypes, $this->clientType); ?>
+        </select>
+    </dd>
+    <div class='clear'></div>
+
+    <dt><label>&nbsp;</label></dt>
+    <dd><input type='submit' value='Проверить'></dd>
+    <div class='clear'></div>
+</form>
+
+<center><h2><?= $this->checkResult; ?></h2></center>

@@ -1,0 +1,75 @@
+<h1>Счет-фактуры. Выбор абонентов для отключения генерации счет-фактур</h1>
+<br />
+<h2>Начиная с этого дня выбранным абонентам счет-фактуры генерироваться НЕ будут.</h2>
+<br />
+<br />
+<center>
+<?php
+    if ($this->form)
+        echo $this->form;
+?>
+</center>
+<br />
+<br />
+
+<?
+if (is_array($this->data))
+{
+?>
+<form method="post" action="#" enctype="multipart/form-data">
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" name="save" align="center" />
+             </td>
+        </tr>
+    </table>
+    <div class='space-5h'></div>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">№</th>
+            <th class="list_head">ID</th>
+            <th class="list_head">Название</th>
+            <th class="list_head">&nbsp;</th>
+        </tr>
+        <?
+        $counter = 0;
+        foreach ($this->data as $key => $row)
+        {
+            $counter++;
+        ?>
+            <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row">
+                    <?= $counter ?>
+                </td>
+                <td class="list_row">
+                    <?= $row['client_id'] ?>
+                </td>
+                <td class="list_row">
+                    <?= $row['client_name'] ?>
+                </td>
+                <td class="list_row">
+                    <input type="checkbox"
+                           name="avoiders[<?= $key ?>]"
+                           value="<?= $row['client_id'] ?>"
+                           <?= $row['avoiding_startdate'] ? 'checked="checked"' : '' ?> />
+                </td>
+            </tr>
+        <?
+        }
+        ?>
+    </table>
+    <div class='space-5h'></div>
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" name="save" align="center" />
+             </td>
+        </tr>
+    </table>
+</form>
+<?
+}
+?>

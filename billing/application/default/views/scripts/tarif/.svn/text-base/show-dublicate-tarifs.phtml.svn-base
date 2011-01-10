@@ -1,0 +1,30 @@
+<h1>Дублирующиеся тарифные планы</h1>
+<br />
+<br />
+<table class="list">
+	<tr>
+		<th class="list_head">Услуга</th>
+		<th class="list_head">ID услуги</th>
+		<th class="list_head">Цена</th>
+		<th class="list_head">Скорость</th>
+		<th class="list_head">Лимит</th>
+		<th class="list_head">Безлимтный</th>
+		<th class="list_head">Кол-во дубликатов</th>
+	</tr>
+	<?
+	foreach ($this->tarifs as $tarif)
+	{
+		?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class="list_row"><?= strtoupper($tarif['tablelink']); ?></td>
+			<td class="list_row"><?= $tarif['servicetype_id']; ?></td>
+			<td class="list_row"><?= number_format($tarif['tarif_price'], 2, ',', ' '); ?></td>
+			<td class="list_row"><?= $tarif['speed']; ?></td>
+			<td class="list_row"><?= $tarif['limit']; ?></td>
+			<td class="list_row"><?= $tarif['unlimit'] ? 'Да' : 'Нет'; ?></td>
+			<td class="list_row"><?= $tarif['tarif_count']; ?></td>
+		</tr>
+		<?
+	}
+	?>
+</table>

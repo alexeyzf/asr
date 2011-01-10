@@ -1,0 +1,40 @@
+<h1>Неоплаченные порты</h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Клиент</th>
+		<th class='list_head'>Балланс</th>
+		<th class='list_head'>Телефон кроcсировки</th>
+		<th class='list_head'>Логин</th>
+		<th class='list_head'>Скорость по тарифу</th>
+		<th class='list_head'>Цена по тарифу</th>
+	</tr>
+	<?
+	foreach ($this->result as $row)
+	{
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'>
+				<a href='/clientinfo/index/clientid/<?= $row['client_id'] ?>'><?= $row['client_name'] ?></a>
+			</td>
+			<td class='list_row right'>
+				<?= number_format($row['ballance'], 2, ',', ' '); ?>
+			</td>
+			<td class='list_row'>
+				<?= $row['pcross']; ?>
+			</td>
+			<td class='list_row'>
+				<?= $row['u_login']; ?>
+			</td>
+			<td class='list_row'>
+				<?= $row['speed']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= number_format($row['tarif_price'], 2, ',', ' '); ?>
+			</td>
+		</tr>
+		<?
+	} 
+	?>
+</table>

@@ -1,0 +1,41 @@
+<h1><?= $this->typeName; ?> за <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<td class='list_head' style='width: 5%'>N</td>
+		<td class='list_head' style='width: 15%'>Дата</td>
+		<td class='list_head' style='width: 5%'>Р.н. клиента</td>
+		<td class='list_head' style='width: 40%'>Наименование</td>
+		<td class='list_head' style='width: 5%'>Пользователь</td>
+		<td class='list_head' style='width: 5%'>Комментарии</td>
+		<td class='list_head' style='width: 15%'>Сумма($)</td>
+		<td class='list_head' style='width: 15%'>Сумма(сум)</td>
+	</tr>
+	<?
+	$i = 1;
+	
+	foreach ($this->data as $tran)
+	{
+		$total += $tran['amount_usd'];
+		$totalUzs += $tran['amount_uzs'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $i++; ?></td>
+			<td class='list_row'><?= date('d.m.y G:i:s', strtotime($tran['currenttime'])); ?></td>
+			<td class='list_row'><?= $tran['client_id']; ?></td>
+			<td class='list_row'><?= $tran['client_name']; ?></td>
+			<td class='list_row'><?= $tran['first_name'] . ' ' . $tran['last_name']; ?></td>
+			<td class='list_row'><?= $tran['commente']; ?></td>
+			<td class='list_row right'><?= number_format($tran['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($tran['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	} 
+	?>
+	<tr>
+		<td class='list_row right' colspan='6'><b>Всего:</b></td>
+		<td class='list_row right'><b><?= number_format($total, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>

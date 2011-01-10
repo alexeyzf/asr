@@ -1,0 +1,93 @@
+<h1>Неопределенные номера</h1>
+<br />
+<br />
+<form method="post" name='unresolved-numbers-form' action='#'>
+	<dt><label>Год: </label></dt>
+	<dd>
+		<select name='year'>
+			<?= FormHelper::getYearOptions($this->year); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+	
+	<dt><label></label></dt>
+	<dd><input type='submit' name='show' value='Показать' /></dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{
+	$monthTotal = array();
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Номер</th>
+			<th class='list_head'>Январь</th>
+			<th class='list_head'>Февраль</th>
+			<th class='list_head'>Март</th>
+			<th class='list_head'>Апрель</th>
+			<th class='list_head'>Май</th>
+			<th class='list_head'>Июнь</th>
+			<th class='list_head'>Июль</th>
+			<th class='list_head'>Август</th>
+			<th class='list_head'>Сентябрь</th>
+			<th class='list_head'>Октябрь</th>
+			<th class='list_head'>Ноябрь</th>
+			<th class='list_head'>Декабрь</th>
+			<th class='list_head'>Итого</th>
+		</tr>
+		<?
+	 	foreach ($this->data as $number => $numberData)
+	 	{
+	 		$numberTotal = 0;
+	 		for ($i = 1; $i <= 12; $i++)
+	 		{
+	 			$numberTotal += $numberData[$i]['amount'];
+	 			$monthTotal[$i] += $numberData[$i]['amount'];
+	 		}
+	 		
+	 		?>
+	 		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	 			<td class='list_row right'>
+	 				<a href='/report/phone-number-calls/number/<?= $number; ?>/year/<?= $this->year; ?>'><?= $number; ?></a>
+	 			</td>
+	 			<?
+	 			for ($i = 1; $i <= 12; $i++)
+	 			{ 
+	 				?>
+	 				<td class='list_row right'><?= number_format($numberData[$i]['amount'], 2, ',', ' '); ?></td>
+	 				<?
+	 			} 
+	 			?>
+	 			<td class='list_row right'><?= number_format($numberTotal, 2, ',', ' '); ?></td>
+	 		</tr>
+	 		<?
+	 	}
+		?>
+		<tr>
+			<td class='list_row right'>
+				<b>Всего:</b>
+			</td>
+			<?
+			$superTotal = 0;
+			
+ 			for ($i = 1; $i <= 12; $i++)
+ 			{ 
+ 				$superTotal += $monthTotal[$i]; 
+ 				?>
+ 				<td class='list_row right'>
+ 					<b><?= number_format($monthTotal[$i], 2, ',', ' '); ?></b>
+ 				</td>
+ 				<?
+ 			} 
+ 			?>
+ 			<td class='list_row right'>
+ 				<b><?= number_format($superTotal, 2, ',', ' '); ?></b>
+ 			</td>
+		</tr>
+	</table>
+	<?
+} 
+?>

@@ -1,0 +1,78 @@
+<h1>Редактировать</h1>
+<br/>
+<br/>
+<center>
+<form action="/Tarif/addcomponent" method="post" >
+<table border="0" id="labelfortarif" cellspacing="7">
+<tr>
+	<td>
+		<b>Тип услуги:</b>
+	</td>
+	<td>
+		<?= $this->data['servicetype_name'] ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>Тарифный план: </b>
+	</td>
+	<td align="left">
+		 <?= $this->data['tarif_name'] ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>Имя составляющего тарифа:</b>
+	</td>
+	<td>
+		<?= $this->form->component_name ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>День недели:</b>
+	</td>
+	<td>
+		<?= $this->form->weekday ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>Время начала действия:</b>
+	</td>
+	<td>
+		<?= $this->form->hours ?>
+		<?= $this->form->minut ?>
+		<?= $this->form->sec ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>Время окончания действия:</b>
+	</td>
+	<td>
+		<?= $this->form->hoursend ?>
+		<?= $this->form->minutend ?>
+		<?= $this->form->secend ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>Цена:</b>
+	</td>
+	<td>
+		<?= $this->form->traffic_excess ?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<input type="hidden" name="tarif_id" value="<?= $this->nowtarif ?>" />
+		<input type="hidden" name="comp_id" value="<?= $this->data['component_id'] ?>" />
+	</td>
+	<td>
+		<input type="submit" value="сохранить" name="save" />
+	</td>
+</tr>
+</table>
+</form>
+</center>

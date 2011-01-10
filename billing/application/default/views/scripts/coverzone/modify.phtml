@@ -1,0 +1,42 @@
+<h1><?= ! $this->isNew ? 'Редактирование' : 'Добавление'; ?> Города</h1>
+<br />
+<br />
+<form method="post" action="">
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/techats')"/>
+             </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <?php echo $this->form->code; ?>
+    <div class='clear'></div>
+
+    <?php echo $this->form->name; ?>
+    <div class='clear'></div>
+
+    <?php echo $this->form->prefix; ?>
+    <div class='clear'></div>
+
+    <input type='hidden' name='id' value='<?= $this->cityID; ?>' />
+    <input type='hidden' name='ats_id' value='<?= $this->atsID; ?>' />
+
+    <br />
+    <br />
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/techats')"/>
+             </td>
+        </tr>
+    </table>
+</form>

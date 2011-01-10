@@ -1,0 +1,63 @@
+<h1>Абоенты по регионам</h1>
+<br />
+<br />
+<h2>Использоваие тарифных планов по регионам</h2>
+<br />
+<br />
+
+<center>
+    <?= $this->form ?>
+</center>
+
+<?
+if ($this->data)
+{
+?>
+    <br />
+    <br />
+    <br />
+    <br />
+    <?
+    foreach (array(0 => 'Корпоративные Клиенты', 1 => 'Клиенты Stream') as $typeId => $caption)
+    {
+    ?>
+        <h2><?= $caption ?></h2>
+        <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">№</th>
+            <th class="list_head">Тарифный Плана</th>
+            <th class="list_head">Количество Точек</th>
+            <th class="list_head">Абон. плата $</th>
+            <th class="list_head">Перелимит $</th>
+            <th class="list_head">Итого</th>
+        </tr>
+    <?
+        $counter = 0;
+        foreach ($this->data[$typeId] as $row)
+        {
+            $counter++;
+    ?>
+        <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter ?></td>
+            <td class="list_row">
+                <a href="/report/clients-by-region-and-tarif/region/<?= $this->region ?>/tarif/<?= $row['tarif_id'] ?>/startdate/<?= $this->dates['startdate'] ?>/enddate/<?= $this->dates['enddate'] ?>/">
+                    <?= $row['tarif_name'] ?>
+                </a>
+            </td>
+            <td class="list_row"><?= $row['amount'] ?></td>
+            <td class="list_row"><?= $row['price'] ?></td>
+            <td class="list_row"><?= $row['overlimit'] ?></td>
+            <td class="list_row"><?= $row['price'] + $row['overlimit'] ?></td>
+        </tr>
+    <?
+        }
+    ?>
+        </table>
+        <br />
+        <br />
+    <?
+    }
+    ?>
+<?
+}
+?>

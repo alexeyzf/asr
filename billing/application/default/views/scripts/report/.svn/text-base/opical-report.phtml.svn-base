@@ -1,0 +1,55 @@
+<h1>Отчеты. Оптика (Зона охвата)</h1>
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th align="center" rowspan="3" class="list_head">Город (Ташкент)</th>
+        <th align="center" class="list_head">Да</th>
+        <th align="center" class="list_head">Нет</th>
+    </tr>
+<?php
+if ( count($this->getClients) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+
+    
+    foreach($this->getClients as $value)
+    {
+        if($value['expanded'] == "true")
+        {
+            $true = $value;
+        }
+        else
+        {
+            $false = $value;
+        }
+
+    }
+
+    $total = $true['cc'] + $false['cc'];
+    $truePercent = $true['cc'] * 100 / $total;
+    $falsePercent = $false['cc'] * 100 / $total;
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td align="center" class="list_row"><?= $true['cc'] ?> клиентов</td>
+            <td align="center" class="list_row"><?= $false['cc'] ?> клиентов</td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td align="center" class="list_row"><?= $truePercent  ?> %</td>
+            <td align="center" class="list_row"><?= $falsePercent ?> %</td>
+        </tr>
+    <?
+}
+?>
+</table>

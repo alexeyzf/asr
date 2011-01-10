@@ -1,0 +1,98 @@
+<h1>Отдел продаж. Модемы</h1>
+<br />
+<br />
+<center>
+    <form action="/Report/modem-sells" method="post">
+		<span class='font14'>Год:</span> 
+        <select size="1"  name="year" >
+            <?
+            $years[2009] = 2009;
+            $years[2010] = 2010;
+            $years[2011] = 2011;
+            $years[2012] = 2012;
+            $years[2013] = 2013;
+            
+            print FormHelper::getSelectOptions($years, $this->year); 
+            ?>
+       </select>&nbsp;&nbsp;&nbsp;&nbsp;
+       <span class='font14'>Тип клиента:</span>
+       <select name='ctype'>
+       		<?
+       		$ctypes['1'] = "Stream";
+       		$ctypes["0"] = "Корп" ;
+       		
+       		print FormHelper::getSelectOptions($ctypes, $this->ctype);
+       		?>
+       </select>&nbsp;&nbsp;&nbsp;&nbsp;
+       <input type="submit" name="btn1" value="Показать" />
+    </form>
+</center>
+
+
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Клиент</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Серия</th>
+        <th class="list_head">Дата</th>
+    </tr>
+<?php
+
+    $months = array (
+        1 => 'Январь',
+        2 => 'Февраль',
+        3 => 'Март',
+        4 => 'Апрель',
+        5 => 'Май',
+        6 => 'Июнь',
+        7 => 'Июль',
+        8 => 'Август',
+        9 => 'Сентябрь',
+        10 => 'Октябрь',
+        11 => 'Ноябрь',
+        12 => 'Декабрь'
+    );
+    $currentMonth = -1;
+    $rowCounter = 0;
+
+    if ( count($this->data) == 0 )
+    {
+        ?>
+            <tr>
+                <td colspan="5" class="list_row center">
+                    Не найдено
+                </td>
+            </tr>
+        <?
+    }
+    else
+    {
+        foreach($this->data as $row)
+        {
+            $rowCounter++;
+            if($currentMonth != date('m', strtotime($row['client_dateagree'])))
+            {
+                $currentMonth = (int)date('m', strtotime($row['client_dateagree']));
+?>              
+                <tr class="list_tr">
+                    <td align="center"  class="list_row" colspan="5"><h2><?= $months[$currentMonth] ?></h2></td>
+                </tr>
+            <?
+            } 
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $rowCounter ?></td>
+                <td class="list_row"><?= $row['client_name'] ?></td>
+                <td class="list_row"><?= $row['client_id'] ?></td>
+                <td class="list_row"><?= $row['modem_serial'] ?></td>
+                <td class="list_row"><?= $row['client_dateagree'] ?></td>
+            </tr>
+ <?
+        }
+    }
+?>
+</table>

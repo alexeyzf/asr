@@ -1,0 +1,73 @@
+<h1>Тарифы. Отчет по скоростям</h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+
+<br />
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head" rowspan='2'>Регион</th>
+        <?
+        foreach ($this->data as $tarifSpeed => $data)
+        {
+        	?>
+        	<th class="list_head" colspan='2'><?= $tarifSpeed; ?></th>
+        	<?
+        }
+        ?>
+   </tr>
+   <tr>
+   		<?
+        foreach ($this->data as $data)
+        {
+        	?>
+        	<th class="list_head">Корп</th>
+        	<th class="list_head">Физ</th>
+        	<?
+        }
+        ?>
+    </tr>
+    <tr>
+    	<td class='list_row'>Ташкент</td>
+    	<?
+        foreach ($this->data as $data)
+        {
+        	?>
+        	<td class='list_row'><?= $data[0][0]; ?></td>
+        	<td class='list_row'><?= $data[0][1]; ?></td>
+        	<?
+        }
+        ?>
+    </tr>
+    <tr>
+    	<td class='list_row'>Самарканд</td>
+    	<?
+        foreach ($this->data as $data)
+        {
+        	?>
+        	<td class='list_row'><?= $data[1][0]; ?></td>
+        	<td class='list_row'><?= $data[1][1]; ?></td>
+        	<?
+        }
+        ?>
+    </tr>
+    <tr>
+    	<td class='list_row'>Бухара</td>
+    	<?
+        foreach ($this->data as $data)
+        {
+        	?>
+        	<td class='list_row'><?= $data[2][0]; ?></td>
+        	<td class='list_row'><?= $data[2][1]; ?></td>
+        	<?
+        }
+        ?>
+    </tr>
+</table>

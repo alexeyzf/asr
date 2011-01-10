@@ -1,0 +1,66 @@
+<script language="JavaScript" type="text/javascript">
+    function setDiscount(is_true)
+    {
+		if(is_true)
+		{
+			$("input[name='discount']")[0].disabled = false;
+			$("textarea[name='discountcomment']")[0].disabled = false;
+		}
+		else
+		{
+			$("input[name='discount']")[0].disabled = true;
+			$("textarea[name='discountcomment']")[0].disabled = true;
+		}
+
+    }
+
+	function setPrice()
+    {
+
+		$("input[name='tarif_speed_unlim']").keyup(function()
+		{
+	      var value = $(this).val();
+
+	      if(value <= 256)
+	      {
+	      		var tarif_price = value * 0.40;
+	      }
+	      else
+	      {
+	      		var tarif_price = (256 * 0.40) + (value - 256) * 0.60;
+	      }
+
+		  if(value <= 256)
+		  {
+		  		var upSpeed = value;
+		  }
+		  else
+		  {
+		  		var upSpeed = 256 + ((value - 256) / 2);
+		  }
+
+	      $("input[name='tarif_price_unlim']").val(tarif_price.toFixed(1));
+	      $("input[name='tarif_speed_up_unlim']").val(Math.ceil(upSpeed));
+
+	    }).keyup();
+    }
+</script>
+<form action="/Service/add" method="post">
+<h1>Абонентский отдел.Добавление новой услуги</h1>
+<br/>
+<br/>
+<?
+if ($this->message)
+{
+	?>
+	<center class='font14'>
+		<?= $this->message ?>&nbsp;&nbsp;<a href='#'  onClick='history.go(-3);'>Назад</a>
+	</center>
+	<?
+}
+else
+{
+	print $this->form;
+}
+?>
+</form>

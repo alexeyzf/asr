@@ -1,0 +1,81 @@
+<center>
+	<img src="images/logo_uncross_mass.png" border="0" height="150" width="550" />
+</center>
+<br />
+<table border="0" width="100%">
+<tr align="left">
+	<td>‭№КР-{#number}</td>
+</tr>
+<tr align="left">
+    <td>‭{#datetime}</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr align="rigth">
+	<td>
+		Директору {#phone_hub_case_name}<br />
+		телефонного узла связи<br />‭
+		филиала "ТшТТ"<br />
+		АК "Узбектелеком"<br />
+		<b style="font-family:arialbd">{#phone_hub_case_director}</b><br />
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+
+
+<table border="0" width="100%">
+<tr align="center">
+	<td>
+		<center><h1><b style="font-family:arialbd">Уважаемый  {#phone_hub_director}!</b></h1></center>
+	</td>
+</tr>
+<tr>
+	<td>
+	<br />
+		В связи с расторжением договора и исключением из биллинга компании, ООО «Sharq Telekom» просит Вас снять кроссировку телефонного
+		номера <b style="font-family:arialbd">{#pcross}</b> с нашей рамки <b style="font-family:arialbd">{#frame_number}</b>, пары <b style="font-family:arialbd">{#line_number1}</b> (станция) ,   <b style="font-family:arialbd">{#line_number2}</b> (линия) в <b style="font-family:arialbd">{#ats_name}</b>.
+	</td>
+</tr>
+</table>
+<br />
+<table border="0" width="100%">
+<tr align="center">
+	<td align="left">
+		Предоплата произведена
+	</td>
+</tr>
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<table border="0" width="100%">
+<tr align="center">
+	<td align="left">
+		С уважением <br />
+		Генеральный директор
+	</td>
+	<td align="right">
+		<b style="font-family:arialbd">Садыков С. И.</b>
+	</td>
+</tr>
+</table>
+

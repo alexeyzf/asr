@@ -1,0 +1,53 @@
+<h1>Отдел управления сети. Указания на установку IP-адресов</h1>
+<br />
+<br />
+<table class="list">
+    <tr>
+        <th class="list_head">Действие</th>
+        <th class="list_head">N</th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/u_login">Логин</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/pcross">Телефон</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/client_name">Наим.</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/ats">АТС</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/dslam_ip">DSLAM</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/servicetype_name">Тип услуги</a>
+        </th>
+        <th class="list_head">
+            <a class="link" href="/net-admin-service-attribute/index/orderBy/tarif_name">Тариф</a>
+        </th>
+    </tr>
+
+    <?
+    $counter = 1;
+
+    foreach ($this->list as $row)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">
+                <a href="/net-admin-service-attribute/modify/point_id/<?= $row['point_id']; ?>/service_type_id/<?= $row['servicetype_id']; ?>">Редактировать</a>
+            </td>
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $row['u_login']; ?></td>
+            <td class="list_row"><?= $row['pcross']; ?></td>
+            <td class="list_row"><?= $row['client_name']; ?></td>
+            <td class="list_row"><?= $row['ats']; ?></td>
+            <td class="list_row"><?= $row['dslam_ip']; ?></td>
+            <td class="list_row"><?= $row['servicetype_name']; ?></td>
+            <td class="list_row"><?= $row['tarif_name']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>

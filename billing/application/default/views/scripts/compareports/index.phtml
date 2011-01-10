@@ -1,0 +1,111 @@
+<h1>Сравнение портов</h1>
+<br />
+<br />
+<br />
+<center><h2>Клиенты с отрицательным балансом и поднятым портом</h2></center>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Факс</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Овердрафт</th>
+        <th class="list_head">Цена</th>
+    </tr>
+<?php
+if ( count($this->arr) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->arr as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['client_id'] ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $ats['client_id'] ?>/pointid/" >
+            		<?= $ats['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ats['ballance']; ?></td>
+            <td class="list_row"><?= $ats['fax']; ?></td>
+            <td class="list_row"><?= $ats['phone']; ?></td>
+            <td class="list_row"><?= $ats['overdraft']; ?></td>
+            <td class="list_row"><?= $ats['tarif_price']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>
+
+
+<br />
+<br />
+<br />
+<center><h2>Клиенты у которых скорость на порту и по тарифу разная</h2></center>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">ID точки</th>
+        <th class="list_head">По тарифу</th>
+        <th class="list_head">На порту</th>
+    </tr>
+<?php
+if ( count($this->arrSpeed) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->arrSpeed as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['client_id'] ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $ats['client_id'] ?>/pointid/" >
+            		<?= $ats['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ats['ballance']; ?></td>
+            <td class="list_row"><?= $ats['u_login']; ?></td>
+            <td class="list_row"><?= $ats['point_id']; ?></td>
+            <td class="list_row"><?= $ats['speed']; ?></td>
+            <td class="list_row"><?= $ats['last_speed']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>

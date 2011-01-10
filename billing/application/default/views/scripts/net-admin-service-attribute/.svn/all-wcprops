@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3454/billing/application/default/views/scripts/net-admin-service-attribute
+END
+show-port-history.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/3453/billing/application/default/views/scripts/net-admin-service-attribute/show-port-history.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1767/billing/application/default/views/scripts/net-admin-service-attribute/index.phtml
+END
+modify.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3454/billing/application/default/views/scripts/net-admin-service-attribute/modify.phtml
+END
+addtask.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/2170/billing/application/default/views/scripts/net-admin-service-attribute/addtask.phtml
+END

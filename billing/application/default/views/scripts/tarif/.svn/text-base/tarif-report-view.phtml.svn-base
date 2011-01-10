@@ -1,0 +1,53 @@
+<h1>Тарифы. Клиенты с тарифным планом - <?= $this->data[0]['tarif_name']; ?></h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+
+<br />
+<br />
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование клиента</th>
+        <th class="list_head">Логин</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row">
+                <a target="_blank" href="/Clientinfo/index/clientid/<?= $ats['client_id']; ?>/pointid/<?= $ats['point_id']; ?>" >
+            		<?= $ats['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $ats['u_login']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+
+</table>

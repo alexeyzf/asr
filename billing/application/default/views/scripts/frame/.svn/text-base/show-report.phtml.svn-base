@@ -1,0 +1,63 @@
+<h1>Отчет по рамкам</h1>
+<br />
+<br />
+<form name='show_report_form' method="post">
+	<dt><label>Выберите АТС</label></dt>
+	<dd>
+		<select name='ats_id'>
+			<?= FormHelper::getSelectOptions($this->atsList, $this->atsID, true); ?>
+		</select>
+		<input type='submit' value='Показать' />
+	</dd>
+	<div class='clear'></div>
+</form>
+<?php
+if ( is_array($this->frames) )
+{
+	foreach ($this->frames as $frame)
+	{
+		?>
+		<h2><?= $frame[0]['frame_number'] ?></h2>
+		<br />
+		<table class='list'>
+			<tr>
+				<th class='list_head' style='width: 10%'>Номер пары</th>
+				<th class='list_head' style='width: 40%'>Dslam</th>
+				<th class='list_head' style='width: 10%'>Номер порта</th>
+				<th class='list_head' style='width: 40%'>Клиент</th>
+			</tr>
+			
+			<?php 
+			foreach ($frame as $item)
+			{
+				?>
+				<tr>
+					<td class='list_row'>
+						<?= $item['pair']; ?>
+					</td>
+					<td class='list_row'>
+						<?= $item['dslam'] ?>
+					</td>
+					<?
+					if ( ! $item['noprint'] )
+					{ 
+						?>
+						<td class='list_row' rowspan="<?= $item['rowspan']; ?>">
+							<?= $item['number'] ?>	
+						</td>
+						<td class='list_row' rowspan="<?= $item['rowspan']; ?>">
+							<?= $item['client_name'] ?>	
+						</td>
+						<?
+					} 
+					?>
+				</tr>
+				<?
+			}
+			?>
+		</table>
+		<br />
+		<br />
+	<?
+	} 
+}

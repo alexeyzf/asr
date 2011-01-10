@@ -1,0 +1,23 @@
+<h1>Предупреждение об отрицательном баллансе</h1>
+<br />
+<br />
+<span class='font16 font-red'>
+Клиент с указанными аттрибутами был найден с отрицательным 
+баллансом в архивной базе.
+<br />
+Наименование клиента: <a target="_blank" href='/clientarhiv/view/id/<?= $this->data['client_id'] ?>'><?= $this->data['client_name']; ?></a>
+<br /> 
+Балланс: <?= $this->data['ballance']; ?>
+<br /> 
+Выберите действие:
+</span>
+<br />
+<br />
+<input type='button' value='Игнорировать предупреждение' onclick="redirect('/employee/client-ignore-warning')" />
+<br />
+<br />
+<input type='button' value='Отменить заведение клиента' onclick="redirect('/employee/client-cancel-warning')" />
+<br />
+<br />
+<input type='button' value='Перенести баланс на нового клиента' onclick="redirect('/employee/client-fix-warning')" />
+<br />

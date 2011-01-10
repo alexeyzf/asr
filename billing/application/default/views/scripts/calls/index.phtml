@@ -1,0 +1,82 @@
+<h1>Абонентский отдел. Вызов специалиста</h1>
+<form action="/Calls/save" method="post" >
+<table class="list" cellpadding="0" cellspacing="0" >
+<tr>
+	<th class="list_head">N</th>
+	<th class="list_head">телефон</th>
+	<th class="list_head">АТС</th>
+	<th class="list_head">Dslam</th>
+	<th class="list_head">N порта</th>
+	<th class="list_head">ФИО</th>
+	<th class="list_head">номер договора</th>
+	<th class="list_head">дата договора</th>
+	<th class="list_head">Действие*</th>
+	<th class="list_head">Дата статуса**</th>
+	<th class="list_head">Серия модема***</th>
+	<th class="list_head">Анкета</th>
+</tr>
+<?php
+// Вывод информации
+
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+
+		 if ($item['statuscall'] == CallStatusHelper::TYPE_NEWCALL)
+            {
+                $color = '#CCCCCC';
+            }
+            elseif ($item['statuscall'] == CallStatusHelper::TYPE_INPROCESS)
+            {
+                $color = '#bdffbb';
+            }
+            elseif ($item['statuscall'] == CallStatusHelper::TYPE_INLINE)
+			{
+                $color = '#92c6dc';
+            }
+		$c = $n+1;
+		echo ('
+			<tr style="background-color:'.$color.'" >
+				<td class="list_row">'.$c.'</td>
+				<td class="list_row">'.$item['pcross'].'</td>
+				<td class="list_row">'.$item['name'].'</td>
+				<td class="list_row">'.$item['dslam_name'].'</td>
+				<td class="list_row">'.$item['port_id'].'</td>
+				<td class="list_row">
+					<a href="/Clientinfo/index/clientid/'.$item['client_id'].'/pointid/'.$item['point_id'].'">
+						'.$item['client_name'].'
+					</a>
+				</td>
+				<td class="list_row">'.$item['contract_number'].'</td>
+				<td class="list_row">'.$item['dateagree'].'</td>
+				<td class="list_row" align="center">
+					<select name="calls['.$item['point_id'].'][status]" onchange="markChanged('.$item['point_id'].');" >
+                        '.FormHelper::getSelectOptions($this->status, $item['statuscall']).'
+                    </select>
+					<input type="checkbox" name="calls['.$item['point_id'].'][flag]" onchange="markChanged('.$item['point_id'].');" />
+				</td>
+				<td class="list_row">'.$item['last_change'].'</td>
+				<td class="list_row">
+					<input type="text" name="calls['.$item['point_id'].'][whatmodem]" value="'.$item['modem_serial'].'" />
+				</td>
+				<td class="list_row">
+					<a href="/Printerdoc/questionnaire/client_id/'.$item['client_id'].'/point_id/'.$item['point_id'].'" > распечатать</a>
+				</td>
+			</tr>
+		');
+		$n++;
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>
+<br/>
+<br/>
+<input type="submit" name="send" value="сохранить" />
+</form>
+

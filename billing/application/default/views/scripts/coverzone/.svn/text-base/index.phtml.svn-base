@@ -1,0 +1,52 @@
+<h1>Зона охвата</h1>
+<br />
+<br />
+<form method='post'>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Код города</th>
+        <th class="list_head">Название</th>
+        <th class="list_head">Добавить в раздел "АТС"</th>
+    </tr>
+<?
+if ( count($this->cities) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="4" class="list_row center">
+            Не найдено ни одного города
+        </td>
+    </tr>
+    <?
+}
+else
+{
+    foreach ($this->cities as $city)
+    {
+        ?>
+        <tr onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'><?= $city['id']; ?></td>
+            <td class='list_row'><?= $city['name']; ?></td>
+            <td class='list_row'>
+                <input type='checkbox' name='cities[<?= $city['id'] ?>][is_enabled]' <?= $city['is_enabled'] == 1 ? 'checked' : ''; ?> value='1' />
+                <input type='hidden' name='cities[<?= $city['id'] ?>][id]' value='<?= $city['id'] ?>' />
+            </td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>
+
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить город" onclick="redirect('/coverzone/modify/ats_id/<?= $this->atsID; ?>')" />
+            <input type="submit" value="Сохранить" />
+            <input type='button' value='Вернуться' onclick="redirect('/techats/modify/id/<?= $this->atsID; ?>')" />
+         </td>
+    </tr>
+</table>
+</form>

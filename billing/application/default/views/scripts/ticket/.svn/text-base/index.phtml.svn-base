@@ -1,0 +1,45 @@
+<h1>Электронные билеты</h1>
+<br />
+<?
+if ($this->error)
+{
+	?>
+	<div id='message'>
+    	<?= $this->error; ?>
+	</div>
+	<?
+} 
+?>
+<br />
+<center>
+	<input type="button" value="Добавить" onclick="redirect('/ticket/add-event')" />
+</center>
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Действие</th>
+		<th class='list_head'>Оргнизация</th>
+		<th class='list_head'>Дата события</th>
+		<th class='list_head'>Кол-во билетов</th>
+		<th class='list_head'>Кол-во проданных билетов</th>
+	</tr>
+	<?
+	foreach ($this->events as $event) 
+	{
+		?>
+		<tr>
+			<td class='list_row'>
+				<a href='/ticket/drop-event/org/<?= $event['organization_code'] ?>/time/<?= strtotime($event['event_time']); ?>'
+					onclick='return confirm("Вы действительно хотите удалить событие?")'>
+					Удалить
+				</a>
+			</td>
+			<td class='list_row'><?= $this->translate($event['organization_code']); ?></td>
+			<td class='list_row'><?= date('d.m.Y H:i', strtotime($event['event_time'])); ?></td>
+			<td class='list_row'><?= $event['ticket_count']; ?></td>
+			<td class='list_row'><?= $event['ticket_sold_count']; ?></td>
+		</tr>
+		<?
+	} 
+	?>
+</table>

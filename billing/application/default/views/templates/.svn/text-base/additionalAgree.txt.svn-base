@@ -1,0 +1,138 @@
+<table width="100%" style="font-family: arial">
+    <tr>
+        <td align=center>
+            <h2>ДОПОЛНИТЕЛЬНОЕ СОГЛАШЕНИЕ N {$number} ({$pointID})</h2>
+        </td>
+    </tr>
+    <tr>
+        <td align=right>
+            <br />От {$start_date_pr}<br />К договору N {$contractNumber}<br />от {$contractDate}
+        </td>
+    </tr>
+</table>
+<br>
+<span style="text-align:justify;font-family: arial">
+ООО "{$companyName}", именуемое в дальнейшем "ИСПОЛНИТЕЛЬ", осуществляющее
+свою деятельность на основании лицензий АА N 0003301, АА N 0003302, <br/>АА N 0003299 и АА N 0003300, выданных
+Агентством связи и информатизации Узбекистана, в лице {$director}, действующего на
+основании Устава, с одной стороны, и {$clientName}, именуемый в дальнейшем
+"ЗАКАЗЧИК",в лице {$sign_name}., с другой стороны, действующего на основании
+_____________, именуемые в дальнейшем каждый в отдельности СТОРОНА, а вместе СТОРОНЫ, заключили
+настоящее Дополнительное соглашение о нижеследующем:
+<br>
+<ol type=1>
+    <li>Согласно пункту 2.2. Договора N {$contractNumber} от {$contractDate} объем и технические характеристики
+        выбранных ЗАКАЗЧИКОМ и предоставляемых по настоящему Договору Услуг определяются в соответствии с
+        Приложением N1 "Заказ на предоставление услуг связи  от {$start_date_pr}, являющегося неотъемлемой
+        частью Дополнительного соглашения.
+    </li>
+    <li>
+    	Согласно пункту 4.3. Договора N {$contractNumber} от {$contractDate}. стоимость Услуг связи определяется в
+        соответствии с Приложением N2 "Протокол согласования договорной цены на стоимость услуги" к Заказу "Заказ на предоставление услуг связи  от {$start_date_pr}, являющегося неотъемлемой
+        частью Дополнительного соглашения.
+     </li>
+</ol>
+Остальные пункты Договора N {$contractNumber} от {$contractDate} считать неизменными. <br />
+</span>
+<b style="font-family: arialbd">Настоящее Дополнительное соглашение  от {$start_date_pr} к Договору N {$contractNumber} от {$contractDate} вступает в силу с момента подписания его обеими СТОРОНАМИ.</b>
+<br>
+<br>
+<table border="1" width="100%" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td width=256>
+            <table cellspacing=2 cellpadding=1>
+                <tr>
+                    <td width=75>Исполнитель:</td>
+                    <td>ООО "{$companyName}"</td>
+                </tr>
+                <tr>
+                    <td width=75>Адрес:</td>
+                    <td>{$companyAddress}</td>
+                </tr>
+                <tr>
+                    <td width=75>Телефон:</td>
+                    <td>{$companyPhone}, факс {$companyFax}</td>
+                </tr>
+                <tr>
+                    <td width=75>Р/с:</td>
+                    <td>{$companySattlementAccount}</td>
+                </tr>
+                <tr>
+                    <td width=75>в:</td>
+                    <td>{$companyBank}</td>
+                </tr>
+                <tr>
+                    <td width=75>Город:</td>
+                    <td>Ташкент</td>
+                </tr>
+                <tr>
+                    <td width=75>МФО:</td>
+                    <td>{$companyMfo}</td>
+                </tr>
+                <tr>
+                    <td width=75>ИНН:</td>
+                    <td>{$companyINN}</td>
+                </tr>
+                <tr>
+                    <td width=75>ОКОНХ:</td>
+                    <td>{$companyOkonx}</td>
+                </tr>
+                <tr>
+                    <td width=75>почтовый адрес:</td>
+                    <td>{$companyZipAddress}</td>
+                </tr>
+            </table>
+        </td>
+        <td width=256>
+            <table cellspacing=2>
+                <tr>
+                    <td width=75>Заказчик:</td>
+                    <td>{$clientName}</td>
+                </tr>
+                <tr>
+                    <td width=75>Адрес:</td>
+                    <td>{$clientAddress}</td>
+                </tr>
+                <tr>
+                    <td width=75>Телефон:</td>
+                    <td>{$clientPhone}</td>
+                </tr>
+                <tr>
+                    <td width=75>Р/с:</td>
+                    <td>{$clientSattlementAccount}</td>
+                </tr>
+                <tr>
+                    <td width=75>в:</td>
+                    <td>{$clientBank}</td>
+                </tr>
+                <tr>
+                    <td width=75>Город:</td>
+                    <td>Ташкент</td>
+                </tr>
+                <tr>
+                    <td width=75>МФО:</td>
+                    <td>{$clientMfo}</td>
+                </tr>
+                <tr>
+                    <td width=75>ИНН:</td>
+                    <td>{$clientINN}</td>
+                </tr>
+                <tr>
+                    <td width=75>ОКОНХ:</td>
+                    <td>{$clientOkonx}</td>
+                </tr>
+                <tr>
+                    <td width=75>почтовый адрес:</td>
+                    <td>{$clientZipAddress}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br>
+<table width="100%" style="font-family: arial">
+    <tr>
+        <td>Генеральный директор:<br/> Садыков С.И.<br/>_________________________________________</td>
+        <td>Атрибуты заказчика:<br/>{$sign_name}<br/>_________________________________________</td>
+     </tr>
+</table>

@@ -1,0 +1,47 @@
+<h1>
+	Отчеты. Номера принадлежащие клиентам.
+</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+	<select size="1" name="stype">
+   		<?= FormHelper::getPhoneServices($this->stype); ?>
+	</select>
+
+	<select size="1" name="ctype">
+		<?= FormHelper::getClientTypeOptions($this->ctype); ?>
+	</select>
+	   <input type="submit" value="Отправить">
+</form>
+</center>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>ID клиента</th>
+		<th class='list_head'>Клиент</th>
+		<th class='list_head'>Номер</th>
+	</tr>
+	<?
+	foreach ($this->result as  $key => $row)
+	{
+?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')" style="background-color:DimGrey;">
+			<td class='list_row' ><b><?= $row[0]['client_id']; ?></b></td>
+			<td class='list_row' colspan="2"><a href="/Clientinfo/index/clientid/<?= $row[0]['client_id']; ?>"><b><?= $row[0]['client_name']; ?></b></a></td>
+		</tr>
+<?
+		foreach($row as $item)
+		{
+		?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'></td>
+			<td class='list_row'></td>
+			<td class='list_row'><b><?= $item['number']; ?></b></td>
+		</tr>
+		<?
+		}
+	}
+	?>
+</table>

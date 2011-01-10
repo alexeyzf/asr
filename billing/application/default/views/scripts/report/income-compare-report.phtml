@@ -1,0 +1,137 @@
+<h1>Поступления. Сравнение поступлений</h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+<br />
+<br />
+<br />
+<br />
+
+<?
+if ( is_array($this->data))
+{
+?>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">&nbsp;</th>
+        <?
+        foreach ($this->data['months'] as $month)
+        {
+        ?>
+            <th class="list_head"><?= "{$month[0]} - {$month[1]}" ?></th>
+        <?
+        }
+        ?>
+    </tr>
+
+    <?
+        $messages = array('corp' => 'Корпаративные клиенты', 'cards' => 'Карточные дилеры', 'stream' => 'Клиенты Sharq Stream');
+        $bankTrans = array(3, 77, 40, 44);
+        $minusTrans = array(80, 90, 148);
+        foreach ($this->data['months'] as $month)
+        {
+            $sums["{$month[0]}-$month[1]"] = 0.0;
+        }
+        foreach ($messages as $clientType => $message)
+        {
+            foreach ($this->data['months'] as $month)
+            {
+                $kassaSums["{$month[0]}-$month[1]"] = 0.0;
+                $localSums["{$month[0]}-$month[1]"] = 0.0;
+            }
+        ?>
+            <tr>
+                <th class="list_head" style="text-align: center; color: #F60;" colspan="<?= count($this->data['months'])+1 ?>"><?= $message ?></th
+            </tr>
+            <?
+            foreach ($this->data['types'][$clientType] as $type)
+            {
+                if (!in_array($type['trantype'], array(3, 77, 40, 44, 80, 90, 148, 20, 9, 6)))
+                {
+                    continue;
+                }
+
+                if (!in_array($type['trantype'], $bankTrans))
+                {
+            ?>
+                <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row">
+                    <?= $type['typename'] ?>
+                </td>
+                <?
+                }
+                foreach ($this->data['trans'][$clientType] as $key => $row)
+                {
+                    if (in_array($type['trantype'], $minusTrans))
+                    {
+                        $row[$type['trantype']] = -$row[$type['trantype']];
+                    }
+
+                    $sums[$key] += $row[$type['trantype']];
+                    $localSums[$key] += $row[$type['trantype']];
+                    if (in_array($type['trantype'], $bankTrans))
+                    {
+                        $kassaSums[$key] += $row[$type['trantype']];
+                        continue;
+                    }
+                ?>
+                    <td class="list_row">
+                        <?= sprintf('%.3f', $row[$type['trantype']]) ?>
+                    </td>
+                <?
+                }
+                ?>
+                </tr>
+            <?
+            }
+
+            if ($clientType != 'cards')
+            {
+            ?>
+                <tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                    <td class="list_row">Всего по кассам</td>
+                    <?
+                    foreach ($kassaSums as $sum)
+                    {
+                    ?>
+                        <td class="list_row"><?= sprintf('%.3f', $sum) ?></td>
+                    <?
+                    }
+                    ?>
+                </tr>
+        <?
+            }
+        ?>
+                <tr>
+                    <th class="list_head">Итого:</th>
+                    <?
+                    foreach ($localSums as $sum)
+                    {
+                    ?>
+                        <th class="list_head"><?= sprintf('%.3f', $sum) ?></th>
+                    <?
+                    }
+                    ?>
+                </tr>
+        <?
+        }
+        ?>
+        <tr>
+            <th class="list_head">Итого:</th>
+            <?
+            foreach ($sums as $sum)
+            {
+            ?>
+                <th class="list_head"><?= sprintf('%.3f', $sum) ?></th>
+            <?
+            }
+            ?>
+        </tr>
+</table>
+<?
+}
+?>

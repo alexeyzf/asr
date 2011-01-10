@@ -1,0 +1,401 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3605/billing/application/default/forms
+END
+Pintel.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1140/billing/application/default/forms/Pintel.php
+END
+NewTaskForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3543/billing/application/default/forms/NewTaskForm.php
+END
+Testdays.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/1511/billing/application/default/forms/Testdays.php
+END
+AddDopPoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2846/billing/application/default/forms/AddDopPoint.php
+END
+CardContract.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/731/billing/application/default/forms/CardContract.php
+END
+Techphonehub.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3/billing/application/default/forms/Techphonehub.php
+END
+Payment.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2318/billing/application/default/forms/Payment.php
+END
+Dialup.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/billing/application/default/forms/Dialup.php
+END
+TransportForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2476/billing/application/default/forms/TransportForm.php
+END
+Techclient.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2403/billing/application/default/forms/Techclient.php
+END
+SwitchForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1954/billing/application/default/forms/SwitchForm.php
+END
+EngineerCall.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3311/billing/application/default/forms/EngineerCall.php
+END
+Makeaccount.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3285/billing/application/default/forms/Makeaccount.php
+END
+Startdate.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/billing/application/default/forms/Startdate.php
+END
+EditPoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2107/billing/application/default/forms/EditPoint.php
+END
+ChangeReservedTarifForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/3500/billing/application/default/forms/ChangeReservedTarifForm.php
+END
+BulkChange.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3432/billing/application/default/forms/BulkChange.php
+END
+Techdslam.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/billing/application/default/forms/Techdslam.php
+END
+Lvs.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1140/billing/application/default/forms/Lvs.php
+END
+Tarif.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/988/billing/application/default/forms/Tarif.php
+END
+ClientRecalculationHistory.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/588/billing/application/default/forms/ClientRecalculationHistory.php
+END
+CorrectAccounting.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/1474/billing/application/default/forms/CorrectAccounting.php
+END
+DatePeriod.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3463/billing/application/default/forms/DatePeriod.php
+END
+TarifSpeedReport.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2404/billing/application/default/forms/TarifSpeedReport.php
+END
+AtsBonusForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3112/billing/application/default/forms/AtsBonusForm.php
+END
+Ngn.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1140/billing/application/default/forms/Ngn.php
+END
+Recalculation.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/billing/application/default/forms/Recalculation.php
+END
+MonthSelect.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3486/billing/application/default/forms/MonthSelect.php
+END
+TarifComponent.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3/billing/application/default/forms/TarifComponent.php
+END
+SwitchPortForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2475/billing/application/default/forms/SwitchPortForm.php
+END
+Reportdateform.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/589/billing/application/default/forms/Reportdateform.php
+END
+Ratechange.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/billing/application/default/forms/Ratechange.php
+END
+ClientInfoModify.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2175/billing/application/default/forms/ClientInfoModify.php
+END
+SearchClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/339/billing/application/default/forms/SearchClient.php
+END
+ServiceEdit.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/forms/ServiceEdit.php
+END
+Arhivclient.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/billing/application/default/forms/Arhivclient.php
+END
+turnForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3088/billing/application/default/forms/turnForm.php
+END
+TarifSummaryReport.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3576/billing/application/default/forms/TarifSummaryReport.php
+END
+MonthDatePeriod.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3465/billing/application/default/forms/MonthDatePeriod.php
+END
+Techats.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3/billing/application/default/forms/Techats.php
+END
+invoice.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/73/billing/application/default/forms/invoice.php
+END
+Overdraft.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/billing/application/default/forms/Overdraft.php
+END
+Isdn.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3294/billing/application/default/forms/Isdn.php
+END
+Wifi.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1140/billing/application/default/forms/Wifi.php
+END
+PhoneTarif.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/714/billing/application/default/forms/PhoneTarif.php
+END
+Tradtel.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3271/billing/application/default/forms/Tradtel.php
+END
+Ivr.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1140/billing/application/default/forms/Ivr.php
+END
+AdditionalWriteOffs.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3529/billing/application/default/forms/AdditionalWriteOffs.php
+END
+TarifReport.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2404/billing/application/default/forms/TarifReport.php
+END
+Task.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2271/billing/application/default/forms/Task.php
+END
+Vpn.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1860/billing/application/default/forms/Vpn.php
+END
+Admingroup.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3/billing/application/default/forms/Admingroup.php
+END
+CardOrder.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1206/billing/application/default/forms/CardOrder.php
+END
+RegionAndMonthSelectionForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3605/billing/application/default/forms/RegionAndMonthSelectionForm.php
+END
+TicketForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2307/billing/application/default/forms/TicketForm.php
+END
+Coverzone.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3/billing/application/default/forms/Coverzone.php
+END
+AddHistory.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1294/billing/application/default/forms/AddHistory.php
+END
+Hosting.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1140/billing/application/default/forms/Hosting.php
+END
+conductingForm.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2296/billing/application/default/forms/conductingForm.php
+END
+Delivery.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/162/billing/application/default/forms/Delivery.php
+END
+Adsl.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3519/billing/application/default/forms/Adsl.php
+END
+Adminuser.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/184/billing/application/default/forms/Adminuser.php
+END
+Addclient.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3207/billing/application/default/forms/Addclient.php
+END
+PortStatus.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1972/billing/application/default/forms/PortStatus.php
+END
+Tasix.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1743/billing/application/default/forms/Tasix.php
+END
+Collacation.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1860/billing/application/default/forms/Collacation.php
+END

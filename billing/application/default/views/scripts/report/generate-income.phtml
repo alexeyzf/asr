@@ -1,0 +1,49 @@
+<h1>Отчет по поступлениям</h1>
+<br />
+<center>
+	<form method="post" action="">
+		<dt><label>Тип:</label></dt>
+		<dd>			
+			<select name='type'>
+				<option value='by-type'>Зачисления по типам</option>
+				<option value='by-client'>Зачисления по клиентам</option>
+				<option value='by-service'>Зачисления по услугам</option>
+				<option value='by-paynet'>Зачисления Paynet</option>
+				<option value='by-kb'>Зачисления с выносных касс КБ</option>
+				<option value='by-mobliss'>Зачисления Mobliss</option>
+                                <option value='by-sigmakapital'>Карты SIGMA-KAPITAL</option>
+			</select>
+		</dd>
+		<div class='clear'></div>
+		
+		<dt><label>Период:</label></dt>
+		<dd>
+			С
+			<select name='start_day'>
+				<?= FormHelper::getDayOptions(1); ?>
+			</select>
+			<select name='start_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select> 
+			<select name='start_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+			
+			По
+			<select name='end_day'>
+				<?= FormHelper::getDayOptions(date('t')); ?>
+			</select>
+			<select name='end_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='end_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+		</dd>
+		<div class='clear'></div>
+		
+		<dt><label>&nbsp;</label></dt>
+		<dd><input type="submit" value='Показать' /></dd>
+		<div class='clear'></div>
+	</form>
+</center>

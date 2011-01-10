@@ -1,0 +1,95 @@
+<h1>Разница счет-фактур</h1>
+<br />
+<br />
+<form name="compare-invoices-form" method="post">
+	<dt><label>Сравнить за</label></dt>
+	<dd>
+		<select name='month_first'>
+			<?= FormHelper::getMonthOptions($this->monthFirst); ?>
+		</select>
+		<select name='year_first'>
+			<?= FormHelper::getYearOptions($this->yearFirst); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label>c</label></dt>
+	<dd>
+		<select name='month_second'>
+			<?= FormHelper::getMonthOptions($this->monthSecond); ?>
+		</select>
+		<select name='year_second'>
+			<?= FormHelper::getYearOptions($this->yearSecond); ?>
+		</select>
+	</dd>
+	<dt><label>детально?:</label></dt>
+	<dd>
+  		<input type="checkbox" name="is_detaled" />
+	</dd>
+	<div class='clear'></div>
+
+	<dt>&nbsp;</dt>
+	<dd>
+		<input type="submit" value="Показать" />
+	</dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{
+	?>
+	<table class="list">
+		<tr>
+			<th class="list_head" rowspan="2" style='width: 10%'>Регистрационный номер</th>
+			<th class="list_head" rowspan="2" style='width: 30%'>Название организации</th>
+			<th class="list_head" align="center" colspan="2"><?= $this->lastDateFirst ?></th>
+			<th class="list_head" align="center" colspan="2"><?= $this->lastDateSecond ?></th>
+			<th class="list_head" align="center" colspan="2">Разница</th>
+		</tr>
+		<tr>
+			<th class="list_head" style='width: 10%'>Сумма($)</th>
+			<th class="list_head" style='width: 10%'>Сумма(UZS)</th>
+			<th class="list_head" style='width: 10%'>Сумма($)</th>
+			<th class="list_head" style='width: 10%'>Сумма(UZS)</th>
+			<th class="list_head" style='width: 10%'>Сумма($)</th>
+			<th class="list_head" style='width: 10%'>Сумма(UZS)</th>
+		</tr>
+		<?
+        $sums = array();
+		foreach ($this->data as $clientID => $row)
+		{
+            $sums['first_amount'] += $row['first_amount'];
+            $sums['first_amount_uzs'] += $row['first_amount_uzs'];
+            $sums['second_amount'] += $row['second_amount'];
+            $sums['second_amount_uzs'] += $row['second_amount_uzs'];
+            $sums['delta_amount'] += $row['second_amount'] - $row['first_amount'];
+            $sums['delta_amount_uzs'] += $row['second_amount_uzs'] - $row['first_amount_uzs'];
+			?>
+			<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row"><?= $clientID ?></td>
+				<td class="list_row"><?= $row['client_name'] ?></td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['first_amount']) ?>	</td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['first_amount_uzs']) ?> </td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['second_amount']) ?> </td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['second_amount_uzs']) ?></td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['second_amount'] - $row['first_amount']) ?></td>
+				<td class="list_row right" align="center"><?= sprintf('%.3f', $row['second_amount_uzs'] - $row['first_amount_uzs']); ?></td>
+			</tr>
+			<?
+		}
+		?>
+            <tr>
+                <th class="list_head" style='width: 10%' colspan="2">Итого:</th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['first_amount']) ?></th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['first_amount_uzs']) ?></th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['second_amount']) ?></th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['second_amount_uzs']) ?></th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['delta_amount']) ?></th>
+                <th class="list_head" style='width: 10%'><?= sprintf('%.3f', $sums['delta_amount_uzs']) ?></th>
+            </tr>
+	</table>
+	<?
+}
+?>

@@ -1,0 +1,19 @@
+<h1>Услуга успешно сохранена</h1>
+<br />
+<br />
+
+<dt><label>Клиент:</label></dt>
+<dd><label><?= $this->serviceData['client_name'] ?></label></dd>
+<div class="clear"></div>
+
+<dt><label>Тип услуги:</label></dt>
+<dd><label><?= $this->serviceData['servicetype_name'] ?></label></dd>
+<div class="clear"></div>
+
+<dt><label>Тариф:</label></dt>
+<dd><label><?= $this->serviceData['tarif_name'] ?></label></dd>
+<div class="clear"></div>
+
+<dt>&nbsp;</dt>
+<dd><input type="button" value="Распечатать доп соглашение" onclick="redirect('/service/printaddagree/t/<?= $this->tableLink; ?>/i/<?= $this->id; ?>/c/<?= $this->contractID; ?>')" /></dd>
+<div class="clear"></div>

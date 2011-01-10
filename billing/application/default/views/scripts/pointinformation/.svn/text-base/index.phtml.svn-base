@@ -1,0 +1,313 @@
+<?php
+	if ($this->errors['additional-service-errors'])
+        {
+        	foreach($this->errors as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+
+        if ($this->infos['additional-service-infos'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">
+        	Информация о Точке
+        	<a id="dop_tochka" href="/Editpoint/index/point_id/<?= $this->pointdata['point_id'] ?>/client_id/<?= $this->pointdata['client_id'] ?>">редактировать</a>
+        </td>
+        <td>
+        	<form action="/employee/modifyservice" method="post">
+        		<input type="hidden" name="point_id" value="<?= $this->point_id ?>" />
+        		<input type="hidden" name="client_id" value="<?= $this->client_id ?>" />
+        		<input type="submit" disabled value="добавить услугу" />
+        	</form>
+        </td>
+    </tr>
+</table>
+<br/>
+<center>
+						<!-- Точка!-->
+<table  id="infoclient" cellpadding="5" cellspacing="8">
+	<tr>
+		<td width="50%" align="right"><b>Логин:</b></td>
+		<td><?= $this->pointdata['u_login'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Телефон кроссировки:</b></td>
+		<td><?= $this->pointdata['pcross'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Дата кроссировки:</b></td>
+		<td><?= $this->pointdata['crossdate'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>АТС:</b></td>
+		<td><?= $this->pointdata['ats_name'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Dslam:</b></td>
+		<td><?= $this->pointdata['ats_name'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Статус кроссировки:</b></td>
+		<td><?= $this->pointdata['statuscross'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Адрес подключения точки:</b></td>
+		<td><?= $this->pointdata['connect_address'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Город:</b></td>
+		<td><?= $this->pointdata['country_name'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Контактное лицо:</b></td>
+		<td><?= $this->pointdata['contact_name'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Контактный телефон:</b></td>
+		<td><?= $this->pointdata['phone'] ?></td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Владелец телефонного номера:</b></td>
+		<td><?= $this->pointdata['pcross_owner'] ?></td>
+	</tr>
+	<?php
+		if($this->pointdata['client_type_id'] == 1)
+		{
+			if( ! $this->trustRow)
+			{
+	?>
+			 <tr>
+				<td width="50%" align="right"><b>Установить доверительный платеж:</b></td>
+				<td>
+				<form action="/Pointinformation/trust-payment" method="post">
+					<input type="hidden" name="username" value="<?= $this->pointdata['u_login'] ?>" />
+					<input type="hidden" name="point_id" value="<?= $this->pointdata['point_id'] ?>" />
+					<input type="submit" name="ok" value="установить" />
+				</form>
+				</td>
+			 </tr>
+	<?php
+			}
+			else
+			{
+				?>
+					 <tr>
+						<td width="50%" align="right"><b>Установить доверительный платеж:</b></td>
+						<td>
+							Установлен с: <?= date("Y/m/d H:m:s", strtotime($this->trustRow['startdate'])); ?>
+							До:
+							<?= date("Y/m/d H:m:s", strtotime($this->trustRow['enddate'])); ?>
+						</td>
+					 </tr>
+				<?php
+			}
+		}
+	?>
+	<tr>
+		<td width="50%" align="right"><b>Установить новый пароль:</b></td>
+		<td>
+			<form action="/Pointinformation/setpwdcontract/" method="post">
+					<input type="hidden" name="point_id" value="<?= $this->pointdata['point_id']  ?>" />
+					<input type="hidden" name="u_login" value="<?= $this->pointdata['u_login'] ?>" />
+					<input type="text" name="new_pwd" value="" size="10" maxlength="9" />
+					<input type="submit" name="ok" value="установить" />
+			</form>
+		</td>
+	</tr>
+
+        <tr>
+		<td width="50%" align="right"><b>Оформить переезд:</b></td>
+		<td>
+			<form action="/Clientinfo/perekros-demands/" method="post">
+                            <select size="1" name="type_change">
+                                <option disabled>Тип</option>
+                                <option value="1">Переезд</option>
+                                <option value="2">Смена пар</option>
+                            </select>
+                            <input type="text" name="new_pcross" value="" size="10" maxlength="9" />
+                            <input type="hidden" name="pcross_old" value="<?= $this->pointdata['pcross'] ?>" />
+                            <input type="hidden" name="point_id" value="<?= $this->pointdata['point_id'] ?>" />
+                            <input type="hidden" name="client_id" value="<?= $this->pointdata['client_id'] ?>" />
+                            <input type="submit" name="ok" value="установить" />
+			</form>
+		</td>
+	</tr>
+	<?php
+
+	if($this->flag == 0) {
+	?>
+	<tr>
+		<td width="50%" align="right"><b>Редактировать логин:</b></td>
+		<td>
+			<form action="/Pointinformation/setnewlogin" method="post">
+					<input type="hidden" name="point_id" value="<?= $this->pointdata['point_id']  ?>" />
+					<input type="text" name="new_login" value="" size="10" maxlength="9" />
+					<input type="submit" name="ok" value="установить" />
+			</form>
+		</td>
+	</tr>
+	<?php } ?>
+
+<?php
+if($this->pointdata['client_type_id'] == "1" and $this->pointdata['tablename'] == "adsl")
+{
+?>
+	<tr>
+		<td width="50%" align="right"><b>Бонус на АТС:</b></td>
+		<td>
+			<form action="/Pointinformation/atsbonus" method="post">
+					<input type="hidden" name="point_id" value="<?= $this->pointdata['point_id']  ?>" />
+					<input type="hidden" name="client_id" value="<?= $this->pointdata['client_id']  ?>" />
+					<input type="hidden" name="u_login" value="<?= $this->pointdata['u_login'] ?>" />
+					<input type="hidden" name="tablename" value="<?= $this->pointdata['tablename'] ?>" />
+					<input type="hidden" name="tarif_id" value="<?= $this->pointdata['tarif_id'] ?>" />
+						<select size="1" name="month_s">
+						    <option disabled selected>Выберите месяц</option>
+						    <option value="1">Янв</option>
+						    <option value="2">Фев</option>
+						    <option value="3">Мар</option>
+						    <option value="4">Апр</option>
+						    <option value="5">Май</option>
+						    <option value="6">Июн</option>
+						    <option value="7">Июл</option>
+						    <option value="8">Авг</option>
+						    <option value="9">Сен</option>
+						    <option value="10">Окт</option>
+						    <option value="11">Ноя</option>
+						    <option value="12">Дек</option>
+						</select>
+					<input type="text" name="bonusday" value="" size="5" title="кол. дней" />
+					<input type="submit" name="ok" value="оформить" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" align="right"><b>Доверительный платеж:</b></td>
+		<td>
+			<a href="/Pointinformation/trust-payment/username/<?= $this->pointdata['u_login'] ?>/point_id/<?= $this->pointdata['point_id']  ?>">
+				включить
+			</a>
+		</td>
+	</tr>
+
+<?php
+}
+
+?>
+	<tr>
+			<td width="50%" align="right">
+				<b>Указание на порт:</b>
+			</td>
+		<td>
+			<a href="/Net-Admin-Service-Attribute/addtask/pid/<?= $this->point_id; ?>/tablename/<?= $this->tablelink; ?>/ctype/<?= $this->client_type_id; ?>" >
+	    		составить
+	    	</a>
+		</td>
+	</tr>
+	<tr>
+			<td width="50%" align="right">
+				<b>Оформить как тест:</b>
+			</td>
+		<td>
+			<a href="/Pointinformation/set-test-days/pid/<?= $this->point_id; ?>/cid/<?= $this->client_id; ?>" >
+				оформить
+	    	</a>
+		</td>
+	</tr>
+<?php
+if($this->client_type_id == "0")
+{
+	if($this->flag_block == 1)
+	{
+		?>
+		<tr>
+                <td  align="right"><b>Заблокировать с даты: </b></td>
+                <td>Блок установлен</td>
+        </tr>
+		<?php
+	}
+	else
+	{
+?>
+                <tr>
+                    <td  align="right"><b>Заблокировать с даты: </b></td>
+                    <td>
+                        <form action="/Pointinformation/block-point" method="post">
+                        <select name="day_off" >
+                            <?php
+							$yearArr = array (
+					            2009 => '2009',
+					            2010 => '2010',
+					            2011 => '2011',
+					            2012 => '2012'
+					        );
+
+                            $day_selected   = '';
+                            $month_selected = '';
+
+                            for( $i = 1; $i < 32; $i++ )
+                            {
+                                if( $i == date('d', strtotime(date('Y-m-d'))) )
+                                {
+                                    $day_selected = "selected";
+                                }
+                                echo "<option ".$day_selected." value=".$i.">".$i."</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="month_off" >
+                            <?php
+                            for( $i = 1; $i < 13; $i++ )
+                            {
+                                if( $i == date('m', strtotime(date('Y-m-d'))) )
+                                {
+                                    $month_selected = "selected";
+                                }
+
+                                echo "<option ".$month_selected." value=".$i.">".$i."</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="year_off" >
+                            <?php
+                            foreach( $yearArr as $key => $value )
+                            {
+                                echo "<option ".$year_selected." value=".$key.">".$value."</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="submit" name="ok" value="заблокировать" />
+                        <input type="hidden" name="client_id" value="<?= $this->client_id; ?>" />
+                        <input type="hidden" name="point_id" value="<?= $this->point_id; ?>" />
+                        <input type="hidden" name="uril" value="<?= $_SERVER['REQUEST_URI']; ?>" />
+                        <input type="hidden" name="flag" value="<?= $flag ?>" />
+                        </form>
+                    </td>
+                </tr>
+<?php
+}}
+?>
+</table>
+				<!-- Конец инфы о точке !-->
+	<br/>
+	<br/>
+	<a href="<?= $_SESSION['local_back_url'] ?>" ><h3>Вернуться назад</h3></a>
+
+</center>
+
+

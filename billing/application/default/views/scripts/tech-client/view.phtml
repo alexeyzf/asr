@@ -1,0 +1,65 @@
+<h1>Линейный отдел.  Просмотр информации о подключении</h1>
+<br/>
+<br/>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Подключение</td>
+    </tr>
+</table>
+<dt id="client_name-label">Клиент:&nbsp;&nbsp;</dt>
+<dd id="client_name-element"><?= $this->info['client_name']; ?></dd>
+<div class="clear"/>
+<dt id="client_type-label">Тип клиента:&nbsp;&nbsp;</dt>
+<dd id="client_type-element"><?= $this->info['type_name']; ?></dd>
+<div class="clear"/>
+<dt id="address-label">Адрес:&nbsp;&nbsp;</dt>
+<dd id="address-element"><?= $this->info['connect_address']; ?></dd>
+<div class="clear"/>
+<dt id="date_agree-label">Дата договора:&nbsp;&nbsp;</dt>
+<dd id="date_agree-element"><?= $this->info['dateagree']; ?></dd>
+<div class="clear"/>
+<dt id="date_cross-label">Дата кроссировки:&nbsp;&nbsp;</dt>
+<dd id="date_cross-element"><?= $this->info['crossdate']; ?></dd>
+<div class="clear"/>
+<dt id="pcross-label">Телефон:&nbsp;&nbsp;</dt>
+<dd id="pcross-element"><?= $this->info['pcross']; ?></dd>
+<div class="clear"/>
+<dt id="ats_id-label">АТС:&nbsp;&nbsp;</dt>
+<dd id="ats_id-element"><?= $this->info['ats']; ?></dd>
+<div class="clear"/>
+<dt id="dslam_id-label">Коммутатор:&nbsp;&nbsp;</dt>
+<dd id="dslam_id-element"><?= $this->info['dslam']; ?></dd>
+<div class="clear"/>
+<dt id="port_id-label">Порт:&nbsp;&nbsp;</dt>
+<dd id="port_id-element"><?= $this->info['port']; ?></dd>
+<div class="clear"/>
+<br />
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Реквизиты</td>
+    </tr>
+</table>
+
+<dt><label>Номер рамки:</label></dt>
+<dd><label id='frame_number'><?= $this->info['frame_number']; ?></label></dd>
+<div class="clear"></div>
+
+<dt><label>Номера пар:</label></dt>
+<dd><label id='pair_number'><?= $this->info['pair_number']; ?></label></dd>
+<div class="clear"></div>
+<br />
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Дополнительная информация</td>
+    </tr>
+</table>
+
+<dt><label>Скорость:</label></dt>
+<dd><label id='port_speed'><?= $this->info['portspeed']; ?></label></dd>
+<div class="clear"></div>
+
+<dt><label>Состояние порта:</label></dt>
+<dd><label id='port_status'><?= $this->info['port_status']; ?></label></dd>
+<div class="clear"></div>

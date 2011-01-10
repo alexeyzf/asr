@@ -1,0 +1,49 @@
+<h1>СТП. АТС</h1>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/name">Наименование</a></th>
+        <th class="list_head" style="width:15%;"><a id="link_color" href="/support-information/ats/sortBy/numbers">Диапазоны номеров</a></th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/bad_numbers">Необслуживаемые номера</a></th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/address">Место расположения</a></th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/hub_name">Телефонный узел</a></th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/status">Статус</a></th>
+        <th class="list_head"><a id="link_color" href="/support-information/ats/sortBy/notes">Примечание</a></th>
+    </tr>
+<?php
+if ( count($this->atsList) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="8" class="list_row center">
+            Не найдено ни одной АТС
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->atsList as $ats)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['name']; ?></td>
+            <td class="list_row"><?= $ats['numbers']; ?></td>
+            <td class="list_row"><?= $ats['bad_numbers']; ?></td>
+            <td class="list_row"><?= $ats['address']; ?></td>
+            <td class="list_row"><?= $ats['hub_name']; ?></td>
+            <td class="list_row"><?= $ats['status']; ?></td>
+            <td class="list_row"><?= $ats['notes']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>
+<br />

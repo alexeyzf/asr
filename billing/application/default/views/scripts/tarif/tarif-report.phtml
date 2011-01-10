@@ -1,0 +1,36 @@
+<h1>Тарифы. Отчет по тарифам</h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+
+<?
+if ( is_array($this->data) ) 
+{ 
+	?>
+	<br />
+	<br />
+	<br />
+	<br />
+	<table class="list" cellpadding="3" cellspacing="0">
+	    <tr>
+	        <th class="list_head">Тариф</th>
+	        <th class="list_head">Кол-во точек</th>
+	    </tr>
+	   	<?
+	   	foreach ($this->data as $row)
+	   	{
+	   		?>
+	   		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	   			<td class='list_row'><?= $row['tarif_name'] ?></td>
+	   			<td class='list_row right'><?= $row['points_count'] ?></td>
+	   		</tr>
+	   		<?
+	   	}
+	   	?>
+	</table>
+	<?
+}

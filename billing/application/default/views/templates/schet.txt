@@ -1,0 +1,94 @@
+<hr style="border:dashed" height="10" />
+<span width="100%" style="font-family: arial" align="center">
+    <b style="font-family:arialbd; font-size: 10">
+		СЧЁТ N {$schetNumber} от {$currentDate}	по договору N {$contractNumber} от {$contractDate}
+	</b>
+</span><br />
+<span width="100%" align="right">
+    Регистрационный номер: {$clientID}
+</span>
+<br />
+<table align="left" border="1" width="530" style="font-family: arial" cellpadding=2>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td width="60">Поставщик:</td>
+                    <td width="200">ООО "{$companyName}"</td>
+                </tr>
+                <tr>
+                    <td width="60">Адрес:</td>
+                    <td width="200">{$companyAddress}</td>
+                </tr>
+                <tr>
+                    <td width="60">Телефон:</td>
+                    <td width="200">{$companyPhone}, факс {$companyFax}</td>
+                </tr>
+                <tr>
+                    <td width="60">Р/с:</td>
+                    <td width="200">{$companySattlementAccount}</td>
+                </tr>
+                <tr>
+                    <td width="60">в:</td>
+                    <td width="200">{$companyBank}</td>
+                </tr>
+                <tr>
+                    <td width="60">Город:</td>
+                    <td width="200">Ташкент</td>
+                </tr>
+                <tr>
+                    <td width="60">МФО:</td>
+                    <td width="200">{$companyMfo}</td>
+                </tr>
+                <tr>
+                    <td width="60">ИНН:</td>
+                    <td width="200">{$companyINN}</td>
+                </tr>
+                <tr>
+                    <td width="60">ОКОНХ:</td>
+                    <td width="200">{$companyOkonx}</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td width="60">Получатель:</td>
+                    <td width="200">{$clientName}"</td>
+                </tr>
+                <tr>
+                    <td width="60">Адрес:</td>
+                    <td width="200">{$clientPhysicalAddress}</td>
+                </tr>
+                <tr>
+                    <td width="60">Телефон:</td>
+                    <td width="200">{$clientPhone}</td>
+                </tr>
+                <tr>
+                    <td width="60">Р/с:</td>
+                    <td width="200">{$clientSattlementAccount}</td>
+                </tr>
+                <tr>
+                    <td width="60">в:</td>
+                    <td width="200">{$clientBank}</td>
+                </tr>
+                <tr>
+                    <td width="60">Город:</td>
+                    <td width="200">{$clientCity}</td>
+                </tr>
+                <tr>
+                    <td width="60">МФО:</td>
+                    <td width="200">{$clientMfo}</td>
+                </tr>
+                <tr>
+                    <td width="60">ИНН:</td>
+                    <td width="200">{$clientINN}</td>
+                </tr>
+                <tr>
+                    <td width="60">ОКОНХ:</td>
+                    <td width="200">{$clientOkonx}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

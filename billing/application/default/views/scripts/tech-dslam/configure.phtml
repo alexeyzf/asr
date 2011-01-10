@@ -1,0 +1,253 @@
+<script language="JavaScript" type="text/javascript">
+function frame_numbers_onchange()
+{
+    var frameNumbers = parseInt($('#frame_numbers').val());
+
+    for (var i = 1; i <= 4; i++)
+    {
+        if (i > frameNumbers)
+        {
+            $('#options_' + i + '_port_number')[0].disabled = true;
+            $('#options_' + i + '_frame_number')[0].disabled = true;
+            $('#options_' + i + '_pair1')[0].disabled = true;
+            $('#options_' + i + '_pair2')[0].disabled = true;
+
+            $('#options_' + i + '_port_number').val('');
+            $('#options_' + i + '_frame_number').val('');
+            $('#options_' + i + '_pair1').val('');
+            $('#options_' + i + '_pair2').val('');
+        }
+        else
+        {
+            if ( i != 1 )
+            {
+                 $('#options_' + i + '_port_number')[0].disabled = false;
+            }
+            
+            $('#options_' + i + '_frame_number')[0].disabled = false;
+            $('#options_' + i + '_pair1')[0].disabled = false;
+            $('#options_' + i + '_pair2')[0].disabled = false;
+        }
+    }
+}
+
+function recalc()
+{
+    var portsCount = parseInt($('#ports_count').val());
+    var framesCount = parseInt($('#frame_numbers').val());
+
+    var portNumbers = new Array();
+    var stationPairs = new Array();
+    var linePairs = new Array();
+    var frameNumbers = new Array();
+
+    for ( var i = 1; i <= framesCount; i++ )
+    {
+        if (i == 1)
+        {
+             portNumbers[1] = 1;
+        }
+        else
+        {
+            portNumbers[i] = parseInt($('#options_' + i + '_port_number').val());
+        }
+
+        stationPairs[i] = parseInt($('#options_' + i + '_pair1').val());
+        linePairs[i]  = parseInt($('#options_' + i + '_pair2').val());
+        frameNumbers[i] = $('#options_' + i + '_frame_number').val();
+    }
+
+    var counter  = 0;
+
+    for ( var i = 1; i <= framesCount; i++ )
+    {
+        var currentPort = portNumbers[i];
+        var currentStationPair = stationPairs[i];
+        var currentLinePair = linePairs[i];
+        var currentFrameNumber = frameNumbers[i];
+
+        var nextNumber = 0;
+
+        if (i + 1 > framesCount)
+        {
+            nextNumber = portsCount + 1;
+        }
+        else
+        {
+            nextNumber = Math.min(portNumbers[i + 1], portsCount);
+        }
+
+        while (currentPort < nextNumber)
+        {
+            $('#ports_' + counter + '_line_number1').val(currentStationPair);
+            $('#ports_' + counter + '_line_number2').val(currentLinePair);
+            $('#ports_' + counter + '_frame_number').val(currentFrameNumber);
+
+            currentStationPair += 2;
+            currentLinePair += 2;
+            counter++;
+            currentPort++;
+        }
+    }
+}
+</script>
+<h1>Настройки Dslam <?= $this->dslam->name; ?></h1>
+<br />
+<br />
+<form name="dslam_options" action="/tech-dslam/saveconfig" method="post">
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+                <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+             </td>
+        </tr>
+    </table>
+
+    <br />
+    
+    <center>
+    <table cellpadding="3" cellspacing="0" style="border-collapse:collapse">
+        <tr>
+            <td class="list_row" colspan ="3">
+                Количество рамок
+                <select name="frame_numbers" id="frame_numbers" class="width-20"
+                        onchange="frame_numbers_onchange()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="list_row width-100px">Порт</td>
+            <td class="list_row width-100px">Номер рамки</td>
+            <td class="list_row width-150px">Номера пар</td>
+        </tr>
+        <tr>
+            <td class="list_row width-100px">1</td>
+            <td class="list_row width-100px">
+                <input type="text" id="options_1_frame_number" class="width-80"
+                       value="<?= $this->options[1]['frame_number']; ?>" />
+            </td>
+            <td class="list_row width-150px">
+                <input type="text" id="options_1_pair1" class="width-40"
+                       value="<?= $this->options[1]['line_number1']; ?>" />
+                <input type="text" id="options_1_pair2" class="width-40"
+                       value="<?= $this->options[1]['line_number2']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="list_row width-100px">
+                <input type="text"id="options_2_port_number" class="width-80"
+                       value="<?= $this->options[2]['port_number']; ?>" />
+            </td>
+            <td class="list_row width-100px">
+                <input type="text" id="options_2_frame_number" class="width-80"
+                       value="<?= $this->options[2]['frame_number']; ?>" />
+            </td>
+            <td class="list_row width-150px">
+                <input type="text" id="options_2_pair1" class="width-40"
+                       value="<?= $this->options[2]['line_number1']; ?>" />
+                <input type="text" id="options_2_pair2" class="width-40"
+                       value="<?= $this->options[2]['line_number2']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="list_row width-100px">
+                <input type="text" id="options_3_port_number" class="width-80"
+                       value="<?= $this->options[3]['port_number']; ?>" />
+            </td>
+            <td class="list_row width-100px">
+                <input type="text" id="options_3_frame_number" class="width-80"
+                       value="<?= $this->options[3]['frame_number']; ?>" />
+            </td>
+            <td class="list_row width-150px">
+                <input type="text" id="options_3_pair1" class="width-40"
+                       value="<?= $this->options[3]['line_number1']; ?>" />
+                <input type="text" id="options_3_pair2" class="width-40"
+                       value="<?= $this->options[3]['line_number2']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="list_row width-100px">
+                <input type="text" id="options_4_port_number" class="width-80"
+                       value="<?= $this->options[4]['port_number']; ?>" />
+            </td>
+            <td class="list_row width-100px">
+                <input type="text" id="options_4_frame_number" class="width-80"
+                       value="<?= $this->options[4]['frame_number']; ?>" />
+            </td>
+            <td class="list_row width-150px">
+                <input type="text" id="options_4_pair1" class="width-40"
+                       value="<?= $this->options[4]['line_number1']; ?>" />
+                <input type="text" id="options_4_pair2" class="width-40"
+                       value="<?= $this->options[4]['line_number2']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="list_row right" colspan ="3">
+                <input type="hidden" name="dslam_id" value="<?= $this->dslam->id; ?>" />
+                <input type="hidden" id="ports_count" value="<?= count($this->ports); ?>" />
+                <input type="button" value="Пересчитать" onclick="recalc()" />
+            </td>
+        </tr>
+    </table>
+    <script language="JavaScript" type="text/javascript">
+        frame_numbers_onchange();
+    </script>
+    <br />
+    <br />
+    <div id="ports">
+        <table cellpadding="3" cellspacing="0" style="border-collapse:collapse"
+               id="ports_table">
+            <tr>
+                <td class="list_row width-100px">Порт</td>
+                <td class="list_row width-100px">Номер рамки</td>
+                <td class="list_row width-150px">Номера пар</td>
+            </tr>
+            <?
+            $counter = 0;
+
+            foreach ($this->ports as $port)
+            {
+                ?>
+                <tr>
+                    <td class="list_row width-100px">
+                        <input type="text" id="ports_<?= $counter; ?>_number" name="ports[<?= $port['id']; ?>][number]"
+                               class="width-80" value="<?= $port['number']; ?>" />
+                    </td>
+                    <td class="list_row width-100px">
+                        <input type="text" id="ports_<?= $counter; ?>_frame_number"
+                               name="ports[<?= $port['id']; ?>][frame_number]" class="width-80"
+                               value="<?= $port['frame_number']; ?>" />
+                    </td>
+                    <td class="list_row width-150px">
+                        <input type="text" id="ports_<?= $counter; ?>_line_number1"
+                               name="ports[<?= $port['id']; ?>][line_number1]" class="width-40"
+                               value="<?= $port['line_number1']; ?>" />
+                        <input type="text" id="ports_<?= $counter; ?>_line_number2"
+                               name="ports[<?= $port['id']; ?>][line_number2]" class="width-40"
+                               value="<?= $port['line_number2']; ?>" />
+                    </td>
+                </tr>
+                <?
+                $counter++;
+            }
+            ?>
+        </table>
+    </div>
+    </center>
+
+    <br />
+
+    <table width='100%'>
+        <tr>
+            <td align='center' nowrap>
+                <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+             </td>
+        </tr>
+    </table>
+</form>

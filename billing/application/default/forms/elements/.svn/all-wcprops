@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3376/billing/application/default/forms/elements
+END
+IsdnNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/billing/application/default/forms/elements/IsdnNumbers.php
+END
+TradtelNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/billing/application/default/forms/elements/TradtelNumbers.php
+END
+DateSelect.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3376/billing/application/default/forms/elements/DateSelect.php
+END
+NgnNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3/billing/application/default/forms/elements/NgnNumbers.php
+END
+Label.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3/billing/application/default/forms/elements/Label.php
+END
+Modem.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/110/billing/application/default/forms/elements/Modem.php
+END

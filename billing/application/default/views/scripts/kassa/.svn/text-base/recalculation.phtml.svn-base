@@ -1,0 +1,56 @@
+<h1>Бухгалтерия. Пересчет баланса по транзакциям.</h1>
+<center>
+<br />
+<form action="/Kassa/startrecalc" method="post">
+	<input type="submit" name="sss" value="Пересчитать баланс по транзакциям для всех клиентов" />
+</form>
+</center>
+<br />
+<br />
+<br />
+<br />
+<br />
+<fieldset>
+<legend>Пересчет балланса по клиенту</legend>
+<form action="#" method="post">
+<?= $this->form; ?>
+</form>
+</fieldset>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Результат</h2>
+<center>
+<?php
+if($this->result) {
+?>
+<table id="infoclient" border="1" >
+<tr>
+	<td> ID </td>
+	<td> Клиент </td>
+	<td> Баланс </td>
+	<td> Потрачено </td>
+	<td> Зачислено </td>
+	<td> Действие </td>
+</tr>
+<tr>
+	<td> <?= $this->result[0]['client_id'] ?> </td>
+	<td> <?= $this->result[0]['client_name'] ?> </td>
+	<td> <?= $this->result[0]['ballance'] ?> </td>
+	<td> <?= $this->result[0]['imoney'] ?> </td>
+	<td> <?= $this->result[0]['omoney'] ?> </td>
+	<td>
+		<a href="/Kassa/startrecalc/client_id/<?= $this->result[0]['client_id'] ?>" >
+			пересчитать
+		</a>
+	</td>
+</tr>
+
+</table>
+</center>
+<?php
+}
+?>

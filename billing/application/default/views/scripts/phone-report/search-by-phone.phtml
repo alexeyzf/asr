@@ -1,0 +1,41 @@
+<h1>Отчеты. Отчет по тел. номерам</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+	   Номер телефона:
+	   <input type="text" name="number" />
+	   <input type="submit" value="Поиск">
+</form>
+</center>
+<br />
+<br />
+<br />
+<table class="list">
+		<tr>
+			<th class="list_head" style='width: 10%'>№</th>
+			<th class="list_head">ID клиента</th>
+			<th class="list_head">Номер</th>
+			<th class="list_head">Логин</th>
+			<th class="list_head">Услуга</th>
+		</tr>
+<?
+if (is_array($this->result))
+{
+	$counter = 0;
+	foreach($this->result as $row)
+	{
+		$counter++;
+?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class="list_row"><?= $counter; ?></td>
+				<td class="list_row"><b><?= $row['client_id']; ?></b></td>
+				<td class="list_row"><?= $row['number']; ?></td>
+				<td class="list_row right"><?= $row['u_login'] ?></td>
+				<td class="list_row right"><?= $row['tablename'] ?></td>
+		</tr>
+<?
+	}
+}
+?>
+</table>

@@ -1,0 +1,56 @@
+<h1>Список заданий</h1>
+<br />
+<h2>Список всех ваших заданий.</h2>
+<br />
+<br />
+
+<?
+    $caption = 'Ошибка';
+    switch ($this->type)
+    {
+        case 'by-me':
+            $caption = 'Созданные мной задания';
+            break;
+        case 'by-me-reassigned':
+            $caption = 'Здания на моем контроле';
+            brea;
+        case 'for-me':
+            $caption = 'Назначенные на меня задания';
+            break;
+    }
+
+?>
+<h2><?= $caption ?></h2>
+<table class="list" cellpadding="3" cellspacing="0" style="text-align:center;">
+    <tr>
+        <th class="list_head">&nbsp;</th>
+        <th class="list_head">Дата создания</th>
+        <th class="list_head">Крайний срок</th>
+        <th class="list_head">Заголовок</th>
+        <th class="list_head">Кем создано</th>
+        <th class="list_head">На кого назначено</th>
+        <th class="list_head">Статус</th>
+        <th class="list_head">Приоритет</th>
+    </tr>
+    <?
+    foreach ($this->data as $row)
+    {
+    ?>
+    <tr id="document_row_1" class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        <td class="list_row">
+            <a href="/documents/show-edit-task/id/<?= $row['task_id'] ?>/">
+                <img border="0" width="25" height="25" src="/images/edit.png" id="decor_a" alt="Просмотр/Редактирование"/>
+            </a>
+        </td>
+        <td class="list_row"><?= $row['create_date'] ?></td>
+        <td class="list_row"><?= $row['deadline'] ?></td>
+        <td class="list_row"><?= $row['title'] ?></td>
+        <td class="list_row"><?= $row['assigner'] ?></td>
+        <td class="list_row"><?= $row['assignees'] ?></td>
+        <td class="list_row"><?= $row['status'] ?></td>
+        <td class="list_row"><?= $row['priority'] ?></td>
+    </tr>
+    <?
+    }
+    ?>
+</table>

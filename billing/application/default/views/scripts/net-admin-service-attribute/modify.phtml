@@ -1,0 +1,131 @@
+<?php
+$_SESSION['back_url'] = $_SERVER['REQUEST_URI'];
+?>
+<h1>Отдел управления. Редактирование атрибутов услуг</h1>
+<br />
+<br />
+<?php
+	if ($this->errors['ip-errors'])
+        {
+        	foreach($this->errors as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+
+        if ($this->infos['ip-infos'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+
+<form method="post" action="" >
+
+    <table width="100%">
+        <tr>
+            <td class="sub-heading center">Основные сведения</td>
+        </tr>
+    </table>
+
+    <br />
+
+    <dt><label>Наименование клиента:</label></dt>
+    <dd><label><?= $this->data['client_name']; ?></label></dd>
+    <div class="clear"></div>
+
+    <dt><label>Логин:</label></dt>
+    <dd><label><?= $this->data['u_login']; ?></label></dd>
+    <div class="clear"></div>
+
+    <dt><label>АТС:</label></dt>
+    <dd><label><?= $this->data['ats']; ?></label></dd>
+    <div class="clear"></div>
+
+    <dt><label>DSLAM:</label></dt>
+    <dd><label><?= $this->data['dslam_ip']; ?></label></dd>
+    <div class="clear"></div>
+
+    <dt><label>Указание на порт:</label></dt>
+    <dd><label>
+    	<a href="/Net-Admin-Service-Attribute/addtask/pid/<?= $this->data['point_id']; ?>/tablename/<?= $this->data['tablelink']; ?>/ctype/<?= $this->data['client_type']; ?>" >
+    		составить
+    	</a>
+    </label></dd>
+    <div class="clear"></div>
+
+    <dt><label>История указании на порт:</label></dt>
+    <dd><label>
+    	<a id="client_name_link" onclick="openIframe('/net-admin-service-attribute/show-port-history/client_id/<?= $this->data['client_id']; ?>')" href="#">
+    		просмотреть
+    	</a>
+    </label></dd>
+    <div class="clear"></div>
+
+    <br />
+
+    <table width="100%">
+        <tr>
+            <td class="sub-heading center">Атрибуты</td>
+        </tr>
+    </table>
+
+    <br />
+	<dt><label>IP адрес:</label></dt>
+    <dd>
+    	<div id="attr_ip">
+    		<?
+    		$counter = 1;
+    		foreach ($this->ipAddresses as $ip)
+    		{
+    		?>
+				<span id='attr_ip<?= $counter; ?>'>
+                	<input type="text" name="ip_addresses[<?= $counter; ?>]" value="<?= $ip; ?>" />
+                    &nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('attr_ip<?= $counter; ?>');" title='Удалить' />
+                    <br />
+				</span>
+                <?
+                $counter++;
+    		}
+    		?>
+    	</div>
+		<div id='attr_ip_template' class="hide">
+			<span id='attr_ipnewCOUNTER'>
+				<input type="text" name="ip_addresses[newCOUNTER]" value="" />
+                &nbsp;<img class='link' src='/images/icons/delete.png' onclick="removeWithConfirm('attr_ipnewCOUNTER');" title='Удалить' />
+                <br />
+            </span>
+        </div>
+
+        <a href="#attr_ip" onclick="addDiv('attr_ip', 'attr_ip_template');">Добавить</a>
+    </dd>
+    <div class="clear"></div>
+
+    <?
+    foreach ($this->attributes as $attribute)
+    {
+        ?>
+        <dt><label><?= $attribute['name']; ?>:</label></dt>
+        <dd>
+            <input type="text" name="attributes[<?= $attribute['type']; ?>]" value="<?= $attribute['value']; ?>" />
+        </dd>
+        <div class="clear"></div>
+        <?
+    }
+    ?>
+
+	<dt><label>&nbsp;</label></dt>
+	<dd>
+		<input type='hidden' name='service_type_id' value='<?= $this->data['servicetype_id']; ?>' />
+		<input type="submit" value="Сохранить" />
+	</dd>
+	<div class="clear"></div>
+</form>

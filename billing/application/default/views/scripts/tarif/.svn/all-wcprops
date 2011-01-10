@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3608/billing/application/default/views/scripts/tarif
+END
+addtarif.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/152/billing/application/default/views/scripts/tarif/addtarif.phtml
+END
+tarif-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/2407/billing/application/default/views/scripts/tarif/tarif-report.phtml
+END
+edit-phone-tarif.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/705/billing/application/default/views/scripts/tarif/edit-phone-tarif.phtml
+END
+bulk-change.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3432/billing/application/default/views/scripts/tarif/bulk-change.phtml
+END
+show-dublicate-tarifs.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1013/billing/application/default/views/scripts/tarif/show-dublicate-tarifs.phtml
+END
+tarif-change-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3575/billing/application/default/views/scripts/tarif/tarif-change-report.phtml
+END
+edit.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/734/billing/application/default/views/scripts/tarif/edit.phtml
+END
+phone-tarif-list.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/715/billing/application/default/views/scripts/tarif/phone-tarif-list.phtml
+END
+tarif-report-view.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1629/billing/application/default/views/scripts/tarif/tarif-report-view.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/740/billing/application/default/views/scripts/tarif/index.phtml
+END
+editcomponent.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/billing/application/default/views/scripts/tarif/editcomponent.phtml
+END
+speed-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/2404/billing/application/default/views/scripts/tarif/speed-report.phtml
+END
+tarif-summary-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3608/billing/application/default/views/scripts/tarif/tarif-summary-report.phtml
+END
+addcomponent.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/3/billing/application/default/views/scripts/tarif/addcomponent.phtml
+END

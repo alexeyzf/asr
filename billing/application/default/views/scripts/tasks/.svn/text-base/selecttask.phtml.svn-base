@@ -1,0 +1,156 @@
+<script language="JavaScript" type="text/javascript">
+    function markChanged(pointID)
+    {
+        $('#points_' + pointID + '_is_changed')[0].value = 1;
+    }
+
+    function updateHidden(pointID, checked)
+    {
+		if (checked)
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_TO_UNCROSS; ?>';
+		}
+		else
+		{
+			$('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_WAIT_UNCROSS; ?>';
+		}
+
+        markChanged(pointID);
+    }
+</script>
+<h1>Указания на порты. Отдел управления сети</h1>
+<br />
+<br />
+<center>Всего невыполненных заданий: <?= count($this->carriedList); ?></center>
+<form method="post" action="/Tasks/deletetask">
+<center>
+    <input type="submit" name="btn1" value="Удалить отмеченные" />
+</center>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head' >N</th>
+		<th class='list_head' >Тип</th>
+		<th class='list_head' >Номер</th>
+		<th class='list_head' >Удалить?</th>
+		<th class='list_head' >Менеджер</th>
+		<th class='list_head' >IP DSLAM-а</th>
+		<th class='list_head' >Порт</th>
+		<th class='list_head' >Скорость</th>
+		<th class='list_head' >Дата созд.</th>
+		<th class='list_head' >Дата выпол.</th>
+		<th class='list_head' >Тип клиента.</th>
+		<th class='list_head' >DSLAM_ID</th>
+		<th class='list_head' >IP адрес</th>
+		<th class='list_head' >Vlan</th>
+		<th class='list_head' >ID клиента</th>
+		<th class='list_head' >Логин</th>
+		<th class='list_head' >Ошибка!</th>
+	</tr>
+
+	<?
+	$counter = 0;
+	foreach ($this->task_list as $item)
+	{
+
+
+		$color= "#FFFFFF";
+		if($item['tasktype'] == "0")
+		{
+			$item['tasktype'] = "UP & DOWN";
+		}
+		elseif($item['tasktype'] == "2")
+		{
+			$item['tasktype'] = "DOWN";
+		}
+
+		if($item['ctype'] == "0")
+		{
+			$item['ctype'] = "Юр. лицо";
+		}
+		elseif($item['ctype'] == "1")
+		{
+			$item['ctype'] = "Физ. лицо";
+		}
+
+
+		if($item['pdone'])
+		{
+			$item['pdone'] = "Выполнено";
+
+		}
+		elseif(!$item['pdone'])
+		{
+			$item['pdone'] = "Не выполнено";
+			$color = '#CCCCCC';
+		}
+
+		?>
+		<tr style="background-color:<?= $color; ?>">
+			<td class='list_row'>
+				<?= $counter ?>
+			</td>
+			<td class='list_row'>
+				<?= $item['tasktype']; ?>
+			</td>
+			<td class='list_row'>
+				<?= $item['id']; ?>
+			</td>
+			<td class='list_row'>
+                            <center>
+                            <input type="checkbox"  onchange="updateHidden(<?= $item['id']; ?>, this.checked);" />
+                            <input type="hidden" id="points_<?= $item['id']; ?>_statuscross" name="points[<?= $item['id']; ?>][needdelete]" />
+                            </center>
+			</td>
+			<td class='list_row right'>
+				<?= $item['managerid']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['dslamip']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['portnumber']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['speed']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['datecreate']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['datedone']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['ctype']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['dslamid']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['ipaddress']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['vlan']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['port_clientid']; ?>
+			</td>
+			<td class='list_row right'>
+				<?= $item['u_login']; ?>
+			</td>
+                        <td class='list_row right'>
+                                <?= $item['error_desc']; ?>
+                        </td>
+		</tr>
+		<?
+		$counter++;
+	}
+	?>
+</table>
+<br />
+<br />
+<center>
+    <input type="submit" name="btn1" value="Удалить отмеченные" />
+</center>
+</form>

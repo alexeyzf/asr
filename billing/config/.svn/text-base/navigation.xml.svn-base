@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <nav>
+        <abonentPage>
+            <label>Отдел продаж</label>
+            <controller>searchclient</controller>
+            <action>index</action>
+            <class>passive</class>
+            <pages>
+                <groupPage>
+                    <label>Новый Клиент</label>
+                    <controller>employee</controller>
+                    <action>index</action>
+                </groupPage>
+                <searchCL>
+                    <label>Поиск клиентов</label>
+                    <controller>searchclient</controller>
+                    <action>index</action>
+                </searchCL>
+               <techApplication>
+                    <label>Заявки</label>
+                    <controller>demand</controller>
+                    <action>index</action>
+                </techApplication>
+                <ngnsearchCL>
+                    <label>Поиск по NGN</label>
+                    <controller>ngn</controller>
+                    <action>index</action>
+                </ngnsearchCL>
+                <historyCL>
+                    <label>Логи</label>
+                    <controller>log</controller>
+                    <action>index</action>
+                </historyCL>
+                <arhivCL>
+                    <label>Архив</label>
+                    <controller>clientarhiv</controller>
+                    <action>index</action>
+                </arhivCL>
+                <problemCL>
+                    <label>Проблемы</label>
+                    <controller>clientproblem</controller>
+                    <action>index</action>
+                </problemCL>
+                <noneActiv>
+                    <label>Не активированные</label>
+                    <controller>noneactiv</controller>
+                    <action>index</action>
+                </noneActiv>
+                <corpBallance>
+                	<label>Баланс короративных клиентов</label>
+                	<controller>corp-client</controller>
+                	<action>show-clients-ballance</action>
+                </corpBallance>
+                <corpNoneInEffect>
+                	<label>Не вступившие в силу</label>
+                	<controller>corp-client</controller>
+                	<action>show-not-in-effect</action>
+                </corpNoneInEffect>
+                <callsCL>
+                    <label>Вызовы</label>
+                    <controller>calls</controller>
+                    <action>index</action>
+                </callsCL>
+                <debtorCL>
+                    <label>Задолжники</label>
+                    <controller>debtor</controller>
+                    <action>index</action>
+                </debtorCL>
+                <uncrossCL>
+                    <label>Снятые с кросса</label>
+                    <controller>uncross</controller>
+                    <action>index</action>
+                </uncrossCL>
+				<blCL>
+                    <label>Черный список</label>
+                    <controller>black-list</controller>
+                    <action>index</action>
+                </blCL>
+                <suspiciousCL>
+                    <label>Подозрительные клиенты</label>
+                    <controller>suspicious</controller>
+                    <action>index</action>
+                </suspiciousCL>
+                <turnaCL>
+                    <label>Очередь</label>
+                    <controller>Turn</controller>
+                    <action>index</action>
+                </turnaCL>
+				<trafficDetailsCL>
+                    <label>Детализация трафика</label>
+                    <controller>Traffic</controller>
+                    <action>get-detaled-traffic</action>
+                </trafficDetailsCL>
+            </pages>
+        </abonentPage>
+
+        <cardsPage>
+            <label>Карточки</label>
+            <controller>card-contract</controller>
+            <action>index</action>
+            <class>passive</class>
+
+            <pages>
+                <contractPage>
+                    <label>Договора</label>
+                    <controller>card-contract</controller>
+                    <action>index</action>
+                </contractPage>
+                <searchPage>
+                	<label>Поиск</label>
+                	<controller>cards</controller>
+                	<action>search</action>
+                </searchPage>
+                <sigmakapitalPage>
+                	<label>Серия SiGMA-KAPITAL</label>
+                	<controller>sigma-kapital</controller>
+                	<action>index</action>
+                </sigmakapitalPage>
+                <sigmaselllPage>
+                	<label>Реализация карт предоплаты</label>
+                	<controller>report</controller>
+                	<action>realisation-card</action>
+                </sigmaselllPage>
+            </pages>
+        </cardsPage>
+
+        <tehnicalPage>
+            <label>Линейнный Отдел</label>
+            <controller>tech-application</controller>
+            <action>index</action>
+            <class>passive</class>
+
+            <pages>
+                <techApplication>
+                    <label>Заявки</label>
+                    <controller>tech-application</controller>
+                    <action>index</action>
+                </techApplication>
+                <techSearchClient>
+                    <label>Поиск Клиента</label>
+                    <controller>tech-client</controller>
+                    <action>search</action>
+                </techSearchClient>
+                <techAts>
+                    <label>АТС</label>
+                    <controller>tech-ats</controller>
+                    <action>index</action></techAts>
+                <techDslam>
+                    <label>DSLAM</label>
+                    <controller>tech-dslam</controller>
+                    <action>index</action>
+                </techDslam>
+                <techHistory>
+                    <label>История</label>
+                    <controller>tech-history</controller>
+                    <action>index</action>
+                </techHistory>
+                <techCross>
+                    <label>На Кросс</label>
+                    <controller>tech-cross</controller>
+                    <action>index</action>
+                </techCross>
+                <techLetterRegister>
+                    <label>Реестр писем</label>
+                    <controller>tech-letter-register</controller>
+                    <action>index</action>
+                </techLetterRegister>
+                <techCourier>
+                    <label>Таблица курьера</label>
+                    <controller>tech-courier</controller>
+                    <action>index</action>
+                </techCourier>
+		<breakPorts>
+                    <label>Битые порты</label>
+                    <controller>beaten-ports</controller>
+                    <action>index</action>
+                </breakPorts>
+                <movingPcross>
+                    <label>Заявки (Перекрос)</label>
+                    <controller>Pointinformation</controller>
+                    <action>moving-list</action>
+                </movingPcross>
+                <techCall>
+                    <label>Вызовы</label>
+                    <controller>tech-call</controller>
+                    <action>index</action>
+                </techCall>
+            </pages>
+        </tehnicalPage>
+
+        <networkAdminPage>
+            <label>Отдел управления</label>
+            <controller>net-admin-client</controller>
+            <action>search</action>
+            <class>passive</class>
+
+            <pages>
+                <netAdminSearchClient>
+                    <label>Поиск клиента</label>
+                    <controller>net-admin-client</controller>
+                    <action>search</action>
+                </netAdminSearchClient>
+                <netAdminServiceAttribute>
+                    <label>Выставление данных</label>
+                    <controller>net-admin-service-attribute</controller>
+                    <action>index</action>
+                </netAdminServiceAttribute>
+                <tasksContr>
+                    <label>Указания</label>
+                    <controller>tasks</controller>
+                    <action>index</action>
+                </tasksContr>
+                <dslamcontrolContr>
+                    <label>Управление DSLAM-и</label>
+                    <controller>dslam</controller>
+                    <action>index</action>
+                </dslamcontrolContr>
+                <switches>
+                	<label>Коммутаторы</label>
+                	<controller>switch</controller>
+                	<action>index</action>
+                </switches>
+				<tablesContr>
+                    <label>Таблицы</label>
+                    <controller>corptables</controller>
+                    <action>index</action>
+                </tablesContr>
+                <registyngnContr>
+                    <label>Регистрация NGN номеров</label>
+                    <controller>ngn</controller>
+                    <action>registration</action>
+                </registyngnContr>
+                <ipaddressjournalContr>
+                    <label>Журнал IP </label>
+                    <controller>Iplist</controller>
+                    <action>index</action>
+                </ipaddressjournalContr>
+				<debtorServiceContr>
+                    <label>Задолжники</label>
+                    <controller>debtor</controller>
+                    <action>show-disabled-service</action>
+                </debtorServiceContr>
+
+                <drawContr>
+                    <label>Графики</label>
+                    <controller>Drawing</controller>
+                    <action>index</action>
+                </drawContr>
+            </pages>
+        </networkAdminPage>
+
+        <stpPage>
+            <label>СТП</label>
+            <controller>support-client</controller>
+            <action>search</action>
+            <class>passive</class>
+
+            <pages>
+                <supportClient>
+                    <label>Поиск клиента</label>
+                    <controller>support-client</controller>
+                    <action>search</action>
+                </supportClient>
+                <ats>
+                    <label>АТС</label>
+                    <controller>support-information</controller>
+                    <action>ats</action>
+                </ats>
+                <supportPhone>
+                    <label>Проверка номера</label>
+                    <controller>support-information</controller>
+                    <action>phone-check</action>
+                </supportPhone>
+                <crossProblem>
+                    <label>Проблемы на кроссе</label>
+                    <controller>support-information</controller>
+                    <action>cross-problem</action>
+                </crossProblem>
+                <radiusCheck>
+                	<label>Проверка radius</label>
+                    <controller>support-client</controller>
+                    <action>check-radius</action>
+                </radiusCheck>
+				<accidentCheck>
+                	<label>Регистрация Аварии</label>
+                    <controller>accident</controller>
+                    <action>index</action>
+                </accidentCheck>
+            </pages>
+        </stpPage>
+
+        <accountingPage>
+            <label>Бухгалтерия</label>
+            <controller>accounting</controller>
+            <action>index</action>
+            <class>passive</class>
+            <pages>
+                <accPage>
+                    <label>Поиск клиента</label>
+                    <controller>accounting</controller>
+                    <action>index</action>
+                </accPage>
+                <kassaPage>
+                    <label>Обменный курс</label>
+                    <controller>kassa</controller>
+                    <action>ratechange</action>
+                </kassaPage>
+                <recalcPage>
+                    <label>Пересчет баланса</label>
+                    <controller>kassa</controller>
+                    <action>recalculation</action>
+                </recalcPage>
+
+                <accountschetPage>
+                    <label>Счет фактуры</label>
+                    <controller>Invoice</controller>
+                    <action>index</action>
+                </accountschetPage>
+                <invoicesTargetsSelectionPage>
+                    <label>Выбор клиентов без счет-фактур</label>
+                    <controller>invoice</controller>
+                    <action>targets-selection</action>
+                </invoicesTargetsSelectionPage>
+
+				<blacklistAccountsPage>
+                    <label>Тест список</label>
+                    <controller>demand</controller>
+                    <action>black-list-client</action>
+                </blacklistAccountsPage>
+
+                <revisionAct>
+                	<label>Акт сверки</label>
+                	<controller>revision-act</controller>
+                	<action>index</action>
+                </revisionAct>
+                <bankClient>
+                    <label>Разноска</label>
+                    <controller>bank-client</controller>
+                    <action>index</action>
+                </bankClient>
+                <clientAccounts>
+                	<label>Расчетные счета</label>
+                	<controller>client-account</controller>
+                	<action>index</action>
+                </clientAccounts>
+                <correctAccounts>
+                	<label>Корректировка бухгалтером</label>
+                	<controller>accounting</controller>
+                	<action>corrective</action>
+                </correctAccounts>
+                <saldocorrectAccounts>
+                	<label>Корректировка САЛЬДО</label>
+                	<controller>saldo</controller>
+                	<action>index</action>
+                </saldocorrectAccounts>
+				<bankextraAccounts>
+                	<label>Выписки</label>
+                	<controller>bank-client</controller>
+                	<action>bank-extract</action>
+                </bankextraAccounts>
+                <financeReport>
+                	<label>Финансовый отчет</label>
+                	<controller>report</controller>
+                	<action>show-finance-report</action>
+                </financeReport>
+                <incomeCompareReport>
+                	<label>Сравнение поступлений</label>
+                	<controller>report</controller>
+                	<action>income-compare-report</action>
+                </incomeCompareReport>
+				<krossReport>
+                	<label>Кроссировачные работы</label>
+                	<controller>kross-work</controller>
+                	<action>index</action>
+                </krossReport>
+                <eTickets>
+                	<label>Электронные билеты</label>
+                	<controller>ticket</controller>
+                	<action>index</action>
+                </eTickets>
+				<curlTest>
+                	<label>Тест CURL</label>
+                	<controller>somecurl</controller>
+                	<action>index</action>
+                </curlTest>
+            </pages>
+        </accountingPage>
+
+        <reportPage>
+            <label>Отчеты</label>
+            <controller>report</controller>
+            <action>index</action>
+            <class>passive</class>
+
+            <pages>
+                <reportClient>
+                    <label>Генерация отчетов</label>
+                    <controller>report</controller>
+                    <action>index</action>
+                </reportClient>
+                <reestrReport>
+                	<label>Отчет по реестру</label>
+                	<controller>report</controller>
+                	<action>generate-reestr</action>
+                </reestrReport>
+                <compareInvoiceReport>
+                	<label>Разница счет-фактур</label>
+                	<controller>report</controller>
+                	<action>compare-invoices</action>
+                </compareInvoiceReport>
+                <overdraftReport>
+                	<label>Отчет "Овердрафт"</label>
+                	<controller>report</controller>
+                	<action>overdraft</action>
+                </overdraftReport>
+                <incomeReport>
+                	<label>Отчет по поступлениям</label>
+                	<controller>report</controller>
+                	<action>generate-income</action>
+                </incomeReport>
+                <phoneReports>
+                	<label>Отчеты по телефонии</label>
+                	<controller>phone-report</controller>
+                	<action>index</action>
+                </phoneReports>
+                <clientsOnReport>
+                	<label>Отчет по вкл. клиентов</label>
+                	<controller>Clientreports</controller>
+                	<action>index</action>
+                </clientsOnReport>
+                <clientsOffReport>
+                	<label>Отчет по выкл. клиентов</label>
+                	<controller>Clientreports</controller>
+                	<action>switchoff</action>
+                </clientsOffReport>
+                <clientsUncross>
+                    <label>Отчет по причинам отключения</label>
+                	<controller>Clientreports</controller>
+                	<action>uncross-report</action>
+                </clientsUncross>
+                <totalClientsOnOffReport>
+                	<label>Итоговый отчет по вкл.</label>
+                	<controller>Clientreports</controller>
+                	<action>show-total-switch-report</action>
+                </totalClientsOnOffReport>
+				<speedkitAllPage>
+                    <label>Итог по Услугам</label>
+                    <controller>total-report</controller>
+                    <action>index</action>
+                </speedkitAllPage>
+				<dymanicReport>
+                	<label>Динамика доходов</label>
+                	<controller>report</controller>
+                	<action>dynamic-incomes</action>
+                </dymanicReport>
+                <portsReport>
+                	<label>Отчет по портам</label>
+                	<controller>Report</controller>
+                	<action>ports-report</action>
+                </portsReport>
+                <statSKReport>
+                	<label>Отчет по картам SiGMA-KAPITAL</label>
+                	<controller>Sigma-Kapital</controller>
+                	<action>get-statistic</action>
+                </statSKReport>
+                <modemReport>
+                	<label>Отчет по модемам</label>
+                	<controller>report</controller>
+                	<action>modem-sells</action>
+                </modemReport>
+                <testReport>
+                	<label>Отчет Stream</label>
+                	<controller>report</controller>
+                	<action>total-report</action>
+                </testReport>
+                <shareStatReport>
+                	<label>Отчеты по акциям и услугам</label>
+                	<controller>report</controller>
+                	<action>share-user-report</action>
+                </shareStatReport>
+				<crossedCorpReport>
+                	<label>Форма №51</label>
+                	<controller>report</controller>
+                	<action>crossed-legal-clients</action>
+                </crossedCorpReport>
+            </pages>
+        </reportPage>
+
+        <documentsPage>
+            <label>Документооборот</label>
+            <controller>document</controller>
+            <action>index</action>
+            <class>passive</class>
+            <pages>
+                <indexPage>
+                    <label>Текущие Задания</label>
+                    <controller>document</controller>
+                    <action>index</action>
+                </indexPage>
+                <addTaskPage>
+                    <label>Добавить Задание</label>
+                    <controller>document</controller>
+                    <action>add-task</action>
+                </addTaskPage>
+                <listDocsPage>
+                    <label>Загруженные Документы</label>
+                    <controller>document</controller>
+                    <action>list-documents</action>
+                </listDocsPage>
+                <addDocPage>
+                    <label>Добавить Документы</label>
+                    <controller>document</controller>
+                    <action>add-document</action>
+                </addDocPage>
+            </pages>
+        </documentsPage>
+
+        <adminPage>
+            <label>Администрирование</label>
+            <controller>admin-group</controller>
+            <action>index</action>
+            <class>passive</class>
+            <pages>
+                <groupPage>
+                    <label>Группы</label>
+                    <controller>admin-group</controller>
+                    <action>index</action>
+                </groupPage>
+                <userPage>
+                    <label>Пользователи</label>
+                    <controller>admin-user</controller>
+                    <action>index</action>
+                </userPage>
+                <tarifPage>
+                    <label>Тарифы</label>
+                    <controller>tarif</controller>
+                    <action>index</action>
+                </tarifPage>
+                <tarifBulkChange>
+                    <label>Массовая смена тарифов</label>
+                    <controller>tarif</controller>
+                    <action>bulk-change</action>
+                </tarifBulkChange>
+                <phoneTarifPage>
+                    <label>Тарифы для телефонии</label>
+                    <controller>tarif</controller>
+                    <action>phone-tarif-list</action>
+                </phoneTarifPage>
+                <tarifSpeedReportPage>
+                    <label>Отчет по скоростям</label>
+                    <controller>tarif</controller>
+                    <action>speed-report</action>
+                </tarifSpeedReportPage>
+                <tarifReportPage>
+                    <label>Отчет по тарифам</label>
+                    <controller>tarif</controller>
+                    <action>tarif-report</action>
+                </tarifReportPage>
+				<tarifSummaryReportPage>
+                    <label>Суммирующий отчет по тарифам</label>
+                    <controller>tarif</controller>
+                    <action>tarif-summary-report</action>
+                </tarifSummaryReportPage>
+                <tarifChangeReportPage>
+                	<label>Отчет по смене тарифов</label>
+                    <controller>tarif</controller>
+                    <action>tarif-change-report</action>
+                </tarifChangeReportPage>
+                <personadiscountPage>
+                    <label>Клиенты Unlimited </label>
+                    <controller>Report</controller>
+                    <action>client-discount</action>
+                </personadiscountPage>
+                <clientsByCountry>
+                    <label>Абоненты по Регионам</label>
+                    <controller>report</controller>
+                    <action>clients-by-region</action>
+                </clientsByCountry>
+				<clientwithdiscountPage>
+                    <label>Клиенты со скидкой (Старые) </label>
+                    <controller>Report</controller>
+                    <action>client-discount-old</action>
+                </clientwithdiscountPage>
+				<portmatchingPage>
+                    <label>Сравнение портов</label>
+                    <controller>Compareports</controller>
+                    <action>index</action>
+                </portmatchingPage>
+                <speedkitPage>
+                    <label>Отчет КИТ unlim</label>
+                    <controller>Report</controller>
+                    <action>kit-report</action>
+                </speedkitPage>
+                <opticalLinePage>
+                    <label>Оптика (Процент охвата)</label>
+                    <controller>Report</controller>
+                    <action>opical-report</action>
+                </opticalLinePage>
+				<dbaseComparePage>
+                    <label>dbase</label>
+                    <controller>Accounting</controller>
+                    <action>dbase-compare</action>
+                </dbaseComparePage>
+            </pages>
+        </adminPage>
+
+        <quitPage>
+            <label>Выход</label>
+            <controller>auth</controller>
+            <action>logout</action>
+            <class>passive</class>
+        </quitPage>
+    </nav>
+</config>

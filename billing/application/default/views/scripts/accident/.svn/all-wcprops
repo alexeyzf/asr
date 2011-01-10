@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2092/billing/application/default/views/scripts/accident
+END
+close-accident.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/2092/billing/application/default/views/scripts/accident/close-accident.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2092/billing/application/default/views/scripts/accident/index.phtml
+END
+show-frame.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2092/billing/application/default/views/scripts/accident/show-frame.phtml
+END
+jurnal.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2092/billing/application/default/views/scripts/accident/jurnal.phtml
+END

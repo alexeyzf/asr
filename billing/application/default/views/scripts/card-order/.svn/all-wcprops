@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/25/billing/application/default/views/scripts/card-order
+END
+create.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3/billing/application/default/views/scripts/card-order/create.phtml
+END
+post.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3/billing/application/default/views/scripts/card-order/post.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/25/billing/application/default/views/scripts/card-order/index.phtml
+END
+view.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/25/billing/application/default/views/scripts/card-order/view.phtml
+END

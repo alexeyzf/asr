@@ -1,0 +1,32 @@
+<h1>Таблица курьера</h1>
+<br />
+<br />
+<form action='' method='post'>
+
+	<dt><label>На число</label></dt>
+	<dd>
+		<select name='day'>
+			<?= FormHelper::getDayOptions($this->day); ?>
+		</select>
+		<select name='month'>
+			<?= FormHelper::getMonthOptions($this->month); ?>
+		</select>
+		<select name='year'>
+			<?= FormHelper::getYearOptions($this->year); ?>
+		</select>
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label>На узел</label></dt>
+	<dd>
+		<select name='hub'>
+			<?= FormHelper::getSelectOptions($this->hubs, $this->hub); ?>
+		</select>
+    </dd>
+    <div class='clear'></div>
+
+    <dt><label>&nbsp;</label></dt>
+    <dd><input type='submit' name='show' value='Показать' /></dd>
+    <div class='clear'></div>
+
+</form>

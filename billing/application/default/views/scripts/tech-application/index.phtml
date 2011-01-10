@@ -1,0 +1,117 @@
+<script language="JavaScript" type="text/javascript">
+    function showType()
+    {
+        var type = $('#type')[0].value;
+        redirect('/tech-application/index/type/' + type);
+    }
+
+    function markChanged(pointID)
+    {
+        $('#points_' + pointID + '_is_changed')[0].value = 1;
+    }
+
+    function updateHidden(pointID, checked)
+    {
+        var type = $('#type')[0].value;
+
+        if (type == 'cross')
+        {
+            if (checked)
+            {
+                $('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_ACCEPTED_CROSS; ?>';
+            }
+            else
+            {
+                $('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_WAIT_CROSS; ?>';
+            }
+        }
+        else if (type == 'uncross')
+        {
+            if (checked)
+            {
+                $('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_TO_UNCROSS; ?>';
+            }
+            else
+            {
+                $('#points_' + pointID + '_statuscross')[0].value = '<?= PointHelper::STATUS_CROSS_WAIT_UNCROSS; ?>';
+            }
+        }
+
+        markChanged(pointID);
+    }
+</script>
+<h1>Заявки на кроссировку и раскроссировку</h1>
+<br />
+<br />
+<form method="post" action="/tech-application/save">
+    <center>
+        <?
+        $typeOptions = array(
+            'cross'     => 'На кроссировку',
+            'uncross'   => 'На раскроссировку',
+        );
+        ?>
+        <select id="type" name="type">
+            <?= FormHelper::getSelectOptions($typeOptions, $this->type); ?>
+        </select>
+
+        &nbsp;
+        <input type="button" value="Показать" onclick="showType();" />
+    </center>
+    <br />
+    <br />
+    <?
+    $counter = 1;
+    if ( is_array($this->points) )
+    {
+        ?>
+        <table id="points" class="list" cellpadding="3" cellspacing="0">
+            <tr>
+            	<th class="list_head">N</th>
+                <th class="list_head">Клиент</th>
+                <th class="list_head">Телефон</th>
+                <th class="list_head">Принято</th>
+                <th class="list_head">Примечание</th>
+            </tr>
+        <?
+        foreach ($this->points as $point)
+        {
+            if ($point['statuscross'] == PointHelper::STATUS_CROSS_ACCEPTED_CROSS || $point['statuscross'] == PointHelper::STATUS_CROSS_ACCEPTED_UNCROSS)
+            {
+                $checked = 'checked';
+            }
+            else
+            {
+                $checked = '';
+            }
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row">
+                   <?= $counter ?>
+                </td>
+                <td class="list_row">
+                    <a href='/tech-client/modify/id/<?= $point['point_id']; ?>'><?= $point['client_name']; ?></a>
+                </td>
+                <td class="list_row"><?= $point['pcross']; ?></td>
+                <td class="list_row">
+                    <input type="checkbox" <?= $checked; ?> onchange="updateHidden(<?= $point['point_id']; ?>, this.checked);" />
+                    <input type="hidden" id="points_<?= $point['point_id']; ?>_statuscross" name="points[<?= $point['point_id']; ?>][statuscross]" value="<?= $point['statuscross']; ?>" />
+                </td>
+
+                <td class="list_row">
+                    <input type="text" name="points[<?= $point['point_id'] ?>][notes]" value="<?= $point['notes']; ?>" onchange="markChanged(<?= $point['point_id']; ?>);" />
+                    <input type="hidden" name="points[<?= $point['point_id']; ?>][is_changed]" id="points_<?= $point['point_id']; ?>_is_changed" value="0" />
+                </td>
+            </tr>
+            <?
+            $counter++;
+        }
+        ?>
+        </table>
+        <br />
+        <br />
+        <center><input type="submit" value="Сохранить" /></center>
+        <?
+    }
+    ?>
+</form>

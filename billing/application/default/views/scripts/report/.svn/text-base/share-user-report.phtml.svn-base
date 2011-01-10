@@ -1,0 +1,112 @@
+<h1>Отчеты. Отчеты по акциям и услугам</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+			За:
+			<select name='start_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='start_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+   <input type="submit" value="показать">
+ </form>
+</center>
+<br />
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Название Акции</th>
+        <th class="list_head">кол. абонентов</th>
+    </tr>
+<?php
+
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Доверительный платеж:</td>
+            <td class="list_row"><?= $this->data['trust_clients']; ?></td>
+        </tr>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">Акция Сигма-Капитал:</td>
+            <td class="list_row"><?= $this->data['sk']; ?></td>
+        </tr>
+</table>
+<?php
+}
+?>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th  width="250" class="list_head">Услуга DAILY</th>
+        <th width="250" class="list_head">Кол. активации</th>
+        <th class="list_head">На сумму</th>
+    </tr>
+    <?php
+    foreach($this->data['megabutton_per_day'] as $key => $value)
+    {
+    	$totalDaily = $totalDaily + $value['tarif_price'];
+    	$totalActiv = $totalActiv + $value['count_act'];
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        	<td class="list_row"><?= $value['tarif_name'] ?></td>
+            <td class="list_row"><?= $value['count_act'] ?></td>
+            <td class="list_row"><?= $value['tarif_price']; ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+    		<td align="right"  colspan="2"  class="list_row"><b>Итого: <?= $totalActiv; ?></b></td>
+    		<td align="right" class="list_row"><b>Итого: <?= $totalDaily; ?></b></td>
+    	</tr>
+</table>
+
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th width="250" class="list_head">Услуга MONTHLY</th>
+        <th width="250" class="list_head">Кол. активации</th>
+        <th class="list_head">На сумму</th>
+    </tr>
+    <?php
+    $totalActiv = 0;
+    foreach($this->data['megabutton_per_month'] as $key => $value)
+    {
+    	if($value['tarif_name'] != "")
+    	{
+    		$totalMonth = $totalMonth + $value['tarif_price'];
+    		$totalActiv = $totalActiv + $value['count_act'];
+    ?>
+        	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+        		<td class="list_row"><?= $value['tarif_name'] ?></td>
+            	<td class="list_row"><?= $value['count_act'] ?></td>
+            	<td class="list_row"><?= $value['tarif_price']; ?></td>
+        	</tr>
+    <?php
+    	}
+    }
+    ?>
+    	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+    		<td align="right" colspan="2"  class="list_row"><b>Итого: <?= $totalActiv; ?></b></td>
+    		<td align="right" class="list_row"><b>Итого: <?= $totalMonth; ?></b></td>
+    	</tr>
+</table>

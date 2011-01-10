@@ -1,0 +1,18 @@
+<h1>Отчеты по телефонии</h1>
+<br />
+<br />
+<h2><a href='/phone-report/direction'>Переговоры по направлениям</a></h2>
+<br />
+<h2><a href='/phone-report/region'>Переговоры по регионам</a></h2>
+<br />
+<h2><a href='/phone-report/calls'>Детализация по переговорам</a></h2>
+<br />
+<h2><a href='/phone-report/number-calls'>Детализация по номеру</a></h2>
+<br />
+<h2><a href='/phone-report/number-analiz'>Форма №21</a></h2>
+<br />
+<h2><a href='/phone-report/search-by-phone'>Форма №24</a></h2>
+<br />
+<h2><a href='/phone-report/attached-numbers'>Форма №25</a></h2>
+<br />
+<h2><a href='/phone-report/free-numbers'>Форма №26</a></h2>

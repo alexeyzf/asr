@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3403/billing/application/default/forms/decorators
+END
+IsdnNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3/billing/application/default/forms/decorators/IsdnNumbers.php
+END
+TradtelNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3/billing/application/default/forms/decorators/TradtelNumbers.php
+END
+DateSelect.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3402/billing/application/default/forms/decorators/DateSelect.php
+END
+Link.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/1844/billing/application/default/forms/decorators/Link.php
+END
+NgnNumbers.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3403/billing/application/default/forms/decorators/NgnNumbers.php
+END
+Separator.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/billing/application/default/forms/decorators/Separator.php
+END
+Modem.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3211/billing/application/default/forms/decorators/Modem.php
+END

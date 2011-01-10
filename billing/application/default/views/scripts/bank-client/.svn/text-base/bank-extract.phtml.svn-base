@@ -1,0 +1,11 @@
+<br />
+<br />
+<center>
+    <form action="/Bank-client/bank-extract" method="post">
+
+	   С клиента: <input type="text" name="fromID" size="10" /> на:
+	   <input type="text" name="toID" size="10" /> за дату:
+	   <input type="text" name="need_date" size="10" />
+       <input type="submit" name="btn1" value="тыц" />
+    </form>
+</center>

@@ -1,0 +1,111 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+function removeWithConfirmSchet(elementID)
+{
+
+      if (confirm('Вы действительно хотите удалить?'))
+      {
+
+            $.php('/ajax/remove-schet', { rid: elementID });
+            $('#' + elementID).remove();
+      }
+
+}
+</script>
+<h1>Отдел Бухгалтерии. Расчетные счета</h1>
+<br />
+<br />
+<div id="info-rschet">
+</div>
+<br />
+
+<form name='client-search-by-inn' method="post">
+	<dt><label>Ввод:</label></dt>
+	<dd>
+		<input type='text' name='svalue' value='<?= $this->inn; ?>' />
+			<select size="1" name="type">
+			    <option value="by_inn">По ИНН</option>
+			    <option value="by_schet">По Р/c</option>
+			    <option value="by_contract">По Номеру договора</option>
+	   		</select>
+		<input type="submit" name='search' value='Поиск' />
+	</dd>
+	<div class='clear'></div>
+</form>
+<br />
+<br />
+<?
+if ($this->message)
+{
+	print '<h2>' . $this->message . '</h2>';
+}
+
+if ($this->client)
+{
+	?>
+	<form name='save-accounts' method="post" action="/client-account/save">
+		<dt><label>Регистрационный номер:</label></dt>
+		<dd>
+			<label><?= $this->client->client_id; ?></label>
+			<input type='hidden' name='client_id' value='<?= $this->client->client_id; ?>' />
+		</dd>
+		<div class='clear'></div>
+
+		<dt><label>Наименование пользователя:</label></dt>
+		<dd><label><?= $this->client->client_name; ?></label></dd>
+		<div class='clear'></div>
+
+		<dt><label>Рассчетные счета:</label></dt>
+		<dd>
+			<div id='accounts'>
+			<?
+			if ($this->clientAccounts)
+			{
+				foreach ($this->clientAccounts as $account)
+				{
+					?>
+					<span id='<?= $account->rschet_id; ?>'>
+						<input type='text' name='accounts[<?= $account->rschet_id; ?>]' value='<?= $account->schet; ?>' />&nbsp;&nbsp;
+						<a href='#' onclick="removeWithConfirmSchet('<?= $account->rschet_id; ?>')">Удалить</a>
+						<br />
+					</span>
+					<?
+				}
+			}
+			?>
+			</div>
+			<br />
+			<a href='#' onclick="addDiv('accounts', 'accounts_template')">Добавить</a>
+			<div id='accounts_template' class='hide'>
+				<span id='newCOUNTER'>
+					<input type='text' name='accounts[newCOUNTER]' />
+					<a href='#' onclick="removeWithConfirmSchet('newCOUNTER')">Удалить</a>
+					<br />
+				</span>
+			</div>
+		</dd>
+		<div class='clear'></div>
+
+		<dt><label></label></dt>
+		<dd><input type="submit" value='Сохранить' /></dd>
+		<div class='clear'></div>
+	</form>
+	<?
+}
+if ($this->clientID)
+{
+	?>
+
+		<dt><label>Регистрационный номер:</label></dt>
+		<dd>
+			<label><?= $this->clientID['client_id']; ?></label>
+		</dd>
+		<div class='clear'></div>
+
+		<dt><label>Наименование пользователя:</label></dt>
+		<dd><label><?= $this->clientID['client_name']; ?></label></dd>
+		<div class='clear'></div>
+		<?
+}
+?>

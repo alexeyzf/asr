@@ -1,0 +1,87 @@
+<h1>Тарифы. Суммирующий отчет по тарифам</h1>
+<br />
+<br />
+<center>
+<?php
+    echo $this->form;
+?>
+</center>
+
+<?
+if ( is_array($this->data) ) 
+{ 
+	?>
+	<br />
+	<br />
+	<br />
+	<br />
+	<table class="list" cellpadding="3" cellspacing="0">
+		<tr>
+			<th class="list_head">Название ТП</th>
+			<?
+			foreach ($this->data['months'] as $month)
+			{
+			?>
+				<th class="list_head" colspan="4"><?= "{$month[0]}-{$month[1]}" ?></th>
+			<?
+			} 
+			?>
+		</tr>
+		<tr>
+			<th class="list_head">&nbsp;</th>
+			<?
+			for ($i = 0; $i < count($this->data['months']); $i++) 
+			{
+			?>
+				<th class="list_head">Количество</th>
+				<th class="list_head">&#37;</th>
+				<th class="list_head">Сумма</th>
+				<th class="list_head">&#37;</th>
+			<?
+			}
+			?>
+		</tr>
+		<?
+		foreach ($this->data['data'] as $name => $rows)
+		{
+		?>
+			<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $name ?></td>
+				<?
+				foreach ($rows as $month => $row)
+				{
+                    $sums[$month]['amount'] += $row['amount'];
+                    $sums[$month]['price'] += $row['price'];
+
+                    $sums[$month]['amount_percents'] += $row['amount_percents'];
+                    $sums[$month]['price_percents'] += $row['price_percents'];
+				?>
+					<td class='list_row'><?= sprintf('%d', $row['amount']) ?></td>
+					<td class='list_row'><?= sprintf('%.3f', $row['amount_percents']) ?></td>
+					<td class='list_row'><?= sprintf('%.3f', $row['price']) ?></td>
+					<td class='list_row'><?= sprintf('%.3f', $row['price_percents']) ?></td>
+				<?
+				}
+				?>
+			</tr>
+		<?
+		}
+		?>
+		<tr>
+			<td class="list_head">Итого</td>
+			<?
+			foreach ($sums as $sum)
+			{
+			?>
+				<td class='list_row'><?= sprintf('%d', $sum['amount']) ?></td>
+				<td class='list_row'><?= sprintf('%d', $sum['amount_percents']) ?></td>
+				<td class='list_row'><?= sprintf('%.3f', $sum['price']) ?></td>
+				<td class='list_row'><?= sprintf('%d', $sum['price_percents']) ?></td>
+			<?
+			}
+			?>
+		</tr>
+	</table>
+<?
+}
+?>

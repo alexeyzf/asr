@@ -1,0 +1,58 @@
+<h1>Группы пользователей</h1>
+<br />
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/admin-group/modify')"/>
+         </td>
+    </tr>
+</table>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Действие</th>
+        <th class="list_head">Название</th>
+    </tr>
+<?php
+if ( count($this->groups) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="3" class="list_row center">
+            Не найдено ни одной группы
+        </td>
+    </tr>
+
+    <?php
+}
+else
+{
+    foreach ($this->groups as $group)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">
+                <a class="link" href="/admin-group/modify/id/<?= $group->id; ?>">Изменить</a>&nbsp;|&nbsp;
+                <a class="link" onclick="return confirm('Вы действительно хотите удалить группу <?= $group->name; ?> ?')"
+                   href="/admin-group/delete/id/<?= $group->id; ?>">Удалить</a>
+            </td>
+            <td class="list_row">
+                <?php echo $group->name; ?>
+            </td>
+        </tr>
+        <?php
+    }
+}
+?>
+</table>
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/admin-group/modify')"/>
+         </td>
+    </tr>
+</table>

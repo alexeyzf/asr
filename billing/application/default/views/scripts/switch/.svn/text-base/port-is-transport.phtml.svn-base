@@ -1,0 +1,8 @@
+<h1>Редактирование параметров порта коммутатора</h1>
+<br />
+<br />
+<form action="/Switch/clear-transport-port" method="post">
+<?php
+	echo $this->form;
+?>
+</form>

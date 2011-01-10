@@ -1,0 +1,45 @@
+<?php $_SESSION['back_url'] = $_SERVER['REQUEST_URI']; ?>
+<h1>Отчет. <?= $this->data[0]['title']; ?>  | <a href="/Report/index" > НАЗАД </a></h1>
+<br />
+<br />
+<br />
+<table  class="list" cellpadding="3" cellspacing="0">
+<tr>
+	<th  class="list_head">Наименование</th>
+	<th class="list_head">Логин</th>
+	<th class="list_head">Телефон крос.</th>
+	<th class="list_head">Баланс</th>
+	<th class="list_head">ID клиента</th>
+	<th class="list_head">ID точки</th>
+	<th class="list_head">Овердрафт</th>
+	<th class="list_head">Действие</th>
+</tr>
+<?php
+for( $i = 0; $i <count($this->data); $i++ )
+{
+?>
+<tr  class='list_tr'>
+	<td  class="list_row"><?= $this->data[$i]['client_name'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['u_login'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['pcross'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['ballance'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['client_id'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['point_id'] ?></td>
+	<td class="list_row"><?= $this->data[$i]['overdraft'] ?></td>
+	<td class="list_row">
+	<?php
+		if( $this->report_type == "2_c")
+		{
+			echo ('<a  href="/Overdraft/deleteoverdraft/client_id/'.$this->data[$i]['client_id'].'" > удалить</a>');
+		}
+		else
+		{
+			echo ('Пусто');
+		}
+	?>
+	</td>
+</tr>
+<?php
+}
+?>
+</table>

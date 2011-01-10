@@ -1,0 +1,111 @@
+<h1>Отдел продаж. Задолжники</h1>
+<br />
+<br />
+<center>
+  <form action="/Debtor/index" method="post">
+   <select size="1"  name="ctype">
+   	<?
+   	$options = array('1' => 'Stream', '2' => 'Stream Самарканд', '0' => 'Корп. клиенты');
+   	print FormHelper::getSelectOptions($options, $this->ctype, 'Выберите тип клиента');
+   	?>
+   </select>
+   <input type="submit" value="Отправить">
+  </form>
+
+</center>
+
+<br />
+<form id="saveNotes" method="post" action="/debtor/index/">
+    <table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="submit" name="postback" value="Сохранить" />
+         </td>
+    </tr>
+    </table>
+
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">N</th>
+            <th class="list_head">ID</th>
+            <th class="list_head">Наименование</th>
+            <th class="list_head" style="width:15%;">Баланс</th>
+            <th class="list_head">Факс</th>
+            <th class="list_head">Телефон</th>
+            <th class="list_head">Овердрафт</th>
+            <th class="list_head">Примечания</th>
+        </tr>
+    <?php
+    if ( count($this->dataClients) == 0 )
+    {
+        ?>
+        <tr>
+            <td colspan="10" class="list_row center">
+                Не найдено
+            </td>
+        </tr>
+        <?
+    }
+    else
+    {
+        $totalPrice = 0;
+
+        foreach ($this->dataClients as $hubName => $list)
+        {
+            ?>
+            <tr id="atsname">
+                <td  class="list_row left"  colspan="9" >
+                    <h2><b><?= $hubName; ?></b></h2>
+                </td>
+            </tr>
+            <?
+            $counter = 1;
+            $price = 0;
+            foreach ($list as $item)
+            {
+                ?>
+                <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                    <td class="list_row"><?= $counter++; ?></td>
+                    <td class="list_row"><?= $item['client_id'] ?></td>
+                    <td class="list_row">
+                        <a href="/Clientinfo/index/clientid/<?= $item['client_id'] ?>/pointid/" >
+                            <?= $item['client_name']; ?>
+                        </a>
+                    </td>
+                    <td class="list_row"><?= $item['ballance']; ?></td>
+                    <td class="list_row"><?= $item['fax']; ?></td>
+                    <td class="list_row"><?= $item['phone']; ?></td>
+                    <td class="list_row"><?= $item['overdraft']; ?></td>
+                    <td class="list_row">
+                        <input type="text" name="note_<?= $item['client_id'] ?>" value="<?= $item['notes'] ?>" />
+                    </td>
+                </tr>
+                <?
+                $price = $price + $item['ballance'];
+                $totalPrice += $item['ballance'];
+            }
+            ?>
+            <tr class="list_tr">
+               <td  class="list_row" colspan="9" align="right" ><b><?= $price ?> $</b></td>
+            </tr>
+            <?
+        }
+        ?>
+        <tr class="list_tr">
+            <td  class="list_row" colspan="9" align="right" ><b><?= $price ?> $</b></td>
+        </tr>
+        <?
+    }
+    ?>
+    </table>
+    
+    <table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="submit" name="postback" value="Сохранить" />
+         </td>
+    </tr>
+    </table>
+</form>

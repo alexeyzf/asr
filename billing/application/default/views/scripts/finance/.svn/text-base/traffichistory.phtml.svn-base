@@ -1,0 +1,84 @@
+<h1>Статистика по траффику клиента ( <?= $this->client_name ?> ) | <a href="<?= $_SESSION['back_url'] ?>">НАЗАД</a></h1>
+<br/>
+<br/>
+<br/>
+
+<form action="/Finance/traffichistory/client_id/<?= $this->client_id ?>" method='post'>
+    <table border="0">
+        <tr>
+        <td class="row">
+            <b>Показать начиная с: </b>
+        </td>
+        <td class="row">
+            <?= $this->form->day; ?>
+            <?= $this->form->month; ?>
+            <?= $this->form->year; ?>
+        </td>
+        <td class="row">
+            <b>по:</b>
+        </td>
+        <td class="row">
+            <?= $this->form->dayend; ?>
+            <?= $this->form->monthend; ?>
+            <?= $this->form->yearend; ?>
+        </td>
+        <td width="100" align="right"><input type="submit" name="show" value="показать" /></td>
+        </tr>
+    </table>
+</form>
+
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Вх.</th>
+        <th class="list_head">Исх.</th>
+    </tr>
+    <?
+	$totalInput = 0;
+	$totalOutput = 0;
+
+	foreach ($this->traffic as $row)
+	{
+		if (round($row['input'], 2) == 0
+			|| round($row['output'], 2) == 0)
+		{
+			continue;
+		}
+
+		$totalInput += $row['input'];
+		$totalOutput += $row['output'];
+
+		?>
+		<tr>
+			<td class='list_row'><?= date('d.m.y G:i:s', strtotime($row['session_time'])); ?></td>
+			<td class='list_row'><?= $row['username']; ?></td>
+			<td class='list_row'><?= round($row['input'], 2); ?></td>
+			<td class='list_row'><?= round($row['output'], 2); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row' colspan='2'><b>Всего</b></td>
+		<td class='list_row'><b><?= round($totalInput, 2); ?></b></td>
+		<td class='list_row'><b><?= round($totalOutput, 2); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_row' colspan='2'><b>Платный</b></td>
+		<td class='list_row'><b><?= round($this->stream_traffic[0]['in'], 2) ?></b></td>
+		<td class='list_row'><b><?= round($this->stream_traffic[0]['out'], 2) ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_row' colspan='2'><b>Бесплатный	Ночной</b></td>
+		<td class='list_row'><b><?= round($this->freeTraffic['output'], 2); ?></b></td>
+		<td class='list_row'><b><?= round($this->freeTraffic['input'], 2); ?></b></td>
+	</tr>
+    </table>
+<br/>
+<br/>
+<br/>
+<br/>
+

@@ -1,0 +1,47 @@
+<h1>Список тарифов по ISDN и традиционной телефонии</h1>
+<br />
+<br />
+<center>
+	<input type='button' value='Добавить' onclick="redirect('/tarif/edit-phone-tarif')" />
+</center>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Действие</th>
+		<th class='list_head'>
+			<a id='link_color' href='/tarif/phone-tarif-list/order-by/directions'>Наименование направления</a>
+		</th>
+		<th class='list_head'>
+			<a id='link_color' href='/tarif/phone-tarif-list/order-by/ut_name'>Регион</a>
+		</th>
+		<th class='list_head'>
+			<a id='link_color' href='/tarif/phone-tarif-list/order-by/prefix'>Префикс</a>
+		</th>
+		<th class='list_head'>
+			<a id='link_color' href='/tarif/phone-tarif-list/order-by/prefix'>Цена</a>
+		</th>
+		<th class='list_head'>Дата начала</th>
+		<th class='list_head'>Дата окончания</th>
+	</tr>
+	<?
+	foreach ($this->phoneTarifs as $tarif)
+	{
+		?>
+		<tr>
+			<td class='list_row'>
+				<a href='/tarif/edit-phone-tarif/id/<?= $tarif['id']; ?>'>Редактировать</a>
+				&nbsp;|&nbsp;
+				<a href='/tarif/delete-phone-tarif/id/<?= $tarif['id']; ?>'>Удалить</a>
+			</td>
+			<td class='list_row'><?= $tarif['directions'] ?></td>
+			<td class='list_row'><?= $tarif['ut_name'] ?></td>
+			<td class='list_row'><?= $tarif['prefix'] ?></td>
+			<td class='list_row'><?= $tarif['price'] ?></td>
+			<td class='list_row'><?= date('d.m.Y', strtotime($tarif['start_date'])); ?></td>
+			<td class='list_row'><?= date('d.m.Y', strtotime($tarif['end_date'])); ?></td>
+		</tr>
+		<?
+	} 
+	?>
+</table>

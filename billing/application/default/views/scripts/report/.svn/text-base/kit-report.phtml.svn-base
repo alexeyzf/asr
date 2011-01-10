@@ -1,0 +1,135 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function checkNumber()
+    {
+        var need_face = $("select[name='is_stream']").val();
+
+        $.php("/ajax/viewtarifs", {is_face: need_face});
+    }
+</script>
+<h1>Отчет. КИТ unlim</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+   <select size="1" name="is_stream" onchange='checkNumber()'>
+            <option disable selected>тип клиента</option>
+	    <option value="1">Стрим</option>
+	    <option value="0">Корп.</option>
+   </select>
+	<div id="tarif">
+	</div>
+   <select size="1" name="month">
+	    <option value="01">янв.</option>
+	    <option value="02">фев.</option>
+	    <option value="03">мар.</option>
+	    <option value="04">апр.</option>
+	    <option value="05">май.</option>
+	    <option value="06">июн.</option>
+	    <option value="07">июл.</option>
+	    <option value="08">авг.</option>
+	    <option value="09">сен.</option>
+	    <option value="10">окт.</option>
+	    <option value="11">ноя.</option>
+	    <option value="12">дек.</option>
+   </select>
+   <select size="1" name="year">
+	    <option value="2010">2010</option>
+	    <option value="2011">2011</option>
+	    <option value="2012">2012</option>
+   </select>
+
+
+   <input type="submit" value="Отправить"></p>
+ </form>
+</center>
+<br />
+<br />
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Тариф</th>
+        <th class="list_head">Цена</th>
+        <th class="list_head">Скорость</th>
+        <th class="list_head">Количество клиентов</th>
+        <th class="list_head" style="width:15%;">Потребляемый трафик, ГБ</th>
+        <th class="list_head">% использования полосы</th>
+        <th class="list_head">Клиентов на мегабит</th>
+    </tr>
+<?php
+
+$nowCountClients = 0;
+if($this->nowClients)
+{
+    foreach($this->nowClients as $value)
+    {
+        $nowCountClients = $nowCountClients + $value['tt'];
+    }
+}
+
+
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+
+	$countClients = count($this->data);
+
+	$trafficSum = 0;
+
+	$f = ($this->speed / 8 * 3600 * 24 * 30) /1000000;
+
+
+
+    foreach ($this->data as $item)
+    {
+		$trafficSum = $trafficSum + $item['traffic_bytes'];
+    }
+
+	$traff = ($trafficSum /1000 /1000 / 1000) / $countClients;
+
+	$polosa = $traff / $f * 100;
+
+
+	$clientsPerMB = 1000 / ($this->speed * ($polosa / 100));
+}
+?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $this->tarifData['tarif_name'] ?></td>
+            <td class="list_row"><?= $this->tarifData['tarif_price'] ?></td>
+            <td class="list_row"><?= $this->speed ?> Кб/c</td>
+            <td class="list_row"><?= $countClients ?></td>
+            <td class="list_row"><?= number_format($traff, 2, ',', ' '); ?></td>
+            <td class="list_row"><?= number_format($polosa, 2, ',', ' '); ?></td>
+            <td class="list_row"><?= number_format($clientsPerMB, 2, ',', ' '); ?></td>
+        </tr>
+</table>
+<br />
+<?php
+
+ $clients = $nowCountClients - $countClients;
+
+ if($clients >= 0)
+ {
+     $str = "+".$clients;
+ }
+ else
+ {
+    $str = "-".$clients;
+ }
+ //На данный момент:  $str ;  клиента.
+?>
+
+
+

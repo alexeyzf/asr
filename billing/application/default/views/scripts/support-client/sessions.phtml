@@ -1,0 +1,56 @@
+<h1>Последние сессии клиента "<?= $this->client; ?>"</h1>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Действие</th>
+        <th class='list_head'>SessionID</th>
+        <th class='list_head'>NAS</th>
+        <th class='list_head'>Логин</th>
+        <th class='list_head'>Начало сессии</th>
+        <th class='list_head'>Конец сессии</th>
+        <th class='list_head'>Длительность</th>
+        <th class='list_head'>Входящий</th>
+        <th class='list_head'>Исходящий</th>
+        <th class='list_head'>Телефон</th>
+        <th class='list_head'>IP-Адрес</th>
+    </tr>
+    <?
+    foreach ($this->sessions as $session)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'>
+                <?
+                if ( ! $session['acctstoptime'] )
+                {
+                    ?>
+                    <img src='/images/icons/close.png' onclick="redirect('/support-client/close-session/id/<?= $session['radacctid'] ?>/l/<?= $this->client; ?>')"
+                        title='Закрыть' class='link' />
+                    <?
+                }
+                ?>
+                <img src='/images/icons/delete.png' onclick="redirect('/support-client/delete-session/id/<?= $session['radacctid'] ?>/l/<?= $this->client; ?>')"
+                    title='Удалить' class='link' />
+            </td>
+            <td class='list_row'><?= $session['acctsessionid']; ?></td>
+            <td class='list_row'><?= $session['nasipaddress']; ?></td>
+            <td class='list_row'><?= $session['username'] ?></td>
+            <td class='list_row'><?= date('d.m.y G:i:s', strtotime($session['acctstarttime'])); ?></td>
+            <td class='list_row'>
+                <?
+                if ($session['acctstoptime'])
+                {
+                    print date('d.m.y G:i:s', strtotime($session['acctstoptime']));
+                }
+                ?></td>
+            <td class='list_row'><?= $session['acctsessiontime']; ?></td>
+            <td class='list_row'><?= $session['acctinputoctets']; ?></td>
+            <td class='list_row'><?= $session['acctoutputoctets']; ?></td>
+            <td class='list_row'><?= $session['callingstationid']; ?></td>
+            <td class='list_row'><?= $session['framedipaddress']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>

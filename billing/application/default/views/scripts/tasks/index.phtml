@@ -1,0 +1,39 @@
+<h1>Указания на порты. Отдел управления сети</h1>
+<br />
+<br />
+
+<center>
+	<form method="post" action="/Tasks/selecttask">
+
+			С
+			<select name='start_day'>
+				<?= FormHelper::getDayOptions(1); ?>
+			</select>
+			<select name='start_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='start_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+
+			По
+			<select name='end_day'>
+				<?= FormHelper::getDayOptions(date('t')); ?>
+			</select>
+			<select name='end_month'>
+				<?= FormHelper::getMonthOptions(date('m')); ?>
+			</select>
+			<select name='end_year'>
+				<?= FormHelper::getYearOptions(date('Y')); ?>
+			</select>
+
+		<input type="submit" value='Показать' />
+	</form>
+</center>
+
+
+
+
+
+
+

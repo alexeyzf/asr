@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/3566/billing/application/default/views/scripts/accounting
+END
+clientcash.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3009/billing/application/default/views/scripts/accounting/clientcash.phtml
+END
+dbase-compare.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3566/billing/application/default/views/scripts/accounting/dbase-compare.phtml
+END
+showcorrect.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1309/billing/application/default/views/scripts/accounting/showcorrect.phtml
+END
+corrective.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/1474/billing/application/default/views/scripts/accounting/corrective.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/123/billing/application/default/views/scripts/accounting/index.phtml
+END

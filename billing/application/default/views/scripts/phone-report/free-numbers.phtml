@@ -1,0 +1,27 @@
+<h1>
+	Отчеты. Незанятые номера
+</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>№</th>
+		<th class='list_head'>Номер</th>
+	</tr>
+	<?
+	$counter = 0;
+	foreach($this->result as $item)
+	{
+		$counter++;
+		?>
+			<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $counter; ?></td>
+				<td class='list_row'><?= $item; ?></td>
+			</tr>
+		<?
+	}
+	?>
+</table>

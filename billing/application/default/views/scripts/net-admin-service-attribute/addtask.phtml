@@ -1,0 +1,29 @@
+<h1>Отдел управления. Указания на DSLAM.</h1>
+<br />
+<br />
+<br />
+<form action="/Net-Admin-Service-Attribute/savetask" method="post">
+<center>
+	<input type='submit' value='создать'  size='100' alt="создать задание"/>
+	<br/>
+	<br/>
+</center>
+<?php
+echo  $this->form_data;
+?>
+
+        <dt><label>Все IP адреса клиентов :</label></dt>
+        <dd>
+<?php
+
+    foreach (explode(',', $this->arrIP) as $value)
+    {
+		?>
+			<input type="text" value="<?= $value ?>" name="client[ip]" /> <br />
+		<?php
+    }
+?>
+        </dd>
+        <div class="clear"></div>
+        <br />
+</form>

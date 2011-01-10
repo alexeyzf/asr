@@ -1,0 +1,112 @@
+<h1>Финансовый отчет</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<div class='clear'></div>
+<br />
+<br />
+<label></label>
+<table class='list'>
+<tr>
+	<th  class='list_head' colspan="2"><h2>Реализация по корп. услугам:</h2></th>
+</tr>
+<tr>
+	<th class='list_head' width="820"  >параметр</th>
+	<th class='list_head'>значение</th>
+</tr>
+
+
+<?php
+$dop = 0;
+$totalInvoice = 0;
+$totalAmount = 0;
+
+$corpTotal = 0.0;
+foreach($this->data[0] as $key => $value)
+{
+	if($value['servicename'] == "Зачисление после пересчета"
+		or
+	   $value['servicename'] == "Снятие при пересчете"
+	    or
+	   $value['servicename'] == "Снятие при пересчете 24"
+	    or
+	   $value['servicename'] == "Смена тарифного плана"
+		)
+	{
+		$dop = $dop + $value['summa'];
+		unset($value);
+		continue;
+	}
+    else
+    {
+        $corpTotal += $value['summa'];
+    }
+	$totalAmount = $totalAmount + $value['summa'];
+?>
+	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+		<td class='list_row'><?= $value['servicename']; ?></td>
+		<td class='list_row'><?= number_format($value['summa'], 2, ',', ' '); ?></td>
+	</tr>
+
+<?php
+}
+?>
+    <tr>
+        <td class='list_row right' style='text-align:left;'>Итого:</td>
+        <td class='list_row right' style='text-align:left;'><?= number_format($corpTotal, 2, ',', ' ') ?></td>
+    </tr>
+</table>
+
+
+
+<table class='list'>
+<tr>
+	<th class='list_head' colspan="2"><h2>Реализация по SharqStream:</h2></th>
+</tr>
+<tr>
+	<th class='list_head' width="820"  >параметр</th>
+	<th class='list_head'>значение</th>
+</tr>
+
+
+<?php
+$dop = 0;
+$totalInvoice = 0;
+$totalStream = 0.0;
+foreach($this->data[1] as $key => $value)
+{
+?>
+	<tr  class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+		<td class='list_row'><?= $value['typename_value']; ?></td>
+		<td class='list_row'><?= number_format($value['sum'], 2, ',', ' '); ?></td>
+	</tr>
+
+<?php
+	$totalAmount = $totalAmount + $value['sum'];
+    $totalStream += $value['sum'];
+}
+?>
+    <tr>
+        <td class='list_row right' style='text-align:left;'>Итого:</td>
+        <td class='list_row right' style='text-align:left;'><?= number_format($totalStream, 2, ',', ' ') ?></td>
+    </tr>
+</table>
+
+
+<table class='list'>
+<tr>
+	<th class='list_head'  colspan="2"><h2>Реализация карт предоплаты:</h2></th>
+</tr>
+<tr>
+	<th  class='list_head' width="820"  >параметр</th>
+	<th  class='list_head'  >значение</th>
+</tr>
+	<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+		<td  class='list_row'>Поступления на Р/С</td>
+		<td  class='list_row'><?= number_format($this->data[2][0]['sum'], 2, ',', ' '); ?></td>
+	</tr>
+</table>
+<?php
+	$totalAmount = $totalAmount + $this->data[2][0]['sum'];
+?>
+<center><h2>Итого: <?= number_format($totalAmount, 2, ',', ' '); ?></h2></center>

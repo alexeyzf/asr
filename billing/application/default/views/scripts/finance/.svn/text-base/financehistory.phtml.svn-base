@@ -1,0 +1,64 @@
+<h1>Просмотр фин. истории клиента ( <?= $this->client_name ?> ) | <a href="<?= $_SESSION['back_url'] ?>">НАЗАД</a></h1>
+<br/>
+<br/>
+<br/>
+<center>
+<form action="/Finance/financehistory/client_id/<?= $this->client_id ?>" method="post" >
+	<table border="0">
+		<tr>
+		  <td><b>Показать начиная с: </b></td>
+		  <td>
+		  	<?= $this->startdate->day; ?>
+		  	<?= $this->startdate->month; ?>
+		  	<?= $this->startdate->year; ?>
+		  </td>
+		  <td width="50" align="right"> <b>по:</b> </td>
+		  <td>
+		  	<?= $this->startdate->dayend; ?>
+		  	<?= $this->startdate->monthend; ?>
+		  	<?= $this->startdate->yearend; ?>
+		  </td>
+		  <td width="100" align="right"><input type="submit" name="show" value="показать" /></td>
+		</tr>
+	</table>
+</form>
+</center>
+<br />
+<br />
+<table border="1"  class="list" >
+<tr>
+	<th class="list_head" >дата</th>
+	<th class="list_head">тип опер.</th>
+	<th class="list_head">сумма</th>
+	<th class="list_head">клиент</th>
+	<th class="list_head">пользователь</th>
+	<th class="list_head">комментарии</th>
+</tr>
+<?php
+// Вывод информации
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row">'.date('Y-m-d H:i:s', strtotime($item['currenttime'])).'</td>
+				<td class="list_row">'.$item['tran_label'].'</td>
+				<td class="list_row">'.money_format('%i', $item['summa']).'$</td>
+				<td class="list_row">'.$item['client_name'].'</td>
+				<td class="list_row">'.$item['user_name'].'</td>
+				<td class="list_row">'.$item['commente'].'</td>
+			</tr>
+		');
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>
+<br/>
+<br/>
+

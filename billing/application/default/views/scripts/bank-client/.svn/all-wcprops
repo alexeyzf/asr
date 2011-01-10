@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3173/billing/application/default/views/scripts/bank-client
+END
+post-bank-client-exchequer.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/2353/billing/application/default/views/scripts/bank-client/post-bank-client-exchequer.phtml
+END
+bank-extract.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/1854/billing/application/default/views/scripts/bank-client/bank-extract.phtml
+END
+kapital.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3173/billing/application/default/views/scripts/bank-client/kapital.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/233/billing/application/default/views/scripts/bank-client/index.phtml
+END
+posted-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/1111/billing/application/default/views/scripts/bank-client/posted-report.phtml
+END
+post-bank-client.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/1788/billing/application/default/views/scripts/bank-client/post-bank-client.phtml
+END
+unposted-report.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1029/billing/application/default/views/scripts/bank-client/unposted-report.phtml
+END

@@ -1,0 +1,45 @@
+<center><h2>Отчет по разнесенным</h2></center>
+<br />
+<br />
+<form name='posted-report-form' action='' method='post'>
+	<center>
+		<input type='text' name='date' value='<?= $this->date; ?>' />
+		<input type='submit' name='show' value='Показать' />
+	</center>
+</form>
+<br />
+<br />
+<?
+if (is_array($this->data))
+{ 
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head' style='width: 10%'>Дата</th>
+			<th class='list_head' style='width: 15%'>Счет</th>
+			<th class='list_head' style='width: 5%'>Номер документа</th>
+			<th class='list_head' style='width: 25%'>Наименование организации</th>
+			<th class='list_head' style='width: 5%'>Банк</th>
+			<th class='list_head' style='width: 10%'>Сумма</th>
+			<th class='list_head' style='width: 30%'>Коментарии</th>
+		</tr>
+		<?
+		foreach ($this->data as $item)
+		{
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= date('d.m.Y', strtotime($item['date'])); ?></td>
+				<td class='list_row'><?= $item['account']; ?></td>
+				<td class='list_row'><?= $item['doc_num']; ?></td>
+				<td class='list_row'><?= $item['org_name']; ?></td>
+				<td class='list_row'><?= $item['bank_type']; ?></td>
+				<td class='list_row right'><?= number_format($item['amount'], 2, ',', ' '); ?></td>
+				<td class='list_row'><?= $item['notes']; ?></td>
+			</tr>
+			<?
+		}	
+		?>
+	</table>
+	<?
+}
+?>

@@ -1,0 +1,32 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function traceBack()
+    {
+		var ats_id = $('#selected_ats')[0].value;
+        $.php("/ajax/show-dslams", {ats: ats_id});
+    }
+
+</script>
+
+<h1>СТП. Запись в журнал</h1>
+<br />
+<br />
+<center>
+<select size="1" name="ats" onchange="traceBack()" id="selected_ats">
+<option disabled>Выберите АТС</option>
+<?php
+foreach($this->data as $key => $value)
+{
+?>
+    <option value="<?= $key ?>"><?= $value ?></option>
+<?php
+}
+?>
+</select>
+</center>
+<br />
+
+<div id="traced">
+
+</div>

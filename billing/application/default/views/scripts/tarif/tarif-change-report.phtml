@@ -1,0 +1,143 @@
+<h1>Тарифы. Отчет по смене тарифных планов</h1>
+<br />
+<br />
+<center>
+<form name='tarif_change_report' method="post">
+	<span class='font14'>Месяц</span>
+	<select name='month'>
+		<?= FormHelper::getMonthOptions($this->month, true, true); ?>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class='font14'>Год</span>
+	<select name='year'>
+		<?= FormHelper::getYearOptions($this->year, true, true); ?>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class='font14'>Тип клиента</span>
+	<select name='client_type'>
+		<?
+		$options = array('0' => 'Корп', '1' => 'Stream', '2' => 'Nova');
+		print FormHelper::getSelectOptions($options, $this->client_type, true);
+		?>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class='font14'>Группировка</span>
+	<select name='order'>
+		<?
+		$options = array('0' => 'С какого ТП', '1' => 'На какой ТП');
+		print FormHelper::getSelectOptions($options, $this->order, true);
+		?>
+	</select>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="submit" value='Показать' />
+</form>
+</center>
+<br />
+<br />
+<?php
+if($this->order == 0)
+{
+	$head1 = "С какого ТП";
+	$head2 = "На какой ТП";
+	$str = "from_tarif_name";
+	$strMany = "to_tarif_name";
+	$totalStr = "С тарифного плана ушло";
+}
+elseif($this->order == 1)
+{
+	$head1 = "На какой ТП";
+	$head2 = "С какого ТП";
+	$str = "to_tarif_name";
+	$strMany = "from_tarif_name";
+	$totalStr = "На тарифный план пришло";
+}
+?>
+<table class="list" cellpadding="3" cellspacing="0">
+<tr>
+	<th  class="list_head"><?= $head1 ?></th>
+	<th  class="list_head"><?= $head2 ?></th>
+	<th  class="list_head">Кол. точек</th>
+	<th  class="list_head">Выручка</th>
+</tr>
+<?
+// С какого ТП
+$totalPoints = 0;
+		//var_dump(TarifHelper::getTarifPrice(9));
+		//exit();
+foreach($this->data as $key => $value)
+{
+	?>
+	<tr class='list_tr'>
+		<td rowspan="<?= count($value) +1 ?>" class="list_row"><b><?= $value[0][$str]; ?></b></td>
+		<?php
+			$totalAmount = 0;
+			foreach($value as $row)
+			{
+				if($this->order == 0)
+				{
+					$tarifX = "from_tarif_id";
+					$tarifY = "to_tarif_id";
+
+                    $tarifXP = "from_price";
+					$tarifYP = "to_price";
+				}
+				else
+				{
+					$tarifX = "to_tarif_id";
+					$tarifY = "from_tarif_id";
+
+                    $tarifXP = "to_price";
+					$tarifYP = "from_price";
+				}
+				if($this->order == 1)
+				{
+					$amount = -(($row[$tarifYP] ? $row[$tarifYP] : TarifHelper::getTarifPrice($row[$tarifY])) * $row['points_count'] -
+							  ($row[$tarifXP] ? $row[$tarifXP] : TarifHelper::getTarifPrice($row[$tarifX])) * $row['points_count']);
+				}
+				else
+				{
+					$amount = ($row[$tarifYP] ? $row[$tarifYP] : TarifHelper::getTarifPrice($row[$tarifY])) * $row['points_count'] -
+					  		  ($row[$tarifXP] ? $row[$tarifXP] : TarifHelper::getTarifPrice($row[$tarifX])) * $row['points_count'];
+				}
+				$totalAmount 	   = $totalAmount + $amount;
+				$globalTotalAmount = $globalTotalAmount + $amount;
+				$totalPoints 	   = $totalPoints + $row['points_count'];
+
+				if($totalAmount < 0)
+				{
+					$amountStr = "Уменьшение дохода от смены ТП";
+				}
+				else
+				{
+					$amountStr = "Увеличение дохода от смены ТП";
+				}
+				?>
+				<tr class="list_tr">
+					<td class="list_row"><?= $row[$strMany]; ?></td>
+					<td class="list_row"><?= $row['points_count']; ?></td>
+					<td class="list_row"><?= sprintf('%.2f', $amount) ?></td>
+				</tr>
+				<?php
+			}
+
+			?>
+			<tr class="list_tr">
+				<td colspan="3" align="right" class="list_row"><h2><?= $totalStr; ?>:</h2></td>
+				<td  class="list_row"><h2><?= $totalPoints ?></h2></td>
+			</tr>
+			<tr class="list_tr">
+				<td colspan="3" align="right" class="list_row"><h2><?= $amountStr; ?>:</h2></td>
+				<td  class="list_row"><h2><?= sprintf('%.2f', $totalAmount) ?></h2></td>
+			</tr>
+		</td>
+	</tr>
+	<?php
+	$totalPoints = 0;
+}
+// Сумма точек!!!
+?>
+	<tr class='list_tr'>
+		<td colspan="3" align="right" class="list_row"><h2>Итого: </h2></td>
+		<td align="right" class="list_row"><h1><?= sprintf('%.2f', $globalTotalAmount) ?></h1></td>
+	</tr>
+</table>

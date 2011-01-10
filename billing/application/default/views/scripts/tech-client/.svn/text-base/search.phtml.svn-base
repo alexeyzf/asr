@@ -1,0 +1,94 @@
+<script language="JavaScript" type="text/javascript">
+function searchTeh()
+{
+	var param = $('#param').val();
+	var value = $('#value').val();
+	redirect('/tech-client/search/param/' + param + '/value/' + value);
+	return false;
+}
+</script>
+<h1>Поиск клиента. Отдел проектов</h1>
+
+<center>
+	<form name='teh_client_search' onsubmit="return searchTeh()">
+    <table cellpadding="3" cellspacing="0">
+        <tr>
+            <td class="row">Найти клиента</td>
+            <td class="row">
+                <?
+                $options = array(
+                    'login'         => 'По логину',
+                    'name'         => 'По названию',
+                    'phone'           => 'По телефону',
+                    'address'    => 'По адресу прописки',
+                    'ats'             => 'По АТС'
+                );
+
+                print "<select id='param'>";
+                print FormHelper::getSelectOptions($options, $this->param);
+                print "</select>";
+                ?>
+            </td>
+            <td class="row">
+                <input type="text" id="value" value="<?= $this->value; ?>" />
+            </td>
+            <td class="row">
+                <input type="submit" value="Поиск" />
+            </td>
+        </tr>
+    </table>
+    </form>
+</center>
+
+<br />
+<?
+if ( $this->clients )
+{
+    ?>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">Действие</th>
+            <th class="list_head">N</th>
+            <th class="list_head">Название</th>
+            <th class="list_head">Логин</th>
+            <th class="list_head">Контактный телефон</th>
+            <th class="list_head">Телефон кроссировки</th>
+            <th class="list_head">АТС</th>
+            <th class="list_head">Идентификатор</th>
+        </tr>
+        <?
+        if( count($this->clients) == 0 )
+        {
+            ?>
+            <tr>
+                <td class="list_row center" colspan="8">Не найдено ни одного клиента</td>
+            </tr>
+            <?
+        }
+
+        $counter = $this->start;
+
+        foreach($this->clients as $client)
+        {
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><a href="/tech-client/modify/id/<?= $client['point_id']; ?>">Изменить</a></td>
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row"><?= $client['client_name']; ?></td>
+                <td class="list_row"><?= $client['u_login']; ?></td>
+                <td class="list_row"><?= $client['contact_phone']; ?></td>
+                <td class="list_row"><?= $client['cross_phone']; ?></td>
+                <td class="list_row"><?= $client['ats']; ?></td>
+                <td class="list_row"><?= $client['client_id']; ?></td>
+            </tr>
+            <?
+        }
+        ?>
+    </table>
+    <br/>
+	<br/>
+	<center>
+		<?= $this->paginationControl($this->clients, 'Sliding', '/my_pagination.phtml'); ?>
+	</center>
+    <?
+}

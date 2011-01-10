@@ -1,0 +1,39 @@
+<h1>Необсчитанные звонки</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<?
+if ($this->data && is_array($this->data))
+{
+	?>
+	<table class='list'>
+		<tr>
+			<th class='list_head'>Код</th>
+			<th class='list_head'>Кол минут</th>
+			<th class='list_head'>Тариф</th>
+		</tr>
+	<?
+	$minutesCountTotal = 0;
+	
+	foreach ($this->data as $code => $minutesCount)
+	{
+		$minutesCountTotal += $minutesCount;
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $code; ?></td>
+			<td class='list_row'><?= $minutesCount; ?></td>
+			<td class='list_row'>&nbsp;</td>
+		</tr>
+		<?
+	}
+	?>
+		<tr>
+			<td class='list_row right'><b>Итого</b></td>
+			<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+			<td class='list_row'>&nbsp;</td>
+		</tr>
+	</table>
+	<?
+}

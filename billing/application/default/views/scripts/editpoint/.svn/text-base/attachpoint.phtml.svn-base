@@ -1,0 +1,28 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function checkNumber()
+    {
+      var phone = $("input[name='pcross']")[0].value;
+      var client_type = $("input[name='client_type_id']")[0].value;
+      var country = $("select[name='country_id']")[0].value;
+      $.php("/ajax/abonclient", {
+            name: "check_number",
+            phone: phone,
+            client_type: client_type,
+            country: country
+      } )
+    }
+</script>
+
+<?php
+	echo ('<h1>Абонентский отдел. Добавление точки</h1><br/>');
+
+?>
+<br/>
+<br/>
+<div class='left font14' style='margin-left: 45%' id='number_test'></div>
+<div class="clear"></div>
+<?php
+ echo $this->form;
+?>

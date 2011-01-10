@@ -1,0 +1,29 @@
+<h1><?= $this->isNew ? 'Добавление' : 'Редактирование'; ?> DSLAM</h1>
+<br />
+<br />
+<form method="post" action="">
+    <?= $this->form->name; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->ip_address; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->group; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->client_type_id; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->type_id; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->ports_count; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->save; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->ats_id; ?>
+    <div class="clear"></div>
+</form>
+

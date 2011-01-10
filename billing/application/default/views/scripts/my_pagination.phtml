@@ -1,0 +1,53 @@
+<?php
+if ($this->pageCount)
+{
+	?>
+	<div class="paginationControl">
+	<?
+	if (isset($this->previous))
+	{
+		?>
+		<a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+		    &lt; Назад
+		</a> |
+		<?
+	}
+	else
+	{
+		?>
+		<span class="disabled">&lt; Назад</span> |
+		<?
+	}
+	
+	foreach ($this->pagesInRange as $page)
+	{
+		if ($page != $this->current)
+		{
+			?>
+			<a  href='<?= $this->url(array('page' => $page)); ?>'> <?= $page; ?> </a> |
+			<?
+		}
+		else
+		{
+			print ':: '.$page.' ::' . ' |';
+		}
+	}
+	
+	if (isset($this->next))
+	{
+		?>
+		<a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+		    Вперед &gt;
+		</a>
+		<?
+	}
+	else
+	{
+		?>
+		<span class="disabled">Вперед &gt;</span>
+		<?
+	}
+	?>
+	</div>
+	<?
+}

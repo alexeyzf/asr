@@ -1,0 +1,131 @@
+<?php $_SESSION['back_url'] = $_SERVER['REQUEST_URI']; ?>
+<h1>Договор с клиентом</h1>
+<br />
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Информация о клиенте</td>
+        <td>
+            <input type="button" value="Изменить" onclick="redirect('/card-contract/modify/id/<?= $this->client['client_id']; ?>')" />
+        </td>
+    </tr>
+</table>
+<br />
+
+<dt><label>Название орагнизации:</label></dt>
+<dd class='padding3'><?= stripcslashes($this->client['client_name']); ?></dd>
+<div class='clear'></div>
+
+<dt><label>Комиссионер</label></dt>
+<dd class='padding3'><?= $this->client['is_broker'] ? 'Да' : 'Нет'; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Регистрационный номер:</label></dt>
+<dd class='padding3'><?= $this->client['client_id']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Фактический адрес:</label></dt>
+<dd class='padding3'><?= $this->client['address']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Почтовый индекс:</label></dt>
+<dd class='padding3'><?= $this->client['zip_code']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Юридический адрес:</label></dt>
+<dd class='padding3'><?= $this->client['legaladdress']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>E-mail:</label></dt>
+<dd class='padding3'><?= $this->client['email']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Расчетный счет:</label></dt>
+<dd class='padding3'>
+    <?
+    $connector = '';
+    foreach ($this->accounts as $account)
+    {
+        print $connector . $account['schet'];
+        $connector = '<br />';
+    }
+    ?>
+</dd>
+<div class='clear'></div>
+
+<dt><label>В банке:</label></dt>
+<dd class='padding3'><?= $this->client['bank_id']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>ИНН:</label></dt>
+<dd class='padding3'><?= $this->client['inn']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>МФО:</label></dt>
+<dd class='padding3'><?= $this->client['mfo']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>ОКОНХ:</label></dt>
+<dd class='padding3'><?= $this->client['okonx']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Телефон для связи:</label></dt>
+<dd class='padding3'><?= $this->client['phone']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Факс:</label></dt>
+<dd class='padding3'><?= $this->client['fax']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Контактное лицо:</label></dt>
+<dd class='padding3'><?= $this->client['contact_name']; ?></dd>
+<div class='clear'></div>
+
+<dt><label>Подписывающее лицо:</label></dt>
+<dd class='padding3'><?= $this->client['boss_id']; ?></dd>
+<div class='clear'></div>
+
+<dt><label><b>Баланс:</b></label></dt>
+<dd class='padding3'><b><?= number_format($this->client['ballance'], 2, ',', ' '); ?></b></dd>
+<div class='clear'></div>
+
+<br />
+<table width="100%">
+	<tr>
+		<td class="sub-heading">Баланс</td>
+		<td>
+			<input type="button" value="Фин. история" onclick="redirect('/Cards/finhistory/cid/<?= $this->client['client_id']; ?>')" />
+		</td>
+	</tr>
+</table>
+<br />
+
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Договор</td>
+        <td>
+            <input type="button" value="Распечатать" onclick="redirect('/card-contract/print/id/<?= $this->client['client_id']; ?>')" />
+        </td>
+    </tr>
+</table>
+<br />
+
+<?
+foreach ($this->contracts as $contract)
+{
+    ?>
+    <dt><label>Номер</label></dt>
+    <dd class='padding3'><?= $contract['contract_number'] ?></dd>
+    <div class='clear'></div>
+
+    <dt><label>Дата договора:</label></dt>
+    <dd class='padding3'><?= date('d.m.y', strtotime($contract['dateagree'])); ?></dd>
+    <div class='clear'></div>
+    <?
+}
+?>
+<dt><label></label></dt>
+<dd>
+    <input type='button' value='Заказы' onclick="redirect('/card-order/index/client_id/<?= $this->client['client_id']; ?>')" />
+</dd>

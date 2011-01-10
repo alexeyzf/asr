@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+* {
+    margin:0;
+    padding:0;
+}
+
+html {
+    text-align:center;
+}
+
+body {
+    font:68.5% Arial;
+    text-align:left;
+    color:#333;
+}
+
+p.pg {
+    font-size:1.2em;
+    line-height:1.5em;
+    margin:1em 0;
+}
+
+ul {
+    list-style:none;
+}
+
+#masthead {
+	display: none;
+}
+
+#mastheadBox {
+	display: none;
+}
+
+#header_with_log {
+	display: none;
+}
+
+#asr_name {
+	display: none;
+}
+
+#nav {
+	display: none;
+}
+
+.list {
+    width: 100%;
+    border-collapse:collapse
+}
+
+.list_head {
+    background-color: #6D6D75;
+    color: white;
+    border: black 0.1em solid;
+    font-size: 13px;
+    padding:2px 4px;
+}
+
+.list_row {
+    color:black;
+    border: black 0.1em solid;
+    font-size: 12px;
+    padding:2px 4px;
+}
+
+input, textarea {
+    border:1px solid #CCC;
+    padding:0.2em;
+}
+
+#mainContent h2 {
+    color:#F60;
+    font-size:1.4em;
+}

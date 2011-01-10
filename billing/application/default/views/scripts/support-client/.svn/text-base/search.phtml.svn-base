@@ -1,0 +1,80 @@
+<form method="post" >
+<h1>СТП. Поиск клиента</h1>
+
+<center>
+    <table cellpadding="3" cellspacing="0">
+        <tr>
+            <td class="row">Найти клиента</td>
+            <td class="row">
+                <?
+                $options = array(
+                    'points.u_login'         => 'По логину',
+                    'client_name'             => 'По названию',
+                    'points.pcross'           => 'По телефону'
+                );
+
+                print "<select name='param'>";
+                print FormHelper::getSelectOptions($options, $this->param);
+                print "</select>";
+                ?>
+            </td>
+            <td class="row">
+                <input type="text" name="value" value="<?= $this->value; ?>" />
+            </td>
+            <td class="row">
+                <input type="submit" value="Поиск" />
+            </td>
+        </tr>
+    </table>
+</center>
+<br />
+<?
+if ( is_array($this->clients) )
+{
+    ?>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">Действие</th>
+            <th class="list_head">N</th>
+            <th class="list_head">Название</th>
+            <th class="list_head">Логин</th>
+            <th class="list_head">Телефон кроссировки</th>
+            <th class="list_head">АТС</th>
+            <th class="list_head">Статус порта</th>
+        </tr>
+        <?
+        if( count($this->clients) == 0 )
+        {
+            ?>
+            <tr>
+                <td class="list_row center" colspan="8">Не найдено ни одного клиента</td>
+            </tr>
+            <?
+        }
+
+        $counter = 1;
+
+        foreach($this->clients as $client)
+        {
+            ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row">
+                    <a href="/support-client/view/id/<?= $client['point_id']; ?>">Просмотр</a>&nbsp;|&nbsp;
+                    <a href='/support-client/logs/id/<?= $client['client_id']; ?>'>Логи</a>&nbsp;|&nbsp;
+                    <a href='/support-client/sessions/user/<?= $client['u_login']; ?>'>Сессии</a>
+                </td>
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row"><?= $client['client_name']; ?></td>
+                <td class="list_row"><?= $client['u_login']; ?></td>
+                <td class="list_row"><?= $client['cross_phone']; ?></td>
+                <td class="list_row"><?= $client['ats']; ?></td>
+                <td class="list_row"><?= $client['state'] ? 'Включен' : 'Выключен'; ?></td>
+            </tr>
+            <?
+        }
+        ?>
+    </table>
+    <?
+}
+?>
+</form>

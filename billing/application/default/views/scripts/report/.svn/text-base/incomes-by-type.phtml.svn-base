@@ -1,0 +1,118 @@
+<h1>Отчет по поступлениям. Зачисления по типам за период: <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+
+<h2>Зачисление и реализация карт</h2>
+<table class='list'>
+	<tr>
+		<th class='list_head' style='width: 50%'>Тип</th>
+		<th class='list_head' style='width: 25%'>Сумма($)</th>
+		<th class='list_head' style='width: 25%'>Сумма(сум)</th>
+	</tr>
+	<?
+	foreach ($this->incomes1 as $type => $item)
+	{
+		$totalUsd1 += $item['amount_usd'];
+		$totalUzs1 += $item['amount_uzs'];
+
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'>
+				<a href='/report/incomes-by-type-details/type/<?= $item['trantype']; ?>/start/<?= $this->startDate; ?>/end/<?= $this->endDate; ?>' >
+					<?= $type ?>
+				</a>
+			</td>
+			<td class='list_row right'><?= number_format($item['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+
+	}
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd1, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs1, 2, ',', ' '); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_row right'><b>Итог по ПК и Кассам:</b></td>
+		<td class='list_row right'><b><?= number_format($this->addSummasUSD, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($this->addSummasUZS, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>
+
+<br />
+<br />
+<h2>Пересчеты и корректровки</h2>
+<table class='list'>
+	<tr>
+		<th class='list_head' style='width: 50%'>Тип</th>
+		<th class='list_head' style='width: 25%'>Сумма($)</th>
+		<th class='list_head' style='width: 25%'>Сумма(сум)</th>
+	</tr>
+	<?
+	foreach ($this->incomes2 as $type => $item)
+	{
+		$totalUsd2 += $item['amount_usd'];
+		$totalUzs2 += $item['amount_uzs'];
+
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'>
+				<a href='/report/incomes-by-type-details/type/<?= $item['trantype']; ?>/start/<?= $this->startDate; ?>/end/<?= $this->endDate; ?>' >
+					<?= $type ?>
+				</a>
+			</td>
+			<td class='list_row right'><?= number_format($item['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd2, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs2, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>
+
+<br />
+<br />
+<h2>Автивизация карт</h2>
+<table class='list'>
+	<tr>
+		<th class='list_head' style='width: 50%'>Тип</th>
+		<th class='list_head' style='width: 25%'>Сумма($)</th>
+		<th class='list_head' style='width: 25%'>Сумма(сум)</th>
+	</tr>
+	<?
+	foreach ($this->incomes3 as $type => $item)
+	{
+		$totalUsd3 += $item['amount_usd'];
+		$totalUzs3 += $item['amount_uzs'];
+
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'>
+				<a href='/report/incomes-by-type-details/type/<?= $item['trantype']; ?>/start/<?= $this->startDate; ?>/end/<?= $this->endDate; ?>' >
+					<?= $type ?>
+				</a>
+			</td>
+			<td class='list_row right'><?= number_format($item['amount_usd'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd3, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs3, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>
+
+<br />
+<br />
+<span class='font14'><b>Итого($): <?= number_format($totalUsd1 + $totalUsd2 + $totalUsd3, 2, ',', ' ');  ?></b></span>
+<br />
+<span class='font14'><b>Итого(сум): <?= number_format($totalUzs1 + $totalUzs2 + $totalUzs3, 2, ',', ' ');  ?></b></span>

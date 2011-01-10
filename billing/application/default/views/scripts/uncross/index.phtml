@@ -1,0 +1,69 @@
+<h1>Отдел продаж. Снятые с кросса</h1>
+<br />
+<br />
+
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Факс</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Дата снятия</th>
+        <th class="list_head">Действие</th>
+    </tr>
+<?php
+if ( count($this->dataClients) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+	foreach ($this->dataClients as $hubName => $list)
+	{
+		?>
+		<tr id="atsname">
+			<td  class="list_row left"  colspan="9" >
+				<h2><b><?= $hubName; ?></b></h2>
+			</td>
+		</tr>
+    	<?
+    	
+    	$counter = 1;
+	
+    	foreach ($list as $client)
+    	{
+	    	?>
+	        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+	            <td class="list_row"><?= $counter++; ?></td>
+	            <td class="list_row">
+	            	<a href="/Clientinfo/index/clientid/<?= $client['client_id'] ?>/pointid/<?= $client['point_id'] ?>" >
+	            		<?= $client['client_name']; ?>
+	            	</a>
+	            </td>
+	            <td class="list_row"><?= $client['ballance']; ?></td>
+	            <td class="list_row"><?= $client['fax']; ?></td>
+	            <td class="list_row"><?= $client['phone']; ?></td>
+	            <td class="list_row"><?= $client['overdraft']; ?></td>
+	            <td class="list_row">
+					<form action="#" method="post" >
+						<input type="hidden" name='client_id' value='<?= $client['client_id'] ?>' />
+						<input type="submit" name="btn1" value="Расторгнуть договор" />
+					</form>
+				</td>
+	        </tr>
+	        <?
+   		}
+	}
+}
+?>
+</table>

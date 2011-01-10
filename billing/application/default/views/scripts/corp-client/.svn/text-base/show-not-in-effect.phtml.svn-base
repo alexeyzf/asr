@@ -1,0 +1,36 @@
+<h1>Корпоративные клиенты, невступившие в силу</h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>N</th>
+		<th class='list_head'>Регистрационный номер</th>
+		<th class='list_head'>Название</th>
+		<th class='list_head'>Логин</th>
+		<th class='list_head'>Телефон кроссировки</th>
+		<th class='list_head'>Контактный тел.</th>
+		<th class='list_head'>Услуга</th>
+		<th class='list_head'>Баланс</th>
+		<th class='list_head'>Статус</th>
+	</tr>
+	<?
+	$i = 1;
+
+	foreach ($this->data as $row)
+	{
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $i++; ?></td>
+			<td class='list_row'><?= $row['client_id']; ?></td>
+			<td class='list_row'><a href='/clientinfo/index/clientid/<?= $row['client_id']; ?>'><?= $row['client_name']; ?></a></td>
+			<td class='list_row'><?= $row['u_login']; ?></td>
+			<td class='list_row'><?= $row['pcross']; ?></td>
+			<td class='list_row'><?= $row['contact_phone']; ?></td>
+			<td class='list_row'><?= $row['tablename']; ?></td>
+			<td class='list_row'><?= $row['ballance']; ?></td>
+			<td class='list_row'><?= $row['label']; ?></td>
+		</tr>
+		<?
+	}
+	?>
+</table>

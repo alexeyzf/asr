@@ -1,0 +1,55 @@
+<h1>Бухгалтерия. Клиенты не соблюдающие правила договора</h1>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Код точки</th>
+        <th class="list_head">Тел. кросс.</th>
+        <th class="list_head">Последнее прим.</th>
+        <th class="list_head">Дата откл.</th>
+        <th class="list_head">Дата заявки</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    	$dataDemand = date('Y.m.d', strtotime('+ 30 days '. $item['ballance_change']));
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['client_id'] ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $item['client_id'] ?>/pointid/" >
+            		<?= $item['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $item['ballance']; ?></td>
+            <td class="list_row"><?= $item['point_id']; ?></td>
+            <td class="list_row"><b><?= $item['pcross']; ?></b></td>
+            <td class="list_row"><?= $item['notes']; ?></td>
+            <td class="list_row"><?= $item['ballance_change']; ?></td>
+            <td class="list_row"><?= $dataDemand; ?></td>
+        </tr>
+    <?
+    }
+}
+?>
+</table>

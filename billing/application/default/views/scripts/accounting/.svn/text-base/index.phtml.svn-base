@@ -1,0 +1,66 @@
+<h1><b>Отдел Бухгалтерии. Поиск клиента</b></h1>
+<br/>
+
+<form action="/Accounting/index" method="post">
+<center>
+<table border="0">
+	<tr>
+		<td width="100" valign="top">
+			<?php echo $this->form->type_search; ?>
+		</td>
+		<td valign="top">
+			<input size="20" type="text" name="searchword" value="" />
+		</td>
+		<td valign="top">
+			<input type="submit" value="поиск" name="s_submit" />
+		</td>
+	</tr>
+
+</table>
+</center>
+</form>
+<br />
+<br />
+<table border="1" width="100%" class="list" align="center" bordercolor="#cccccc"  cellspacing="2" cellpadding="2"  style="border-collapse: collapse">
+<tr>
+	<th class="list_head">действия</th>
+	<th class="list_head">N</th>
+	<th class="list_head">Название</th>
+	<th class="list_head">Логин</th>
+	<th class="list_head">Контактный тел.</th>
+	<th class="list_head">Телефон крос.</th>
+	<th class="list_head">ID клиента</th>
+
+</tr>
+<?php
+// Вывод информации
+$counter = 1;
+if (count($this->paginator))
+{
+	foreach ($this->paginator as $item)
+	{
+		echo ('
+			<tr class="list_tr" onmouseout="bgColor=\'#ffffff\'" onmouseover="bgColor=\'#f8f8f8\'">
+				<td class="list_row">
+					<a href="/Accounting/clientcash/clientid/'.$item['client_id'].'/pointid/'.$item['point_id'].'" >
+							<img id="decor_a" border="0" src="/images/edit.png" width="25" height="25" />
+					</a>
+				</td>
+				<td class="list_row">'.$counter.'</td>
+				<td class="list_row">'.$item['client_name'].'</td>
+				<td class="list_row">'.$item['u_login'].'</td>
+				<td class="list_row">'.$item['phone'].'</td>
+				<td class="list_row">'.$item['pcross'].'</td>
+				<td class="list_row">'.$item['client_id'].'</td>
+			</tr>
+		');
+		$counter++;
+	}
+}
+?>
+</table>
+<br/>
+<br/>
+<center>
+	<?= $this->paginationControl($this->paginator, 'Sliding', '/my_pagination.phtml'); ?>
+</center>

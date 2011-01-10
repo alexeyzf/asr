@@ -1,0 +1,224 @@
+<h1>Отчеты. Отчет по портам</h1>
+<br />
+<br />
+<center>
+
+</center>
+
+
+<?
+$ats = PortReportHelper::getAtsIDHelper();
+?>
+
+  <TABLE cellspacing="1" class="list" border="0" cellpadding="0">
+    <TR>
+      <TD align="right">
+
+      </TD>
+    </TR>
+    <TR>
+        <TD align="center">
+          <TABLE cellspacing="1"  border="1" cellpadding="0" bgcolor="white">
+            <TR bgcolor="#c5c5c5">
+              <TD align="center" rowspan="2" valign="bottom"><strong>N АТС</strong></TD>
+
+              <TD align="center" rowspan="2" valign="bottom"><strong>N Dslam</strong></TD>
+              <TD align="center" rowspan="2" valign="bottom"><strong>Всего портов</strong></TD>
+              <TD align="center" colspan="3" valign="bottom"><strong>Занято</strong></TD>
+              <TD align="center" rowspan="2" valign="bottom"><strong>Битые</strong></TD>
+	          <TD align="center" rowspan="2" valign="bottom"><strong>Свободно</strong></TD>
+            </TR>
+
+	    <TR bgcolor="#c5c5c5">
+	      <TD >включены</TD>
+	      <TD >отключены</TD>
+	      <TD >всего</TD>
+	    </TR>
+<?
+
+	$area = PortReportHelper::getHubAreaHelper();
+
+	foreach ($area as $a)
+	{
+		echo "<TR bgcolor='#dfdfdf'><TD colspan='12' align='center'><b>{$a['name']}</b></TD></TR>";
+
+		$ats = PortReportHelper::getAtsByHubHelper($a['id']);
+		$tcel[0] = $tcel[1] = $tcel[2] = $tcel[3] = $tcel[4] = $tcel[5] = $tcel[6] = $tcel[7] = $tcel[8] = 0;
+		foreach($ats as $a)
+		{
+		       $dslam = PortReportHelper::getAtsDslamsHelper($a['id']);
+		?>
+		      <TR bgcolor="#dfdfdf">
+			      <TD colspan="10"></TD>
+			    </TR>
+		      <TR class='list_tr'>
+		        <TD class="list_row" <? if (count($dslam)) echo "rowspan=\"".count($dslam)."\"";?> align="center" ><strong><? echo $a['name'];?></strong></TD>
+		<?
+		       unset($cel);
+		       if (count($dslam))
+		       {
+		       	$k = 0;
+		       	foreach ($dslam as $d)
+		       	{
+		       		unset($ps);
+		       		unset($rez);
+		       		unset($ports);
+		       		$all[1] = 0;
+		       		$all[2] = 0;
+		       		unset($empty);
+
+                          $data = PortReportHelper::arr1($d['id']);
+
+                          foreach($data as $value)
+                          {
+                              $ports[$value['portstatus']] = $value['countp'];
+                          }
+
+		          //$sql = "select count(*) as countb from ports where penable='f' and dslamid={$d['id']}";
+		          $broken = PortReportHelper::arr2($d['id']);
+
+		       		$all[1] = intval($ports[0] + $ports[1] + $ports[4] + $ports[5]);
+		       		$empty = $d['countport'] - $all[1] - $broken[0]['countb'];
+
+		       		$cel[1] += $d['countport'];
+		       		$cel[2] += $ports[1];
+		       		$cel[3] += $ports[0];
+		       		$cel[4] += $ports[4];
+		       		$cel[5] += $ports[5];
+		       		$cel[6] += $all[1];
+		       		$cel[7] += $broken[0]['countb'];
+		       		$cel[8] += $empty;
+
+		       		$tcel[1] += $d['countport'];
+		       		$tcel[2] += $ports[1];
+		       		$tcel[3] += $ports[0];
+		       		$tcel[4] += $ports[4];
+		       		$tcel[5] += $ports[5];
+		       		$tcel[6] += $all[1];
+		       		$tcel[7] += $broken[0]['countb'];
+		       		$tcel[8] += $empty;
+
+		       		if ($k++ > 0 ) echo "<TR>";
+		?>
+		              <TD class="list_row" align="center"><? echo $d['name'];?></TD>
+			      <TD class="list_row" align="center"><? echo $d['countport'];?></TD>
+		              <TD class="list_row" align="center" bgcolor="#E6E6E6"><? echo $ports[1];?></TD>
+		              <TD class="list_row" align="center" bgcolor="#E6E6E6"><? echo $ports[0];?></TD>
+		              <TD class="list_row" align="center"><? echo $all[1];?></TD>
+		              <TD class="list_row" align="center"><? echo $broken[0]['countb'];?></TD>
+			      <TD class="list_row" align="center"><? echo $empty;?></TD>
+		            </TR>
+		<?
+		         }
+		         $tcel[0] +=count($dslam);
+		       }
+		       else
+		       {
+		?>
+			     <TD colspan="10"></TD>
+			   </TR>
+		<?
+		       }
+		?>
+		       <TR  <? if ($cel[8]<10) echo "bgcolor=\"#FF848E\"";?>>
+		         <TD align="right">Всего:</TD>
+			       <TD  align="center"><? echo count($dslam); $cel[0]=count($dslam);?></TD>
+			       <TD align="center"><? echo $cel[1];?></TD>
+			       <TD align="center" bgcolor="#E6E6E6"><? echo $cel[2];?></TD>
+			       <TD align="center" bgcolor="#E6E6E6"><? echo $cel[3];?></TD>
+
+
+			       <TD align="center"><? echo $cel[6];?></TD>
+			       <TD align="center"><? echo $cel[7];?></TD>
+			       <TD align="center"><? echo $cel[8];?></TD>
+		       </TR>
+		<?
+
+		       for ($i = 0; $i < 11; $i++)
+		       {
+		         $fin[$i] += $cel[$i];
+
+		         if ($a['city_id'] == 1)
+		         {
+		         	$fin_sam[$i] += $cel[$i];
+		         }
+		         elseif($a['city_id'] == 0)
+		         {
+		         	$fin_tash[$i] += $cel[$i];
+		         }
+		         elseif($a['city_id'] == 2)
+		         {
+		         	$fin_buh[$i] += $cel[$i];
+		         }
+		       }
+		}
+		?>
+		<TR bgcolor="#dfdfdf">
+			      <TD colspan="10"></TD>
+
+			    </TR>
+		       <TR bgcolor='#84B0FF'>
+		         <TD align="right">Всего:</TD>
+			       <TD align="center"><? echo $tcel[0]; ?></TD>
+			       <TD align="center"><? echo $tcel[1];?></TD>
+			       <TD align="center"><? echo $tcel[2];?></TD>
+			       <TD align="center"><? echo $tcel[3];?></TD>
+			       <TD align="center"><? echo $tcel[6];?></TD>
+			       <TD align="center"><? echo $tcel[7];?></TD>
+			       <TD align="center"><? echo $tcel[8];?></TD>
+		       </TR>
+		<?php
+
+	}
+	?>
+	<TR bgcolor="#dfdfdf"><TD colspan="10"></TD></TR>
+
+       <TR bgcolor="#84B0FF">
+         <TD align="right">Итого по Ташкенту:</TD>
+	       <TD align="center"><? echo $fin_tash[0];?></TD>
+
+	       <TD align="center"><? echo $fin_tash[1];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_tash[2];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_tash[3];?></TD>
+	       <TD align="center"><? echo $fin_tash[6];?></TD>
+	       <TD align="center"><? echo $fin_tash[7];?></TD>
+	       <TD align="center"><? echo $fin_tash[8];?></TD>
+       </TR>
+
+       <TR bgcolor="#84B0FF">
+         <TD align="right">Итого по Самарканду:</TD>
+	       <TD align="center"><? echo $fin_sam[0];?></TD>
+	       <TD align="center"><? echo $fin_sam[1];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_sam[2];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_sam[3];?></TD>
+	       <TD align="center"><? echo $fin_sam[6];?></TD>
+	       <TD align="center"><? echo $fin_sam[7];?></TD>
+	       <TD align="center"><? echo $fin_sam[8];?></TD>
+       </TR>
+
+       <TR bgcolor="#84B0FF">
+         <TD align="right">Итого по Бухаре:</TD>
+	       <TD align="center"><? echo $fin_buh[0];?></TD>
+	       <TD align="center"><? echo $fin_buh[1];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_buh[2];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin_buh[3];?></TD>
+	       <TD align="center"><? echo $fin_buh[6];?></TD>
+	       <TD align="center"><? echo $fin_buh[7];?></TD>
+	       <TD align="center"><? echo $fin_buh[8];?></TD>
+       </TR>
+       <TR bgcolor="#84B0FF">
+         <TD align="right">Итого:</TD>
+	       <TD align="center"><? echo $fin[0];?></TD>
+	       <TD align="center"><? echo $fin[1];?></TD>
+
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin[2];?></TD>
+	       <TD align="center" bgcolor="#E6E6E6"><? echo $fin[3];?></TD>
+	       <TD align="center"><? echo $fin[6];?></TD>
+	       <TD align="center"><? echo $fin[7];?></TD>
+	       <TD align="center"><? echo $fin[8];?></TD>
+       </TR>
+	  </TABLE>
+
+	</TD>
+      </TR>
+   </TABLE>

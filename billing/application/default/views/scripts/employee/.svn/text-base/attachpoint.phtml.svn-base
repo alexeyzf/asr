@@ -1,0 +1,13 @@
+<center><div style="margin-bottom:35px;"><h1>Добавление дополнительной точки</h1></div></center>
+<br/>
+
+<?php
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+echo $this->form;
+
+
+?>

@@ -1,0 +1,45 @@
+<h1>Отдел Бухгалтерии. Фин. История</h1>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">дата</th>
+        <th class="list_head" style="width:15%;">сумма</th>
+        <th class="list_head">тип операции</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['id'] ?></td>
+            <td class="list_row"><?= $item['currenttime']; ?></td>
+            <td class="list_row"><?= $item['summa']; ?></td>
+            <td class="list_row"><?= $item['trantype']; ?></td>
+        </tr>
+    <?
+
+    }
+
+}
+?>
+</table>
+<br />
+<center><h1><a href="/kross-work/index">назад</a></h1></center>

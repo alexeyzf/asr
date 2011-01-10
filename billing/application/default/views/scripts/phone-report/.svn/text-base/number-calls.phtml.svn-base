@@ -1,0 +1,43 @@
+<h1>
+	Междугородние звонки по номеру <?= $this->number ?> за <?= $this->month . '.' . $this->year ?>
+</h1>
+<br />
+<br />
+<?= $this->form; ?>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Дата</th>
+		<th class='list_head'>Время</th>
+		<th class='list_head'>Номер куда звонили</th>
+		<th class='list_head'>Наименование направления</th>
+		<th class='list_head'>Кол минут</th>
+		<th class='list_head'>Тариф</th>
+		<th class='list_head'>Сумма</th>
+	</tr>
+	<?
+	foreach ($this->calls as $row)
+	{
+		$minutesCountTotal += $row['minutes_count'];
+		$amountTotal += $row['amount'];
+		?>
+		<tr class="list_tr" onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= date('d.m.Y', strtotime($row['call_date'])); ?></td>
+			<td class='list_row'><?= $row['call_time']; ?></td>
+			<td class='list_row'><?= $row['abonent2']; ?></td>
+			<td class='list_row'><?= $row['directions']; ?></td>
+			<td class='list_row right'><?= $row['minutes_count']; ?></td>
+			<td class='list_row right'><?= number_format($row['price'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right' colspan="4"><b>Итого</b></td>
+		<td class='list_row right'><b><?= $minutesCountTotal; ?></b></td>
+		<td class='list_row'>&nbsp;</td>
+		<td class='list_row right'><b><?= number_format($amountTotal, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>

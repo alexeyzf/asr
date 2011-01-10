@@ -1,0 +1,55 @@
+<h1>Отчет по причине отключения</h1>
+<br />
+<br />
+<h2>Отчет формируется на основе данных, введенных абоненским отделом при отправлении клиента на расскросс.</h2>
+<br />
+<br />
+
+<center>
+    <?= $this->form ?>
+</center>
+
+<?
+if ($this->data)
+{
+?>
+    <br />
+    <br />
+    <h2><?= $this->clientType == 0 ? 'Корпоративные клиенты' : 'Клиенты стрим' ?></h2>
+    <table class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">№</th>
+            <th class="list_head">Причина отключения</th>
+            <th class="list_head">Количество</th>
+        </tr>
+        <?
+        if (!$this->data or count($this->data) == 0)
+        {
+        ?>
+        <tr>
+            <td colspan="3">
+                Точек не найдено.
+            </td>
+        </tr>
+        <?
+        }
+        else
+        {
+            $counter = 0;
+            foreach ($this->data as $row)
+            {
+                $counter++;
+        ?>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $counter ?></td>
+                <td class="list_row"><?= $row['typename'] ? $row['typename'] : 'Неизвестно' ?></td>
+                <td class="list_row"><?= $row['amount'] ?></td>
+            </tr>
+        <?
+            }
+        }
+        ?>
+    </table>
+<?
+}
+?>

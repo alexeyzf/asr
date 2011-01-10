@@ -1,0 +1,22 @@
+<h1>СТП. Логи клиента "<?= $this->client; ?>"</h1>
+<br/>
+<br/>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Дата</th>
+        <th class='list_head'>Пользователь</th>
+        <th class='list_head'>Действие</th>
+    </tr>
+    <?
+    foreach ($this->logs as $log)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'><?= date('d.m.y G:i:s', strtotime($log['actiondate'])); ?></td>
+            <td class='list_row'><?= $log['user_name']; ?></td>
+            <td class='list_row'><?= $log['action']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>

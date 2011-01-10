@@ -1,0 +1,76 @@
+<center><h2>Принятие с Капитал-Банка</h2></center>
+<br />
+<br />
+
+<form method='post'>
+	<dt><label>За дату:</label></dt>
+	<dd>
+		<input type='text' name='date' value='<?= $this->date; ?>' />
+		Тест <input type="checkbox" name='is_test' <?= $this->is_test ? 'checked' : ''; ?> />
+	</dd>
+	<div class='clear'></div>
+
+	<dt><label></label></dt>
+	<dd><input type='submit' value='Разнести'></dd>
+	<div class='clear'></div>
+</form>
+<div class='clear'></div>
+<br />
+<br />
+<?
+
+if ($this->message)
+{
+	print '<h3><center>' . $this->message . '</center></h3>';
+}
+?>
+<center>
+<?
+if ( is_array($this->result) )
+{
+	?>
+	<table class='list'>
+		<tr>
+			<td class='list_head'>Р.н.</td>
+			<td class='list_head'>Дата</td>
+			<td class='list_head'>МФО</td>
+			<td class='list_head'>Счет</td>
+			<td class='list_head'>Наименование</td>
+			<td class='list_head'>Сумма</td>
+			<td class='list_head'>Коментарии</td>
+		</tr>
+		<?
+		foreach ($this->result as $row)
+		{
+			if($row['notes'] == "Не найден")
+			{
+				$row['notes'] = "<b>Не найден</b>";
+			}
+			?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'><?= $row['client_id']; ?></td>
+				<td class='list_row'><?= $row['date']; ?></td>
+				<td class='list_row'><?= $row['mfo1']; ?></td>
+				<td class='list_row'><?= $row['account']; ?></td>
+				<td class='list_row'><b><?= $row['client_name']; ?></b></td>
+				<td class='list_row'><?= $row['amount']; ?></td>
+				<td class='list_row'><?= $row['notes']; ?></td>
+			</tr>
+			<?
+		}
+
+		?>
+			<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+				<td class='list_row'></td>
+				<td class='list_row'></td>
+				<td class='list_row'></td>
+				<td class='list_row'></td>
+				<td class='list_row'></td>
+				<td class='list_row'><b><?= $this->total; ?></b></td>
+				<td class='list_row'></td>
+			</tr>
+	</table>
+	<?
+}
+?>
+</center>

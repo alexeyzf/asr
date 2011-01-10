@@ -1,0 +1,77 @@
+<h1>Заказы клиента <a href='/card-contract/view/id/<?= $this->clientID; ?>'>"<?= stripslashes($this->client); ?>"</a></h1>
+<br />
+<br />
+<center>
+    <input type='button' value='Добавить' onclick="redirect('/card-order/create/client_id/<?= $this->clientID; ?>')" />
+</center>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Действие</th>
+        <th class='list_head'>Номер</th>
+        <th class='list_head'>Накладная</th>
+        <th class='list_head'>Дата</th>
+        <th class='list_head'>Скидка</th>
+        <th class='list_head'>Сумма</th>
+        <th class='list_head'>Распечатать</th>
+    </tr>
+    <?
+    if ( count($this->orders) == 0 )
+    {
+        ?>
+        <tr>
+            <td colspan='7' class='list_row center'>Не найдено ни одного клиента</td>
+        </tr>
+        <?
+    }
+    foreach ($this->orders as $order)
+    {
+        if ( ! $order['is_posted'] )
+        {
+            $color = '#f4c4c4';
+        }
+        else
+        {
+            $color = 'white';
+        }
+        ?>
+        <tr style="background-color: <?= $color; ?>">
+            <td class='list_row'>
+                <a href='/card-order/view/id/<?= $order['id']; ?>'>Просмотр</a>&nbsp;|&nbsp;
+                <?
+                if ( ! $order['is_posted'] )
+                {
+                    ?>
+                    <a href='/card-order/post/id/<?= $order['id']; ?>'>Провести</a>&nbsp;|&nbsp;
+                    <?
+                }
+                ?>
+                <a onclick="return confirm('Вы действительно хотите удалить заказ?')" href='/card-order/delete/id/<?= $order['id']; ?>'>Удалить</a>
+            </td>
+            <td class='list_row'><?= $order['number']; ?></td>
+            <td class='list_row'><?= $order['invoice_number']; ?></td>
+            <td class='list_row'><?= date('d.m.y', strtotime($order['order_date'])); ?></td>
+            <td class='list_row'><?= $order['discount']; ?></td>
+            <td class='list_row'><?= $order['amount']; ?></td>
+            <td class='list_row'>
+                <a href='/card-order/print-order/id/<?= $order['id'] ?>'>Заказ</a>
+                <?
+                if ($order['is_posted'])
+                {
+                    ?>
+                    <a href='/card-order/print-invoice/id/<?= $order['id'] ?>'>Накладная</a>
+                    <?
+                }
+                ?>
+            </td>
+        </tr>
+        <?
+    }
+    ?>
+</table>
+<br />
+<br />
+<center>
+    <input type='button' value='Добавить' onclick="redirect('/card-order/create/client_id/<?= $this->clientID; ?>')" />
+</center>

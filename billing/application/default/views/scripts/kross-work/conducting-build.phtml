@@ -1,0 +1,31 @@
+<h1>Создание проводки</h1>
+<br />
+<br />
+<center>
+<form action="#" method="post">
+<table border="0">
+<tr>
+	<td>Сумма: </td>
+	<td><input type="text" name="summa" /></td>
+</tr>
+<tr>
+	<td>Комментарии: </td>
+	<td><input type="text" name="notes" /></td>
+</tr>
+<tr>
+	<td>Тип операции: </td>
+	<td>
+		<select name="trantype">
+			<option value="10">Снятие</option>
+			<option value="20">Зачисление</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td><input type="submit" value="создать" /></td>
+	<td><input type="hidden" name="hub_id" value="<?= $this->hubID; ?>" /> | <a href="/kross-work/index/month/<?= $this->month; ?>">Назад</a></td>
+</tr>
+</tr>
+</table>
+</form>
+</center>

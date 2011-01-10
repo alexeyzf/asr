@@ -1,0 +1,66 @@
+<h1>Отдел управления сети. Задолжники</h1>
+<br />
+<br />
+<center>
+	<form action="/Debtor/show-disabled-service" method="post">
+	<select size="1"  name="service">
+	    <option disabled>Выберите услугу</option>
+	    <option value="hosting">Hosting</option>
+	    <option value="collacation">Collacation</option>
+	    <option value="ngn">NGN</option>
+	    <option value="isdn">ISDN</option>
+	    <option value="tradtel">Трад. тел.</option>
+	</select>
+	<input type="submit" value="показать" />
+	</form>
+</center>
+<br />
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID</th>
+        <th class="list_head">Наименование</th>
+        <th class="list_head" style="width:15%;">Баланс</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Телефон</th>
+        <th class="list_head">Овердрафт</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $item)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $item['client_id'] ?></td>
+            <td class="list_row">
+            	<a href="/Clientinfo/index/clientid/<?= $item['client_id'] ?>/pointid/" >
+            		<?= $item['client_name']; ?>
+            	</a>
+            </td>
+            <td class="list_row"><?= $item['ballance']; ?></td>
+            <td class="list_row"><?= $item['u_login']; ?></td>
+            <td class="list_row"><?= $item['phone']; ?></td>
+            <td class="list_row"><?= $item['overdraft']; ?></td>
+        </tr>
+    <?
+    }
+
+}
+?>
+</table>

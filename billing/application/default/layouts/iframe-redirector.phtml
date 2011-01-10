@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="Abilov Marat, Tsoy Alexey" />
+    <title>АСР "SHARQ". Администрирование</title>
+    <link rel="stylesheet" type="text/css" media="print" href="/styles/print.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+    <script language="JavaScript" type="text/javascript" src="/scripts/jquery.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/scripts/util.js"></script>
+</head>
+<script type="text/javascript">
+function reload()
+{
+	location = "<?= $this->url_need ?>";
+
+};
+setTimeout('reload()', 2000);
+</script>
+	<div class="center-align" align="center">
+		<div class="error">
+			<p>
+				<?php
+					foreach($this->mess as $item)
+					{
+						print "<b>".$item."</b>";
+					}
+				?>
+			</p>
+			<p>Вы будете перемещены обратно на страницу через несколько секунд.</p>
+			<p>Нажмите <a href="<?= $this->url_need; ?>">здесь</a>, если не хотите ждать.</a></p>
+		</div>
+	</div>
+</body>
+</html>

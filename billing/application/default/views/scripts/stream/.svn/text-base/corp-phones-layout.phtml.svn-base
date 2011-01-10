@@ -1,0 +1,103 @@
+<h1>Итог по клиентам</h1>
+<br />
+<br />
+<center>
+<form action="/Stream/index" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+
+	<select size="1" name="year">
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+
+	<select size="1" name="by_type">
+   		<?
+   		$options = array(
+   			'by_pay'		=> 'по платежам',
+			'by_clients'	=> 'по клиентам',
+   			'by_ports'		=> 'по портам'
+
+		);
+   		?>
+        <?= FormHelper::getSelectOptions($options, $this->by_type); ?>
+   </select>
+
+	<select size="1" name="is_face">
+   		<?
+   		$options = array(
+   			'1'		=> 'stream',
+   			'0'		=> 'корп.',
+   			'by_corp_phone'		=> 'Корп. телефония',
+			'by_stream_phone'	=> 'Частная телефония',
+			'by_dialup'		    => 'Dialup'
+   		);
+   		?>
+        <?= FormHelper::getSelectOptions($options, $this->is_face); ?>
+   </select>
+
+
+   <input type="submit" value="Отправить">
+ </form>
+</center>
+<br />
+<?php
+$amount = 0;
+?>
+<br />
+<h2>Ежемесячные платежи:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+
+        <tr>
+            <th class="list_head">Параметр</th>
+            <th class="list_head">Значение</th>
+        </tr>
+        <?php
+        foreach($this->data['abon'] as $row)
+        {
+			$amount = $amount + $row['summa'];
+        ?>
+	        <tr class='list_tr'>
+	            <td class="list_row"><?= $row['service_name']; ?>:</td>
+	            <td class="list_row right">
+	            	<?= number_format($row['summa'], 3, ',', ' '); ?>
+	            </td>
+	        </tr>
+	       	<tr class='list_tr'>
+	            <td class="list_row"><b>Количество клиентов (<?= $row['service_name']; ?>):</b></td>
+	            <td class="list_row right">
+	            	<b><?= $row['count_clients'] ?></b>
+	            </td>
+	        </tr>
+        <?php
+        }
+        ?>
+</table>
+<br />
+<h2>Переговоры:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+
+        <tr>
+            <th class="list_head">Параметр</th>
+            <th class="list_head">Значение</th>
+        </tr>
+        <?php
+        foreach($this->data['peregovor'] as $row)
+        {
+			$amount = $amount + $row['summa'];
+        ?>
+	        <tr class='list_tr'>
+	            <td class="list_row"><?= $row['service_name']; ?>:</td>
+	            <td class="list_row right">
+	            	<?= number_format($row['summa'], 3, ',', ' '); ?>
+	            </td>
+	        </tr>
+        <?php
+        }
+        ?>
+
+         <tr>
+           <td class="list_row" align="right"><br/><b>Итого: </b></td>
+            <td class="list_row"><br /><b><?= number_format($amount, 3, ',', ' '); ?></b></td>
+        </tr>
+</table>

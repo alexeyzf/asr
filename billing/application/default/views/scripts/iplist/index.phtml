@@ -1,0 +1,59 @@
+<h1>Отдел управления сети. Журнал IP адресов</h1>
+<br />
+<br />
+
+<center>
+	<form action="/Iplist/index" method="post">
+	   <select size="1"  name="type_ip">
+	    <option value="busy" >Занятые IP</option>
+	    <option value="free" >Свободные IP</option>
+	   </select>
+	   <input type="submit" value="Отправить">
+	</form>
+</center>
+
+<br />
+<br />
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head" style="width:15%;">IP адрес</th>
+        <th class="list_head">Старт</th>
+        <th class="list_head">Конец</th>
+        <th class="list_head">ID точки</th>
+    </tr>
+<?php
+if ( count($this->getIpList) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->getIpList as $ip)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ip['u_login']; ?></td>
+            <td class="list_row"><?= $ip['ip_address']; ?></td>
+            <td class="list_row"><?= $ip['start_date']; ?></td>
+            <td class="list_row"><?= $ip['end_date']; ?></td>
+            <td class="list_row"><?= $ip['point_id']; ?></td>
+        </tr>
+        <?
+    }
+}
+?>
+</table>

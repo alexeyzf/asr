@@ -1,0 +1,150 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function setDiscount(is_true)
+    {
+		if(is_true)
+		{
+			$("input[name='discount']")[0].disabled = false;
+			$("textarea[name='discountcomment']")[0].disabled = false;
+		}
+		else
+		{
+			$("input[name='discount']")[0].disabled = true;
+			$("textarea[name='discountcomment']")[0].disabled = true;
+		}
+
+    }
+
+    function test()
+    {
+    	var modem_type   = $('#modem-modem_type')[0].value;
+    	var modem_serial = $('#modem-modem_serial')[0].value;
+		var client_id    = $('#client_id')[0].value;
+		var modem_price  = $('#modem-modem_price')[0].value;
+		var tablelink    = $('#tablelink')[0].value;
+		var sid          = $('#id')[0].value;
+		var point_id     = $('#point_id')[0].value;
+		var modem_id     = $('#modem-modem_id')[0].value;
+
+		$.php("/service/add-modem", {
+                    modem_type_var: modem_type,
+                    modem_serial_var: modem_serial,
+                    client_id_var: client_id,
+                    modem_price_var: modem_price,
+                    tablelink_var: tablelink,
+                    sid_var: sid,
+                    point_id_var: point_id,
+                    modem_id_var: modem_id
+        });
+    }
+</script>
+<h1><b>Редактирование информации об оказываемой услуге.</b></h1>
+<br/>
+<br/>
+
+<center>
+	<div id="modem_info">
+	</div>
+</center>
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Редактирование тарифного плана</td>
+    </tr>
+</table>
+<br />
+<?
+if ($this->isCorp)
+{
+	$this->contracts['new'] = 'Новое';
+	?>
+	<dt><label></label></dt>
+	<dd>
+		<select name='agree' onchange="redirect('/service/edit/client_id/<?= $this->clientID; ?>/point_id/<?= $this->pointID; ?>/tablelink/<?= $this->tablelink; ?>/id/' + this.value)" >
+			aad<?= FormHelper::getSelectOptions($this->contracts, $this->serviceID); ?>
+		</select>
+		<a href='/service/printaddagree/t/<?= $this->tablelink ?>/i/<?=  $this->serviceID ?>'>Распечатать</a>
+	</dd>
+	<div class='clear'></div>
+	<?
+}
+else
+{
+	?>
+	<center class='font14'>
+		<a href='/service/printaddagree/t/<?= $this->tablelink ?>/i/<?=  $this->serviceID ?>'>Распечатать</a>
+	</center>
+	<?
+}
+?>
+<?= $this->tarifForm; ?>
+<br />
+<br />
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Дополнительные снятия</td>
+    </tr>
+</table>
+<br />
+<form action="/Service/write-offs" method="post" >
+	<?= $this->formAdditional; ?>
+</form>
+<br />
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Замечания</td>
+    </tr>
+</table>
+<br />
+
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">Заметка</th>
+        <th class="list_head">Дата</th>
+        <th class="list_head">Сотрудник</th>
+    </tr>
+<?php
+if ( count($this->listNotes) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->listNotes as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['textnote']; ?></td>
+            <td class="list_row"><?= $ats['datecreate']; ?></td>
+            <td class="list_row"><?= $ats['userface']; ?></td>
+        </tr>
+    <?
+        $price = $price + $ats['tarif_price'];
+    }
+
+}
+?>
+</table>
+<br />
+<br />
+<center>
+<form action="/Service/add-notes" method="post">
+    <textarea name="main_note" ></textarea><br /><br />
+    <input type="hidden" name="pid" value="<?= $this->pointID ?>" />
+    <input type="submit" name="btn1" value="сохранить" />
+</form>
+</center>

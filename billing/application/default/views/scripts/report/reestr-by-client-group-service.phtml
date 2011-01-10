@@ -1,0 +1,91 @@
+<h1>Отчет по реестру. Сумма по клиентам с группировкой по услугам за период: <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>N</th>
+		<th class='list_head'>ID</th>
+		<th class='list_head'>Номер сч. фактуры</th>
+		<th class='list_head'>Наименование</th>
+		<th class='list_head'>Адрес</th>
+		<th class='list_head'>Телефон</th>
+		<th class='list_head'>К оплате ($)</th>
+		<th class='list_head'>К оплате (сум)</th>
+	</tr>
+	<?
+	if (count($this->data) == 0) 
+	{
+		?>
+		<tr>
+			<td class='list_row' colspan='8'>
+				Нет данных
+			</td>
+		</tr>
+		<?
+	} 
+	else 
+	{
+		$currentService = $this->data[0]['servicename'];
+		$counter = 1;
+		$clients = array();
+		$totalUzs = 0;
+		$totalUsd = 0;
+		?>
+		<tr>
+			<td class='list_head center' colspan='8'><?= $currentService; ?></td>
+		</tr>
+		<?
+		foreach ($this->data as $row) 
+		{
+			if ($row['servicename'] != $currentService)
+			{
+				?>
+				<tr>
+					<td class='list_head' colspan='6'>
+						Итого: Кол-во клиентов - <?= count($clients); ?>
+					</td>
+					<td class='list_head'><?= number_format($totalUsd, 2, ',', ' '); ?></td>
+					<td class='list_head'><?= number_format($totalUzs, 2, ',', ' '); ?></td>
+				</tr>
+				<tr>
+					<td class='list_head center' colspan='8'><?= $row['servicename']; ?></td>
+				</tr>
+				<?
+				$currentService = $row['servicename'];
+				$counter = 1;
+				$clients = array();
+				$totalUzs = 0;
+				$totalUsd = 0;
+			}
+			
+			$clients[$row['client_id']] = 1;
+			$totalUsd += $row['amount'];
+			$totalUzs += $row['amount_uzs'];
+			?>
+			<tr>
+				<td class='list_row'><?= $counter++; ?></td>
+				<td class='list_row'><?= $row['client_id']; ?></td>
+				<td class='list_row'><?= $row['schetfnum']; ?></td>
+				<td class='list_row'>
+					<a href='/clientinfo/index/clientid/<?= $row['client_id']; ?>'><?= $row['client_name']; ?></a>
+				</td>
+				<td class='list_row'><?= $row['address']; ?></td>
+				<td class='list_row'><?= $row['phone']; ?></td>
+				<td class='list_row'><?= number_format($row['amount'], 2, ',', ' '); ?></td>
+				<td class='list_row'><?= number_format($row['amount_uzs'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+		
+		?>
+		<tr>
+			<td class='list_head' colspan='6'>
+				Итого: Кол-во клиентов - <?= count($clients); ?>
+			</td>
+			<td class='list_head'><?= number_format($totalUsd, 2, ',', ' '); ?></td>
+			<td class='list_head'><?= number_format($totalUzs, 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+</table>

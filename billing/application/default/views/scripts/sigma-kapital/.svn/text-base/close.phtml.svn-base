@@ -1,0 +1,24 @@
+<h1>Карточки. Серия SiGMA-KAPITAL</h1>
+<br />
+<br />
+
+
+<center>
+    <h2><?= $this->msg ?></h2>
+    <?php
+        for($i=0; $i<count($this->data); $i++)
+        {
+            echo "<br />". $this->data[$i]['number'];
+        }
+    ?>
+    <br />
+    <br />
+    <h1>Выберите действие</h1>
+<br />
+<br />
+    <form action="/Sigma-kapital/post-close-serial" method="post">
+        <input type="hidden" name="del_serial" value="<?= $this->serial ?>" />
+        <input type="submit" name="btn1" value="закрыть серию" />
+    </form>
+
+</center>

@@ -1,0 +1,4 @@
+<center>
+	Точка удалена!
+	<a href="#" onClick="history.back(-1)">Назад</a>
+</center>

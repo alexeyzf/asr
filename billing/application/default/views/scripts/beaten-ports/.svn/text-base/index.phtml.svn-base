@@ -1,0 +1,69 @@
+<h1>Линейный отдел. Битые порты </h1>
+<br />
+<br />
+<?php
+        if ($this->infos['port-info'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">N</th>
+        <th class="list_head">ID порта</th>
+        <th class="list_head">№ порта</th>
+        <th class="list_head">IP дслам</th>
+        <th class="list_head">Действие</th>
+        <th class="list_head">АТС</th>
+        <th class="list_head">Примечания</th>
+    </tr>
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="10" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+
+    foreach ($this->data as $ats)
+    {
+    ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row"><?= $counter++; ?></td>
+            <td class="list_row"><?= $ats['id'] ?></td>
+            <td class="list_row"><?= $ats['number'] ?></td>
+            <td class="list_row"><?= $ats['ip_dslam']; ?></td>
+            <td align="center" class="list_row">
+            	<form action="/beaten-ports/save-change-status" method="post">
+            	   <select size="1" name="mark">
+					    <option disabled selected value="1">действие</option>
+					    <option value="0">отметить</option>
+				   </select>
+				   <input type="hidden" name="port_id" value="<?= $ats['id'] ?>" />
+				   <input type="submit" name="btn1" value="сохранить" />
+            	</form>
+            </td>
+            <td class="list_row"><?= $ats['ats_name']; ?></td>
+            <td class="list_row"><?= $ats['port_notes']; ?></td>
+        </tr>
+    <?
+        $price = $price + $ats['tarif_price'];
+    }
+
+}
+?>
+</table>

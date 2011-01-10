@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3572/billing/application/default/views/scripts/total-report
+END
+index-stream.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3572/billing/application/default/views/scripts/total-report/index-stream.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3311/billing/application/default/views/scripts/total-report/index.phtml
+END
+corp-phones-layout.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3311/billing/application/default/views/scripts/total-report/corp-phones-layout.phtml
+END
+dialup-clients-layout.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3311/billing/application/default/views/scripts/total-report/dialup-clients-layout.phtml
+END
+index-corp.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3516/billing/application/default/views/scripts/total-report/index-corp.phtml
+END

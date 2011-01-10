@@ -1,0 +1,160 @@
+<h1>Итог по клиентам</h1>
+<br />
+<br />
+<center>
+<form action="" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+
+	<select size="1" name="year">
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+	Тип:
+    <select name="flag" >
+        <option label="Stream" value="stream" selected="selected">Stream</option>
+        <option label="Nova" value="nova">Nova</option>
+        <option label="Private" value="private">Private</option>
+    </select>
+   <input type="submit" value="Отправить">
+ </form>
+</center>
+<br />
+<br />
+<br />
+<h2>Статистика:</h2>
+<table class="list" cellpadding="3" cellspacing="0">
+
+        <tr>
+            <th class="list_head">тариф</th>
+            <th class="list_head">цена</th>
+            <th class="list_head">скорость</th>
+            <th class="list_head">кол. клиентов</th>
+            <th class="list_head">Потреб. трафик, Гб</th>
+            <th class="list_head">% исполь. полосы</th>
+            <th class="list_head">клиентов на МБ</th>
+        </tr>
+<?php
+
+    $allTrans = $this->dataArr;
+
+    if(count($allTrans) == 0)
+    {
+		echo "
+			<tr class='list_tr'>
+		        <td colspan=\"7\" align=\"center\" class=\"list_row\"><b>Не найдено</b></td>
+		    </tr>
+		";
+    }
+	else
+	{
+	    foreach($allTrans as $value)
+	    {
+	    	$clientCount = count($value);
+
+	    	$speed = explode('/', $value[0]['speed']);
+
+	    	$f = ($speed[0] / 8 * 3600 * 24 * 30) /1000000;
+
+			$trafficSum = 0;
+
+			$relimitArr    = array();
+			$nonRelimitArr = array();
+
+			for($i = 0; $i < count($value); $i++)
+			{
+				$trafficSum = $trafficSum + $value[$i]['traffic_out'];
+
+				if($value[$i]['traffic_out'] > ($value[$i]['t_limit'] * 1024 * 1024))
+				{
+					array_push($relimitArr, $value[$i]);
+				}
+				else
+				{
+					array_push($nonRelimitArr, $value[$i]);
+				}
+			}
+
+			for($t = 0; $t < count($relimitArr); $t++)
+			{
+				$traffic_relimited = $traffic_relimited + $relimitArr[$t]['traffic_out'];
+			}
+
+			for($tn = 0; $tn < count($nonRelimitArr); $tn++)
+			{
+				$traffic_nonRelimited = $traffic_nonRelimited + $nonRelimitArr[$tn]['traffic_out'];
+			}
+
+
+			$traffic_nonRelimited = $traffic_nonRelimited / 1024 / 1024;
+			$traffic_relimited    = $traffic_relimited / 1024 / 1024;
+
+                        if(count($nonRelimitArr) == 0)
+                        {
+                            $count_NonRelimited = 1;
+                        }
+                        else
+                        {
+                            $count_NonRelimited = count($nonRelimitArr);
+                        }
+
+                        if(count($relimitArr) == 0)
+                        {
+                            $count_Relimit = 1;
+                        }
+                        else
+                        {
+                            $count_Relimit = count($relimitArr);
+                        }
+
+			$total_nonRelimit = $traffic_nonRelimited / $count_NonRelimited;
+                        $total_relimited  = $traffic_relimited / $count_Relimit;
+
+			$traff = ($trafficSum /1000 /1000 / 1000) / $clientCount;
+			if($f == 0)
+			{
+				continue;
+			}
+			$polosa = $traff / $f * 100;
+
+			$clientsPerMB = 1000 / ($speed[0] * ($polosa / 100));
+			if($clientsPerMB == 0)
+			{
+				//continue;
+			}
+            
+			?>
+			    <tr class='list_tr'>
+			        <td align="left" class="list_row"><b><?= $value[0]['tarif_name']; ?></b>:</td>
+			        <td class="list_row right"><?= $value[0]['tarif_price']; ?></td>
+			        <td class="list_row right"><?= $value[0]['speed']; ?></td>
+			        <td class="list_row right"><?= $clientCount; ?></td>
+			        <td class="list_row right"><?= number_format($traff, 2, '.', ' '); ?></td>
+			        <td class="list_row right"><?= number_format($polosa, 2, '.', ' '); ?></td>
+			        <td class="list_row right"><?= number_format($clientsPerMB, 2, '.', ' '); ?></td>
+			    </tr>
+			    <tr class='list_tr'>
+			        <td align="left" class="list_row" colspan="7">
+			        	<b>кол-во с перелитом :</b><?= count($relimitArr) ?>
+			        	[<b style="color:red">среднее знач:</b><?= number_format($total_relimited, 2, '.', ' '); ?> Мб]
+			        	<br />
+			        	<b>кол-во без перелита:</b><?= count($nonRelimitArr) ?>
+			        	[<b style="color:red">среднее знач:</b><?= number_format($total_nonRelimit, 2, '.', ' '); ?> Мб]
+			        </td>
+
+			    </tr>
+			    <tr class='list_tr'>
+			        <td align="left" class="list_row" colspan="7">
+			        	<br />
+			        	<br />
+			        	<br />
+			        </td>
+			    </tr>
+			<?
+	    }
+	}
+?>
+
+</table>
+
+

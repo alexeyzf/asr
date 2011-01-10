@@ -1,0 +1,45 @@
+<h1>Отчеты. Генерация отчетов</h1>
+<br />
+<form action="/Report/allreport" method="post" >
+  <fieldset id="legend_style">
+   <legend>Список возможных отчетов (STREAM)</legend>
+
+	   <select name="report_type">
+	   	 <option value="0_s">Клиенты с положительным балансом, рабочих</option>
+	   	 <option value="1_s">Клиенты ожидающие кроссировки</option>
+	   	 <option value="2_s">Клиенты ожидающие расскроса</option>
+	   	 <option value="3_s">Клиенты c отрицательным балансом и выключенными услугами</option>
+	   </select>
+		&nbsp;&nbsp;&nbsp;
+	   <input type="submit" name="get_report" value="показать" />
+  </fieldset>
+</form>
+
+<form action="/Report/allreport" method="post" >
+  <fieldset id="legend_style">
+   <legend>Список возможных отчетов (Корпоративные клиенты)</legend>
+
+	   <select name="report_type">
+	   	 <option value="0_c">Клиенты с положительным балансом и рабочими услугами</option>
+	   	 <option value="1_c">Клиенты c отрицательным балансом и опущенным портом</option>
+	   	 <option value="2_c">Клиенты c услугой "Овердрафт"</option>
+	   </select>
+		&nbsp;&nbsp;&nbsp;
+	   <input type="submit" name="get_report" value="показать" />
+  </fieldset>
+</form>
+
+<form action="/Report/allreport" method="post" >
+  <fieldset id="legend_style">
+   <legend>Состояние точек</legend>
+
+	   <select name="report_type">
+	   	 <option value="0_p">Точки ожидающие кросса </option>
+	   	 <option value="1_p">Точки ожидающие расскроса </option>
+	   	 <option value="2_p">Точки с поднятым портом </option>
+	   	 <option value="3_p">Точки с опущенным портом </option>
+	   </select>
+		&nbsp;&nbsp;&nbsp;
+	   <input type="submit" name="get_report" value="показать" />
+  </fieldset>
+</form>

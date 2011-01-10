@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3551/billing/application/default/layouts
+END
+client-links.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2225/billing/application/default/layouts/client-links.phtml
+END
+show-port-history.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3455/billing/application/default/layouts/show-port-history.phtml
+END
+support-additional.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3386/billing/application/default/layouts/support-additional.phtml
+END
+iframe-redirector.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3087/billing/application/default/layouts/iframe-redirector.phtml
+END
+iframe.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2231/billing/application/default/layouts/iframe.phtml
+END
+cabinet-log.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3481/billing/application/default/layouts/cabinet-log.phtml
+END
+main.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3551/billing/application/default/layouts/main.phtml
+END
+login.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1831/billing/application/default/layouts/login.phtml
+END
+repair-internet.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2087/billing/application/default/layouts/repair-internet.phtml
+END
+tarif-change.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/3068/billing/application/default/layouts/tarif-change.phtml
+END
+traffic-layout.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2160/billing/application/default/layouts/traffic-layout.phtml
+END

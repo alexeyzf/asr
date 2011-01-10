@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3075/billing/application/default/views/scripts/stream
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3061/billing/application/default/views/scripts/stream/index.phtml
+END
+corp-phones-layout.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3075/billing/application/default/views/scripts/stream/corp-phones-layout.phtml
+END
+dialup-clients-layout.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3061/billing/application/default/views/scripts/stream/dialup-clients-layout.phtml
+END

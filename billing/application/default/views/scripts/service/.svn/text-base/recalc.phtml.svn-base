@@ -1,0 +1,101 @@
+<script type="text/javascript">
+<!--
+function recalcAccept()
+{
+	$('#recalc_action').val('recalc');
+	document.recalc_form.submit();
+}
+
+function recalcCancel()
+{
+	$('#recalc_action').val('cancel');
+	document.recalc_form.submit();
+}
+//-->
+</script>
+
+<h1>Пересчет по точке <?= $this->pointID ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Месяц</th>
+		<th class='list_head'>Сумма по счет-фактуре</th>
+		<th class='list_head'>Сумма по пересчету</th>
+		<th class='list_head'>Разница (в нашу пользу)</th>
+	</tr>
+	<?
+	foreach ($this->data as $month => $row)
+	{
+		$invoiceTotal += $row['invoice_amount'];
+		$recalcTotal = $recalcTotal + $row['recalc_amount'];
+		$diff = $row['recalc_amount'] - $row['invoice_amount'];
+		$diffTotal = $diffTotal + $diff;
+		?>
+		<tr>
+			<td class='list_row'><?= $month; ?></td>
+			<td class='list_row right'><?= number_format($row['invoice_amount'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($row['recalc_amount'], 2, ',', ' '); ?></td>
+			<td class='list_row right'><?= number_format($diff, 2, ',', ' '); ?></td>
+		</tr>
+		<?
+		//var_dump($row);
+	}
+
+	//exit();
+	?>
+	<tr>
+		<td class='list_row right'><b>Итого:</b></td>
+		<td class='list_row right'><b><?= number_format($invoiceTotal, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($recalcTotal, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($diffTotal, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>
+<br />
+<br />
+<h2>Детально по услугам</h2>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>Дата начала</th>
+		<th class='list_head'>Дата окончания</th>
+		<th class='list_head'>Точка</th>
+		<th class='list_head'>Услуга</th>
+		<th class='list_head'>Тариф</th>
+		<th class='list_head'>Цена</th>
+	</tr>
+	<?
+	foreach ($this->services as $month => $monthServices)
+	{
+		?>
+		<tr>
+			<td class='list_row center' colspan='6'><b>Месяц: <?= $month; ?></b></td>
+		</tr>
+		<?
+		foreach ($monthServices as $service)
+		{
+			?>
+			<tr>
+				<td class='list_row'><?= $service['startdate']; ?></td>
+				<td class='list_row'><?= $service['enddate']; ?></td>
+				<td class='list_row'><?= $service['point_id']; ?></td>
+				<td class='list_row'><?= $service['servicetype_name']; ?></td>
+				<td class='list_row'><?= $service['tarif_name']; ?></td>
+				<td class='list_row right'><?= number_format($service['tarif_price'], 2, ',', ' '); ?></td>
+			</tr>
+			<?
+		}
+	}
+	?>
+</table>
+<br />
+<br />
+<form name='recalc_form' id='recalc_form' method="post" action="#">
+	<center>
+		<input type='hidden' id='recalc_action' name='recalc_action' value='cancel' />
+		<input type='button' value="Принять" onclick='recalcAccept()' />
+		&nbsp;&nbsp;
+		<input type='button' value="Отменить" onclick='recalcCancel()' />
+	</center>
+</form>

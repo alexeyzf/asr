@@ -1,0 +1,277 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function redirectToLetter()
+    {
+        var letterType = $('#letter').val();
+        redirect('/tech-letter/create/type/' + letterType);
+    }
+
+    function onChangePhone()
+    {
+		var country = '<?= $this->countryID; ?>';
+        var point = $('#point_id').val();
+        var phone = $('#pcross').val();
+        var client_type = $('#client_type_id').val();
+        var phone_type = $('#pcross_type').val();
+        var port = $('#port_id').val();
+
+        $.php("/ajax/techclient", {
+            name: "ats",
+            phone: phone,
+            phone_type: phone_type,
+            client_type: client_type,
+            point: point,
+            country: country,
+            port: port
+        });
+    }
+
+    function getDslamList()
+    {
+        var ats = $('#ats_id').val();
+        var client_type = $('#client_type_id').val();
+        var phone_type = $('#pcross_type').val();
+
+        $.php("/ajax/techclient", {
+            name: 'dslam_list',
+            ats: ats,
+            phone_type: phone_type,
+            client_type: client_type
+        });
+    }
+
+    function getPorts()
+    {
+        var dslam = $('#dslam_id').val();
+        var phone_type = $('#pcross_type').val();
+
+        $.php("/ajax/techclient", {
+            name: 'port_list',
+            dslam: dslam,
+            phone_type: phone_type
+        });
+    }
+
+    function getPortInfo()
+    {
+        var port = $('#port_id').val();
+        var phone_type = $('#pcross_type').val();
+
+        $.php("/ajax/techclient", {
+            name: 'port_info',
+            port: port,
+            phone_type: phone_type
+        });
+    }
+
+    function openHistoryByLogin()
+    {
+        redirect('/tech-history/index/searchBy/client/login/<?= $this->form->u_login->getValue(); ?>');
+    }
+
+    function openHistoryByPhone()
+    {
+        redirect('/tech-history/index/searchBy/phone/number/' + $('#pcross')[0].value);
+    }
+
+    function openHistoryByPort()
+    {
+
+         redirect('/tech-history/index/searchBy/equipment/ats/' + $('#ats_id')[0].value +
+                '/dslam/' + $('#dslam_id')[0].value + '/port/' + $('#port_id')[0].value);
+    }
+
+    function checkNumber()
+    {
+        var country = $('#country_id').val();
+        var phone = $("input[name='pcross']").val();
+        var client_type = $('#faceid')[0].value;
+        $.php("/ajax/abonclient", {
+                    name: "check_number",
+                    phone: phone,
+                    client_type: client_type,
+                    country: country
+        });
+    }
+
+    function clearInfo()
+    {
+    	var point = $('#point_id').val();
+
+        $.php("/ajax/techclient", {
+            name: 'clear_info',
+            point: point
+        });
+    }
+</script>
+
+<h1>Линейный отдел.  Информация о подключении</h1>
+<br/>
+<br/>
+<?php
+	if ($this->errors['port-errors'])
+        {
+        	foreach($this->errors as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+
+    if ($this->infos['port-infos'])
+        {
+        	foreach($this->infos as $value)
+        	{
+				?>
+					<center><h1><?= $value; ?></h1></center>
+					<br />
+				<?
+        	}
+        }
+?>
+
+<form method="post" action="">
+    <table width="100%">
+        <tr>
+            <td class="sub-heading center">Основные сведения</td>
+        </tr>
+    </table>
+
+    <div class="clear"></div>
+
+    <?= $this->form->u_login; ?>&nbsp;
+    <input type="button" value="История клиента" onclick="openHistoryByLogin()" />
+    <div class="clear"></div>
+
+    <?= $this->form->typename; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->faceid; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->service_name; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->client_name; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->pcross_owner; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->connect_address; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->dateagree; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->crossdate; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->manager_name; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->engineer_name; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->country_id; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->pcross; ?>&nbsp;<?= $this->form->pcross_type; ?>
+    <input type="button" value="Изменить" onclick="onChangePhone()" />&nbsp;
+    <input type="button" value="История номера" onclick="openHistoryByPhone()" />
+    <div class="clear"></div>
+
+    <?= $this->form->ats_id; ?><div class='left font14' id='ats'></div>
+    <div class="clear"></div>
+
+    <?= $this->form->dslam_id; ?><div class='left font14' id='dslam'></div>
+    <div class="clear"></div>
+
+    <?= $this->form->port_id; ?><div class='left font14' id='port'></div>&nbsp;
+    <input type="button" value="История порта" onclick="openHistoryByPort()" />
+    <div class="clear"></div>
+
+    <?= $this->form->frame_number; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->pair_number; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->isPerekross; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->client_type_id; ?>
+    <div class="clear"></div>
+
+    <dt>&nbsp;&nbsp;</dt>
+    <dd>
+        <input type="submit" value="Присвоить" />&nbsp;
+        <input type="button" value="Очистить" onclick="clearInfo()" />
+        <input type="button" value="Проверить номер" onclick='checkNumber()' />
+        	<div id='number_test'></div>
+    </dd>
+    <div class="clear"></div>
+
+    <input type='hidden' id='point_id' name='point_id' value='<?= $this->pointID; ?>' />
+    <input type='hidden' name='client_id' value='<?= $this->clientID; ?>' />
+    <?= $this->form->client_type_id; ?>
+    <div class="clear"></div>
+     <?= $this->form->country_id; ?>
+    <div class="clear"></div>
+
+    <br />
+</form>
+
+<form method="post" action="/tech-client/formletter">
+    <table width="100%">
+        <tr>
+            <td colspan="4" class="sub-heading center">Формирование письма</td>
+        </tr>
+    </table>
+
+    <?= $this->form->letter_kind; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->letter_type; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->letter_sent_way; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->letter_sent_date; ?>
+    <div class="clear"></div>
+
+    <?= $this->form->form_letter_button; ?>
+    <div class="clear"></div>
+
+    <input type='hidden' id="letter_point" name='point_id' value='<?= $this->pointID; ?>' />
+    <input type="hidden" id="letter_ats" name="ats_id" value='<?= $this->form->ats_id->getValue(); ?>' />
+    <br />
+</form>
+
+<table width="100%">
+    <tr>
+        <td class="sub-heading center">Дополнительная информация</td>
+    </tr>
+</table>
+
+<?= $this->form->portspeed; ?>
+<div class="clear"></div>
+
+<?= $this->form->port_status; ?>
+<div class="clear"></div>
+
+<?= $this->form->service_status; ?>
+<div class="clear"></div>
+
+<?= $this->form->ballance_status; ?> $
+<div class="clear"></div>
+
+<?= $this->form->last_session_date; ?>
+<div class="clear"></div>
+
+<?= $this->form->tarif_name; ?>
+<div class="clear"></div>

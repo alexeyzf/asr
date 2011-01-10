@@ -1,0 +1,78 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+    function checkSattlement()
+    {
+        var arrOfSattlments = $("#accounts input[type='text']");
+
+        var params = '';
+        var connector = '';
+
+        for (i = 0; i < arrOfSattlments.length; i++)
+        {
+            params += connector + arrOfSattlments[i].value;
+            connector = ',';
+        }
+
+	    $.php("/ajax/varifysattlement", { arr: params })
+	}
+
+</script>
+<h1>Новый договор</h1>
+<br />
+<br />
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Общая информация</td>
+    </tr>
+</table>
+
+<form name='card_contract_create' method='post'>
+    <?= $this->form->client_name; ?>
+    <?= $this->form->is_broker; ?>
+    <?= $this->form->address; ?>
+
+    <?= $this->form->sign_name; ?>
+    <?= $this->form->post_sign_name; ?>
+
+
+    <?= $this->form->zip_code; ?>
+    <?= $this->form->legaladdress; ?>
+    <?= $this->form->email; ?>
+
+    <dt><label class="required">Расчетный счет: </label></dt>
+    <dd>
+        <div id="accounts">
+            <span id='account1'>
+                <input id="" type="text" name="accounts[1]" value="" style='width: 270px;' />
+                &nbsp;&nbsp;<img class='link' src='/images/icons/revert.gif' onclick="$('#account1').remove()" title='Удалить' />
+                <br />
+            </span>
+        </div>
+
+        <div id='accounts_template' class='hide'>
+            <span id='accountCOUNTER'>
+                <input id="" type="text" name="accounts[COUNTER]" value="" style='width: 270px;' />
+                &nbsp;&nbsp;<img class='link' src='/images/icons/revert.gif' onclick="$('#accountCOUNTER').remove()" title='Удалить' />
+                <br />
+            </span>
+        </div>
+
+        <a href="#accounts" onclick="addDiv('accounts', 'accounts_template')">Добавить</a>
+        <br/>
+        <input type="button" onClick="checkSattlement()" name="btn2" value="Проверить" />
+    </dd>
+    <div class='left font14' style='margin-left: 45%' id='msg_rschet'></div>
+    <div class='clear'></div>
+
+    <?= $this->form->bank_id; ?>
+    <?= $this->form->inn; ?>
+    <?= $this->form->mfo; ?>
+    <?= $this->form->okonx; ?>
+    <?= $this->form->phone; ?>
+    <?= $this->form->fax; ?>
+    <?= $this->form->contact_name; ?>
+    <?= $this->form->boss_id; ?>
+
+    <?= $this->form->save; ?>
+</form>

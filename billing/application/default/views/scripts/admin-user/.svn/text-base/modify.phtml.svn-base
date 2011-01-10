@@ -1,0 +1,108 @@
+<h1><?= ! $this->isNew ? 'Редактирование' : 'Добавление'; ?> Пользователя</h1>
+<br />
+<br />
+<form method="post" action="">
+
+    <table width='100%'>
+    <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/admin-user')"/>
+             </td>
+    </tr>
+    </table>
+
+    <table width="100%">
+    <tr>
+            <td class="sub-heading">Информация о Пользователе</td>
+    </tr>
+    </table>
+
+    <?php echo $this->form->first_name; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->last_name; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->appointment; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->login; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->password; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->password_confirm; ?>
+    <div class="clear"></div>
+    <?php echo $this->form->home_page; ?>
+    <div class="clear"></div>
+    <dt><label class="required">Группы:</label></dt>
+    <dd style="width: 20%">
+        <?php
+        print '<div id="groups">';
+
+        foreach ($this->userGroups as $userGroupID => $groupID)
+        {
+            print "<span id='groups{$userGroupID}'>";
+            print "<select name='user_groups[{$userGroupID}]' id='user_groups[{$userGroupID}]' style='width: 30%'>";
+
+            foreach ($this->groups as $group)
+            {
+                if ($groupID == $group->id)
+                {
+                    $selectedText = 'selected';
+                }
+                else
+                {
+                    $selectedText = '';
+                }
+
+                print "<option value='{$group->id}' {$selectedText}>{$group->name}</option>";
+            }
+
+            print "</select>";
+            print "&nbsp;&nbsp;<img class='link' src='/images/icons/revert.gif' onclick=\"$('#groups{$userGroupID}').remove()\" title='Удалить' />";
+            print "<br />";
+            print "</span>";
+        }
+
+        print '</div>';
+        print '<div id="groups_template" class="hide">';
+        print '<span id="groupsnewCOUNTER">';
+        print "<select name='user_groups[newCOUNTER]' id='user_groups[newCOUNTER]' style='width: 30%'>";
+
+        foreach ($this->groups as $group)
+        {
+            print "<option value='{$group->id}'>{$group->name}</option>";
+        }
+
+        print "</select>";
+        print "&nbsp;&nbsp;<img class='link' src='/images/icons/revert.gif' onclick=\"$('#groupsnewCOUNTER').remove()\" title='Удалить' />";
+        print "<br />";
+        print "</span>";
+        print '</div>';
+
+        if ( count($this->userGroups) == 0 )
+        {
+            print '<script>';
+            print "addDiv('groups', 'groups_template')";
+            print '</script>';
+        }
+        ?>
+
+        <a href="#groups" onclick="addDiv('groups', 'groups_template')">Добавить</a>
+    </dd>
+
+    <div class="clear"></div>
+
+    <input type='hidden' name="id" value="<?= $this->userID; ?>" />
+
+    <br />
+    <br />
+    <table width='100%'>
+    <tr>
+            <td align='center' nowrap>
+            <div class='space-5h'></div>
+                <input type="submit" value="Сохранить" />
+                <input type="button" value="Отменить" onclick="redirect('/admin-user')"/>
+             </td>
+    </tr>
+    </table>
+</form>

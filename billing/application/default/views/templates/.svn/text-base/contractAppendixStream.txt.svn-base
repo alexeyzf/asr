@@ -1,0 +1,492 @@
+<h2><b style="font-family:arialbd">14. ВЫБРАННЫЙ ПЛАН ОБСЛУЖИВАНИЯ:</b></h2>
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td>
+		   Тарифный план:
+	</td>
+	<td>
+		   Скорость передачи, кбит\с, до:
+	</td>
+	<td>
+		   Абонентская плата, у.е./месяц
+	</td>
+	<td>
+		   Объем трафика, включенного в абонентскую плату, Мб
+	</td>
+	<td>
+		   Стоимость трафика при превышении объема предоплаченного трафика, 1 МБ
+	</td>
+    {$dns_support}
+</tr>
+
+{$tarifs}
+
+</table>
+
+<br />
+<br />
+
+<h2><b style="font-family:arialbd">15.НАЧАЛЬНЫЕ ИДЕНТИФИКАЦИОННЫЕ ДАННЫЕ:</b></h2>
+<table border="1" width="100%" cellpadding=2>
+<tr>
+	<td>
+		Услуга
+	</td>
+	<td>
+		Телефон кроссировки
+	</td>
+	<td>
+		Логин(login)
+	</td>
+	<td>
+		Пароль(password) небезопасный! Сменить при активировании услуги!
+	</td>
+</tr>
+{$identifications}
+</table>
+
+<br />
+<br />
+
+
+<h2><b style="font-family:arialbd">16. ЮРИДИЧЕСКИЕ АДРЕСА И РЕКВИЗИТЫ СТОРОН</b></h2>
+<table border="0" width="100%">
+<tr>
+	<td>
+		<b style="font-family:arialbd">ПРОВАЙДЕР</b>
+	</td>
+	<td  align="center">
+		<b style="font-family:arialbd">АБОНЕНТ</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">ООО "Sharq Telekom"</b>
+	</td>
+	<td  align="center">
+		<b style="font-family:arialbd">{$client_name}</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Адрес юридический:</b> г. Ташкент, ул. А.Темура, пр. 1, д. 6
+
+	</td>
+	<td>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Адрес физический:</b> г. Ташкент, ул. Зар-Кайнар, д. 39-41
+	</td>
+	<td>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Адрес почтовый:</b> г. Ташкент, ул. Зар-Кайнар, д. 39-41
+	</td>
+	<td>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Тел:</b> 113-00-00, <b style="font-family:arialbd">факс:</b> 113-13-02
+	</td>
+	<td  align="center">
+		<b style="font-family:arialbd">Тел:</b> {$client_phone}, <b style="font-family:arialbd">факс:</b> {$fax}
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Email</b> stream@st.uz
+	</td>
+	<td  align="center">
+		<b style="font-family:arialbd">Email:</b> {$email}
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">Расчетный счет:</b> 2020 8000 3041 1857 7004
+		 в ОПЕРУ АКБ "Капиталбанк"
+		<b style="font-family:arialbd">МФО</b> 00974
+		<b style="font-family:arialbd">ИНН</b> 203 608 943
+		<b style="font-family:arialbd">ОКОНХ</b> 82 100
+	</td>
+	<td>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		<br />
+		<b style="font-family:arialbd">ООО "Sharq Telekom"</b>
+		<br />
+	</td>
+	<td align="center">
+		<br />
+		<b style="font-family:arialbd">{$client_name}</b>
+		<br />
+	</td>
+</tr>
+<tr>
+	<td>
+		___________________Подпись.
+	</td>
+	<td  align="center">
+		___________________Подпись.
+		<br />
+	</td>
+</tr>
+
+<tr>
+	<td>
+		{$data_contract_agree}
+	</td>
+	<td  align="center">
+		{$data_contract_agree}
+	</td>
+</tr>
+</table>
+
+<page_break>
+
+<h2><b style="font-family:arialbd">17 . Перечень оборудования передаваемого Абоненту для Подключения к Интернет-Сети ООО «Sharq Telekom»</b></h2>
+<table border="1" width="100%" cellpadding=4>
+	<tr>
+		<td>№</td>
+		<td>Наименование оборудования</td>
+		<td>Ед.изм.</td>
+		<td>Кол-во</td>
+		<td>Serial</td>
+		<td>Цена ($)</td>
+	</tr>
+{$reserch_modem}
+</table>
+<page_break>
+<table border="0" width="100%">
+    <tr>
+            <td align="right">
+                    <b style="font-family:arialbd">Приложение №1<br /> к договору от {$time} <br /></b>
+            </td>
+    </tr>
+</table>
+
+<table border="0" width="100%">
+<tr>
+	<td align="left">
+		{$time}
+	</td>
+	<td align="right">
+              Генеральному директору<br />
+              ООО «Sharq Telekom»<b style="font-family:arialbd">Садыкову С.И.</b> <br />
+              от: <b>{$client_name}</b>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="center">
+		<b style="font-family:arialbd">Заявление</b>
+	</td>
+</tr>
+<tr>
+	<td>
+	<br />
+	Прошу Вас произвести установку оборудования технологии АDSL на абонентской линии No {$pcross}
+	обслуживаемой по Договору No {$contract_number} от {$time}
+	зарегистрированной по адресу: {$connect_address}
+	для получения услуг постоянного доступа в сеть Интернет.
+	<br />
+	<br />
+	Согласен с тем, что ООО «Sharq Telekom» не несет ответственности за возможное ухудшение качества
+	предоставляемых услуг телефонной связи в части:<br />
+   - нарушений модемной и факсимильной связи;<br />
+   - повышения уровня шума в телефонной линии (при включенном АDSL-оборудовании)<br />
+   - возможных перерывов связи в период проведения работ по обеспечению технической возможности
+       предоставления услуг постоянного доступа в сеть Интернет, а также работ связанных с устранением
+       неисправностей на линии.<br /><br />
+
+	С условиями Договора-оферты на предоставление услуг широкополосного доступа в Интернет по
+	предварительной оплате ознакомлен и согласен.<br />
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="left">
+		<b style="font-family:arialbd">
+		Выбранный тарифный план на Услугу:
+		</b>
+		<br />
+		{$servicetype_name}
+		<br />
+		<b style="font-family:arialbd">
+		Название тарифного плана:
+		</b>
+		<br />
+		{$tarif_name}
+		<br />
+	</td>
+	<td>
+		<b style="font-family:arialbd">
+			Номер линии:
+		</b>
+		{$pcross}<br />
+		<b style="font-family:arialbd">
+			Ф.И.О:
+		</b>
+		{$client_name}<br />
+		<b style="font-family:arialbd">
+			Номер паспорта:
+		</b>
+		{$passp_n}<br />
+		<b style="font-family:arialbd">
+			Кем выдан:
+		</b>
+		{$ruvd_name}<br />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td colspan="2">
+		<b style="font-family:arialbd">
+			Контактная информация:
+		</b>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b style="font-family:arialbd">
+			Ф.И.О:
+		</b>
+		{$client_name} <br />
+		<b style="font-family:arialbd">
+			Телефон для связи:
+		</b>
+		{$phone} <br />
+		<b style="font-family:arialbd">
+			Email:
+		</b>
+		{$email} <br />
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="right">
+			Подпись Абонента:«_________________________»
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="left">
+	Данные об Абоненте и зарегистрированной
+	телефонной линии подтверждаю
+	Менеджер абонентского отдела
+	ООО «Sharq Telekom»<br />
+	Подпись:«_________________________»
+	</td>
+</tr>
+</table>
+
+<page_break>
+
+<table border="0" width="100%">
+<table border="0" width="100%">
+    <tr>
+            <td align="right">
+                    <b style="font-family:arialbd">Приложение №2<br /> к договору от {$time} <br /></b>
+            </td>
+    </tr>
+</table>
+<tr>
+	<td align="right">
+	Директору<br />
+	Телефонного узла связи филиала «ТшТТ»<br />
+	АК «Узбектелеком»<br />
+		<b style="font-family:arialbd">
+			От {$client_name} <br />
+			Тел. № {$pcross} <br />
+		</b>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="center">
+		<b style="font-family:arialbd">
+			ЗАЯВЛЕНИЕ <br /><br />
+		</b>
+	</td>
+</tr>
+<tr>
+	<td>
+	    В связи с подключением в сеть Интернет, прошу Вас скроссировать принадлежащий мне телефон
+		(абонентский No {$pcross}) на рамку ООО «Sharq Telekom». Настоящим заявлением подтверждаю, что
+		действительно являюсь владельцем телефонного номера {$pcross}, установленного по адресу:
+		 {$connect_address}
+		       Также подтверждаю, что на данном телефонном номере отсутствует задолженность перед ГТС по
+		абонентской плате и прочим платежам.
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+
+<table border="0" width="100%">
+<tr>
+	<td align="left">
+		Ф.И.О: {$client_name}
+	</td>
+	<td align="center">
+		Подпись:___________
+	</td>
+</tr>
+</table>
+
+<page_break>
+<table border="0" width="100%">
+<table border="0" width="100%">
+    <tr>
+            <td align="right">
+                    <b style="font-family:arialbd">Приложение №3<br /> к договору от {$time} <br /></b>
+            </td>
+    </tr>
+</table>
+<tr>
+	<td colspan="2" align="center">
+	<br />
+	<br />
+		<b style="font-family:arialbd">АКТ ПРИЕМА-ПЕРЕДАЧИ</b>
+		<br />
+        <br />
+	</td>
+</tr>
+</table>
+<table border="0" width="100%">
+<tr>
+	<td>
+		 Подтверждаю, что <b style="font-family:arialbd">ADSL-модем</b> _______________, <b style="font-family:arialbd">стоимостью</b> ______________ долларов США. с серийным номером __________________, в полной
+		 комплектации, получил в целости и с работоспособными параметрами.<br />
+		 Обязуюсь применять все меры для предотвращения попадания Модема в ненадлежащие условия технической эксплуатации,
+		 могущие привести к его неисправности или преднамеренной поломке, не вскрывать и не пытаться ремонтировать его самостоятельно.<br />
+	</td>
+</tr>
+</table>
+<br />
+<br />
+<table border="0" width="100%">
+	<tr>
+		<td>№</td>
+		<td>Наименование оборудования</td>
+		<td>Ед.изм.</td>
+		<td>Кол-во</td>
+		<td>Serial</td>
+		<td>Цена</td>
+	</tr>
+{$reserch_modem}
+</table>
+
+<br />
+<br />
+<table border="0" width="100%">
+<tr>
+	<td>
+		<b style="font-family:arialbd">ПРЕДУПРЕЖДЕНИЕ</b>
+	</td>
+	<td>
+	<b style="font-family:arialbd">
+		Срок гарантии на оборудование (модем) – 1 год с момента получения. В случае выхода модема из строя по вине
+        Абонента при его настройке либо при неправильной эксплуатации, гарантийный срок на него не распространяется, и ремонг
+        или замена оборудования осуществляется за счет Абонента.
+     </b>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<table border="0" width="100%">
+<tr align="center">
+	<td>
+		<br/>
+		<b style="font-family:arialbd">ПЕРЕДАЛ:</b>
+	</td>
+	<td align="center">
+		<br/>
+		<b style="font-family:arialbd">ПРИНЯЛ:</b>
+	</td>
+</tr>
+<tr align="center">
+	<td>
+		<br/>
+		<b style="font-family:arialbd">ООО "Sharq Telekom"</b>
+	</td>
+	<td align="center">
+		<br/>
+		<b style="font-family:arialbd">{$client_name}</b>
+	</td>
+</tr>
+<tr align="center">
+	<td>
+		___________________Подпись.
+	</td>
+	<td  align="center">
+		___________________Подпись.
+	</td>
+</tr>
+<tr align="center">
+	<td>
+	<br />
+		{$time}
+	</td>
+	<td  align="center">
+	<br />
+		{$time}
+	</td>
+</tr>
+</table>
+

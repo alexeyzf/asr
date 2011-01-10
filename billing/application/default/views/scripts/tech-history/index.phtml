@@ -1,0 +1,139 @@
+<?
+require_once('FormHelper.php');
+$searchOptions = array(
+    'client'    => 'По логину',
+    'phone'    => 'По телефону',
+    'equipment' => 'По оборудованию'
+);
+?>
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+<script language="JavaScript" type="text/javascript">
+    function onChangeSearchBy(searchBy)
+    {
+        if (searchBy == 'client')
+        {
+            $('#client-div').show();
+            $('#phone-div').hide();
+            $('#equipment-div').hide();
+        }
+        if (searchBy == 'phone')
+        {
+            $('#phone-div').show();
+            $('#equipment-div').hide();
+            $('#client-div').hide();
+        }
+        else if (searchBy == 'equipment')
+        {
+            $('#phone-div').hide();
+            $('#client-div').hide();
+            $('#equipment-div').show();
+        }
+    }
+
+    function fillDslamList()
+    {
+        var ats = $('#ats')[0].value;
+        $.php("/ajax/techhistory", {name: 'dslam_list', ats: ats});
+    }
+
+    function fillPortList()
+    {
+        var dslam = $('#dslam')[0].value;
+        $.php("/ajax/techhistory", {name: 'port_list', dslam: dslam});
+    }
+</script>
+<h1>Отдел проектов.  История</h1>
+<br />
+
+<br />
+<form method="post" action="">
+    <center class="font14">
+        Поиск&nbsp;&nbsp;
+        <select name="searchBy" id="searchBy" onchange="onChangeSearchBy(this.value)">
+            <?= FormHelper::getSelectOptions($searchOptions, $this->searchBy); ?>
+        </select>
+        <span id="client-div">
+            <input type="text" name="login" value="<?= $this->login; ?>" />
+        </span>
+        <span id="phone-div">
+           <input type="text" name="number" value="<?= $this->number; ?>" />
+        </span>
+        <span id="equipment-div">
+           <select name="ats" id="ats" onchange="fillDslamList()" style="width: 200px">
+               <?= FormHelper::getSelectOptions($this->atsList, $this->ats, true); ?>
+           </select>
+           <select name="dslam" id="dslam" onchange="fillPortList()" style="width: 100px">
+               <?= FormHelper::getSelectOptions($this->dslamList, $this->dslam, true); ?>
+           </select>
+           <select name="port" id="port" style="width: 50px">
+               <?= FormHelper::getSelectOptions($this->portList, $this->port, true); ?>
+           </select>
+       </span>
+       <input type="submit" value="Показать" />
+    </center>
+</form>
+
+<script language="JavaScript" type="text/javascript">
+    onChangeSearchBy($('#searchBy')[0].value);
+</script>
+
+<br />
+<br />
+<?
+if (is_array($this->logList))
+{
+    ?>
+    <table id='logList' class="list" cellpadding="3" cellspacing="0">
+        <tr>
+            <th class="list_head">Дата</th>
+            <th class="list_head">Действие</th>
+            <th class="list_head">Причина</th>
+            <th class="list_head">Клиент</th>
+            <th class="list_head">Тип клиента</th>
+            <th class="list_head">Телефон</th>
+            <th class="list_head">АТС</th>
+            <th class="list_head">DSLAM</th>
+            <th class="list_head">Порт</th>
+            <th class="list_head">Рамка</th>
+            <th class="list_head">Пары</th>
+            <th class="list_head">Скорость</th>
+            <th class="list_head">Пользователь</th>
+            <th class="list_head">Статус</th>
+        </tr>
+    <?
+    foreach ($this->logList as $log)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'><?= date('d.m.Y G:i:s', strtotime($log['date'])); ?></td>
+            <td class='list_row'><?= $log['action']; ?></td>
+            <td class='list_row'><?= $log['reason']; ?></td>
+            <td class='list_row'><?= $log['client_name']; ?></td>
+            <td class='list_row'><?= $log['client_type']; ?></td>
+            <td class='list_row'><?= $log['phone']; ?></td>
+            <td class='list_row'><?= $log['ats']; ?></td>
+            <td class='list_row'><?= $log['dslam']; ?></td>
+            <td class='list_row'><?= $log['port_number']; ?></td>
+            <td class='list_row'><?= $log['frame_number']; ?></td>
+            <td class='list_row'><?= $log['pair_number']; ?></td>
+            <td class='list_row'><?= $log['speed']; ?></td>
+            <td class='list_row'><?= $log['user_full_name']; ?></td>
+            <td class="list_row"><?= $log['status_label']; ?></td>
+        </tr>
+        <?
+    }
+    ?>
+    </table>
+    <?
+}
+?>
+<br />
+<center>
+	<form action="/Tech-History/manual-addition" method="post" >
+		<input type="hidden" name="sphone" value="<?= $this->logList[0]['phone']; ?>" />
+		<input type="submit" value="[Добавить вручную]" name="btn1" />
+	</form>
+</center>
+
+
+

@@ -1,0 +1,85 @@
+<h1>Отчеты. Услуга "Овердрафт"</h1>
+<br />
+<br />
+<center>
+
+</center>
+
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+
+<?php
+if ( count($this->data) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="9" class="list_row center">
+            Не найдено
+        </td>
+    </tr>
+
+    <?
+}
+else
+{
+    $counter = 1;
+    $hub_id = 0;
+    foreach ($this->data as $ats)
+    {
+        if($hub_id == $ats['hub_id'])
+        {
+            ?>
+             <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row">
+                    <a href="/Clientinfo/index/clientid/<?= $ats['client_id'] ?>/pointid/" >
+                            <?= $ats['client_name']; ?>
+                    </a>
+                </td>
+                <td class="list_row"><?= $ats['ballance']; ?></td>
+                <td class="list_row"><?= $ats['fax']; ?></td>
+                <td class="list_row"><?= $ats['phone']; ?></td>
+                <td class="list_row"><?= $ats['overdraft']; ?></td>
+                <td class="list_row"><?= $ats['notes']; ?></td>
+            </tr>
+            <?
+        }
+        else
+        {
+            ?>
+            <tr>
+                <td><br /><br /><br /></td>
+            </tr>
+            <tr>
+                <th class="list_head" colspan="7" align="center" ><h1>[ <?= $ats['hub_name']; ?> ]</h1></th>
+            </tr>
+            <tr>
+                <th class="list_head">N</th>
+                <th class="list_head">Наименование</th>
+                <th class="list_head" style="width:15%;">Баланс</th>
+                <th class="list_head">Факс</th>
+                <th class="list_head">Телефон</th>
+                <th class="list_head">Овердрафт</th>
+                <th class="list_head">Примечание</th>
+            </tr>
+            <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $counter++; ?></td>
+                <td class="list_row">
+                    <a href="/Clientinfo/index/clientid/<?= $ats['client_id'] ?>/pointid/" >
+                            <?= $ats['client_name']; ?>
+                    </a>
+                </td>
+                <td class="list_row"><?= $ats['ballance']; ?></td>
+                <td class="list_row"><?= $ats['fax']; ?></td>
+                <td class="list_row"><?= $ats['phone']; ?></td>
+                <td class="list_row"><?= $ats['overdraft']; ?></td>
+                <td class="list_row"><?= $ats['notes']; ?></td>
+            </tr>
+            <?
+        }
+        $hub_id = $ats['hub_id'];
+    }
+
+}
+?>
+</table>

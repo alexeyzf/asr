@@ -1,0 +1,96 @@
+<h1>Статистика по услугам <?= $this->login; ?></h1>
+<br />
+<br />
+<center> показать с:
+<form action="" method="post">
+	<select size="1" name="month">
+   		<?= FormHelper::getMonthOptions($this->month); ?>
+	</select>
+
+	<select size="1" name="year">
+		<?= FormHelper::getYearOptions($this->year); ?>
+	</select>
+	<input type="submit" name="btn1" value="показать" />
+</form>
+	<br />
+	<br />
+</center>
+<table class='list'>
+	<tr>
+		<th class='list_head'>Услуга</th>
+		<th class='list_head'>Дата начала сессии</th>
+		<th class='list_head'>Дата окончания сессии</th>
+		<th class='list_head'>Входящий</th>
+		<th class='list_head'>Иcходящий</th>
+	</tr>
+	<?
+	$totalInput = 0;
+	$totalOutput = 0;
+
+	foreach ($this->traffic as $row)
+	{
+
+		if($this->ctype == "0")
+		{
+			$totalInput += $row['bytes_in'];
+			$totalOutput += $row['bytes_out'];
+
+			if (round($row['bytes_in'], 2) == 0	|| round($row['bytes_out'], 2) == 0)
+			{
+				continue;
+			}
+		}
+		else
+		{
+			$totalInput += $row['input'];
+			$totalOutput += $row['output'];
+
+			if (round($row['input'], 2) == 0
+				|| round($row['output'], 2) == 0)
+			{
+				continue;
+			}
+		}
+
+		if($this->ctype == "0")
+		{
+			?>
+			<tr>
+				<td class='list_row'><?= $this->serviceTypes[$row['servicetype']]; ?></td>
+				<td class='list_row'><?= date('d.m.y G:i:s', strtotime($row['date_time'])); ?></td>
+				<td class='list_row'><?= $row['date_time'] ? date('d.m.y G:i:s', strtotime($row['date_time'])) : ''; ?></td>
+				<td class='list_row'><?= round($row['bytes_in'], 2); ?></td>
+				<td class='list_row'><?= round($row['bytes_out'], 2); ?></td>
+			</tr>
+			<?
+		}
+		else
+		{
+			?>
+			<tr>
+				<td class='list_row'><?= $this->serviceTypes[$row['servicetype']]; ?></td>
+				<td class='list_row'><?= date('d.m.y G:i:s', strtotime($row['acctstarttime'])); ?></td>
+				<td class='list_row'><?= $row['acctstoptime'] ? date('d.m.y G:i:s', strtotime($row['acctstoptime'])) : ''; ?></td>
+				<td class='list_row'><?= round($row['input'], 2); ?></td>
+				<td class='list_row'><?= round($row['output'], 2); ?></td>
+			</tr>
+			<?
+		}
+	}
+	?>
+	<tr>
+		<td class='list_row' colspan='3'><b>Всего</b></td>
+		<td class='list_row'><b><?= round($totalInput, 2); ?></b></td>
+		<td class='list_row'><b><?= round($totalOutput, 2); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_row' colspan='3'><b>Платный</b></td>
+		<td class='list_row'><b><?= round($totalInput - $this->freeTraffic['input'], 2); ?></b></td>
+		<td class='list_row'><b><?= round($totalOutput - $this->freeTraffic['output'], 2); ?></b></td>
+	</tr>
+	<tr>
+		<td class='list_row' colspan='3'><b>Бесплатный	Ночной</b></td>
+		<td class='list_row'><b><?= round($this->freeTraffic['input'], 2); ?></b></td>
+		<td class='list_row'><b><?= round($this->freeTraffic['output'], 2); ?></b></td>
+	</tr>
+</table>

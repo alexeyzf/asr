@@ -1,0 +1,45 @@
+<h1>Отчет по реестру. Сумма по услугам с детализацией по клиентам за период: <?= $this->startDate; ?> - <?= $this->endDate; ?></h1>
+<br />
+<br />
+<table class='list'>
+	<tr>
+		<th class='list_head'>N</th>
+		<th class='list_head'>Услуга</th>
+		<th class='list_head'>ID</th>
+		<th class='list_head'>Номер сч. фактуры</th>
+		<th class='list_head'>Наименование</th>
+		<th class='list_head'>Адрес</th>
+		<th class='list_head'>Телефон</th>
+		<th class='list_head'>К оплате ($)</th>
+		<th class='list_head'>К оплате (сум)</th>
+	</tr>
+	<?
+	$i = 1;
+	
+	foreach ($this->data as $item)
+	{
+		$totalUsd += $item['amount'];
+		$totalUzs += $item['amount_uzs'];
+		?>
+		<tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+			<td class='list_row'><?= $i++; ?></td>
+			<td class='list_row'><?= $item['servicename']; ?></td>
+			<td class='list_row'><?= $item['client_id']; ?></td>
+			<td class='list_row'><?= $item['schetfnum']; ?></td>
+			<td class='list_row'>
+				<a href='/clientinfo/index/clientid/<?= $item['client_id']; ?>'><?= $item['client_name']; ?></a>
+			</td>
+			<td class='list_row'><?= $item['address']; ?></td>
+			<td class='list_row'><?= $item['phone']; ?></td>
+			<td class='list_row'><?= number_format($item['amount'], 2, ',', ' '); ?></td>
+			<td class='list_row'><?= number_format($item['amount_uzs'], 2, ',', ' '); ?></td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class='list_row right' colspan='7'><b>Итого</b></td>
+		<td class='list_row right'><b><?= number_format($totalUsd, 2, ',', ' '); ?></b></td>
+		<td class='list_row right'><b><?= number_format($totalUzs, 2, ',', ' '); ?></b></td>
+	</tr>
+</table>

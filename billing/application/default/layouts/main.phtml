@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="Abilov Marat, Tsoy Alexey" />
+    <title>АСР "SHARQ". Администрирование</title>
+    <link rel="stylesheet" type="text/css" media="print" href="/styles/print.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+    <script language="javascript" type="text/javascript" src="/scripts/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="/scripts/stringformat.js"></script>
+    <script language="javascript" type="text/javascript" src="/scripts/util.js"></script>
+</head>
+
+
+<body  onload=" $('#yurik').hide();">
+
+    <div id="header_with_log">
+        <div id="asr_name">АСР "Sharq"</div>
+    </div>
+
+    <div id='nav'>
+        <?php
+        $config = new Zend_Config_Xml(realpath('../config/navigation.xml'), 'nav');
+        $navContainer = new Zend_Navigation($config);
+        $pageIterator = new RecursiveIteratorIterator($navContainer, RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach ($pageIterator as $page)
+        {
+            if ($page->isActive())
+            {
+                if ( is_a( $page->parent, 'Zend_Navigation_Page_Mvc') )
+                {
+                    $page->parent->setClass('active');
+                }
+                else
+                {
+                    $page->setClass('active');
+                }
+            }
+        }
+
+        $this->getHelper('navigation')->setContainer($navContainer);
+
+        echo $this->navigation()->menu();
+        ?>
+    </div>
+
+    <div id="mainContent" style='z-index: 1'>
+        <h1><?php echo $this->placeholder('title') ?></h1>
+    	<?php echo $this->layout()->content ?>
+    	<br />
+    	<br />
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3603/billing/application/default/views/scripts/document
+END
+show-edit-document.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3600/billing/application/default/views/scripts/document/show-edit-document.phtml
+END
+show-edit-task.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3600/billing/application/default/views/scripts/document/show-edit-task.phtml
+END
+add-document.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3578/billing/application/default/views/scripts/document/add-document.phtml
+END
+index.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3539/billing/application/default/views/scripts/document/index.phtml
+END
+add-task.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3603/billing/application/default/views/scripts/document/add-task.phtml
+END
+my-tasks.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3551/billing/application/default/views/scripts/document/my-tasks.phtml
+END
+list-documents.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3600/billing/application/default/views/scripts/document/list-documents.phtml
+END

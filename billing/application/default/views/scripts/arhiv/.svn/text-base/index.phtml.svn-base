@@ -1,0 +1,56 @@
+							<!-- BEGIN Архив !-->
+<br/>
+<br/>
+<table width="100%">
+    <tr>
+        <td class="sub-heading">Архив точки</td>
+        <td></td>
+    </tr>
+</table>
+<br/>
+
+<center>
+	<table id="tableservice" border="1" cellpadding="5" cellspacing="4">
+		<tr>
+		   	 <td width="30"  bgcolor="#D3EDF6" align="center">ID</td>
+		   	 <td width="30"  bgcolor="#D3EDF6" align="center">точка</td>
+		   	 <td width="80"  bgcolor="#D3EDF6" align="center">логин</td>
+		   	 <td width="230" bgcolor="#D3EDF6" align="center">адрес</td>
+		   	 <td width="150" bgcolor="#D3EDF6" align="center">период</td>
+		   	 <td width="150" bgcolor="#D3EDF6" align="center">услуга</td>
+		     <td width="190" bgcolor="#D3EDF6" align="center">Тариф</td>
+		     <td width="90" bgcolor="#D3EDF6" align="center">тел. крос.</td>
+		     <td width="80" bgcolor="#D3EDF6" align="center">сост. крос.</td>
+		     <td width="80" bgcolor="#D3EDF6" align="center">действия</td>
+		</tr>
+<?php
+
+for($i=0; $i<count($this->arhiv); $i++)
+	{
+		for($z=0; $z<count($this->arhiv[$i]); $z++)
+		{
+		echo ('
+		  <tr>
+		   	 <td width="30">'.$i.'</td>
+		   	 <td width="30">'.$this->arhiv[$i][$z]['point_id'].'</td>
+		   	 <td width="80">
+					'.$this->arhiv[$i][$z]['login'].'
+			 </td>
+		   	 <td width="230">'.$this->arhiv[$i][$z]['connect_address'].'</td>
+		   	 <td width="150">период</td>
+		   	 <td width="150">'.$this->arhiv[$i][$z]['servicetype_name'].'</td>
+		     <td width="190">'.$this->arhiv[$i][$z]['tarif_name'].'</td>
+		     <td width="90">'.$this->servicedata[$i]['pcross'].'</td>
+		     <td width="80">'.$this->servicedata[$i]['label'].'</td>
+		     <td width="80">
+				<br/>
+				<a href="/Arhiv/restore/point/'.$this->arhiv[$i][$z]['point_id'].'/sid/'.$this->arhiv[$i][$z]['id'].'/tarif/'.$this->arhiv[$i][$z]['tarif_id'].'/tablename/'.$this->arhiv[$i][$z]['tablelink'].'/client_id/'.$this->arhiv[$i][$z]['client_id'].'">
+					восстановить
+				</a>
+			 </td>
+		  </tr>
+		');
+		}
+	}
+?>
+</table>

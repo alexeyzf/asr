@@ -1,0 +1,25 @@
+<h1>СТП. Финансовая история клиента "<?= $this->client; ?>"</h1>
+<br/>
+<br/>
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class='list_head'>Транзакция</th>
+        <th class='list_head'>Услуга</th>
+        <th class='list_head'>Сумма</th>
+        <th class='list_head'>Время</th>
+    </tr>
+
+    <?
+    foreach ($this->transactions as $transaction)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class='list_row'><?= $transaction['tran_label']; ?></td>
+            <td class='list_row'><?= $transaction['servicetype_name']; ?></td>
+            <td class='list_row'>$<?= $transaction['summa'] ? $transaction['summa']: '0'; ?></td>
+            <td class='list_row'><?= date('d.m.y G:i:s', strtotime($transaction['currenttime'])); ?></td>
+        </tr>
+        <?
+    }
+    ?>
+</table>

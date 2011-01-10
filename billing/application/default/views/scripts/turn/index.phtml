@@ -1,0 +1,70 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+
+</script>
+<table border="0">
+<tr>
+	<th><h1>Отдел продаж. Очередь | </h1> </th>
+	<th> <form action="/turn/add-on-turn"> <input type="submit"/ value="добавить"></form></th>
+	<th> <form action="/turn/get-list-turn"> <input type="submit"/ value="Весь список"></form></th>
+</tr>
+</table>
+<br />
+<br />
+<center><h1>Список очереди</h1></center>
+<br />
+<table id="points" class="list" cellpadding="3" cellspacing="0">
+    <tr>
+    	<th class="list_head">N</th>
+        <th class="list_head">дата</th>
+        <th class="list_head">тел. кроса</th>
+        <th class="list_head">конт. тел.</th>
+        <th class="list_head">конт. лицо</th>
+        <th class="list_head">АТС</th>
+        <th class="list_head">Действия</th>
+    </tr>
+<?php
+$hub_id  = 0;
+$counter = 0;
+
+foreach($this->data as $item)
+{
+	for($i = 0; $i < count($this->emptyPorts); $i++)
+	{
+		if($this->emptyPorts[$i]['ats_id'] == $item['ats_id'])
+		{
+			// Шапку узла
+			if($hub_id != $item['phone_hub_id'])
+			{
+				?>
+		    	<tr class='list_tr'>
+		    		<td class="list_head center" colspan="7"><b><h1><?=  $item['hub_name']; ?></h1></b></td>
+		    	</tr>
+				<?php
+				$hub_id = $item['phone_hub_id'];
+
+			}
+		?>
+		    <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+                <td class="list_row"><?= $counter ?></td>
+                <td class="list_row"><?= date('d/m/Y', strtotime($item['date_action'])); ?></td>
+				<td class="list_row"><?= $item['pcross']; ?></td>
+				<td class="list_row"><?= $item['contact_phone']; ?></td>
+				<td class="list_row"><?= $item['contact_name']; ?></td>
+				<td class="list_row"><?= $item['name']; ?></td>
+				<td class="list_row">
+				<form action="/turn/mark-delete" >
+					<input type="hidden" name="clear_id" value="<?= $item['turn_id']; ?>" />
+					<input type="submit" value="убрать"/>
+				</form>
+				</td>
+            </tr>
+        <?php
+		}
+	}
+
+
+$counter++;
+}
+?>

@@ -1,0 +1,82 @@
+<h1>Пользователи</h1>
+<br />
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/admin-user/modify')"/>
+         </td>
+    </tr>
+</table>
+<br />
+<table class="list" cellpadding="3" cellspacing="0">
+    <tr>
+        <th class="list_head">Действие</th>
+        <th class="list_head">ФИО</th>
+        <th class="list_head">Должность</th>
+        <th class="list_head">Логин</th>
+        <th class="list_head">Группа</th>
+        <th class="list_head">Домашняя страница</th>
+    </tr>
+<?php
+if ( count($this->users) == 0 )
+{
+    ?>
+    <tr>
+        <td colspan="4" class="list_row center">
+            Не найдено ни одного пользователя
+        </td>
+    </tr>
+
+    <?php
+}
+else
+{
+    foreach ($this->users as $user)
+    {
+        ?>
+        <tr class='list_tr' onMouseOver="this.setAttribute('class', 'list_tr_hover')" onMouseOut="this.setAttribute('class', 'list_tr')">
+            <td class="list_row">
+                <a class="link" href="/admin-user/modify/id/<?= $user->id; ?>">Изменить</a>&nbsp;|&nbsp;
+                <a class="link" onclick="return confirm('Вы действительно хотите удалить пользователя <?= $user->first_name . ' ' . $user->last_name; ?> ?')"
+                   href="/admin-user/delete/id/<?= $user->id; ?>">Удалить</a>
+            </td>
+            <td class="list_row">
+                <?php echo $user->first_name . ' ' . $user->last_name; ?>
+            </td>
+            <td class="list_row">
+                <?php echo $user->appointment; ?>
+            </td>
+            <td class="list_row">
+                <?php echo $user->login; ?>
+            </td>
+            <td class="list_row">
+                <?php
+                $connector = '';
+
+                foreach ($this->userGroups[$user->id] as $groupName)
+                {
+                    print $connector . $groupName;
+                    $connector = ', ';
+                }
+                ?>
+            </td>
+            <td class="list_row">
+                <?php echo $this->modules[$user->home_page]; ?>
+            </td>
+        </tr>
+        <?php
+    }
+}
+?>
+</table>
+<br />
+<table width='100%'>
+    <tr>
+        <td align='center' nowrap>
+            <div class='space-5h'></div>
+            <input type="button" value="Добавить" onclick="redirect('/admin-user/modify')"/>
+         </td>
+    </tr>
+</table>

@@ -1,0 +1,94 @@
+<script language="JavaScript" type="text/javascript" src="/scripts/jquery.php.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+	function brokenChanged(val)
+	{
+		if (val)
+		{
+			$('#ats_id').attr('disabled', 1);
+			$('#dslam_id').attr('disabled', 1);
+			$('#ats_id').val('');
+			$('#dslam_id').val('');
+			$('#client_name_link').hide();
+			$('#client_name-element').html('');
+			$('#pcross-element').html('');
+			$('#point_id').val();
+		}
+		else
+		{
+			equipmentChanged($('#is_dslam').val());
+		}
+	}
+
+	function equipmentChanged(val)
+	{
+		if (val == 'dslam')
+		{
+			$('#ats_id').removeAttr('disabled');
+
+			$('#switch_id').attr('disabled', 1);
+			$('#switch_id').val('');
+
+			$('#dslam_id').removeAttr('disabled');
+			$('#client_name_link').hide();
+			$('#client_name-element').html('');
+			$('#pcross-element').html('');
+			$('#point_id').val();
+		}
+		else if (val == 'modem')
+		{
+			$('#switch_id').attr('disabled', 1);
+			$('#switch_id').val('');
+
+			$('#ats_id').attr('disabled', 1);
+			$('#ats_id').val('');
+			$('#dslam_id').attr('disabled', 1);
+			$('#dslam_id').val('');
+			$('#client_name_link').show();
+		}
+		else if (val == 'transport')
+		{
+			$('#dslam_id').attr('disabled', 1);
+
+			$('#dslam_id').hide();
+
+
+			$('#switch_id').attr('enabled', 1);
+			$('#switch_id').val('');
+
+			$('#ats_id').removeAttr('disabled');
+			$('#switch_id').removeAttr('disabled');
+			$('#ats_id').removeAttr('onchange');
+
+			$('#ats_id').change(function()
+								{
+									var erlang = $('#ats_id').val();
+									$.php("/ajax/get-switch-by-ats-id", { ats_id: erlang});
+								});
+
+			$('#client_name_link').hide();
+			$('#dslam_id').val('');
+		}
+	}
+
+	function testA()
+	{
+		alert(8888);
+	}
+
+	function getDslamList()
+	{
+	    var ats = $('#ats_id').val();
+	    var client_type = $('#client_type_id').val();
+	    var phone_type = $('#pcross_type').val();
+
+	    $.php("/ajax/get-dslams", {
+	        ats: ats
+	    });
+	}
+</script>
+
+<h1>Редактирование параметров порта коммутатора</h1>
+<br />
+<br />
+<?= $this->form; ?>
