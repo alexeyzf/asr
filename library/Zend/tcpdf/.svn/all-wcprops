@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/3548/library/Zend/tcpdf
+END
+LICENSE.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3/library/Zend/tcpdf/LICENSE.TXT
+END
+tcpdf.pem
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3/library/Zend/tcpdf/tcpdf.pem
+END
+CHANGELOG.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/3/library/Zend/tcpdf/CHANGELOG.TXT
+END
+unicode_data.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/library/Zend/tcpdf/unicode_data.php
+END
+tcpdf.php
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3/library/Zend/tcpdf/tcpdf.php
+END
+barcodes.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3/library/Zend/tcpdf/barcodes.php
+END
+README.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/3/library/Zend/tcpdf/README.TXT
+END
+htmlcolors.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/library/Zend/tcpdf/htmlcolors.php
+END
+2dbarcodes.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3/library/Zend/tcpdf/2dbarcodes.php
+END
